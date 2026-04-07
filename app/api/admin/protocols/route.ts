@@ -92,8 +92,12 @@ export async function POST(request: NextRequest) {
       await supabase.from("protocol_items").insert(itemRows);
     }
 
-    await writeAuditLog(admin.id, "create", "protocol", protocol.id, {
-      name: protocolData.name,
+    await writeAuditLog({
+      admin_id: admin.id,
+      action: "protocol.create",
+      entity_type: "protocol",
+      entity_id: protocol.id,
+      details: { name: protocolData.name },
     });
 
     return NextResponse.json({ id: protocol.id }, { status: 201 });
@@ -156,8 +160,12 @@ export async function PUT(request: NextRequest) {
       await supabase.from("protocol_items").insert(itemRows);
     }
 
-    await writeAuditLog(admin.id, "update", "protocol", id, {
-      name: protocolData.name,
+    await writeAuditLog({
+      admin_id: admin.id,
+      action: "protocol.update",
+      entity_type: "protocol",
+      entity_id: id,
+      details: { name: protocolData.name },
     });
 
     return NextResponse.json({ id });
@@ -200,8 +208,12 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    await writeAuditLog(admin.id, "delete", "protocol", id, {
-      name: protocol?.name,
+    await writeAuditLog({
+      admin_id: admin.id,
+      action: "protocol.delete",
+      entity_type: "protocol",
+      entity_id: id,
+      details: { name: protocol?.name },
     });
 
     return NextResponse.json({ success: true });

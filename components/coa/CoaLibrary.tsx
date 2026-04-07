@@ -185,7 +185,8 @@ export default function CoaLibrary({ productCoas }: CoaLibraryProps) {
         .single();
 
       if (data) {
-        const product = data.product as { name: string } | null;
+        const productRaw = data.product as unknown as { name: string } | { name: string }[] | null;
+        const product = Array.isArray(productRaw) ? productRaw[0] ?? null : productRaw;
         setResult({
           batch_number: data.batch_number,
           purity_percentage: data.purity_percentage,
