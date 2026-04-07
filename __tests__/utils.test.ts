@@ -31,10 +31,10 @@ describe("generateOrderNumber", () => {
 });
 
 describe("formatPrice", () => {
-  it("formats a whole number price in CAD", () => {
+  it("formats a whole number price in USD", () => {
     const result = formatPrice(50);
     expect(result).toContain("50");
-    expect(result).toContain("CAD");
+    expect(result).toContain("USD");
   });
 
   it("formats a decimal price", () => {
@@ -42,8 +42,8 @@ describe("formatPrice", () => {
     expect(result).toContain("29.99");
   });
 
-  it("uses CAD by default", () => {
-    expect(formatPrice(10)).toContain("CAD");
+  it("uses USD by default", () => {
+    expect(formatPrice(10)).toContain("USD");
   });
 
   it("supports custom currency", () => {

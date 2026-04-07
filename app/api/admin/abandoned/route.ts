@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
   const formattedTotal = new Intl.NumberFormat("en-CA", {
     style: "currency",
-    currency: "CAD",
+    currency: "USD",
   }).format(total);
 
   const html = `
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
         <tr>
           <td style="padding:16px 24px;">
             <p style="margin:0;font-size:15px;line-height:1.6;color:#555;">
-              We noticed you started an order <strong>(#${orderNumber})</strong> for <strong>${formattedTotal} CAD</strong> but didn't complete checkout. Your items are still waiting for you!
+              We noticed you started an order <strong>(#${orderNumber})</strong> for <strong>${formattedTotal} USD</strong> but didn't complete checkout. Your items are still waiting for you!
             </p>
             <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:#555;">
               If you ran into any issues or have questions, email us at <a href="mailto:support@puritylabresearch.com" style="color:#0097A7;">support@puritylabresearch.com</a> - we're happy to help.

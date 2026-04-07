@@ -33,9 +33,11 @@ export default function ReorderButton({ items }: Props) {
           name: item.product_name,
           slug: product?.slug ?? "",
           price: product?.price ?? item.unit_price,
+          subscriptionPrice: null,
           size: "",
           image: product?.images?.[0] ?? null,
           purchaseType: "one-time",
+          deliveryFrequencyWeeks: 4,
           quantity: item.quantity,
         });
       }

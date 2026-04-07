@@ -18,7 +18,7 @@ interface DiscountCode {
   code: string;
   type: "percentage" | "fixed";
   value: number;
-  min_order_amount: number;
+  min_order: number;
   max_uses: number | null;
   used_count: number;
   active: boolean;
@@ -56,7 +56,7 @@ export default function AdminDiscountsPage() {
   /* ---------- Load ---------- */
   const loadCodes = useCallback(async () => {
     const { data, error } = await supabase
-      .from("discount_codes")
+      .from("discounts")
       .select("*")
       .order("created_at", { ascending: false });
 
@@ -80,14 +80,14 @@ export default function AdminDiscountsPage() {
       code: formCode.trim().toUpperCase(),
       type: formType,
       value: parseFloat(formValue),
-      min_order_amount: formMinOrder ? parseFloat(formMinOrder) : 0,
+      min_order: formMinOrder ? parseFloat(formMinOrder) : 0,
       active: true,
     };
 
     if (formMaxUses) payload.max_uses = parseInt(formMaxUses, 10);
     if (formExpiry) payload.expires_at = new Date(formExpiry).toISOString();
 
-    const { error } = await supabase.from("discount_codes").insert(payload);
+    const { error } = await supabase.from("discounts").insert(payload);
 
     if (error) {
       alert(error.message || "Failed to create discount code.");
@@ -111,7 +111,7 @@ export default function AdminDiscountsPage() {
   /* ---------- Toggle active ---------- */
   async function toggleActive(id: string, currentActive: boolean) {
     const { error } = await supabase
-      .from("discount_codes")
+      .from("discounts")
       .update({ active: !currentActive })
       .eq("id", id);
 
@@ -127,7 +127,7 @@ export default function AdminDiscountsPage() {
     if (!confirm("Are you sure you want to delete this discount code?")) return;
 
     const { error } = await supabase
-      .from("discount_codes")
+      .from("discounts")
       .delete()
       .eq("id", id);
 
@@ -343,8 +343,8 @@ export default function AdminDiscountsPage() {
                         : `$${Number(code.value).toFixed(2)}`}
                     </td>
                     <td className="px-4 py-3 text-gray-600">
-                      {Number(code.min_order_amount) > 0
-                        ? `$${Number(code.min_order_amount).toFixed(2)}`
+                      {Number(code.min_order) > 0
+                        ? `$${Number(code.min_order).toFixed(2)}`
                         : "--"}
                     </td>
                     <td className="px-4 py-3 text-gray-600">

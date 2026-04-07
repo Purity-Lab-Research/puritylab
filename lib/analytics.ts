@@ -34,7 +34,7 @@ export function trackEvent(action: string, params?: Record<string, unknown>) {
 /** Fired when a user views a product detail page */
 export function trackViewItem(item: GAItem) {
   gtag("event", "view_item", {
-    currency: "CAD",
+    currency: "USD",
     value: item.price,
     items: [item],
   });
@@ -43,7 +43,7 @@ export function trackViewItem(item: GAItem) {
 /** Fired when a user adds a product to the cart */
 export function trackAddToCart(item: GAItem) {
   gtag("event", "add_to_cart", {
-    currency: "CAD",
+    currency: "USD",
     value: item.price * (item.quantity ?? 1),
     items: [item],
   });
@@ -52,7 +52,7 @@ export function trackAddToCart(item: GAItem) {
 /** Fired when a user removes a product from the cart */
 export function trackRemoveFromCart(item: GAItem) {
   gtag("event", "remove_from_cart", {
-    currency: "CAD",
+    currency: "USD",
     value: item.price * (item.quantity ?? 1),
     items: [item],
   });
@@ -61,7 +61,7 @@ export function trackRemoveFromCart(item: GAItem) {
 /** Fired when a user views the cart */
 export function trackViewCart(items: GAItem[], total: number) {
   gtag("event", "view_cart", {
-    currency: "CAD",
+    currency: "USD",
     value: total,
     items,
   });
@@ -70,7 +70,7 @@ export function trackViewCart(items: GAItem[], total: number) {
 /** Fired when a user starts checkout */
 export function trackBeginCheckout(items: GAItem[], total: number) {
   gtag("event", "begin_checkout", {
-    currency: "CAD",
+    currency: "USD",
     value: total,
     items,
   });
@@ -79,7 +79,7 @@ export function trackBeginCheckout(items: GAItem[], total: number) {
 /** Fired when a user adds shipping info */
 export function trackAddShippingInfo(items: GAItem[], total: number, shippingTier: string) {
   gtag("event", "add_shipping_info", {
-    currency: "CAD",
+    currency: "USD",
     value: total,
     shipping_tier: shippingTier,
     items,
@@ -89,7 +89,7 @@ export function trackAddShippingInfo(items: GAItem[], total: number, shippingTie
 /** Fired when a user adds payment info */
 export function trackAddPaymentInfo(items: GAItem[], total: number, paymentType: string) {
   gtag("event", "add_payment_info", {
-    currency: "CAD",
+    currency: "USD",
     value: total,
     payment_type: paymentType,
     items,
@@ -106,7 +106,7 @@ export function trackPurchase(
 ) {
   gtag("event", "purchase", {
     transaction_id: transactionId,
-    currency: "CAD",
+    currency: "USD",
     value: total,
     shipping,
     tax,

@@ -19,7 +19,7 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
-function formatCurrency(amount: number, currency = "CAD"): string {
+function formatCurrency(amount: number, currency = "USD"): string {
   const formatted = new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency,
@@ -94,7 +94,7 @@ export async function sendOrderConfirmation(
   const safePostal = escapeHtml(order.shipping_postal);
   const safeCountry = escapeHtml(order.shipping_country);
 
-  const currency = order.currency || "CAD";
+  const currency = order.currency || "USD";
 
   const itemRows = items
     .map((item) => {
@@ -283,7 +283,7 @@ export async function sendAdminOrderNotification(
   const customerEmail = order.guest_email
     ? escapeHtml(order.guest_email)
     : "N/A (logged-in user)";
-  const currency = order.currency || "CAD";
+  const currency = order.currency || "USD";
 
   const itemSummary = items
     .map((item) => {
@@ -665,14 +665,14 @@ export async function sendBackInStockNotification(
 
         <tr>
           <td style="padding:32px 24px 8px;">
-            <h2 style="margin:0 0 4px;font-size:20px;color:#111;">Good News &mdash; It&apos;s Back in Stock!</h2>
+            <h2 style="margin:0 0 4px;font-size:20px;color:#111;">Good News: It&apos;s Back in Stock!</h2>
           </td>
         </tr>
 
         <tr>
           <td style="padding:16px 24px 0;">
             <p style="margin:0;font-size:15px;line-height:1.6;">
-              You asked us to let you know when <strong>${safeName}</strong> was back in stock. Great news &mdash; it&apos;s available again! Grab yours before it sells out.
+              You asked us to let you know when <strong>${safeName}</strong> was back in stock. Great news: it&apos;s available again! Grab yours before it sells out.
             </p>
           </td>
         </tr>

@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const { orderId } = parsed.data;
     const supabase = createAdminClient();
 
-    // Fetch the order — must exist and still be pending
+    // Fetch the order  -  must exist and still be pending
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("id, order_number, total, currency, status, guest_email, shipping_name, shipping_line1, shipping_line2, shipping_city, shipping_province, shipping_postal, shipping_country")
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
           custom_id: order.id,
           description: `Order ${order.order_number}`,
           amount: {
-            currency_code: "CAD",
+            currency_code: "USD",
             value: order.total.toFixed(2),
           },
           shipping: {

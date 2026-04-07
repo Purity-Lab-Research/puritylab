@@ -15,7 +15,7 @@ export default function SendAbandonedEmailButton({ email, orderNumber, total }: 
 
   const formattedTotal = new Intl.NumberFormat("en-CA", {
     style: "currency",
-    currency: "CAD",
+    currency: "USD",
   }).format(total);
 
   async function handleSend() {
@@ -43,7 +43,7 @@ export default function SendAbandonedEmailButton({ email, orderNumber, total }: 
         const entry = {
           to: email,
           subject: `You left something behind! Complete your Purity Lab order #${orderNumber}`,
-          body: `We noticed you started an order (#${orderNumber}) for ${formattedTotal} CAD but didn't complete checkout. Your items are still waiting for you!\n\nIf you ran into any issues or have questions, email us at support@puritylabresearch.com - we're happy to help.`,
+          body: `We noticed you started an order (#${orderNumber}) for ${formattedTotal} USD but didn't complete checkout. Your items are still waiting for you!\n\nIf you ran into any issues or have questions, email us at support@puritylabresearch.com - we're happy to help.`,
           sentAt: now.toISOString(),
         };
         localStorage.setItem("puritylab_sent_emails", JSON.stringify([entry, ...saved].slice(0, 50)));
@@ -123,7 +123,7 @@ export default function SendAbandonedEmailButton({ email, orderNumber, total }: 
                 <div className="bg-white px-5 py-6 space-y-3">
                   <h2 className="text-lg font-bold text-gray-900 m-0">You left something behind!</h2>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    We noticed you started an order <strong>(#{orderNumber})</strong> for <strong>{formattedTotal} CAD</strong> but didn&apos;t complete checkout. Your items are still waiting for you!
+                    We noticed you started an order <strong>(#{orderNumber})</strong> for <strong>{formattedTotal} USD</strong> but didn&apos;t complete checkout. Your items are still waiting for you!
                   </p>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     If you ran into any issues or have questions, email us at <span className="text-[#0097A7]">support@puritylabresearch.com</span> - we&apos;re happy to help.

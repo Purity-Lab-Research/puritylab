@@ -26,7 +26,7 @@ export function verifyCsrf(request: NextRequest): NextResponse | null {
     const requestOrigin = new URL(request.url).origin;
     if (incoming === requestOrigin) return null;
   } catch {
-    // Malformed URL — reject
+    // Malformed URL  -  reject
   }
 
   return NextResponse.json(

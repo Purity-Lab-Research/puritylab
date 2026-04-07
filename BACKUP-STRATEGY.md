@@ -7,7 +7,7 @@ Supabase automatically performs **daily backups** of your PostgreSQL database.
 - **Free plan**: 7-day retention
 - **Pro plan**: 14-day retention, downloadable from Dashboard > Database > Backups
 
-### Point-in-Time Recovery (PITR) — Recommended for Production
+### Point-in-Time Recovery (PITR)  -  Recommended for Production
 PITR allows you to restore your database to **any second** within the retention window.
 - Available on **Pro plan** as an add-on ($100/month for 7-day retention)
 - Available by default on **Team** and **Enterprise** plans

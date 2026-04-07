@@ -8,7 +8,7 @@ This project is designed to deploy on [Vercel](https://vercel.com).
 
 1. Push this repository to GitHub
 2. Go to [vercel.com/new](https://vercel.com/new) and import the repository
-3. Vercel auto-detects Next.js — no framework settings needed
+3. Vercel auto-detects Next.js  -  no framework settings needed
 4. Add all environment variables (see below)
 5. Deploy
 

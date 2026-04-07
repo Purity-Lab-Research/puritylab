@@ -6,7 +6,7 @@ const CONTACT_EMAIL = "support@puritylabresearch.com";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
-  description: `${SITE_NAME} cookie policy — what cookies we use, why, and how you can control them.`,
+  description: `${SITE_NAME} cookie policy  -  what cookies we use, why, and how you can control them.`,
 };
 
 export default function CookiePolicyPage() {
@@ -197,8 +197,8 @@ export default function CookiePolicyPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               This Cookie Policy is governed by the laws of the Province of
-              Ontario, Canada, including the Personal Information Protection and
-              Electronic Documents Act (PIPEDA). For full details on how we
+              California, United States, including the Personal Information Protection and
+              Electronic Documents Act (CCPA). For full details on how we
               collect, use, and protect your personal information, please see
               our{" "}
               <a href="/policies/privacy" className="text-[#0097A7] hover:underline">

@@ -9,7 +9,7 @@ export interface CountryConfig {
   postalLabel: string;
   /** Placeholder for postal/zip code */
   postalPlaceholder: string;
-  /** Predefined regions (provinces/states) — null means free-text input */
+  /** Predefined regions (provinces/states)  -  null means free-text input */
   regions: { code: string; name: string }[] | null;
 }
 
@@ -104,7 +104,7 @@ export const COUNTRIES: CountryConfig[] = [
   c("BR", "Brazil", { regionLabel: "State", regionPlaceholder: "São Paulo", postalLabel: "CEP", postalPlaceholder: "01310-100" }),
   c("MX", "Mexico", { regionLabel: "State", regionPlaceholder: "Mexico City", postalLabel: "Código Postal", postalPlaceholder: "06600" }),
   c("IN", "India", { regionLabel: "State", regionPlaceholder: "Maharashtra", postalLabel: "PIN Code", postalPlaceholder: "400001" }),
-  // Rest of the world — alphabetical (excludes countries already listed above)
+  // Rest of the world  -  alphabetical (excludes countries already listed above)
   c("AF", "Afghanistan"), c("AL", "Albania"), c("DZ", "Algeria"), c("AD", "Andorra"),
   c("AO", "Angola"), c("AG", "Antigua and Barbuda"), c("AR", "Argentina"), c("AM", "Armenia"),
   c("AT", "Austria"), c("AZ", "Azerbaijan"), c("BS", "Bahamas"),

@@ -44,3 +44,8 @@ next-env.d.ts
 
 # test/debug files
 shippo_*.json
+
+.vercel
+
+# supabase local
+supabase/.temp/

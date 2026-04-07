@@ -1,14 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
-import { formatPrice, calculateSavings } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import { useCart } from "@/hooks/useCart";
-import { useWishlist } from "@/hooks/useWishlist";
-import { ShoppingCart, Heart, Star } from "lucide-react";
-import { useState } from "react";
+import { ShoppingCart } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -16,172 +14,171 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
-  const { toggleWishlist, isWishlisted } = useWishlist();
-  const router = useRouter();
-  const [hovered, setHovered] = useState(false);
-  const wishlisted = isWishlisted(product.id);
 
-  const hasVariants = (product.variants?.length ?? 0) > 0;
-  const minPrice = hasVariants
-    ? Math.min(...product.variants!.map((v) => v.price))
-    : product.price;
-  const savings = calculateSavings(
-    minPrice,
-    hasVariants ? product.variants![0].original_price : product.original_price
+  const variants = (product.variants?.filter((v) => v.active) ?? []).sort(
+    (a, b) => a.sort_order - b.sort_order
   );
-  const image = product.images?.[0] ?? null;
-  const hoverImage = product.images?.[1] ?? null;
+  const hasVariants = variants.length > 0;
+
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
+    hasVariants ? variants[0].id : null
+  );
+
+  const selectedVariant = hasVariants
+    ? variants.find((v) => v.id === selectedVariantId) ?? variants[0]
+    : null;
+
+  const activePrice = selectedVariant?.price ?? product.price;
+  const activeOriginalPrice = selectedVariant?.original_price ?? product.original_price;
+  const activeSize = selectedVariant?.size ?? product.size;
+
+  // Use variant-specific image if available, otherwise product image
+  const image =
+    selectedVariant?.images?.length
+      ? selectedVariant.images[0]
+      : product.images?.[0] ?? null;
+
+  const shortDesc = product.short_description;
+
+  // Use variant-level subscription price if available, else product-level
+  const activeSubPrice = selectedVariant?.subscription_price ?? product.subscription_price;
+  const savingsPercent =
+    activeSubPrice && activeSubPrice < activePrice
+      ? Math.round(((activePrice - activeSubPrice) / activePrice) * 100)
+      : null;
 
   function handleAddToCart() {
-    if (hasVariants) {
-      router.push(`/shop/${product.slug}`);
-      return;
-    }
     addItem({
       productId: product.id,
-      variantId: null,
+      variantId: selectedVariant?.id ?? null,
       name: product.name,
       slug: product.slug,
-      price: product.price,
-      size: product.size,
+      price: activePrice,
+      subscriptionPrice: activeSubPrice,
+      size: activeSize,
       image,
       purchaseType: "one-time",
+      deliveryFrequencyWeeks: 4,
     });
   }
 
   return (
-    <div
-      className="group relative flex flex-col rounded-xl border bg-white"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hovered ? "0 16px 32px rgba(11, 61, 122, 0.12)" : "0 1px 3px rgba(0,0,0,0.04)",
-        borderColor: hovered ? "#0097A7" : "#e5e7eb",
-      }}
-    >
-      {/* Badge */}
-      {product.badge && (
-        <span className="absolute top-3 left-3 z-10 rounded-md bg-[#0097A7] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
-          {product.badge}
-        </span>
-      )}
-
-      {/* Savings badge */}
-      {savings && (
-        <span className="absolute top-3 right-3 z-10 rounded-md bg-green-500 px-2 py-1 text-[11px] font-bold text-white">
-          -{savings}%
-        </span>
-      )}
-
-      {/* Wishlist heart */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleWishlist(product.id);
-        }}
-        className={`absolute ${savings ? "top-11" : "top-3"} right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 transition-colors hover:bg-white`}
-        aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-      >
-        <Heart
-          className={`h-4 w-4 transition-colors ${
-            wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
-          }`}
-        />
-      </button>
-
-      {/* Image with hover swap */}
-      <Link href={`/shop/${product.slug}`} className="block">
-        <div className="relative aspect-[5/4] w-full overflow-hidden rounded-t-xl bg-white">
+    <div className="group bg-surface border border-border rounded-xl overflow-hidden flex flex-col transition-all hover:border-secondary hover:shadow-md">
+      {/* Image */}
+      <Link href={`/shop/${product.slug}`} className="block relative">
+        <div className="relative aspect-[5/4] w-full overflow-hidden bg-white">
           {image ? (
-            <>
-              <Image
-                src={image}
-                alt={product.name}
-                fill
-                className="object-contain p-1 transition-opacity duration-300"
-                style={{ opacity: hovered && hoverImage ? 0 : 1 }}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              />
-              {hoverImage && (
-                <Image
-                  src={hoverImage}
-                  alt={`${product.name} - Certificate of Analysis`}
-                  fill
-                  className="object-contain p-2 transition-opacity duration-300"
-                  style={{ opacity: hovered ? 1 : 0 }}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              )}
-            </>
+            <Image
+              src={image}
+              alt={product.name}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
           ) : (
-            <div className="flex h-full items-center justify-center text-gray-300">
-              <ShoppingCart className="h-12 w-12" />
+            <div className="flex h-full items-center justify-center text-border">
+              <ShoppingCart className="h-10 w-10" />
             </div>
+          )}
+          {/* Badge */}
+          {product.badge && (
+            <span className="absolute top-3 left-3 bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded">
+              {product.badge}
+            </span>
           )}
         </div>
       </Link>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-5">
         <Link href={`/shop/${product.slug}`}>
-          <h3 className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 hover:text-[#0097A7] transition-colors">
+          <h3 className="font-heading text-base font-bold text-primary leading-snug hover:text-secondary transition-colors">
             {product.name}
           </h3>
         </Link>
 
-        <p className="mt-1 text-xs text-gray-400">
-          {product.category?.name}
-          {hasVariants
-            ? <> &middot; {product.variants!.slice().sort((a, b) => a.sort_order - b.sort_order).map((v) => v.size).join(", ")}</>
-            : product.size && <> &middot; {product.size}</>}
+        <p className="text-xs text-text-secondary mt-0.5">
+          {activeSize}
+          {product.category?.name && ` · ${product.category.name}`}
         </p>
 
-        {/* Star rating */}
-        {(product.review_count ?? 0) > 0 && (
-          <div className="mt-1.5 flex items-center gap-1">
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star
-                  key={s}
-                  className={`h-3 w-3 ${s <= Math.round(product.avg_rating ?? 0) ? "fill-amber-400 text-amber-400" : "fill-gray-200 text-gray-200"}`}
-                />
-              ))}
-            </div>
-            <span className="text-[10px] text-gray-400">({product.review_count})</span>
+        {shortDesc && (
+          <p className="text-xs text-text-secondary mt-1 line-clamp-2">
+            {shortDesc}
+          </p>
+        )}
+
+        {/* Variant Selector */}
+        {hasVariants && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {variants.map((v) => {
+              const isSelected = v.id === selectedVariantId;
+              const oos = v.stock_quantity <= 0;
+              return (
+                <button
+                  key={v.id}
+                  onClick={() => !oos && setSelectedVariantId(v.id)}
+                  disabled={oos}
+                  className={`rounded-md border px-2 py-1 text-[11px] font-semibold transition-all ${
+                    isSelected
+                      ? "border-primary bg-primary/5 text-primary"
+                      : oos
+                        ? "border-border text-text-secondary/40 cursor-not-allowed line-through"
+                        : "border-border text-text-secondary hover:border-secondary"
+                  }`}
+                >
+                  {v.size}
+                </button>
+              );
+            })}
           </div>
         )}
 
-        {/* Price */}
-        <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-base font-bold text-[#1A2B4A]">
-            {hasVariants && "From "}{formatPrice(minPrice)}
-          </span>
-          {!hasVariants && product.original_price && product.original_price > product.price && (
-            <span className="text-sm text-gray-400 line-through">
-              {formatPrice(product.original_price)}
-            </span>
+        {/* Pricing */}
+        <div className="mt-3">
+          {activeSubPrice ? (
+            <>
+              <span className="text-[10px] text-secondary uppercase tracking-wider font-semibold block">
+                Subscribe
+              </span>
+              <div className="flex items-baseline gap-2 mt-0.5">
+                <span className="font-heading text-lg font-bold text-primary">
+                  {formatPrice(activeSubPrice)}
+                </span>
+                {savingsPercent && (
+                  <span className="bg-success/10 text-success text-[10px] font-bold px-2 py-0.5 rounded">
+                    Save {savingsPercent}%
+                  </span>
+                )}
+              </div>
+              <span className="text-sm text-text-secondary line-through">
+                {formatPrice(activePrice)}
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="font-heading text-lg font-bold text-primary">
+                {formatPrice(activePrice)}
+              </span>
+              {activeOriginalPrice && activeOriginalPrice > activePrice && (
+                <span className="ml-2 text-sm text-text-secondary line-through">
+                  {formatPrice(activeOriginalPrice)}
+                </span>
+              )}
+            </>
           )}
         </div>
 
-        {/* Actions */}
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#0097A7] px-3 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-[#00838F]"
-          >
-            <ShoppingCart className="h-3.5 w-3.5" />
-            {hasVariants ? "Select Size" : "Add to Cart"}
-          </button>
-          <Link
-            href={`/shop/${product.slug}`}
-            className="inline-flex items-center justify-center rounded-lg border border-gray-200 px-3 py-2.5 text-xs font-semibold text-gray-600 transition-colors hover:bg-gray-50"
-          >
-            View
-          </Link>
-        </div>
+        {/* Add to Cart */}
+        <button
+          onClick={handleAddToCart}
+          disabled={selectedVariant ? selectedVariant.stock_quantity <= 0 : product.stock_quantity <= 0}
+          className="mt-3 w-full bg-primary text-white rounded-lg py-2.5 text-sm font-semibold hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {(selectedVariant ? selectedVariant.stock_quantity <= 0 : product.stock_quantity <= 0)
+            ? "Out of Stock"
+            : "Add to Cart"}
+        </button>
       </div>
     </div>
   );

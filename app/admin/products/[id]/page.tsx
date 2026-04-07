@@ -17,7 +17,7 @@ export default async function EditProductPage({
   const [productRes, categoriesRes, coaRes, allProductsRes, tagsRes, relatedRes] = await Promise.all([
     supabase.from("products").select("*, variants:product_variants(*)").eq("id", id).single<Product>(),
     supabase.from("categories").select("*").order("sort_order"),
-    supabase.from("coa_documents").select("*").eq("product_id", id).order("created_at", { ascending: false }),
+    supabase.from("coa").select("*").eq("product_id", id).order("created_at", { ascending: false }),
     supabase.from("products").select("id, name").eq("active", true).order("name"),
     supabase.from("product_tag_links").select("tag:product_tags(*)").eq("product_id", id),
     supabase.from("related_products").select("related_product_id").eq("product_id", id).order("sort_order"),

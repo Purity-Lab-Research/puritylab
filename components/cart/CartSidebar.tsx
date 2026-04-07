@@ -12,6 +12,13 @@ import type { Product } from "@/lib/types";
 
 type Tab = "cart" | "wishlist";
 
+function itemDisplayPrice(item: { purchaseType: string; subscriptionPrice: number | null; price: number }): number {
+  if (item.purchaseType === "subscription" && item.subscriptionPrice != null) {
+    return item.subscriptionPrice;
+  }
+  return item.price;
+}
+
 export default function CartSidebar() {
   const {
     items,
@@ -21,6 +28,8 @@ export default function CartSidebar() {
     updateQuantity,
     addItem,
     subtotal,
+    savings,
+    hasSubscriptionItems,
     itemCount,
   } = useCart();
   const { wishlistIds, toggleWishlist } = useWishlist();
@@ -55,6 +64,11 @@ export default function CartSidebar() {
     if (isOpen) setTab("cart");
   }, [isOpen]);
 
+  // Get max delivery frequency from subscription items
+  const subFrequency = items
+    .filter((i) => i.purchaseType === "subscription")
+    .reduce((max, i) => Math.max(max, i.deliveryFrequencyWeeks ?? 4), 4);
+
   if (!isOpen) return null;
 
   return (
@@ -73,7 +87,7 @@ export default function CartSidebar() {
                 onClick={() => setTab("cart")}
                 className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors ${
                   tab === "cart"
-                    ? "border-[#1A2B4A] text-[#1A2B4A]"
+                    ? "border-primary text-primary"
                     : "border-transparent text-gray-400 hover:text-gray-600"
                 }`}
               >
@@ -108,13 +122,11 @@ export default function CartSidebar() {
             {items.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6 text-center">
                 <ShoppingBag className="w-14 h-14 text-gray-300" />
-                <p className="text-gray-500 font-[family-name:var(--font-body)]">
-                  Your cart is empty
-                </p>
+                <p className="text-gray-500">Your cart is empty</p>
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-block rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
+                  className="inline-block rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-all"
                 >
                   Browse Products
                 </Link>
@@ -123,6 +135,7 @@ export default function CartSidebar() {
               <ul className="flex-1 overflow-y-auto divide-y divide-gray-100 px-6">
                 {items.map((item) => {
                   const key = `${item.productId}-${item.variantId ?? "base"}-${item.purchaseType}`;
+                  const price = itemDisplayPrice(item);
                   return (
                     <li key={key} className="flex gap-4 py-5">
                       <div className="relative w-18 h-18 shrink-0 rounded-lg bg-gray-100 overflow-hidden">
@@ -141,10 +154,21 @@ export default function CartSidebar() {
                       </div>
 
                       <div className="flex-1 min-w-0 flex flex-col gap-1">
-                        <p className="text-sm font-semibold text-gray-900 truncate font-[family-name:var(--font-body)]">
+                        <p className="text-sm font-semibold text-gray-900 truncate">
                           {item.name}
                         </p>
-                        <span className="text-xs text-gray-500">{item.size}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-500">{item.size}</span>
+                          {item.purchaseType === "subscription" ? (
+                            <span className="text-[10px] font-semibold text-secondary">
+                              Subscribing
+                            </span>
+                          ) : (
+                            <span className="text-[10px] text-text-secondary">
+                              One-time
+                            </span>
+                          )}
+                        </div>
 
                         <div className="flex items-center justify-between mt-auto pt-1">
                           <div className="flex items-center gap-1">
@@ -184,7 +208,7 @@ export default function CartSidebar() {
 
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-semibold text-gray-900">
-                              {formatPrice(item.price * item.quantity)}
+                              {formatPrice(price * item.quantity)}
                             </span>
                             <button
                               onClick={() =>
@@ -205,11 +229,26 @@ export default function CartSidebar() {
             )}
 
             {items.length > 0 && (
-              <div className="border-t border-gray-200 px-6 py-5 space-y-4">
+              <div className="border-t border-gray-200 px-6 py-5 space-y-3">
+                {/* Subscription savings */}
+                {hasSubscriptionItems && savings > 0 && (
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-success font-semibold">
+                        Subscription savings
+                      </span>
+                      <span className="text-sm text-success font-semibold">
+                        -{formatPrice(savings)}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-text-secondary">
+                      Delivery: Every {subFrequency} weeks
+                    </p>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600 font-[family-name:var(--font-body)]">
-                    Subtotal
-                  </span>
+                  <span className="text-sm text-gray-600">Subtotal</span>
                   <span className="text-lg font-semibold text-gray-900">
                     {formatPrice(subtotal)}
                   </span>
@@ -217,7 +256,7 @@ export default function CartSidebar() {
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="block w-full text-center rounded-lg bg-[#1A2B4A] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
+                  className="block w-full text-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary-hover transition-all"
                 >
                   Proceed to Checkout
                 </Link>
@@ -235,13 +274,11 @@ export default function CartSidebar() {
             {wishlistIds.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6 text-center">
                 <Heart className="w-14 h-14 text-gray-300" />
-                <p className="text-gray-500 font-[family-name:var(--font-body)]">
-                  Your wishlist is empty
-                </p>
+                <p className="text-gray-500">Your wishlist is empty</p>
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-block rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
+                  className="inline-block rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-all"
                 >
                   Browse Products
                 </Link>
@@ -279,7 +316,7 @@ export default function CartSidebar() {
                         <Link
                           href={`/shop/${product.slug}`}
                           onClick={closeCart}
-                          className="text-sm font-semibold text-gray-900 truncate block hover:text-[#0097A7] transition-colors"
+                          className="text-sm font-semibold text-gray-900 truncate block hover:text-secondary transition-colors"
                         >
                           {product.name}
                         </Link>
@@ -296,13 +333,15 @@ export default function CartSidebar() {
                                 name: product.name,
                                 slug: product.slug,
                                 price: product.price,
+                                subscriptionPrice: product.subscription_price,
                                 size: product.size,
                                 image,
                                 purchaseType: "one-time",
+                                deliveryFrequencyWeeks: 4,
                               });
                               setTab("cart");
                             }}
-                            className="text-xs font-semibold text-[#0097A7] hover:underline"
+                            className="text-xs font-semibold text-secondary hover:underline"
                           >
                             Add to Cart
                           </button>

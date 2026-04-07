@@ -33,7 +33,7 @@ export default function ProductStructuredData({ product }: Props) {
     offers: {
       "@type": "Offer",
       price: product.price,
-      priceCurrency: "CAD",
+      priceCurrency: "USD",
       availability:
         product.stock_quantity > 0
           ? "https://schema.org/InStock"

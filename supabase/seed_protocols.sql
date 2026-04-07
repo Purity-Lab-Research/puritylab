@@ -11,17 +11,12 @@ DECLARE
   cat_supplies uuid;
 
   -- product IDs
-  pid_bpc157_5       uuid;
-  pid_bpc157_10      uuid;
-  pid_bpc157_20      uuid;
-  pid_tb500_5        uuid;
-  pid_tb500_10       uuid;
-  pid_wolverine_5_5  uuid;
-  pid_wolverine_10_10 uuid;
+  pid_bpc157         uuid;
+  pid_tb500          uuid;
+  pid_wolverine      uuid;
   pid_cjc_ipa        uuid;
   pid_ipamorelin     uuid;
-  pid_motsc_10       uuid;
-  pid_motsc_40       uuid;
+  pid_motsc          uuid;
   pid_aod9604        uuid;
   pid_bac_water      uuid;
   pid_recon_water    uuid;
@@ -42,93 +37,88 @@ BEGIN
   -- Insert products
   -- =====================
 
-  -- BPC-157 5mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('BPC-157 5mg', 'bpc-157-5mg', '', 'Accelerates soft tissue repair and joint recovery', cat_peptides, 50.00, 45.00, '5mg', 'recovery', 'tier_1', true, false, 100)
+  -- BPC-157 (single product with 3 size variants)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity, badge, size)
+  VALUES ('BPC-157', 'bpc-157', '', 'Accelerates soft tissue repair and joint recovery', cat_peptides, 50.00, 45.00, 'recovery', 'tier_1', true, false, 100, 'Best Seller', '5mg')
   ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_bpc157_5 FROM products WHERE slug = 'bpc-157-5mg';
+  SELECT id INTO pid_bpc157 FROM products WHERE slug = 'bpc-157';
 
-  -- BPC-157 10mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('BPC-157 10mg', 'bpc-157-10mg', '', 'Enhanced dose for faster tissue and ligament healing', cat_peptides, 55.00, 49.50, '10mg', 'recovery', 'tier_1', true, false, 100)
-  ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_bpc157_10 FROM products WHERE slug = 'bpc-157-10mg';
+  INSERT INTO product_variants (product_id, size, price, subscription_price, stock_quantity, low_stock_threshold, sort_order, active)
+  VALUES
+    (pid_bpc157, '5mg',  50.00, 45.00,  100, 10, 0, true),
+    (pid_bpc157, '10mg', 55.00, 49.50,  100, 10, 1, true),
+    (pid_bpc157, '20mg', 95.00, 85.50,  100, 10, 2, true)
+  ON CONFLICT DO NOTHING;
 
-  -- BPC-157 20mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('BPC-157 20mg', 'bpc-157-20mg', '', 'Maximum dose for serious injury recovery protocols', cat_peptides, 95.00, 85.50, '20mg', 'recovery', 'tier_1', true, false, 100)
+  -- TB-500 (single product with 2 size variants)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity, size)
+  VALUES ('TB-500', 'tb-500', '', 'Promotes flexibility and reduces inflammation', cat_peptides, 65.00, 58.50, 'recovery', 'tier_1', true, false, 100, '5mg')
   ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_bpc157_20 FROM products WHERE slug = 'bpc-157-20mg';
+  SELECT id INTO pid_tb500 FROM products WHERE slug = 'tb-500';
 
-  -- TB500 5mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('TB500 5mg', 'tb500-5mg', '', 'Promotes flexibility and reduces inflammation', cat_peptides, 65.00, 58.50, '5mg', 'recovery', 'tier_1', true, false, 100)
-  ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_tb500_5 FROM products WHERE slug = 'tb500-5mg';
+  INSERT INTO product_variants (product_id, size, price, subscription_price, stock_quantity, low_stock_threshold, sort_order, active)
+  VALUES
+    (pid_tb500, '5mg',  65.00, 58.50, 100, 10, 0, true),
+    (pid_tb500, '10mg', 95.00, 85.50, 100, 10, 1, true)
+  ON CONFLICT DO NOTHING;
 
-  -- TB500 10mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('TB500 10mg', 'tb500-10mg', '', 'Full dose for accelerated tissue and muscle repair', cat_peptides, 95.00, 85.50, '10mg', 'recovery', 'tier_1', true, false, 100)
+  -- Wolverine Blend (single product with 2 size variants)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity, size)
+  VALUES ('Wolverine Blend', 'wolverine-blend', '', 'BPC-157 and TB500 combined for complete recovery support', cat_blends, 85.00, 76.50, 'recovery', 'tier_1', true, false, 100, '5/5mg')
   ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_tb500_10 FROM products WHERE slug = 'tb500-10mg';
+  SELECT id INTO pid_wolverine FROM products WHERE slug = 'wolverine-blend';
 
-  -- Wolverine Blend 5/5mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Wolverine Blend 5/5mg', 'wolverine-blend-5-5mg', '', 'BPC-157 and TB500 combined for complete recovery support', cat_blends, 85.00, 76.50, '5/5mg', 'recovery', 'tier_1', true, false, 100)
-  ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_wolverine_5_5 FROM products WHERE slug = 'wolverine-blend-5-5mg';
-
-  -- Wolverine Blend 10/10mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Wolverine Blend 10/10mg', 'wolverine-blend-10-10mg', '', 'Full-strength recovery blend for athletes', cat_blends, 140.00, 126.00, '10/10mg', 'recovery', 'tier_1', true, false, 100)
-  ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_wolverine_10_10 FROM products WHERE slug = 'wolverine-blend-10-10mg';
+  INSERT INTO product_variants (product_id, size, price, subscription_price, stock_quantity, low_stock_threshold, sort_order, active)
+  VALUES
+    (pid_wolverine, '5/5mg',   85.00,  76.50, 100, 10, 0, true),
+    (pid_wolverine, '10/10mg', 140.00, 126.00, 100, 10, 1, true)
+  ON CONFLICT DO NOTHING;
 
   -- CJC-1295/Ipamorelin Blend 5/5mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('CJC-1295/Ipamorelin Blend 5/5mg', 'cjc-ipa-blend-5-5mg', '', 'Growth hormone support for recovery and body composition', cat_blends, 75.00, 67.50, '5/5mg', 'performance', 'tier_1', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('CJC-1295/Ipamorelin Blend 5/5mg', 'cjc-ipa-blend-5-5mg', '', 'Growth hormone support for recovery and body composition', cat_blends, 75.00, 67.50, 'performance', 'tier_1', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_cjc_ipa FROM products WHERE slug = 'cjc-ipa-blend-5-5mg';
 
   -- Ipamorelin 10mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Ipamorelin 10mg', 'ipamorelin-10mg', '', 'Clean growth hormone release without cortisol or prolactin spikes', cat_peptides, 55.00, 49.50, '10mg', 'performance', 'tier_1', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('Ipamorelin 10mg', 'ipamorelin-10mg', '', 'Clean growth hormone release without cortisol or prolactin spikes', cat_peptides, 55.00, 49.50, 'performance', 'tier_1', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_ipamorelin FROM products WHERE slug = 'ipamorelin-10mg';
 
-  -- MOTS-C 10mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('MOTS-C 10mg', 'mots-c-10mg', '', 'Metabolic optimization and endurance enhancement', cat_peptides, 55.00, 49.50, '10mg', 'fat_loss', 'tier_1', true, false, 100)
+  -- MOTS-C (single product with 2 size variants)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity, size)
+  VALUES ('MOTS-C', 'mots-c', '', 'Metabolic optimization and endurance enhancement', cat_peptides, 55.00, 49.50, 'fat_loss', 'tier_1', true, false, 100, '10mg')
   ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_motsc_10 FROM products WHERE slug = 'mots-c-10mg';
+  SELECT id INTO pid_motsc FROM products WHERE slug = 'mots-c';
 
-  -- MOTS-C 40mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('MOTS-C 40mg', 'mots-c-40mg', '', 'Full dose metabolic peptide for fat loss and energy', cat_peptides, 130.00, 117.00, '40mg', 'fat_loss', 'tier_1', true, false, 100)
-  ON CONFLICT (slug) DO NOTHING;
-  SELECT id INTO pid_motsc_40 FROM products WHERE slug = 'mots-c-40mg';
+  INSERT INTO product_variants (product_id, size, price, subscription_price, stock_quantity, low_stock_threshold, sort_order, active)
+  VALUES
+    (pid_motsc, '10mg', 55.00,  49.50,  100, 10, 0, true),
+    (pid_motsc, '40mg', 130.00, 117.00, 100, 10, 1, true)
+  ON CONFLICT DO NOTHING;
 
   -- AOD 9604 5mg
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('AOD 9604 5mg', 'aod-9604-5mg', '', 'Targets fat reduction without affecting blood sugar or growth', cat_peptides, 75.00, 67.50, '5mg', 'fat_loss', 'tier_1', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('AOD 9604 5mg', 'aod-9604-5mg', '', 'Targets fat reduction without affecting blood sugar or growth', cat_peptides, 75.00, 67.50, 'fat_loss', 'tier_1', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_aod9604 FROM products WHERE slug = 'aod-9604-5mg';
 
   -- Bac Water 10ml
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Bac Water 10ml', 'bac-water-10ml', '', 'Bacteriostatic water for peptide reconstitution', cat_supplies, 15.00, 13.50, '10ml', 'supplies', 'supplies', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('Bac Water 10ml', 'bac-water-10ml', '', 'Bacteriostatic water for peptide reconstitution', cat_supplies, 15.00, 13.50, 'supplies', 'supplies', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_bac_water FROM products WHERE slug = 'bac-water-10ml';
 
   -- Reconstitution Water 3ml
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Reconstitution Water 3ml', 'reconstitution-water-3ml', '', 'Sterile water for single-use reconstitution', cat_supplies, 10.00, 9.00, '3ml', 'supplies', 'supplies', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('Reconstitution Water 3ml', 'reconstitution-water-3ml', '', 'Sterile water for single-use reconstitution', cat_supplies, 10.00, 9.00, 'supplies', 'supplies', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_recon_water FROM products WHERE slug = 'reconstitution-water-3ml';
 
   -- Syringes
-  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, size, goal_category, tier, active, featured, stock_quantity)
-  VALUES ('Syringes', 'syringes', '', 'Insulin syringes for subcutaneous injection', cat_supplies, 10.00, 9.00, '10pk', 'supplies', 'supplies', true, false, 100)
+  INSERT INTO products (name, slug, description, short_description, category_id, price, subscription_price, goal_category, tier, active, featured, stock_quantity)
+  VALUES ('Syringes', 'syringes', '', 'Insulin syringes for subcutaneous injection', cat_supplies, 10.00, 9.00, 'supplies', 'supplies', true, false, 100)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO pid_syringes FROM products WHERE slug = 'syringes';
 
@@ -147,12 +137,12 @@ BEGIN
   SELECT id INTO proto_fatloss FROM protocols WHERE slug = 'fat-loss';
 
   INSERT INTO protocols (name, slug, tagline, cycle_length, subscription_price, one_time_price, badge, accent_color, sort_order)
-  VALUES ('Performance Protocol', 'performance', 'Optimize growth hormone for recovery and lean mass', '8-12 weeks', 140.00, 155.00, NULL, '#0097A7', 3)
+  VALUES ('Performance Protocol', 'performance', 'Optimize growth hormone for recovery and lean mass', '8-12 weeks', 140.00, 155.00, NULL, '#2E7D32', 3)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO proto_performance FROM protocols WHERE slug = 'performance';
 
   INSERT INTO protocols (name, slug, tagline, cycle_length, subscription_price, one_time_price, badge, accent_color, sort_order)
-  VALUES ('Full Recomp Protocol', 'full-recomp', 'The complete athlete optimization stack', '8-12 weeks', 342.00, 380.00, 'PREMIUM', '#142238', 4)
+  VALUES ('Full Recomp Protocol', 'full-recomp', 'The complete athlete optimization stack', '8-12 weeks', 342.00, 380.00, 'PREMIUM', '#7B1FA2', 4)
   ON CONFLICT (slug) DO NOTHING;
   SELECT id INTO proto_recomp FROM protocols WHERE slug = 'full-recomp';
 
@@ -160,16 +150,16 @@ BEGIN
   -- Link protocol items
   -- =====================
 
-  -- Recovery: Wolverine Blend 10/10mg + Bac Water + Syringes
+  -- Recovery: Wolverine Blend + Bac Water + Syringes
   INSERT INTO protocol_items (protocol_id, product_id, sort_order) VALUES
-    (proto_recovery, pid_wolverine_10_10, 1),
+    (proto_recovery, pid_wolverine, 1),
     (proto_recovery, pid_bac_water, 2),
     (proto_recovery, pid_syringes, 3)
   ON CONFLICT (protocol_id, product_id) DO NOTHING;
 
-  -- Fat Loss: MOTS-C 40mg + AOD 9604 + CJC/Ipa + Bac Water + Syringes
+  -- Fat Loss: MOTS-C + AOD 9604 + CJC/Ipa + Bac Water + Syringes
   INSERT INTO protocol_items (protocol_id, product_id, sort_order) VALUES
-    (proto_fatloss, pid_motsc_40, 1),
+    (proto_fatloss, pid_motsc, 1),
     (proto_fatloss, pid_aod9604, 2),
     (proto_fatloss, pid_cjc_ipa, 3),
     (proto_fatloss, pid_bac_water, 4),
@@ -184,15 +174,15 @@ BEGIN
     (proto_performance, pid_syringes, 4)
   ON CONFLICT (protocol_id, product_id) DO NOTHING;
 
-  -- Full Recomp: BPC-157 10mg + TB500 10mg + CJC/Ipa + MOTS-C 40mg + Bac Water + Syringes
+  -- Full Recomp: BPC-157 + TB-500 + CJC/Ipa + MOTS-C + Bac Water + Syringes
   INSERT INTO protocol_items (protocol_id, product_id, sort_order) VALUES
-    (proto_recomp, pid_bpc157_10, 1),
-    (proto_recomp, pid_tb500_10, 2),
+    (proto_recomp, pid_bpc157, 1),
+    (proto_recomp, pid_tb500, 2),
     (proto_recomp, pid_cjc_ipa, 3),
-    (proto_recomp, pid_motsc_40, 4),
+    (proto_recomp, pid_motsc, 4),
     (proto_recomp, pid_bac_water, 5),
     (proto_recomp, pid_syringes, 6)
   ON CONFLICT (protocol_id, product_id) DO NOTHING;
 
-  RAISE NOTICE 'Seed complete: 15 products, 4 protocols, all items linked.';
+  RAISE NOTICE 'Seed complete: 11 products (4 with variants), 4 protocols, all items linked.';
 END $$;

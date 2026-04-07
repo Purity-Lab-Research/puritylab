@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Shipping Policy",
-  description: `${SITE_NAME} shipping policy — same-day processing, 3-8 business day delivery, worldwide shipping.`,
+  description: `${SITE_NAME} shipping policy - same-day fulfillment, 2-4 business day US domestic delivery, free shipping over $200.`,
 };
 
 export default function ShippingPolicyPage() {
@@ -12,7 +12,7 @@ export default function ShippingPolicyPage() {
     <>
       <PageHeader
         title="SHIPPING POLICY"
-        description="Fast, reliable shipping worldwide."
+        description="Same-day fulfillment. Free shipping on orders over $200."
         breadcrumbs={[{ label: "Shipping Policy" }]}
       />
 
@@ -49,7 +49,7 @@ export default function ShippingPolicyPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               All orders are processed same-day when placed before 2:00 PM EST on business days (Monday
-              through Friday, excluding Canadian statutory holidays). Orders placed after this cutoff or
+              through Friday, excluding United States statutory holidays). Orders placed after this cutoff or
               on weekends and holidays will be processed on the next business day.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -67,17 +67,14 @@ export default function ShippingPolicyPage() {
               Once your order has been shipped, estimated delivery times are as follows:
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li><strong>Canada:</strong> 3-8 business days</li>
-              <li><strong>United States:</strong> 3-8 business days</li>
-              <li><strong>Europe:</strong> 5-12 business days</li>
-              <li><strong>Australia / New Zealand:</strong> 7-15 business days</li>
-              <li><strong>Rest of World:</strong> 7-20 business days</li>
+              <li><strong>Standard Shipping:</strong> 2-4 business days</li>
+              <li><strong>Priority Shipping:</strong> 1-2 business days</li>
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
-              These are estimated timeframes and are not guaranteed. Actual delivery times may vary due
-              to carrier capacity, weather, customs processing, holidays in the destination country, and
-              other factors beyond our control. {SITE_NAME} is not liable for delays in delivery once
-              the order has been transferred to the shipping carrier.
+              We currently ship within the United States only. International shipping is planned for the
+              future. These are estimated timeframes and are not guaranteed. Actual delivery times may
+              vary due to carrier capacity, weather, and other factors beyond our control. Free shipping
+              is available on all orders over $200 and on all active subscriptions.
             </p>
           </div>
 
@@ -91,9 +88,8 @@ export default function ShippingPolicyPage() {
               weight, and service level:
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>Canada Post</li>
+              <li>USPS</li>
               <li>FedEx</li>
-              <li>DHL</li>
               <li>UPS</li>
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
@@ -108,10 +104,9 @@ export default function ShippingPolicyPage() {
               5. Shipping Destinations and Restrictions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              We ship to most countries worldwide. However, we do not ship to countries, territories, or
-              regions that are subject to Canadian sanctions, embargoes, or trade restrictions as
-              administered by Global Affairs Canada, or where the importation of our products is
-              prohibited or restricted by local law.
+              We currently ship within the United States only. We do not ship to P.O. boxes for
+              orders requiring signature confirmation. International shipping may be available in
+              the future.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               We reserve the right to refuse or cancel any order shipping to a destination where we
@@ -143,7 +138,7 @@ export default function ShippingPolicyPage() {
               taxes before placing an order.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              All international shipments include accurate customs declarations as required by Canadian
+              All international shipments include accurate customs declarations as required by United States
               export regulations and international shipping law. We are legally required to declare the
               actual contents and value of each shipment.
             </p>

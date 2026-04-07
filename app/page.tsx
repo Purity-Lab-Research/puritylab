@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
-import type { Product } from "@/lib/types";
+import type { Product, Protocol } from "@/lib/types";
 import Hero from "@/components/home/Hero";
 import TrustStrip from "@/components/home/TrustStrip";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -23,20 +23,30 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   let products: Product[] = [];
+  let protocols: Protocol[] = [];
 
   try {
     const supabase = await createClient();
-    const { data } = await supabase
-      .from("products")
-      .select("*, category:categories(*), variants:product_variants(*)")
-      .eq("active", true)
-      .eq("featured", true)
-      .order("created_at", { ascending: false })
-      .limit(6);
 
-    if (data) products = data as Product[];
+    const [productsRes, protocolsRes] = await Promise.all([
+      supabase
+        .from("products")
+        .select("*, category:categories(*), variants:product_variants(*)")
+        .eq("active", true)
+        .eq("featured", true)
+        .order("created_at", { ascending: false })
+        .limit(6),
+      supabase
+        .from("protocols")
+        .select("*, items:protocol_items(*, product:products(name, slug))")
+        .eq("active", true)
+        .order("sort_order", { ascending: true }),
+    ]);
+
+    if (productsRes.data) products = productsRes.data as Product[];
+    if (protocolsRes.data) protocols = protocolsRes.data as Protocol[];
   } catch {
-    // Supabase may not be connected yet — fall back to empty array
+    // Supabase may not be connected yet - fall back to empty arrays
   }
 
   return (
@@ -44,7 +54,7 @@ export default async function HomePage() {
       <Hero />
       <TrustStrip />
       <HowItWorks />
-      <Protocols />
+      <Protocols protocols={protocols} />
       <FeaturedProducts products={products} />
       <WhyPurityLab />
       <EducationPreview />

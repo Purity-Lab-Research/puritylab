@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Everything you need to know about our research peptides.",
+    "Frequently asked questions about ordering, subscriptions, products, and peptide usage at Purity Lab.",
 };
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {

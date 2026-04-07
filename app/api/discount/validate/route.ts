@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient();
 
     const { data: discountCode, error } = await supabase
-      .from("discount_codes")
+      .from("discounts")
       .select("*")
       .eq("code", code.toUpperCase().trim())
       .single();
@@ -57,13 +57,13 @@ export async function POST(req: NextRequest) {
     }
 
     // Check min order amount
-    if (subtotal < Number(discountCode.min_order_amount)) {
+    if (subtotal < Number(discountCode.min_order)) {
       return NextResponse.json(
         {
           valid: false,
           discount: 0,
           type: null,
-          message: `Minimum order amount of $${Number(discountCode.min_order_amount).toFixed(2)} is required for this code.`,
+          message: `Minimum order amount of $${Number(discountCode.min_order).toFixed(2)} is required for this code.`,
         },
         { status: 200 }
       );

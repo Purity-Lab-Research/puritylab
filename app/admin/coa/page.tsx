@@ -11,7 +11,7 @@ export default async function AdminCoaPage() {
   const supabase = createAdminClient();
 
   const { data } = await supabase
-    .from("coa_documents")
+    .from("coa")
     .select("*, product:products(name)")
     .order("created_at", { ascending: false });
 
@@ -44,14 +44,14 @@ export default async function AdminCoaPage() {
             {coas.map((coa) => (
               <tr key={coa.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium text-gray-900">
-                  {coa.product?.name ?? "—"}
+                  {coa.product?.name ?? " - "}
                 </td>
                 <td className="px-4 py-3">{coa.purity_percentage}%</td>
                 <td className="px-4 py-3">{coa.batch_number}</td>
                 <td className="px-4 py-3 text-gray-500">
                   {coa.test_date
                     ? new Date(coa.test_date).toLocaleDateString()
-                    : "—"}
+                    : " - "}
                 </td>
                 <td className="px-4 py-3">
                   {coa.pdf_url ? (
@@ -64,7 +64,7 @@ export default async function AdminCoaPage() {
                       View PDF
                     </a>
                   ) : (
-                    "—"
+                    " - "
                   )}
                 </td>
                 <td className="px-4 py-3">

@@ -104,7 +104,7 @@ export default async function AdminOrderDetailPage({
           {order.tracking_number && (
             <div className="mt-3 border-t pt-3">
               <p className="text-xs text-gray-500">
-                Tracking: {order.carrier && `${order.carrier} — `}
+                Tracking: {order.carrier && `${order.carrier}  -  `}
                 {order.tracking_number}
               </p>
             </div>

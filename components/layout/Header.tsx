@@ -13,7 +13,8 @@ const NAV_LINKS = [
   { href: "/protocols", label: "Protocols" },
   { href: "/shop", label: "Shop" },
   { href: "/coa", label: "CoA Library" },
-  { href: "/education", label: "Education" },
+  { href: "/learn", label: "Education" },
+  { href: "/resources", label: "Resources" },
 ];
 
 interface SearchResult {

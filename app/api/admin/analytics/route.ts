@@ -8,7 +8,7 @@ export async function GET() {
 
   const supabase = createAdminClient();
 
-  // Fetch all data in parallel — including pending orders for abandoned stats
+  // Fetch all data in parallel  -  including pending orders for abandoned stats
   const [ordersRes, pendingOrdersRes, orderItemsRes, productsRes, customersRes] =
     await Promise.all([
       supabase

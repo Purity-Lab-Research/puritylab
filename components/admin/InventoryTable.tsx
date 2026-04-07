@@ -80,7 +80,7 @@ export default function InventoryTable({
                   {p.name}
                 </td>
                 <td className="px-4 py-3 text-gray-500">
-                  {p.category?.name ?? "—"}
+                  {p.category?.name ?? " - "}
                 </td>
                 <td className="px-4 py-3 text-right">
                   {isEditing ? (

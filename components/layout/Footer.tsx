@@ -19,11 +19,12 @@ const protocolLinks = [
 ];
 
 const learnLinks = [
-  { label: "Beginner's Guide", href: "/education/beginners-guide" },
-  { label: "Dosing & Reconstitution", href: "/education/dosing" },
+  { label: "Beginner's Guide", href: "/learn/getting-started" },
+  { label: "Dosing & Reconstitution", href: "/learn/how-to-reconstitute" },
   { label: "CoA Library", href: "/coa" },
-  { label: "How We Test", href: "/education/testing" },
+  { label: "How We Test", href: "/how-we-test" },
   { label: "FAQ", href: "/faq" },
+  { label: "Resources", href: "/resources" },
 ];
 
 const companyLinks = [
@@ -170,7 +171,7 @@ export default function Footer() {
             </p>
             <span className="hidden sm:inline text-white/20">|</span>
             <p className="text-xs text-white/40 font-medium">
-              For Research Use Only
+              For Research Use Only. Not for human consumption.
             </p>
           </div>
           <div className="flex items-center gap-2">

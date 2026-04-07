@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 /**
  * Lightweight visitor tracking beacon.
  * Sends a heartbeat to /api/track every 30s while the page is visible.
- * Respects cookie consent — only tracks if analytics consent is given.
+ * Respects cookie consent  -  only tracks if analytics consent is given.
  */
 export default function SiteTracker() {
   const pathname = usePathname();

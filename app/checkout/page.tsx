@@ -54,7 +54,7 @@ const INITIAL_SHIPPING: ShippingForm = {
   city: "",
   province: "",
   postalCode: "",
-  country: "CA",
+  country: "US",
 };
 
 const inputCls =
@@ -62,7 +62,7 @@ const inputCls =
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotal, clearCart } = useCart();
+  const { items, subtotal, savings, hasSubscriptionItems, clearCart } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -299,12 +299,12 @@ export default function CheckoutPage() {
           shipping: deliveryMethod === "pickup"
             ? {
                 fullName: shipping.fullName,
-                line1: "Local Pickup — Windsor, ON",
+                line1: "Local Pickup  -  Windsor, ON",
                 line2: null,
                 city: "Windsor",
                 province: "ON",
                 postalCode: "N8W 3T6",
-                country: "CA",
+                country: "US",
               }
             : {
                 fullName: shipping.fullName,
@@ -544,7 +544,7 @@ export default function CheckoutPage() {
                     {/* Pickup Info */}
                     {deliveryMethod === "pickup" && (
                       <div className="sm:col-span-2 rounded-lg border border-blue-200 bg-primary/5 p-4 space-y-2">
-                        <p className="text-sm font-semibold text-[#1A2B4A]">Local Pickup — Windsor, Ontario</p>
+                        <p className="text-sm font-semibold text-[#1A2B4A]">Local Pickup  -  Windsor, Ontario</p>
                         <p className="text-sm text-gray-600">
                           Free pickup is available in <strong>Windsor, Ontario, Canada</strong> only.
                           To arrange a pickup time, email us at{" "}
@@ -615,7 +615,7 @@ export default function CheckoutPage() {
                       )}
                     </div>
 
-                    {/* Province / State — dynamic per country */}
+                    {/* Province / State  -  dynamic per country */}
                     {(() => {
                       const cc: CountryConfig = getCountryConfig(shipping.country);
                       return (
@@ -654,7 +654,7 @@ export default function CheckoutPage() {
                       );
                     })()}
 
-                    {/* Postal / ZIP Code — dynamic per country */}
+                    {/* Postal / ZIP Code  -  dynamic per country */}
                     {(() => {
                       const cc: CountryConfig = getCountryConfig(shipping.country);
                       return (
@@ -824,7 +824,7 @@ export default function CheckoutPage() {
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-900">
-                              {rate.carrier} &mdash; {rate.service}
+                              {rate.carrier} &middot; {rate.service}
                             </p>
                             <p className="text-xs text-gray-500">{rate.delivery_days}</p>
                           </div>
@@ -945,7 +945,7 @@ export default function CheckoutPage() {
                       <p className="text-xs text-gray-500">{shipping.email}</p>
                       {selectedRate && (
                         <p className="text-xs text-[#1A2B4A] font-medium mt-1">
-                          {selectedRate.carrier} &mdash; {selectedRate.service} ({selectedRate.delivery_days})
+                          {selectedRate.carrier} &middot; {selectedRate.service} ({selectedRate.delivery_days})
                         </p>
                       )}
                     </div>
@@ -1000,37 +1000,77 @@ export default function CheckoutPage() {
                 Order Summary
               </h3>
 
-              <ul className="mb-4 divide-y divide-gray-100">
-                {items.map((item) => (
-                  <li
-                    key={`${item.productId}-${item.variantId ?? "base"}-${item.purchaseType}`}
-                    className="flex gap-3 py-3"
-                  >
-                    {item.image && (
-                      <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-contain p-1"
-                          sizes="56px"
-                        />
+              {/* Items grouped by purchase type */}
+              {(() => {
+                const subItems = items.filter((i) => i.purchaseType === "subscription");
+                const oneTimeItems = items.filter((i) => i.purchaseType !== "subscription");
+                const subFreq = subItems.reduce((max, i) => Math.max(max, i.deliveryFrequencyWeeks ?? 4), 4);
+                const itemPrice = (item: typeof items[0]) =>
+                  item.purchaseType === "subscription" && item.subscriptionPrice != null
+                    ? item.subscriptionPrice
+                    : item.price;
+
+                return (
+                  <div className="mb-4">
+                    {subItems.length > 0 && (
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">
+                          Subscription (every {subFreq} weeks)
+                        </p>
+                        <ul className="divide-y divide-gray-100">
+                          {subItems.map((item) => (
+                            <li key={`${item.productId}-${item.variantId ?? "base"}-sub`} className="flex gap-3 py-3">
+                              {item.image && (
+                                <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
+                                  <Image src={item.image} alt={item.name} fill className="object-contain p-1" sizes="56px" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
+                                <p className="text-xs text-gray-500">
+                                  {item.size && <>{item.size} &middot; </>}Qty: {item.quantity}
+                                </p>
+                              </div>
+                              <p className="text-sm font-medium text-gray-900 whitespace-nowrap">
+                                {formatPrice(itemPrice(item) * item.quantity)}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
-                        {item.name}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {item.size && <>{item.size} &middot; </>}Qty: {item.quantity}
-                      </p>
-                    </div>
-                    <p className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                      {formatPrice(item.price * item.quantity)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+                    {oneTimeItems.length > 0 && (
+                      <div>
+                        {subItems.length > 0 && (
+                          <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                            One-Time Items
+                          </p>
+                        )}
+                        <ul className="divide-y divide-gray-100">
+                          {oneTimeItems.map((item) => (
+                            <li key={`${item.productId}-${item.variantId ?? "base"}-ot`} className="flex gap-3 py-3">
+                              {item.image && (
+                                <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
+                                  <Image src={item.image} alt={item.name} fill className="object-contain p-1" sizes="56px" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
+                                <p className="text-xs text-gray-500">
+                                  {item.size && <>{item.size} &middot; </>}Qty: {item.quantity}
+                                </p>
+                              </div>
+                              <p className="text-sm font-medium text-gray-900 whitespace-nowrap">
+                                {formatPrice(item.price * item.quantity)}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
 
               {/* Discount Code */}
               <div className="border-t border-gray-100 pt-4 mb-4">
@@ -1086,6 +1126,12 @@ export default function CheckoutPage() {
               </div>
 
               <div className="space-y-2 border-t border-gray-100 pt-4 text-sm">
+                {hasSubscriptionItems && savings > 0 && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Subscription savings</span>
+                    <span>-{formatPrice(savings)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
                   <span>{formatPrice(subtotal)}</span>
@@ -1132,6 +1178,12 @@ export default function CheckoutPage() {
                   {selectedRate ? selectedRate.delivery_days : "Multiple carrier options"}
                 </div>
               </div>
+
+              {hasSubscriptionItems && (
+                <p className="mt-4 text-[10px] text-gray-400 leading-relaxed border-t border-gray-100 pt-4">
+                  Subscription items will be charged and shipped automatically based on your selected frequency. You can pause or cancel anytime from your dashboard.
+                </p>
+              )}
             </div>
           </aside>
         </div>

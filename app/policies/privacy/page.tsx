@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: `${SITE_NAME} privacy policy — how we collect, use, and protect your personal information.`,
+  description: `${SITE_NAME} privacy policy  -  how we collect, use, and protect your personal information.`,
 };
 
 const PRIVACY_EMAIL = CONTACT_EMAIL;
@@ -32,8 +32,8 @@ export default function PrivacyPolicyPage() {
             <p className="mt-2 text-sm leading-relaxed">
               This Privacy Policy describes how Purity Lab (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or
               &ldquo;our&rdquo;) collects, uses, discloses, retains, and protects personal
-              information. We are a Canadian company and our primary data protection obligations
-              arise under the Personal Information Protection and Electronic Documents Act (PIPEDA)
+              information. We are a United States company and our primary data protection obligations
+              arise under the California Consumer Privacy Act (CCPA)
               and applicable provincial legislation, including Quebec&apos;s Law 25.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
               </p>
             </div>
             <p className="mt-4 text-sm leading-relaxed">
-              In accordance with PIPEDA Principle 1 (Accountability), we have designated a Privacy
+              In accordance with CCPA Principle 1 (Accountability), we have designated a Privacy
               Officer responsible for our compliance with this policy and all applicable privacy
               legislation:
             </p>
@@ -224,7 +224,7 @@ export default function PrivacyPolicyPage() {
                 improve functionality, performance, and user experience.
               </li>
               <li>
-                <strong>Legal Obligations:</strong> Complying with applicable Canadian,
+                <strong>Legal Obligations:</strong> Complying with applicable United States,
                 international, and destination-country laws, regulations, export controls, and court
                 orders.
               </li>
@@ -239,11 +239,11 @@ export default function PrivacyPolicyPage() {
           {/* Section 6 */}
           <div>
             <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              6. Consent (PIPEDA)
+              6. Consent (CCPA)
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              For processing governed by Canadian law, we obtain your meaningful consent before or at
-              the time of collecting personal information, as required by PIPEDA Principle 3
+              For processing governed by United States law, we obtain your meaningful consent before or at
+              the time of collecting personal information, as required by CCPA Principle 3
               (Consent):
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -297,7 +297,7 @@ export default function PrivacyPolicyPage() {
               <li>
                 <strong>Shipping and Logistics Carriers:</strong> Your name, shipping address,
                 telephone number, and email (for delivery notifications) are shared with carriers
-                (e.g., Canada Post, FedEx, UPS, DHL, local postal services) solely to deliver your
+                (e.g., USPS, FedEx, UPS) solely to deliver your
                 order. For international shipments, customs declaration information (order contents,
                 declared value) is provided as required by law.
               </li>
@@ -338,18 +338,18 @@ export default function PrivacyPolicyPage() {
               8. International Data Transfers
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              We are based in Canada and our primary data storage is in Canada. However, because we
+              We are based in the United States and our primary data storage is in the United States. However, because we
               serve customers worldwide and use service providers in multiple countries, your
               personal information may be transferred to and processed in countries other than your
-              own, including Canada, the United States, and other jurisdictions.
+              own, including the United States and other jurisdictions.
             </p>
 
             <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               8.1 Transfers from the EEA, UK, and Switzerland
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
-              Canada has been granted an adequacy decision by the European Commission, meaning
-              transfers of personal data from the EEA to Canadian organizations subject to PIPEDA
+              The United States provides data protection through various frameworks, including
+              transfers of personal data from the EEA to United States organizations subject to CCPA
               are generally permitted without additional safeguards. For any sub-processors located
               in jurisdictions without an adequacy decision, we implement appropriate transfer
               mechanisms, including Standard Contractual Clauses (SCCs) approved by the European
@@ -380,7 +380,7 @@ export default function PrivacyPolicyPage() {
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
                 <strong>Order and transaction records:</strong> 7 years from the date of
-                transaction, as required by the Canada Revenue Agency for tax record-keeping, and to
+                transaction, as required by the Internal Revenue Service (IRS) for tax record-keeping, and to
                 comply with applicable statute of limitations periods.
               </li>
               <li>
@@ -490,8 +490,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
-                We will notify the Office of the Privacy Commissioner of Canada and affected
-                individuals as required by PIPEDA&apos;s breach notification provisions.
+                We will notify the Office of the Federal Trade Commission (FTC) and affected
+                individuals as required by CCPA&apos;s breach notification provisions.
               </li>
               <li>
                 For breaches affecting EU/EEA residents, we will notify the relevant supervisory
@@ -547,7 +547,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              13.1 All Customers (PIPEDA)
+              13.1 All Customers (CCPA)
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
@@ -565,7 +565,7 @@ export default function PrivacyPolicyPage() {
               </li>
               <li>
                 <strong>Complain:</strong> File a complaint with our Privacy Officer or the Office of
-                the Privacy Commissioner of Canada.
+                the Federal Trade Commission (FTC).
               </li>
             </ul>
 
@@ -704,7 +704,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
-                <strong>Canada (PIPEDA):</strong> 30 calendar days
+                <strong>CCPA:</strong> 30 calendar days
               </li>
               <li>
                 <strong>EU/UK (GDPR):</strong> 1 month, extendable by 2 additional months for
@@ -812,7 +812,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="mt-2 text-sm leading-relaxed space-y-3 pl-5">
               <div>
-                <p><strong>Canada:</strong> Office of the Privacy Commissioner of Canada</p>
+                <p><strong>United States:</strong> Federal Trade Commission (FTC)</p>
                 <p>30 Victoria Street, Gatineau, Quebec K1A 1H3 | Toll-free: 1-800-282-1376 | www.priv.gc.ca</p>
               </div>
               <div>

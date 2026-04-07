@@ -1,126 +1,73 @@
+import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import PageHeader from "@/components/ui/PageHeader";
-import Button from "@/components/ui/Button";
-import CoaExplanation from "@/components/coa/CoaExplanation";
-import { FileText, FlaskConical } from "lucide-react";
-import { getCoaUrl } from "@/lib/coa-url";
+import CoaLibrary from "@/components/coa/CoaLibrary";
 
-export const metadata = {
-  title: "Certificates of Analysis",
+export const metadata: Metadata = {
+  title: "CoA Library",
   description:
-    "Every product batch is independently tested for purity and identity. View our COAs.",
+    "Every product batch is independently tested. Look up your batch number or browse all Certificates of Analysis.",
 };
 
-interface CoaDocument {
+interface CoaRow {
   id: string;
   batch_number: string;
   purity_percentage: number;
   pdf_url: string | null;
+  test_date: string | null;
   created_at: string;
-  product: { name: string; slug: string } | null;
+  product_id: string;
+}
+
+interface ProductWithCoas {
+  id: string;
+  name: string;
+  slug: string;
+  size: string;
+  coas: CoaRow[];
 }
 
 export default async function CoaPage() {
-  const supabase = await createClient();
-
-  let coas: CoaDocument[] = [];
+  let productCoas: ProductWithCoas[] = [];
 
   try {
-    const { data } = await supabase
-      .from("coa_documents")
-      .select("*, product:products(name, slug)")
-      .order("created_at");
+    const supabase = await createClient();
 
-    coas = (data as CoaDocument[]) ?? [];
+    // Fetch all CoA documents with their product info
+    const { data: coas } = await supabase
+      .from("coa")
+      .select("id, batch_number, purity_percentage, pdf_url, test_date, created_at, product_id")
+      .order("test_date", { ascending: false });
+
+    // Fetch products that have CoAs
+    if (coas && coas.length > 0) {
+      const productIds = [...new Set(coas.map((c: CoaRow) => c.product_id))];
+      const { data: products } = await supabase
+        .from("products")
+        .select("id, name, slug, size")
+        .in("id", productIds);
+
+      if (products) {
+        productCoas = products.map((product) => ({
+          ...product,
+          coas: coas.filter((c: CoaRow) => c.product_id === product.id),
+        }));
+        // Sort by product name
+        productCoas.sort((a, b) => a.name.localeCompare(b.name));
+      }
+    }
   } catch {
-    coas = [];
+    productCoas = [];
   }
 
   return (
     <>
       <PageHeader
-        title="CERTIFICATES OF ANALYSIS"
-        description="Every product batch is independently tested for purity and identity."
-        breadcrumbs={[{ label: "Certificates of Analysis" }]}
-        titleKey="coa_title"
-        descriptionKey="coa_description"
+        title="CoA Library"
+        description="Every product, every batch, independently verified."
+        breadcrumbs={[{ label: "CoA Library" }]}
       />
-
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        {/* Info Box */}
-        <div className="mb-10 flex items-start gap-4 rounded-xl border border-[#0097A7]/20 bg-[#0097A7]/5 p-5">
-          <FlaskConical className="mt-0.5 h-5 w-5 shrink-0 text-[#0097A7]" />
-          <p className="text-sm text-gray-700 font-[family-name:var(--font-body)]">
-            All products undergo rigorous HPLC and Mass Spectrometry analysis by
-            independent third-party laboratories.
-          </p>
-        </div>
-
-        {/* COA Grid */}
-        {coas.length > 0 ? (
-          <div
-            className="grid gap-6"
-            style={{
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-            }}
-          >
-            {coas.map((coa) => (
-              <div
-                key={coa.id}
-                className="flex flex-col rounded-xl border border-[#dde2ea] bg-white p-5 shadow-sm"
-              >
-                <FileText className="mb-3 h-8 w-8 text-[#1A2B4A]" />
-
-                <h3 className="text-sm font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-                  {coa.product?.name ?? "Unknown Product"}
-                </h3>
-
-                {coa.purity_percentage != null && (
-                  <p className="mt-1 text-lg font-bold text-green-600 font-[family-name:var(--font-body)]">
-                    {coa.purity_percentage}% Purity
-                  </p>
-                )}
-
-                {coa.batch_number && (
-                  <p className="mt-1 text-xs text-gray-500 font-[family-name:var(--font-body)]">
-                    Batch: {coa.batch_number}
-                  </p>
-                )}
-
-                <div className="mt-auto pt-4">
-                  {coa.pdf_url ? (
-                    <Button
-                      href={getCoaUrl(coa.pdf_url)}
-                      size="sm"
-                      variant="blue"
-                      className="w-full"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View COA
-                    </Button>
-                  ) : (
-                    <button
-                      disabled
-                      className="w-full cursor-not-allowed rounded-lg bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-400 font-[family-name:var(--font-body)]"
-                    >
-                      View COA
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-sm text-gray-500 font-[family-name:var(--font-body)]">
-            No certificates of analysis are available at this time. Check back
-            soon.
-          </p>
-        )}
-
-        {/* Understanding Our COAs */}
-        <CoaExplanation />
-      </section>
+      <CoaLibrary productCoas={productCoas} />
     </>
   );
 }

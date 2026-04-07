@@ -10,7 +10,7 @@ export default function LoadingBar() {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // Skip the initial mount — only animate on actual route changes
+    // Skip the initial mount  -  only animate on actual route changes
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "We're here to help with any questions about our research peptides.",
+  description: "Get in touch with Purity Lab support. We respond within 24 hours.",
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
-        // Update order status to processing (only if still pending — idempotency)
+        // Update order status to processing (only if still pending  -  idempotency)
         const { data: updatedOrders, error: orderError } = await supabase
           .from("orders")
           .update({ status: "processing", updated_at: new Date().toISOString() })

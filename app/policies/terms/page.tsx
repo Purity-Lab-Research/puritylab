@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: `${SITE_NAME} terms of service — rules and conditions for purchasing research peptides.`,
+  description: `${SITE_NAME} terms of service - rules and conditions for purchasing research peptides.`,
 };
 
 export default function TermsPage() {
@@ -173,7 +173,7 @@ export default function TermsPage() {
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
               Payment must be received in full before orders are processed and shipped. All prices
-              listed on our website are in CAD unless otherwise stated. Prices are subject to change
+              listed on our website are in USD unless otherwise stated. Prices are subject to change
               without prior notice, but changes will not affect orders that have already been confirmed.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -182,7 +182,40 @@ export default function TermsPage() {
             </p>
           </div>
 
-          {/* 7. Product Information and Accuracy */}
+          {/* 7. Subscriptions */}
+          <div>
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+              7. Subscriptions
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              {SITE_NAME} offers subscription plans that provide automatic recurring shipments at a
+              discounted price. By subscribing, you agree to the following terms:
+            </p>
+            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
+              <li>
+                Subscriptions are billed automatically at the frequency you select (every 4, 6, or 8
+                weeks). The first charge occurs at the time of subscription creation.
+              </li>
+              <li>
+                Subscription orders receive a 10% discount off the one-time purchase price for all
+                included items.
+              </li>
+              <li>
+                You may pause or cancel your subscription at any time from your account dashboard.
+                Pausing stops future shipments and charges until you choose to resume.
+              </li>
+              <li>
+                Cancellation takes effect at the end of the current billing period. No refunds are
+                issued for subscription orders that have already been shipped.
+              </li>
+              <li>
+                {SITE_NAME} reserves the right to modify subscription pricing with 30 days&apos; notice.
+                You will be notified by email before any price change takes effect.
+              </li>
+            </ul>
+          </div>
+
+          {/* 8. Product Information and Accuracy */}
           <div>
             <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               7. Product Information and Accuracy
@@ -278,22 +311,22 @@ export default function TermsPage() {
               10. Export Compliance and Sanctions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              {SITE_NAME} complies with all applicable Canadian export control laws and regulations,
-              including the Export and Import Permits Act (EIPA), the Controlled Goods Program, and
-              Canadian sanctions regulations administered by Global Affairs Canada.
+              {SITE_NAME} complies with all applicable applicable United States export control laws and regulations,
+              including the Export Administration Regulations (EAR) and sanctions administered by the
+              Office of Foreign Assets Control (OFAC).
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              We do not ship to countries, regions, entities, or individuals subject to Canadian
+              We do not ship to countries, regions, entities, or individuals subject to U.S.
               sanctions or embargoes. By placing an order, you represent and warrant that:
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
                 You are not located in, and will not ship or transfer products to, any country or
-                region subject to Canadian, U.S., EU, or UN sanctions or embargoes.
+                region subject to U.S., EU, or UN sanctions or embargoes.
               </li>
               <li>
-                You are not named on any restricted party list, including the Canadian Consolidated
-                Autonomous Sanctions List or the U.S. Specially Designated Nationals (SDN) list.
+                You are not named on any restricted party list, including the U.S. Specially Designated Nationals (SDN) list
+                or the Entity List.
               </li>
               <li>
                 You will not use, re-export, or transfer products in violation of any applicable export
@@ -314,7 +347,7 @@ export default function TermsPage() {
             <p className="mt-2 text-sm leading-relaxed">
               All content on the {SITE_NAME} website, including but not limited to text, images,
               graphics, logos, trademarks, product descriptions, page layouts, and software, is the
-              property of {SITE_NAME} or its licensors and is protected by applicable Canadian and
+              property of {SITE_NAME} or its licensors and is protected by applicable United States and
               international intellectual property laws.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -439,16 +472,16 @@ export default function TermsPage() {
             <h3 className="mt-4 text-base font-semibold text-gray-900">15.2 Binding Arbitration</h3>
             <p className="mt-2 text-sm leading-relaxed">
               If the dispute cannot be resolved informally within 30 days, either party may submit the
-              dispute to binding arbitration administered in accordance with the Arbitration Act, 1991
-              (Ontario). The arbitration shall take place in Windsor, Ontario, Canada. The language of
+              dispute to binding arbitration administered in accordance with the Federal Arbitration Act.
+              The arbitration shall take place in Los Angeles, California. The language of
               arbitration shall be English. The arbitrator&apos;s decision shall be final and binding.
             </p>
 
             <h3 className="mt-4 text-base font-semibold text-gray-900">15.3 Exceptions</h3>
             <p className="mt-2 text-sm leading-relaxed">
-              Either party may bring a claim in the Ontario Superior Court of Justice or the Small
-              Claims Court of Ontario (if the claim is within its monetary jurisdiction) for injunctive
-              or equitable relief, or for claims related to intellectual property infringement.
+              Either party may bring a claim in the state or federal courts located in Los Angeles County,
+              California for injunctive or equitable relief, or for claims related to intellectual
+              property infringement.
             </p>
 
             <h3 className="mt-4 text-base font-semibold text-gray-900">15.4 Class Action Waiver</h3>
@@ -514,13 +547,13 @@ export default function TermsPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               These Terms of Service shall be governed by and construed in accordance with the laws of
-              the Province of Ontario and the federal laws of Canada applicable therein, without regard
-              to conflict of law principles.
+              the State of California and the federal laws of the United States applicable therein,
+              without regard to conflict of law principles.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               Subject to the arbitration provisions in Section 15, any legal proceedings arising under
-              these Terms shall be brought exclusively in the courts located in Windsor, Ontario,
-              Canada.
+              these Terms shall be brought exclusively in the state or federal courts located in
+              Los Angeles County, California.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               If you are a consumer in the European Union, this clause does not affect your right to
@@ -538,7 +571,7 @@ export default function TermsPage() {
             </p>
             <div className="mt-2 text-sm leading-relaxed">
               <p className="font-semibold">{SITE_NAME}</p>
-              <p>Windsor, Ontario, Canada</p>
+              <p>United States</p>
               <p>
                 Email:{" "}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">

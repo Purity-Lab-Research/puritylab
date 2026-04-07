@@ -3,7 +3,7 @@ import AnalyticsCharts from "@/components/admin/AnalyticsCharts";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Analytics — Admin",
+  title: "Analytics  -  Admin",
 };
 
 export default async function AnalyticsPage() {

@@ -21,7 +21,7 @@ export async function GET() {
 
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("coa_documents")
+    .from("coa")
     .select("*, product:products(name)")
     .order("created_at", { ascending: false });
 
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
   const db = createAdminClient();
   const { data, error } = await db
-    .from("coa_documents")
+    .from("coa")
     .insert(parsed.data)
     .select()
     .single();
@@ -87,7 +87,7 @@ export async function PUT(req: NextRequest) {
 
   const db = createAdminClient();
   const { data, error } = await db
-    .from("coa_documents")
+    .from("coa")
     .update(parsed.data)
     .eq("id", id)
     .select()
@@ -115,7 +115,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   const db = createAdminClient();
-  const { error } = await db.from("coa_documents").delete().eq("id", id);
+  const { error } = await db.from("coa").delete().eq("id", id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

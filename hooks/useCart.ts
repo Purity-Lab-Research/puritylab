@@ -11,6 +11,8 @@ export interface CartContextType {
   clearCart: () => void;
   itemCount: number;
   subtotal: number;
+  savings: number;
+  hasSubscriptionItems: boolean;
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;

@@ -45,9 +45,9 @@ interface Toast {
 function formatPrice(cents: number) {
   const formatted = new Intl.NumberFormat("en-CA", {
     style: "currency",
-    currency: "CAD",
+    currency: "USD",
   }).format(cents / 100);
-  return `${formatted} CAD`;
+  return `${formatted} USD`;
 }
 
 function formatDate(iso: string) {
@@ -416,7 +416,7 @@ export default function AdminCustomersPage() {
                 <td className="px-4 py-3">
                   <div>
                     <p className="font-medium text-gray-900">
-                      {customer.full_name || "—"}
+                      {customer.full_name || " - "}
                     </p>
                     {customer.phone && (
                       <p className="text-xs text-gray-400">{customer.phone}</p>

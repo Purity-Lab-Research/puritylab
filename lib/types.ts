@@ -12,6 +12,7 @@ export interface ProductVariant {
   size: string;
   price: number;
   original_price: number | null;
+  subscription_price: number | null;
   stock_quantity: number;
   low_stock_threshold: number;
   images: string[];
@@ -52,6 +53,14 @@ export interface Product {
   updated_at: string;
   avg_rating: number;
   review_count: number;
+  subscription_price: number | null;
+  short_description: string;
+  goal_category: string | null;
+  tier: string;
+  dosage_info: string;
+  cycle_length: string;
+  storage_info: string;
+  reconstitution_info: string;
   variants?: ProductVariant[];
   tags?: ProductTag[];
 }
@@ -173,13 +182,42 @@ export interface CartItem {
   name: string;
   slug: string;
   price: number;
+  subscriptionPrice: number | null;
   size: string;
   image: string | null;
   quantity: number;
   purchaseType: "one-time" | "subscription";
+  deliveryFrequencyWeeks: number;
 }
 
 export interface SiteSetting {
   key: string;
   value: unknown;
+}
+
+export interface ProtocolItem {
+  id: string;
+  protocol_id: string;
+  product_id: string;
+  quantity: number;
+  sort_order: number;
+  product?: Product;
+}
+
+export interface Protocol {
+  id: string;
+  name: string;
+  slug: string;
+  tagline: string;
+  description: string;
+  cycle_length: string;
+  subscription_price: number;
+  one_time_price: number;
+  badge: string | null;
+  accent_color: string;
+  sort_order: number;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+  items?: ProtocolItem[];
 }

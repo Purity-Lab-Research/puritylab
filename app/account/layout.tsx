@@ -30,8 +30,8 @@ export default async function AccountLayout({
   const links = [
     { href: "/account", label: "Overview" },
     { href: "/account/orders", label: "Orders" },
-    { href: "/account/addresses", label: "Addresses" },
     { href: "/account/subscriptions", label: "Subscriptions" },
+    { href: "/account/addresses", label: "Addresses" },
   ];
 
   return (

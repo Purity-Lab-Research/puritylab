@@ -14,6 +14,7 @@ import {
   ClipboardList,
   Settings,
   CreditCard,
+  Layers,
 } from "lucide-react";
 import Link from "next/link";
 import type { Order, OrderStatus } from "@/lib/types";
@@ -33,7 +34,7 @@ const statusColors: Record<OrderStatus, string> = {
 export default async function AdminDashboard() {
   const staff = await requireStaffPage();
 
-  // Fulfillment users can only access orders — redirect them
+  // Fulfillment users can only access orders - redirect them
   if (staff.role === "fulfillment") redirect("/admin/orders");
   const supabase = createAdminClient();
 
@@ -50,6 +51,7 @@ export default async function AdminDashboard() {
     recentRes,
     topProductsRes,
     abandonedRes,
+    protocolsRes,
   ] = await Promise.all([
     supabase.from("orders").select("id", { count: "exact", head: true }).neq("status", "pending"),
     supabase
@@ -91,6 +93,10 @@ export default async function AdminDashboard() {
       .eq("status", "pending")
       .order("created_at", { ascending: false })
       .limit(10),
+    supabase
+      .from("protocols")
+      .select("id", { count: "exact", head: true })
+      .eq("active", true),
   ]);
 
   const totalOrders = ordersRes.count ?? 0;
@@ -99,6 +105,7 @@ export default async function AdminDashboard() {
   const totalRevenue =
     allTimeRevenueRes.data?.reduce((sum, o) => sum + (o.total ?? 0), 0) ?? 0;
   const activeProducts = productsRes.count ?? 0;
+  const activeProtocols = protocolsRes.count ?? 0;
   const lowStock =
     lowStockRes.data?.filter(
       (p) => p.stock_quantity <= p.low_stock_threshold
@@ -172,6 +179,14 @@ export default async function AdminDashboard() {
       icon: Package,
       color: "text-[#1A2B4A] bg-[#0097A7]/10",
       href: "/admin/products",
+    },
+    {
+      label: "Active Protocols",
+      value: activeProtocols.toLocaleString(),
+      sub: "Subscription stacks",
+      icon: Layers,
+      color: "text-teal-600 bg-teal-50",
+      href: "/admin/protocols",
     },
     {
       label: "Low Stock",
@@ -425,7 +440,7 @@ export default async function AdminDashboard() {
                       )}
                     </td>
                     <td className="px-5 py-3 text-gray-700">
-                      {checkout.guest_email ?? "—"}
+                      {checkout.guest_email ?? "-"}
                     </td>
                     <td className="whitespace-nowrap px-5 py-3 text-right font-medium text-gray-900">
                       {formatPrice(checkout.total)}

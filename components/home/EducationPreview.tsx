@@ -8,19 +8,19 @@ const articles = [
     tag: "Beginner",
     readTime: "8 min read",
     title: "New to Peptides? Start Here",
-    href: "/learn#new-to-peptides",
+    href: "/learn/getting-started",
   },
   {
     tag: "Guide",
     readTime: "5 min read",
     title: "How to Reconstitute & Dose",
-    href: "/learn#reconstitute-and-dose",
+    href: "/learn/how-to-reconstitute",
   },
   {
     tag: "Trust",
     readTime: "4 min read",
     title: "How to Read a Certificate of Analysis",
-    href: "/learn#read-coa",
+    href: "/learn/how-to-read-coa",
   },
 ];
 

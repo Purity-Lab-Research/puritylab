@@ -57,7 +57,7 @@ export default async function AdminOrdersPage() {
                   {order.order_number}
                 </td>
                 <td className="px-4 py-3 text-gray-600">
-                  {order.guest_email ?? "—"}
+                  {order.guest_email ?? "-"}
                 </td>
                 <td className="px-4 py-3 text-gray-600 text-xs max-w-[250px]">
                   {order.order_items?.length > 0 ? (
@@ -69,7 +69,7 @@ export default async function AdminOrdersPage() {
                       ))}
                     </div>
                   ) : (
-                    "—"
+                    " - "
                   )}
                 </td>
                 <td className="px-4 py-3">

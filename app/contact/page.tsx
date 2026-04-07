@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* LEFT — Contact Info */}
+          {/* LEFT  -  Contact Info */}
           <div>
             <h2 className="text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               <EditableText settingKey="contact_heading">Get in Touch</EditableText>
@@ -101,7 +101,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* RIGHT — Contact Form */}
+          {/* RIGHT  -  Contact Form */}
           <div className="rounded-xl border border-[#dde2ea] bg-white p-6 shadow-sm lg:p-8">
             <h2 className="mb-6 text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               <EditableText settingKey="contact_form_heading">Send Us a Message</EditableText>

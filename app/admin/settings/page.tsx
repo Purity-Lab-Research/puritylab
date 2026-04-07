@@ -305,7 +305,7 @@ export default function AdminSettingsPage() {
         const data = await res.json().catch(() => null);
         throw new Error(data?.error || `Revalidation failed (${res.status})`);
       }
-      addToast("success", "Cache cleared — pages will rebuild on next visit");
+      addToast("success", "Cache cleared  -  pages will rebuild on next visit");
     } catch (err) {
       addToast(
         "error",

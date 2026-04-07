@@ -130,7 +130,7 @@ const COUNTRY_FLAGS: Record<string, string> = {
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat("en-CA", {
-    style: "currency", currency: "CAD",
+    style: "currency", currency: "USD",
     minimumFractionDigits: 0, maximumFractionDigits: 0,
   }).format(n);
 }
@@ -712,7 +712,7 @@ function SalesTab({ data }: { data: AnalyticsData }) {
       </div>
 
       {/* AOV Trend */}
-      <ChartCard title="Average Order Value Trend" subtitle="Weekly AOV — last 90 days">
+      <ChartCard title="Average Order Value Trend" subtitle="Weekly AOV  -  last 90 days">
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data.aovTimeSeries}>

@@ -1,66 +1,43 @@
 import { createClient } from "@/lib/supabase/server";
 import PageHeader from "@/components/ui/PageHeader";
 import ShopContent from "@/components/shop/ShopContent";
-import type { Product, Category, ProductTag } from "@/lib/types";
+import type { Product } from "@/lib/types";
 
 export const metadata = {
   title: "Shop All Products",
   description:
-    "Browse our complete collection of research peptides, blends, nasal sprays, and laboratory supplies.",
+    "Browse research peptides by goal. Recovery, fat loss, performance protocols and supplies. Every batch third-party tested.",
 };
 
 export default async function ShopPage() {
   const supabase = await createClient();
 
   let products: Product[] = [];
-  let categories: Category[] = [];
-  let tags: ProductTag[] = [];
 
   try {
-    const { data: productsData } = await supabase
+    const { data } = await supabase
       .from("products")
-      .select("*, category:categories(*), variants:product_variants(*)")
+      .select(
+        "*, category:categories(*), variants:product_variants(*)"
+      )
       .eq("active", true)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
 
-    products = (productsData as Product[]) ?? [];
+    products = (data as Product[]) ?? [];
   } catch {
     products = [];
-  }
-
-  try {
-    const { data: categoriesData } = await supabase
-      .from("categories")
-      .select("*")
-      .order("sort_order");
-
-    categories = (categoriesData as Category[]) ?? [];
-  } catch {
-    categories = [];
-  }
-
-  try {
-    const { data: tagsData } = await supabase
-      .from("product_tags")
-      .select("*")
-      .order("name");
-    tags = (tagsData as ProductTag[]) ?? [];
-  } catch {
-    tags = [];
   }
 
   return (
     <>
       <PageHeader
-        title="SHOP ALL PRODUCTS"
-        description="Browse our complete collection of research peptides, blends, nasal sprays, and laboratory supplies."
+        title="Shop All Products"
+        description="Research peptides organized by goal. Every batch third-party tested."
         breadcrumbs={[{ label: "Shop" }]}
-        titleKey="shop_title"
-        descriptionKey="shop_description"
       />
 
-      <ShopContent products={products} categories={categories} tags={tags} />
+      <ShopContent products={products} />
     </>
   );
 }

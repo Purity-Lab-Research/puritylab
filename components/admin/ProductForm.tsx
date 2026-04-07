@@ -33,6 +33,7 @@ interface VariantForm {
   size: string;
   price: string;
   original_price: string;
+  subscription_price: string;
   stock_quantity: string;
   low_stock_threshold: string;
   images: string[];
@@ -49,7 +50,7 @@ function slugify(text: string) {
 function formatPrice(amount: number): string {
   return new Intl.NumberFormat("en-CA", {
     style: "currency",
-    currency: "CAD",
+    currency: "USD",
   }).format(amount);
 }
 
@@ -256,6 +257,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
         size: v.size,
         price: v.price.toString(),
         original_price: v.original_price?.toString() ?? "",
+        subscription_price: v.subscription_price?.toString() ?? "",
         stock_quantity: v.stock_quantity.toString(),
         low_stock_threshold: v.low_stock_threshold.toString(),
         images: v.images ?? [],
@@ -387,6 +389,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
         size: "",
         price: "",
         original_price: "",
+        subscription_price: "",
         stock_quantity: "100",
         low_stock_threshold: "10",
         images: [],
@@ -552,6 +555,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
             size: v.size,
             price: parseFloat(v.price) || 0,
             original_price: v.original_price ? parseFloat(v.original_price) : null,
+            subscription_price: v.subscription_price ? parseFloat(v.subscription_price) : null,
             stock_quantity: parseInt(v.stock_quantity) || 0,
             low_stock_threshold: parseInt(v.low_stock_threshold) || 10,
             sort_order: i,
@@ -846,7 +850,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-5 gap-3">
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
                         <div>
                           <label className="mb-1 block text-xs font-medium text-gray-600">
                             Size
@@ -870,6 +874,19 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                             value={v.price}
                             onChange={(e) => updateVariant(idx, "price", e.target.value)}
                             required
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-xs font-medium text-gray-600">
+                            Sub Price
+                          </label>
+                          <input
+                            type="number"
+                            step="0.01"
+                            className={inputCls}
+                            value={v.subscription_price}
+                            onChange={(e) => updateVariant(idx, "subscription_price", e.target.value)}
+                            placeholder="optional"
                           />
                         </div>
                         <div>
@@ -911,7 +928,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                       {/* Variant Images */}
                       <div className="mt-3">
                         <label className="mb-1.5 block text-xs font-medium text-gray-600">
-                          Variant Images <span className="text-gray-400 font-normal">(optional — uses product images if empty)</span>
+                          Variant Images <span className="text-gray-400 font-normal">(optional  -  uses product images if empty)</span>
                         </label>
                         <div className="flex items-center gap-2 flex-wrap">
                           {v.images.map((url) => (
@@ -1334,7 +1351,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1.5">
                       <Shield className="h-3.5 w-3.5" />
-                      {coa.id ? `COA — ${coa.batch_number || "Draft"}` : "New COA"}
+                      {coa.id ? `COA  -  ${coa.batch_number || "Draft"}` : "New COA"}
                     </span>
                     <div className="flex items-center gap-2">
                       {coa.id && (

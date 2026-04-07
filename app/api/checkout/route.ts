@@ -13,10 +13,12 @@ const CartItemSchema = z.object({
   name: z.string(),
   slug: z.string(),
   price: z.number(),
+  subscriptionPrice: z.number().nullable(),
   size: z.string(),
   image: z.string().nullable(),
   quantity: z.number().int().positive(),
   purchaseType: z.enum(["one-time", "subscription"]),
+  deliveryFrequencyWeeks: z.number().int().min(1).default(4),
 });
 
 const ShippingSchema = z.object({
@@ -81,11 +83,11 @@ export async function POST(request: NextRequest) {
     const { items, shipping, email, paymentMethod, researchDisclaimerAccepted, ageVerified, termsAccepted, shippingRate, createAccount, password } = parsed.data;
     const supabase = createAdminClient();
 
-    // Fetch actual prices from database — never trust client prices
+    // Fetch actual prices from database - never trust client prices
     const productIds = items.map((item) => item.productId);
     const { data: products, error: productsError } = await supabase
       .from("products")
-      .select("id, name, price, stock_quantity, active")
+      .select("id, name, price, subscription_price, stock_quantity, active")
       .in("id", productIds);
 
     if (productsError || !products) {
@@ -153,14 +155,18 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Calculate totals from verified DB prices
+    // Calculate totals from verified DB prices (use subscription price when applicable)
     const subtotal = items.reduce((sum, item) => {
       if (item.variantId) {
         const variant = variantMap.get(item.variantId)!;
         return sum + variant.price * item.quantity;
       }
       const product = productMap.get(item.productId)!;
-      return sum + product.price * item.quantity;
+      const unitPrice =
+        item.purchaseType === "subscription" && product.subscription_price
+          ? product.subscription_price
+          : product.price;
+      return sum + unitPrice * item.quantity;
     }, 0);
 
     const shippingCost = shippingRate.rate;
@@ -180,7 +186,7 @@ export async function POST(request: NextRequest) {
         shipping_cost: shippingCost,
         tax,
         total,
-        currency: "CAD",
+        currency: "USD",
         shipping_name: shipping.fullName,
         shipping_line1: shipping.line1,
         shipping_line2: shipping.line2,
@@ -207,10 +213,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create order items
+    // Create order items (use subscription price where applicable)
     const orderItems = items.map((item) => {
       const product = productMap.get(item.productId)!;
       const variant = item.variantId ? variantMap.get(item.variantId) : null;
+      const unitPrice = variant
+        ? variant.price
+        : item.purchaseType === "subscription" && product.subscription_price
+          ? product.subscription_price
+          : product.price;
       return {
         order_id: order.id,
         product_id: item.productId,
@@ -218,7 +229,7 @@ export async function POST(request: NextRequest) {
         product_name: product.name,
         variant_size: variant?.size ?? null,
         quantity: item.quantity,
-        unit_price: variant?.price ?? product.price,
+        unit_price: unitPrice,
         purchase_type: item.purchaseType,
       };
     });
@@ -236,6 +247,47 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Create subscription records if there are subscription items
+    const subscriptionItems = items.filter((i) => i.purchaseType === "subscription");
+    if (subscriptionItems.length > 0) {
+      // Determine delivery frequency (use the max from cart items)
+      const deliveryWeeks = Math.max(...subscriptionItems.map((i) => i.deliveryFrequencyWeeks ?? 4));
+      const nextDelivery = new Date();
+      nextDelivery.setDate(nextDelivery.getDate() + deliveryWeeks * 7);
+
+      const { data: subscription, error: subError } = await supabase
+        .from("subscriptions")
+        .insert({
+          user_id: null, // Will be linked if user creates account
+          status: "active",
+          plan_name: `Custom Stack (${subscriptionItems.length} items)`,
+          delivery_frequency_weeks: deliveryWeeks,
+          next_delivery_date: nextDelivery.toISOString(),
+        })
+        .select("id")
+        .single();
+
+      if (subscription && !subError) {
+        // Create subscription_items
+        const subItemRows = subscriptionItems.map((item) => ({
+          subscription_id: subscription.id,
+          product_id: item.productId,
+          variant_id: item.variantId ?? null,
+          quantity: item.quantity,
+        }));
+
+        await supabase.from("subscription_items").insert(subItemRows);
+
+        // Link subscription to order
+        await supabase.from("orders").update({ user_id: null }).eq("id", order.id);
+
+        log.info("Subscription created", { subscriptionId: subscription.id, orderId: order.id, items: subItemRows.length });
+      } else if (subError) {
+        // Non-fatal: log but don't fail the order
+        log.warn("Failed to create subscription record", { orderId: order.id, error: subError.message });
+      }
+    }
+
     // Create payment session based on selected method
     let clientSecret: string | null = null;
 
@@ -243,7 +295,7 @@ export async function POST(request: NextRequest) {
       try {
         const paymentIntent = await getStripe().paymentIntents.create({
           amount: Math.round(total * 100),
-          currency: "cad",
+          currency: "usd",
           automatic_payment_methods: { enabled: true },
           receipt_email: email,
           shipping: {

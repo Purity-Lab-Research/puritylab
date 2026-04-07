@@ -52,7 +52,7 @@ export function EditProvider({ children }: { children: React.ReactNode }) {
     new Map()
   );
 
-  // Inline edit mode disabled — use /admin dashboard instead
+  // Inline edit mode disabled  -  use /admin dashboard instead
   // useEffect(() => {
   //   let cancelled = false;
   //   fetch("/api/admin/check-role")

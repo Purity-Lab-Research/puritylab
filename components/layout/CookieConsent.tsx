@@ -52,7 +52,7 @@ export default function CookieConsent() {
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
-    // Consent exists — apply it
+    // Consent exists  -  apply it
     applyConsent(consent);
   }, []);
 

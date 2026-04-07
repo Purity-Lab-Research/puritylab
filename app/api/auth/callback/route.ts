@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
           sendAdminNewAccountNotification(user.email).catch(() => {});
         }
       } catch {
-        // Silently fail — linking is a nice-to-have
+        // Silently fail  -  linking is a nice-to-have
       }
 
       return NextResponse.redirect(`${origin}/account`);

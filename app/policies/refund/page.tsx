@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Refund Policy",
-  description: `${SITE_NAME} refund policy — what to do if your product arrives damaged or quality is not correct.`,
+  description: `${SITE_NAME} refund policy - what to do if your product arrives damaged or quality is not correct.`,
 };
 
 export default function RefundPolicyPage() {
@@ -62,7 +62,7 @@ export default function RefundPolicyPage() {
               </li>
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
-              Claims must be submitted within 3 calendar days of the delivery date. Claims submitted
+              Claims must be submitted within 14 calendar days of the delivery date. Claims submitted
               after 3 days will not be accepted.
             </p>
           </div>
@@ -161,7 +161,7 @@ export default function RefundPolicyPage() {
               <li>
                 Issues caused by improper storage, handling, or use of the product after delivery.
               </li>
-              <li>Claims submitted more than 3 calendar days after the delivery date.</li>
+              <li>Claims submitted more than 14 calendar days after the delivery date.</li>
               <li>Products purchased from unauthorized resellers or third-party sources.</li>
               <li>
                 Delays in delivery caused by carrier issues, customs processing, or events beyond our
@@ -252,6 +252,23 @@ export default function RefundPolicyPage() {
               </p>
               <p>Subject Line: Refund Request - [Your Order Number]</p>
             </div>
+          </div>
+
+          {/* Subscription Refunds */}
+          <div>
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+              Subscription Refund Policy
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              Subscription orders that have already been shipped are not eligible for refund based
+              solely on cancellation of the subscription. To avoid being charged for the next cycle,
+              cancel or pause your subscription before the next billing date from your account dashboard.
+            </p>
+            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
+              <li>Subscription orders that arrive damaged are eligible for replacement under the same terms as one-time orders.</li>
+              <li>If you cancel your subscription, you will not be charged for future cycles, but no refund is issued for the current shipped order.</li>
+              <li>Pausing your subscription stops all future charges until you choose to resume.</li>
+            </ul>
           </div>
 
           <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">

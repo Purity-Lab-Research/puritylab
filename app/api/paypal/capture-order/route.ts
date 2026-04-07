@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
-    // Idempotency — if already processed, return success
+    // Idempotency  -  if already processed, return success
     if (order.status === "processing") {
       log.info("PayPal capture already processed", {
         orderId: order.id,
@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update order status to processing (only if still pending — idempotency)
+    // Update order status to processing (only if still pending  -  idempotency)
     const { error: updateError } = await supabase
       .from("orders")
       .update({ status: "processing", updated_at: new Date().toISOString() })

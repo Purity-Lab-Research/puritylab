@@ -12,8 +12,9 @@ import InlineEditBar from "@/components/admin/InlineEditBar";
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
+  const isQuiz = pathname.startsWith("/quiz");
 
-  if (isAdmin) {
+  if (isAdmin || isQuiz) {
     return <>{children}</>;
   }
 

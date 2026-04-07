@@ -1,79 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import type { Protocol } from "@/lib/types";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const protocols = [
-  {
-    name: "Recovery Protocol",
-    tagline: "Accelerate tissue repair and reduce downtime",
-    items: [
-      "Wolverine Blend (BPC-157 10mg / TB500 10mg)",
-      "Bac Water 10ml",
-      "Syringes",
-    ],
-    cycle: "4-6 weeks",
-    subPrice: 149,
-    fullPrice: 165,
-    badge: "MOST POPULAR",
-    badgeClass: "bg-secondary text-white",
-    accentColor: "bg-secondary",
-  },
-  {
-    name: "Fat Loss Protocol",
-    tagline: "Target stubborn fat while preserving lean muscle",
-    items: [
-      "MOTS-C 40mg",
-      "AOD 9604 5mg",
-      "CJC/Ipa Blend 5/5mg",
-      "Bac Water 10ml",
-      "Syringes",
-    ],
-    cycle: "8-12 weeks",
-    subPrice: 275,
-    fullPrice: 305,
-    badge: null,
-    badgeClass: "",
-    accentColor: "bg-warning",
-  },
-  {
-    name: "Performance Protocol",
-    tagline: "Optimize growth hormone for recovery and lean mass",
-    items: [
-      "CJC/Ipa Blend 5/5mg",
-      "Ipamorelin 10mg",
-      "Bac Water 10ml",
-      "Syringes",
-    ],
-    cycle: "8-12 weeks",
-    subPrice: 140,
-    fullPrice: 155,
-    badge: null,
-    badgeClass: "",
-    accentColor: "bg-success",
-  },
-  {
-    name: "Full Recomp Protocol",
-    tagline: "The complete athlete optimization stack",
-    items: [
-      "BPC-157 10mg",
-      "TB500 10mg",
-      "CJC/Ipa Blend 5/5mg",
-      "MOTS-C 40mg",
-      "Bac Water 10ml",
-      "Syringes",
-    ],
-    cycle: "8-12 weeks",
-    subPrice: 342,
-    fullPrice: 380,
-    badge: "PREMIUM",
-    badgeClass: "bg-primary text-white",
-    accentColor: "bg-primary",
-  },
-];
+interface ProtocolsProps {
+  protocols: Protocol[];
+}
 
-export default function Protocols() {
+const BADGE_STYLES: Record<string, string> = {
+  "MOST POPULAR": "bg-secondary text-white",
+  PREMIUM: "bg-primary text-white",
+};
+
+export default function Protocols({ protocols }: ProtocolsProps) {
   const animRef = useScrollAnimation();
+
+  if (protocols.length === 0) return null;
 
   return (
     <section className="bg-surface py-20 border-t border-border">
@@ -91,14 +34,14 @@ export default function Protocols() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {protocols.map((protocol) => (
             <div
-              key={protocol.name}
+              key={protocol.id}
               className="relative bg-surface border border-border rounded-xl overflow-hidden flex flex-col transition-all hover:shadow-lg"
               style={{ transition: "border-color 0.3s, box-shadow 0.3s" }}
             >
               {/* Badge */}
               {protocol.badge && (
                 <span
-                  className={`absolute top-4 right-4 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded ${protocol.badgeClass}`}
+                  className={`absolute top-4 right-4 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded ${BADGE_STYLES[protocol.badge] ?? "bg-secondary text-white"}`}
                 >
                   {protocol.badge}
                 </span>
@@ -107,7 +50,8 @@ export default function Protocols() {
               {/* Top Section */}
               <div className="p-8 pb-0">
                 <div
-                  className={`w-1 h-8 rounded ${protocol.accentColor} mb-4`}
+                  className="w-1 h-8 rounded mb-4"
+                  style={{ backgroundColor: protocol.accent_color }}
                 />
                 <h3 className="font-heading text-xl font-bold text-primary">
                   {protocol.name}
@@ -121,30 +65,32 @@ export default function Protocols() {
               <div className="px-8 flex-1">
                 <div className="border-t border-border pt-4 mt-4">
                   <ul className="space-y-2.5">
-                    {protocol.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2 text-xs text-text-primary"
-                      >
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-success flex-shrink-0 mt-0.5"
+                    {protocol.items
+                      ?.sort((a, b) => a.sort_order - b.sort_order)
+                      .map((item) => (
+                        <li
+                          key={item.id}
+                          className="flex items-start gap-2 text-xs text-text-primary"
                         >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="text-success flex-shrink-0 mt-0.5"
+                          >
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                          {item.product?.name ?? "Unknown product"}
+                        </li>
+                      ))}
                   </ul>
                   <p className="text-xs text-text-secondary mt-3">
-                    Recommended cycle: {protocol.cycle}
+                    Recommended cycle: {protocol.cycle_length}
                   </p>
                 </div>
               </div>
@@ -153,15 +99,16 @@ export default function Protocols() {
               <div className="p-8 border-t border-border mt-4">
                 <div className="mb-4">
                   <span className="font-heading text-3xl font-extrabold text-primary">
-                    ${protocol.subPrice}
+                    ${protocol.subscription_price}
                   </span>
                   <span className="text-xs text-text-secondary ml-1">
                     /month
                   </span>
                 </div>
                 <p className="text-xs text-text-secondary mb-4">
-                  One-time: ${protocol.fullPrice} — Save $
-                  {protocol.fullPrice - protocol.subPrice}/mo with subscription
+                  One-time: ${protocol.one_time_price} - Save $
+                  {(protocol.one_time_price - protocol.subscription_price).toFixed(0)}/mo with
+                  subscription
                 </p>
                 <Link
                   href="/subscribe"

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description:
       product.meta_description ||
       product.description?.replace(/<[^>]*>/g, "").slice(0, 160) ||
-      `Shop ${product.name} — premium research peptide with 99%+ purity.`,
+      `Shop ${product.name} - research-grade peptide, third-party tested.`,
   };
 }
 
@@ -49,11 +49,11 @@ export default async function ProductPage({ params }: PageProps) {
 
   const typedProduct = product as Product;
 
-  // Fetch COA documents for this product
+  // Fetch COA documents
   let coaDocuments: CoaDocument[] = [];
   try {
     const { data } = await supabase
-      .from("coa_documents")
+      .from("coa")
       .select("*")
       .eq("product_id", typedProduct.id)
       .order("created_at", { ascending: false });
@@ -63,17 +63,18 @@ export default async function ProductPage({ params }: PageProps) {
     coaDocuments = [];
   }
 
-  // Fetch related products — use manually linked ones first, fall back to same category
+  // Fetch related products
   let relatedProducts: Product[] = [];
   try {
-    // Check for manually linked related products
     const { data: linkedRows } = await supabase
       .from("related_products")
       .select("related_product_id")
       .eq("product_id", typedProduct.id)
       .order("sort_order");
 
-    const linkedIds = (linkedRows ?? []).map((r: { related_product_id: string }) => r.related_product_id);
+    const linkedIds = (linkedRows ?? []).map(
+      (r: { related_product_id: string }) => r.related_product_id
+    );
 
     if (linkedIds.length > 0) {
       const { data } = await supabase
@@ -81,36 +82,53 @@ export default async function ProductPage({ params }: PageProps) {
         .select("*, category:categories(*), variants:product_variants(*)")
         .eq("active", true)
         .in("id", linkedIds);
-      // Preserve sort order
-      const productMap = new Map((data ?? []).map((p: Product) => [p.id, p]));
-      relatedProducts = linkedIds.map((id: string) => productMap.get(id)).filter(Boolean) as Product[];
+      const productMap = new Map(
+        (data ?? []).map((p: Product) => [p.id, p])
+      );
+      relatedProducts = linkedIds
+        .map((id: string) => productMap.get(id))
+        .filter(Boolean) as Product[];
     }
 
-    // Fall back to same-category products if not enough linked
+    // Fall back to same goal_category
     if (relatedProducts.length < 4) {
-      const excludeIds = [typedProduct.id, ...relatedProducts.map((p) => p.id)];
-      const { data } = await supabase
-        .from("products")
-        .select("*, category:categories(*), variants:product_variants(*)")
-        .eq("active", true)
-        .eq("category_id", typedProduct.category_id)
-        .not("id", "in", `(${excludeIds.join(",")})`)
-        .limit(4 - relatedProducts.length);
+      const goalCat = typedProduct.goal_category;
+      const excludeIds = [
+        typedProduct.id,
+        ...relatedProducts.map((p) => p.id),
+      ];
 
-      relatedProducts = [...relatedProducts, ...((data as Product[]) ?? [])];
+      if (goalCat) {
+        const { data } = await supabase
+          .from("products")
+          .select("*, category:categories(*), variants:product_variants(*)")
+          .eq("active", true)
+          .eq("goal_category", goalCat)
+          .not("id", "in", `(${excludeIds.join(",")})`)
+          .limit(4 - relatedProducts.length);
+        relatedProducts = [
+          ...relatedProducts,
+          ...((data as Product[]) ?? []),
+        ];
+      }
     }
 
-    // Still not enough? grab any other active products
+    // Still not enough? grab any
     if (relatedProducts.length < 4) {
-      const excludeIds = [typedProduct.id, ...relatedProducts.map((p) => p.id)];
+      const excludeIds = [
+        typedProduct.id,
+        ...relatedProducts.map((p) => p.id),
+      ];
       const { data: more } = await supabase
         .from("products")
         .select("*, category:categories(*), variants:product_variants(*)")
         .eq("active", true)
         .not("id", "in", `(${excludeIds.join(",")})`)
         .limit(4 - relatedProducts.length);
-
-      relatedProducts = [...relatedProducts, ...((more as Product[]) ?? [])];
+      relatedProducts = [
+        ...relatedProducts,
+        ...((more as Product[]) ?? []),
+      ];
     }
   } catch {
     relatedProducts = [];
@@ -127,23 +145,31 @@ export default async function ProductPage({ params }: PageProps) {
         ]}
       />
 
-      <section className="mx-auto max-w-7xl px-6 py-10 md:py-14">
-        <ProductDetail product={typedProduct} coaDocuments={coaDocuments} />
-        <ProductReviews
-          productId={typedProduct.id}
-          avgRating={typedProduct.avg_rating ?? 0}
-          reviewCount={typedProduct.review_count ?? 0}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <ProductDetail
+          product={typedProduct}
+          coaDocuments={coaDocuments}
+          relatedProducts={relatedProducts}
         />
+
+        {/* Reviews - always visible */}
+        <div className="mt-14">
+          <ProductReviews
+            productId={typedProduct.id}
+            avgRating={typedProduct.avg_rating ?? 0}
+            reviewCount={typedProduct.review_count ?? 0}
+          />
+        </div>
       </section>
 
-      {/* Related Products */}
+      {/* Customers also bought */}
       {relatedProducts.length > 0 && (
-        <section className="mx-auto max-w-7xl px-6 pb-14">
-          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-gray-900 font-[family-name:var(--font-heading)]">
-            Related Products
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-14">
+          <h2 className="font-heading text-2xl font-bold text-primary mb-6">
+            Customers Also Bought
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-            {relatedProducts.map((rp) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedProducts.slice(0, 4).map((rp) => (
               <ProductCard key={rp.id} product={rp} />
             ))}
           </div>

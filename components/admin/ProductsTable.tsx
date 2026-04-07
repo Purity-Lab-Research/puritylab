@@ -90,7 +90,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                   {p.name}
                 </td>
                 <td className="px-4 py-3 text-gray-500">
-                  {p.category?.name ?? "—"}
+                  {p.category?.name ?? " - "}
                 </td>
                 <td className="px-4 py-3 text-right">
                   {formatPrice(p.price)}
@@ -102,7 +102,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                       {p.badge}
                     </span>
                   ) : (
-                    "—"
+                    " - "
                   )}
                 </td>
                 <td className="px-4 py-3">

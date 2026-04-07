@@ -28,7 +28,7 @@ interface AuditEntry {
 }
 
 /**
- * Write an audit log entry. Fire-and-forget — never throws.
+ * Write an audit log entry. Fire-and-forget  -  never throws.
  */
 export async function writeAuditLog(entry: AuditEntry): Promise<void> {
   try {

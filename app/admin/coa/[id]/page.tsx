@@ -19,7 +19,7 @@ export default async function EditCoaPage({
     isNew
       ? Promise.resolve({ data: null })
       : supabase
-          .from("coa_documents")
+          .from("coa")
           .select("*")
           .eq("id", id)
           .single<CoaDocument>(),

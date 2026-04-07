@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .eq("active", true);
     products = data;
   } catch {
-    // DB unavailable (e.g. CI build) — return static pages only
+    // DB unavailable (e.g. CI build)  -  return static pages only
   }
 
   const productPages: MetadataRoute.Sitemap = (products ?? []).map(

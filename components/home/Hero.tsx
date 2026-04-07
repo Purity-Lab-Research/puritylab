@@ -87,11 +87,11 @@ export default function Hero() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    // Smooth animation loop — lerps current toward target
+    // Smooth animation loop  -  lerps current toward target
     function animate() {
       const diff = targetRef.current - currentRef.current;
       if (Math.abs(diff) > 0.001) {
-        currentRef.current += diff * 0.1; // ease factor — lower = silkier
+        currentRef.current += diff * 0.1; // ease factor  -  lower = silkier
         setSmoothProgress(currentRef.current);
       } else if (currentRef.current !== targetRef.current) {
         currentRef.current = targetRef.current;
@@ -107,7 +107,7 @@ export default function Hero() {
     function handleWheel(e: WheelEvent) {
       const p = targetRef.current;
 
-      // Animation done + in dead zone buffer — absorb scroll
+      // Animation done + in dead zone buffer  -  absorb scroll
       if (doneRef.current && e.deltaY > 0) {
         bufferRef.current += e.deltaY;
         if (bufferRef.current < 400) {
@@ -191,7 +191,7 @@ export default function Hero() {
             style={{ objectPosition: "center 95%" }}
             priority
           />
-          {/* Bottom fade only — keeps athlete visible */}
+          {/* Bottom fade only  -  keeps athlete visible */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent" />
           {/* Subtle side vignette */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628]/40 via-transparent to-[#0a1628]/40" />
@@ -202,7 +202,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Text — fades out on scroll */}
+        {/* Text  -  fades out on scroll */}
         <div
           className="absolute inset-0 z-20 flex items-center justify-center"
           style={{
@@ -226,7 +226,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Cards + dots — fade in as text fades out */}
+        {/* Cards + dots  -  fade in as text fades out */}
         <div
           className="absolute inset-0 z-10"
           style={{
@@ -237,12 +237,12 @@ export default function Hero() {
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-full flex flex-col">
             {/* Desktop: cards around athlete */}
             <div className="hidden lg:block relative flex-1 mt-16">
-              {/* Glow dots — matching the blue circles baked into the image */}
+              {/* Glow dots  -  matching the blue circles baked into the image */}
               <GlowDot className="left-[52%] top-[15%]" style={{ opacity: cardsOpacity }} />   {/* Shoulder circle */}
               <GlowDot className="left-[53%] top-[35%]" style={{ opacity: cardsOpacity }} />   {/* Stomach/core circle */}
               <GlowDot className="left-[51%] top-[44%]" style={{ opacity: cardsOpacity }} />   {/* Front thigh (raised leg) */}
 
-              {/* Connector lines — solid */}
+              {/* Connector lines  -  solid */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-20" style={{ opacity: cardsOpacity }}>
                 <defs>
                   <linearGradient id="line-glow-1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -281,17 +281,17 @@ export default function Hero() {
                 <line x1="81%" y1="55%" x2="51%" y2="45%" stroke="url(#line-glow-3)" strokeWidth="2.5" />
               </svg>
 
-              {/* Recover Faster — upper left, points to bicep */}
+              {/* Recover Faster  -  upper left, points to bicep */}
               <div className="absolute left-0 top-[-2%] w-[195px] z-20" style={{ transform: `translateY(${cardsSlide}px)` }}>
                 <GoalCard goal={goals[0]} />
               </div>
 
-              {/* Lose Fat — mid left, points to stomach */}
+              {/* Lose Fat  -  mid left, points to stomach */}
               <div className="absolute left-0 top-[38%] w-[195px] z-20" style={{ transform: `translateY(${cardsSlide}px)` }}>
                 <GoalCard goal={goals[1]} />
               </div>
 
-              {/* Build Muscle — right side, points to thigh */}
+              {/* Build Muscle  -  right side, points to thigh */}
               <div className="absolute right-[2%] top-[42%] w-[195px] z-20" style={{ transform: `translateY(${cardsSlide}px)` }}>
                 <GoalCard goal={goals[2]} />
               </div>
