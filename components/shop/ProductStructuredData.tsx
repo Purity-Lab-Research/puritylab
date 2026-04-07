@@ -1,0 +1,133 @@
+import type { Product } from "@/lib/types";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://puritylabresearch.com";
+
+interface Props {
+  product: Product;
+}
+
+export default function ProductStructuredData({ product }: Props) {
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.meta_description || product.description?.replace(/<[^>]*>/g, "").slice(0, 200),
+    sku: product.sku || product.slug,
+    image: product.images.length > 0 ? product.images.map((img) =>
+      img.startsWith("http") ? img : `${BASE_URL}${img}`
+    ) : undefined,
+    url: `${BASE_URL}/shop/${product.slug}`,
+    brand: {
+      "@type": "Brand",
+      name: "Purity Lab",
+    },
+    category: product.category?.name,
+    ...(product.purity && {
+      additionalProperty: {
+        "@type": "PropertyValue",
+        name: "Purity",
+        value: product.purity,
+      },
+    }),
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "CAD",
+      availability:
+        product.stock_quantity > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      url: `${BASE_URL}/shop/${product.slug}`,
+      seller: {
+        "@type": "Organization",
+        name: "Purity Lab",
+      },
+      priceValidUntil: new Date(
+        new Date().getFullYear() + 1,
+        new Date().getMonth(),
+        new Date().getDate()
+      ).toISOString().split("T")[0],
+      itemCondition: "https://schema.org/NewCondition",
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "CA",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          businessDays: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 8,
+          },
+        },
+      },
+    },
+    ...(product.review_count > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: product.avg_rating,
+        reviewCount: product.review_count,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BASE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Shop",
+        item: `${BASE_URL}/shop`,
+      },
+      ...(product.category
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: product.category.name,
+              item: `${BASE_URL}/shop?category=${product.category.slug}`,
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: product.name,
+              item: `${BASE_URL}/shop/${product.slug}`,
+            },
+          ]
+        : [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: product.name,
+              item: `${BASE_URL}/shop/${product.slug}`,
+            },
+          ]),
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+    </>
+  );
+}

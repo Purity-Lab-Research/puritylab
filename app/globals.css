@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  /* Clinical teal — clean, trustworthy, lab-grade */
+  --color-navy-50: #f0fdfb;
+  --color-navy-100: #ccfbf1;
+  --color-navy-200: #99f6e4;
+  --color-navy-300: #5eead4;
+  --color-navy-400: #2dd4bf;
+  --color-navy-500: #0d9488;
+  --color-navy-600: #0f766e;
+  --color-navy-700: #115e59;
+  --color-navy-800: #134e4a;
+  --color-navy-900: #0c312f;
+
+  --color-success: #22c55e;
+  --color-danger: #e74c3c;
+  --color-warning: #f59e0b;
+
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: #1a1a2e;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* Visible focus rings for keyboard navigation (WCAG 2.4.7) */
+  :focus-visible {
+    outline: 2px solid #0d9488;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove default focus outline for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  .hover-scale:active {
+    transform: scale(0.97);
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* Ticker scroll animation */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  width: max-content;
+  animation: ticker-scroll 35s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Loading bar animation */
+@keyframes loading-bar {
+  0% { width: 0; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+.loading-bar {
+  animation: loading-bar 0.6s ease-out forwards;
+}
