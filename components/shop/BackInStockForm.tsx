@@ -51,12 +51,12 @@ export default function BackInStockForm({ productId, productName }: Props) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
-          className="flex-1 rounded-lg border border-amber-300 bg-white px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]"
+          className="flex-1 rounded-lg border border-amber-300 bg-white px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors disabled:opacity-50"
+          className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors disabled:opacity-50"
         >
           {status === "loading" ? <Loader2 className="h-4 w-4 animate-spin" /> : "Notify Me"}
         </button>

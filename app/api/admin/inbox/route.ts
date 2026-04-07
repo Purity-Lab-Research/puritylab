@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://www.puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />

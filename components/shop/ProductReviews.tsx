@@ -118,7 +118,7 @@ export default function ProductReviews({
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors"
+          className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors"
         >
           Write a Review
         </button>
@@ -140,7 +140,7 @@ export default function ProductReviews({
               required
               value={formData.author_name}
               onChange={(e) => setFormData((f) => ({ ...f, author_name: e.target.value }))}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
               placeholder="John D."
             />
           </div>
@@ -154,7 +154,7 @@ export default function ProductReviews({
               type="text"
               value={formData.title}
               onChange={(e) => setFormData((f) => ({ ...f, title: e.target.value }))}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
               placeholder="Great product!"
             />
           </div>
@@ -164,7 +164,7 @@ export default function ProductReviews({
               value={formData.body}
               onChange={(e) => setFormData((f) => ({ ...f, body: e.target.value }))}
               rows={3}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
               placeholder="Share your experience..."
             />
           </div>
@@ -172,7 +172,7 @@ export default function ProductReviews({
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors disabled:opacity-50"
+              className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors disabled:opacity-50"
             >
               {submitting ? "Submitting..." : "Submit Review"}
             </button>

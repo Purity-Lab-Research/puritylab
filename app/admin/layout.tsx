@@ -35,7 +35,7 @@ export default async function AdminLayout({
     <div className="flex h-screen">
       <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-gray-200 bg-white">
         <div className="px-6 py-5">
-          <h1 className="text-sm font-bold tracking-widest text-[#0f766e]">
+          <h1 className="text-sm font-bold tracking-widest text-[#1A2B4A]">
             PURITY LAB ADMIN
           </h1>
         </div>

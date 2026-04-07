@@ -29,9 +29,15 @@ export function validateEnv() {
   }
 
   if (missing.length > 0) {
-    throw new Error(
-      `Missing required environment variables:\n  ${missing.join("\n  ")}\n\nCheck your .env.local file.`
-    );
+    if (process.env.NODE_ENV === "development") {
+      console.warn(
+        `[env] Missing required environment variables:\n  ${missing.join("\n  ")}\n\nCheck your .env.local file.`
+      );
+    } else {
+      throw new Error(
+        `Missing required environment variables:\n  ${missing.join("\n  ")}\n\nCheck your .env.local file.`
+      );
+    }
   }
 
   const unset = optional.filter((k) => {

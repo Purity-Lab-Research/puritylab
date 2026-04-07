@@ -83,18 +83,18 @@ export default function CategoriesSection({
   }
 
   const inputCls =
-    "rounded border border-gray-300 px-2 py-1 text-sm focus:border-[#0d9488] focus:outline-none";
+    "rounded border border-gray-300 px-2 py-1 text-sm focus:border-[#0097A7] focus:outline-none";
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Tags className="h-5 w-5 text-[#0d9488]" />
+          <Tags className="h-5 w-5 text-[#0097A7]" />
           <h2 className="text-lg font-semibold text-gray-900">Categories</h2>
         </div>
         <button
           onClick={startAdd}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[#0f766e] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#115e59]"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#142238]"
         >
           <Plus className="h-3.5 w-3.5" />
           Add Category
@@ -114,7 +114,7 @@ export default function CategoriesSection({
           <tbody className="divide-y">
             {categories.map((cat) =>
               editing === cat.id ? (
-                <tr key={cat.id} className="bg-blue-50/30">
+                <tr key={cat.id} className="bg-primary/5/30">
                   <td className="px-4 py-2">
                     <input
                       className={inputCls}
@@ -162,7 +162,7 @@ export default function CategoriesSection({
                   <td className="px-4 py-3 text-right">{cat.sort_order}</td>
                   <td className="px-4 py-3">
                     <div className="flex gap-1">
-                      <button onClick={() => startEdit(cat)} className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#0d9488]">
+                      <button onClick={() => startEdit(cat)} className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#0097A7]">
                         <Pencil className="h-4 w-4" />
                       </button>
                       <button onClick={() => remove(cat.id)} className="rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-600">
@@ -174,7 +174,7 @@ export default function CategoriesSection({
               )
             )}
             {adding && (
-              <tr className="bg-blue-50/30">
+              <tr className="bg-primary/5/30">
                 <td className="px-4 py-2">
                   <input
                     className={inputCls}

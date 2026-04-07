@@ -54,7 +54,7 @@ export default function BulkProductActions({ selectedIds, onClear }: Props) {
   }
 
   return (
-    <div className="flex items-center gap-3 rounded-lg bg-blue-50 border border-blue-200 px-4 py-2.5">
+    <div className="flex items-center gap-3 rounded-lg bg-primary/5 border border-blue-200 px-4 py-2.5">
       {loading && <Loader2 className="h-4 w-4 animate-spin text-blue-600" />}
       <span className="text-sm font-medium text-blue-700">
         {selectedIds.length} selected

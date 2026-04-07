@@ -21,7 +21,7 @@ export const SHIPPING_INFO = {
 export const SHIPPING_COST = 15;
 export const TAX_RATE = 0.13;
 export const SUBSCRIPTION_DISCOUNT = 0.10;
-export const AGE_REQUIREMENT = 21;
+export const AGE_REQUIREMENT = 18;
 export const MAX_QUANTITY = 20;
 
 export const PAYMENT_METHODS = ["Visa", "Mastercard", "Amex"];

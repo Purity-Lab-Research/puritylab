@@ -145,14 +145,14 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
                 {images.map((_, i) => (
                   <span
                     key={i}
-                    className={`h-1.5 rounded-full transition-all ${i === mainImage ? "w-4 bg-[#0f766e]" : "w-1.5 bg-gray-300"}`}
+                    className={`h-1.5 rounded-full transition-all ${i === mainImage ? "w-4 bg-[#1A2B4A]" : "w-1.5 bg-gray-300"}`}
                   />
                 ))}
               </div>
             )}
             {/* Badge overlay */}
             {product.badge && (
-              <span className="absolute left-3 top-3 z-10 rounded-full bg-[#0f766e] px-3 py-1 text-xs font-semibold text-white shadow-sm pointer-events-none">
+              <span className="absolute left-3 top-3 z-10 rounded-full bg-[#1A2B4A] px-3 py-1 text-xs font-semibold text-white shadow-sm pointer-events-none">
                 {product.badge}
               </span>
             )}
@@ -175,7 +175,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
                 className={cn(
                   "relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition",
                   mainImage === i
-                    ? "border-[#0f766e] ring-1 ring-[#0f766e]/20"
+                    ? "border-[#1A2B4A] ring-1 ring-[#1A2B4A]/20"
                     : "border-transparent hover:border-gray-300"
                 )}
               >
@@ -205,7 +205,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
 
           {/* Purity Badge */}
           {product.purity && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 border border-blue-200 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
               <Shield className="h-3 w-3" />
               {product.purity} Purity
             </span>
@@ -227,18 +227,18 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
 
         {/* Description */}
         <div
-          className="mt-4 prose prose-sm max-w-none text-gray-700 font-[family-name:var(--font-body)] prose-headings:text-gray-900 prose-a:text-[#0d9488]"
+          className="mt-4 prose prose-sm max-w-none text-gray-700 font-[family-name:var(--font-body)] prose-headings:text-gray-900 prose-a:text-[#0097A7]"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.description) }}
         />
 
         {/* Research Description (rich text HTML) */}
         {product.research_description && (
-          <div className="mt-4 rounded-lg border border-blue-100 bg-blue-50/50 p-4">
-            <h3 className="mb-2 text-sm font-semibold text-[#0f766e] font-[family-name:var(--font-heading)]">
+          <div className="mt-4 rounded-lg border border-blue-100 bg-primary/5/50 p-4">
+            <h3 className="mb-2 text-sm font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               Research Description
             </h3>
             <div
-              className="prose prose-sm max-w-none text-gray-700 font-[family-name:var(--font-body)] prose-headings:text-gray-900 prose-a:text-[#0d9488]"
+              className="prose prose-sm max-w-none text-gray-700 font-[family-name:var(--font-body)] prose-headings:text-gray-900 prose-a:text-[#0097A7]"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.research_description) }}
             />
           </div>
@@ -262,10 +262,10 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
                     className={cn(
                       "rounded-lg border-2 px-4 py-2.5 text-sm font-semibold transition-all",
                       isSelected
-                        ? "border-[#0f766e] bg-[#0f766e]/5 text-[#0f766e]"
+                        ? "border-[#1A2B4A] bg-[#1A2B4A]/5 text-[#1A2B4A]"
                         : outOfStock
                         ? "border-gray-200 bg-gray-50 text-gray-300 cursor-not-allowed line-through"
-                        : "border-gray-200 text-gray-700 hover:border-[#0d9488] hover:text-[#0d9488]"
+                        : "border-gray-200 text-gray-700 hover:border-[#0097A7] hover:text-[#0097A7]"
                     )}
                   >
                     <span>{v.size}</span>
@@ -281,7 +281,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
 
         {/* Price Row */}
         <div className="mt-6 flex items-baseline gap-3">
-          <span className="text-3xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+          <span className="text-3xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
             {formatPrice(displayPrice)}
           </span>
           {displayOriginalPrice && displayOriginalPrice > displayPrice && (
@@ -293,8 +293,8 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
 
         {/* Purchase Type */}
         <div className="mt-6 flex flex-col gap-2">
-          <div className="flex items-center gap-3 rounded-lg border-2 border-[#0f766e] bg-[#0f766e]/5 px-4 py-3">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#0f766e] bg-[#0f766e]">
+          <div className="flex items-center gap-3 rounded-lg border-2 border-[#1A2B4A] bg-[#1A2B4A]/5 px-4 py-3">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#1A2B4A] bg-[#1A2B4A]">
               <span className="h-2 w-2 rounded-full bg-white" />
             </span>
             <span className="font-medium text-gray-900 font-[family-name:var(--font-body)]">
@@ -399,7 +399,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
                   href={product.video_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full items-center justify-center bg-gray-50 text-sm text-[#0d9488] hover:underline"
+                  className="flex h-full items-center justify-center bg-gray-50 text-sm text-[#0097A7] hover:underline"
                 >
                   Watch on TikTok
                 </a>
@@ -427,7 +427,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
         {coaDocuments.length > 0 && (
           <div className="mt-8 rounded-xl border border-gray-200 bg-white">
             <div className="flex items-center gap-2.5 border-b border-gray-100 px-5 py-4">
-              <Shield className="h-5 w-5 text-[#0f766e]" />
+              <Shield className="h-5 w-5 text-[#1A2B4A]" />
               <h3 className="text-sm font-semibold text-gray-900 font-[family-name:var(--font-heading)]">
                 Certificate of Analysis
               </h3>
@@ -436,7 +436,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
               {coaDocuments.map((coa) => (
                 <div key={coa.id} className="flex items-center justify-between px-5 py-3.5">
                   <div className="flex items-center gap-3">
-                    <FileText className="h-5 w-5 text-[#0d9488]" />
+                    <FileText className="h-5 w-5 text-[#0097A7]" />
                     <div>
                       <p className="text-sm font-medium text-gray-900 font-[family-name:var(--font-body)]">
                         Batch {coa.batch_number}
@@ -462,7 +462,7 @@ export default function ProductDetail({ product, coaDocuments = [] }: ProductDet
                       href={getCoaUrl(coa.pdf_url)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-[#0d9488] px-3 py-1.5 text-xs font-semibold text-[#0d9488] transition-colors hover:bg-[#0d9488] hover:text-white"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-[#0097A7] px-3 py-1.5 text-xs font-semibold text-[#0097A7] transition-colors hover:bg-[#0097A7] hover:text-white"
                     >
                       View PDF
                       <ExternalLink className="h-3 w-3" />

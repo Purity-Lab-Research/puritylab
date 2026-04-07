@@ -58,7 +58,7 @@ const INITIAL_SHIPPING: ShippingForm = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#0d9488] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 placeholder:text-gray-400";
+  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -366,13 +366,13 @@ export default function CheckoutPage() {
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
                   currentStep >= 1
-                    ? "bg-[#0f766e] text-white"
+                    ? "bg-[#1A2B4A] text-white"
                     : "bg-gray-200 text-gray-500"
                 }`}
               >
                 1
               </span>
-              <span className={`text-sm font-medium ${currentStep >= 1 ? "text-[#0f766e]" : "text-gray-400"}`}>
+              <span className={`text-sm font-medium ${currentStep >= 1 ? "text-[#1A2B4A]" : "text-gray-400"}`}>
                 Shipping
               </span>
             </div>
@@ -381,13 +381,13 @@ export default function CheckoutPage() {
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
                   currentStep >= 2
-                    ? "bg-[#0f766e] text-white"
+                    ? "bg-[#1A2B4A] text-white"
                     : "bg-gray-200 text-gray-500"
                 }`}
               >
                 2
               </span>
-              <span className={`text-sm font-medium ${currentStep >= 2 ? "text-[#0f766e]" : "text-gray-400"}`}>
+              <span className={`text-sm font-medium ${currentStep >= 2 ? "text-[#1A2B4A]" : "text-gray-400"}`}>
                 Payment
               </span>
             </div>
@@ -402,8 +402,8 @@ export default function CheckoutPage() {
               <form onSubmit={handleContinueToPayment} className="space-y-6">
                 <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
                   <div className="flex items-center gap-2 mb-6">
-                    <Truck className="h-5 w-5 text-[#0f766e]" />
-                    <h2 className="text-xl font-bold text-[#0f766e]">
+                    <Truck className="h-5 w-5 text-[#1A2B4A]" />
+                    <h2 className="text-xl font-bold text-[#1A2B4A]">
                       Shipping Information
                     </h2>
                   </div>
@@ -467,7 +467,7 @@ export default function CheckoutPage() {
                               setPasswordError(null);
                             }
                           }}
-                          className="rounded border-gray-300 text-[#0f766e] focus:ring-[#0d9488]"
+                          className="rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
                         />
                         <span className="text-sm text-gray-700">
                           Create an account for faster checkout next time
@@ -509,13 +509,13 @@ export default function CheckoutPage() {
                           onClick={() => setDeliveryMethod("ship")}
                           className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 transition-all ${
                             deliveryMethod === "ship"
-                              ? "border-[#0f766e] bg-[#0f766e]/5"
+                              ? "border-[#1A2B4A] bg-[#1A2B4A]/5"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
-                          <Truck className={`h-5 w-5 ${deliveryMethod === "ship" ? "text-[#0f766e]" : "text-gray-400"}`} />
+                          <Truck className={`h-5 w-5 ${deliveryMethod === "ship" ? "text-[#1A2B4A]" : "text-gray-400"}`} />
                           <div className="text-left">
-                            <p className={`text-sm font-medium ${deliveryMethod === "ship" ? "text-[#0f766e]" : "text-gray-700"}`}>
+                            <p className={`text-sm font-medium ${deliveryMethod === "ship" ? "text-[#1A2B4A]" : "text-gray-700"}`}>
                               Ship to Address
                             </p>
                             <p className="text-xs text-gray-400">Worldwide delivery</p>
@@ -526,13 +526,13 @@ export default function CheckoutPage() {
                           onClick={() => setDeliveryMethod("pickup")}
                           className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 transition-all ${
                             deliveryMethod === "pickup"
-                              ? "border-[#0f766e] bg-[#0f766e]/5"
+                              ? "border-[#1A2B4A] bg-[#1A2B4A]/5"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
-                          <Package className={`h-5 w-5 ${deliveryMethod === "pickup" ? "text-[#0f766e]" : "text-gray-400"}`} />
+                          <Package className={`h-5 w-5 ${deliveryMethod === "pickup" ? "text-[#1A2B4A]" : "text-gray-400"}`} />
                           <div className="text-left">
-                            <p className={`text-sm font-medium ${deliveryMethod === "pickup" ? "text-[#0f766e]" : "text-gray-700"}`}>
+                            <p className={`text-sm font-medium ${deliveryMethod === "pickup" ? "text-[#1A2B4A]" : "text-gray-700"}`}>
                               Local Pickup
                             </p>
                             <p className="text-xs text-gray-400">Windsor, ON</p>
@@ -543,12 +543,12 @@ export default function CheckoutPage() {
 
                     {/* Pickup Info */}
                     {deliveryMethod === "pickup" && (
-                      <div className="sm:col-span-2 rounded-lg border border-blue-200 bg-blue-50 p-4 space-y-2">
-                        <p className="text-sm font-semibold text-[#0f766e]">Local Pickup — Windsor, Ontario</p>
+                      <div className="sm:col-span-2 rounded-lg border border-blue-200 bg-primary/5 p-4 space-y-2">
+                        <p className="text-sm font-semibold text-[#1A2B4A]">Local Pickup — Windsor, Ontario</p>
                         <p className="text-sm text-gray-600">
                           Free pickup is available in <strong>Windsor, Ontario, Canada</strong> only.
                           To arrange a pickup time, email us at{" "}
-                          <a href="mailto:support@puritylabresearch.com" className="text-[#0d9488] hover:underline font-medium">
+                          <a href="mailto:support@puritylabresearch.com" className="text-[#0097A7] hover:underline font-medium">
                             support@puritylabresearch.com
                           </a>{" "}
                           after placing your order. You can pay online now or in person at pickup.
@@ -733,11 +733,11 @@ export default function CheckoutPage() {
                                       setCountrySearch("");
                                     }}
                                     className={`flex w-full items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[#f0f4ff] ${
-                                      shipping.country === c.code ? "bg-[#f0f4ff] text-[#0f766e] font-medium" : "text-gray-700"
+                                      shipping.country === c.code ? "bg-[#f0f4ff] text-[#1A2B4A] font-medium" : "text-gray-700"
                                     }`}
                                   >
                                     {c.name}
-                                    {shipping.country === c.code && <Check className="h-4 w-4 text-[#0f766e]" />}
+                                    {shipping.country === c.code && <Check className="h-4 w-4 text-[#1A2B4A]" />}
                                   </button>
                                 </li>
                               ));
@@ -754,8 +754,8 @@ export default function CheckoutPage() {
                 {deliveryMethod === "ship" && (
                 <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
                   <div className="flex items-center gap-2 mb-4">
-                    <Package className="h-5 w-5 text-[#0f766e]" />
-                    <h2 className="text-lg font-bold text-[#0f766e]">
+                    <Package className="h-5 w-5 text-[#1A2B4A]" />
+                    <h2 className="text-lg font-bold text-[#1A2B4A]">
                       Shipping Method
                     </h2>
                   </div>
@@ -769,7 +769,7 @@ export default function CheckoutPage() {
                         type="button"
                         onClick={fetchShippingRates}
                         disabled={!canFetchRates || loadingRates}
-                        className="inline-flex items-center gap-2 rounded-lg bg-[#0f766e] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#115e59] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <Truck className="h-4 w-4" />
                         Get Shipping Rates
@@ -779,7 +779,7 @@ export default function CheckoutPage() {
 
                   {loadingRates && (
                     <div className="flex items-center justify-center gap-2 py-8">
-                      <Loader2 className="h-5 w-5 animate-spin text-[#0f766e]" />
+                      <Loader2 className="h-5 w-5 animate-spin text-[#1A2B4A]" />
                       <span className="text-sm text-gray-600">Fetching shipping rates...</span>
                     </div>
                   )}
@@ -810,7 +810,7 @@ export default function CheckoutPage() {
                           key={rate.id}
                           className={`flex items-center gap-4 rounded-lg border p-4 cursor-pointer transition-all ${
                             selectedRate?.id === rate.id
-                              ? "border-[#0f766e] bg-[#f0f4ff] ring-1 ring-[#0f766e]"
+                              ? "border-[#1A2B4A] bg-[#f0f4ff] ring-1 ring-[#1A2B4A]"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
@@ -820,7 +820,7 @@ export default function CheckoutPage() {
                             value={rate.id}
                             checked={selectedRate?.id === rate.id}
                             onChange={() => setSelectedRate(rate)}
-                            className="text-[#0f766e] focus:ring-[#0d9488]"
+                            className="text-[#1A2B4A] focus:ring-[#0097A7]"
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-900">
@@ -836,7 +836,7 @@ export default function CheckoutPage() {
                       <button
                         type="button"
                         onClick={fetchShippingRates}
-                        className="text-xs text-[#0d9488] hover:underline mt-1"
+                        className="text-xs text-[#0097A7] hover:underline mt-1"
                       >
                         Refresh rates
                       </button>
@@ -865,7 +865,7 @@ export default function CheckoutPage() {
                         type="checkbox"
                         checked={compliance.researchDisclaimer}
                         onChange={(e) => setCompliance((p) => ({ ...p, researchDisclaimer: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#0f766e] focus:ring-[#0d9488]"
+                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
                       />
                       <span className="text-sm text-gray-700">
                         I acknowledge that these products are for <strong>research use only</strong> and are not for human consumption.
@@ -877,10 +877,10 @@ export default function CheckoutPage() {
                         type="checkbox"
                         checked={compliance.ageVerified}
                         onChange={(e) => setCompliance((p) => ({ ...p, ageVerified: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#0f766e] focus:ring-[#0d9488]"
+                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
                       />
                       <span className="text-sm text-gray-700">
-                        I confirm that I am <strong>21 years of age or older</strong>.
+                        I confirm that I am <strong>18 years of age or older</strong>.
                       </span>
                     </label>
 
@@ -889,13 +889,13 @@ export default function CheckoutPage() {
                         type="checkbox"
                         checked={compliance.termsAccepted}
                         onChange={(e) => setCompliance((p) => ({ ...p, termsAccepted: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#0f766e] focus:ring-[#0d9488]"
+                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
                       />
                       <span className="text-sm text-gray-700">
                         I agree to the{" "}
-                        <a href="/policies/terms" target="_blank" className="text-[#0d9488] underline">Terms of Service</a>
+                        <a href="/policies/terms" target="_blank" className="text-[#0097A7] underline">Terms of Service</a>
                         {" "}and{" "}
-                        <a href="/policies/privacy" target="_blank" className="text-[#0d9488] underline">Privacy Policy</a>.
+                        <a href="/policies/privacy" target="_blank" className="text-[#0097A7] underline">Privacy Policy</a>.
                       </span>
                     </label>
                   </div>
@@ -904,7 +904,7 @@ export default function CheckoutPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting || !compliance.researchDisclaimer || !compliance.ageVerified || !compliance.termsAccepted || !selectedRate}
-                      className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#0f766e] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#115e59] disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#1A2B4A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -927,8 +927,8 @@ export default function CheckoutPage() {
             {currentStep === 2 && clientSecret && orderId && (
               <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
                 <div className="flex items-center gap-2 mb-6">
-                  <CreditCard className="h-5 w-5 text-[#0f766e]" />
-                  <h2 className="text-xl font-bold text-[#0f766e]">
+                  <CreditCard className="h-5 w-5 text-[#1A2B4A]" />
+                  <h2 className="text-xl font-bold text-[#1A2B4A]">
                     Payment
                   </h2>
                 </div>
@@ -944,7 +944,7 @@ export default function CheckoutPage() {
                       </p>
                       <p className="text-xs text-gray-500">{shipping.email}</p>
                       {selectedRate && (
-                        <p className="text-xs text-[#0f766e] font-medium mt-1">
+                        <p className="text-xs text-[#1A2B4A] font-medium mt-1">
                           {selectedRate.carrier} &mdash; {selectedRate.service} ({selectedRate.delivery_days})
                         </p>
                       )}
@@ -952,7 +952,7 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      className="text-xs font-medium text-[#0d9488] hover:underline"
+                      className="text-xs font-medium text-[#0097A7] hover:underline"
                     >
                       Edit
                     </button>
@@ -966,7 +966,7 @@ export default function CheckoutPage() {
                     appearance: {
                       theme: "stripe",
                       variables: {
-                        colorPrimary: "#0f766e",
+                        colorPrimary: "#1A2B4A",
                         borderRadius: "8px",
                         fontFamily: "inherit",
                       },
@@ -984,7 +984,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="mt-4 flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-[#0d9488]"
+                  className="mt-4 flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-[#0097A7]"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   Back to Shipping
@@ -996,7 +996,7 @@ export default function CheckoutPage() {
           {/* Order Summary Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 rounded-xl bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-lg font-bold text-[#0f766e]">
+              <h3 className="mb-4 text-lg font-bold text-[#1A2B4A]">
                 Order Summary
               </h3>
 
@@ -1048,13 +1048,13 @@ export default function CheckoutPage() {
                           if (discountError) setDiscountError(null);
                         }}
                         placeholder="Enter code"
-                        className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm transition-all focus:border-[#0d9488] focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 placeholder:text-gray-400"
+                        className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400"
                       />
                       <button
                         type="button"
                         onClick={applyDiscount}
                         disabled={applyingDiscount || !discountCode.trim()}
-                        className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#115e59] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {applyingDiscount ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -1111,7 +1111,7 @@ export default function CheckoutPage() {
                   <span>Tax (13% HST)</span>
                   <span>{formatPrice(tax)}</span>
                 </div>
-                <div className="flex justify-between border-t border-gray-100 pt-2 text-base font-bold text-[#0f766e]">
+                <div className="flex justify-between border-t border-gray-100 pt-2 text-base font-bold text-[#1A2B4A]">
                   <span>Total</span>
                   <span>{formatPrice(total)}</span>
                 </div>
@@ -1128,7 +1128,7 @@ export default function CheckoutPage() {
                   Secure payment via Stripe
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <Truck className="h-3.5 w-3.5 text-[#0d9488]" />
+                  <Truck className="h-3.5 w-3.5 text-[#0097A7]" />
                   {selectedRate ? selectedRate.delivery_days : "Multiple carrier options"}
                 </div>
               </div>

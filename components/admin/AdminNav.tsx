@@ -70,8 +70,8 @@ export default function AdminNav({ role }: { role: StaffRole }) {
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all duration-200",
                   active
-                    ? "bg-[#0d9488]/10 font-semibold text-[#0f766e] border-l-[3px] border-[#0f766e]"
-                    : "text-gray-600 border-l-[3px] border-transparent hover:border-[#0d9488] hover:bg-[#0d9488]/5 hover:text-[#0f766e] hover:translate-x-1 hover:shadow-sm"
+                    ? "bg-[#0097A7]/10 font-semibold text-[#1A2B4A] border-l-[3px] border-[#1A2B4A]"
+                    : "text-gray-600 border-l-[3px] border-transparent hover:border-[#0097A7] hover:bg-[#0097A7]/5 hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -84,7 +84,7 @@ export default function AdminNav({ role }: { role: StaffRole }) {
 
       <Link
         href="/"
-        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-gray-500 border-l-[3px] border-transparent transition-all duration-200 hover:border-gray-400 hover:bg-gray-100 hover:text-[#0f766e] hover:translate-x-1 hover:shadow-sm"
+        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-gray-500 border-l-[3px] border-transparent transition-all duration-200 hover:border-gray-400 hover:bg-gray-100 hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Site

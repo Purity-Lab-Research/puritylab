@@ -23,7 +23,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* LEFT — Contact Info */}
           <div>
-            <h2 className="text-xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               <EditableText settingKey="contact_heading">Get in Touch</EditableText>
             </h2>
             <p className="mt-2 text-sm text-gray-600 font-[family-name:var(--font-body)]">
@@ -34,8 +34,8 @@ export default function ContactPage() {
             <div className="mt-8 space-y-6">
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0f766e]/10">
-                  <Mail className="h-5 w-5 text-[#0f766e]" />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A2B4A]/10">
+                  <Mail className="h-5 w-5 text-[#1A2B4A]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-800 font-[family-name:var(--font-body)]">
@@ -43,7 +43,7 @@ export default function ContactPage() {
                   </h3>
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="text-sm text-[#0d9488] hover:underline font-[family-name:var(--font-body)]"
+                    className="text-sm text-[#0097A7] hover:underline font-[family-name:var(--font-body)]"
                   >
                     {CONTACT_EMAIL}
                   </a>
@@ -52,8 +52,8 @@ export default function ContactPage() {
 
               {/* Location */}
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0f766e]/10">
-                  <MapPin className="h-5 w-5 text-[#0f766e]" />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A2B4A]/10">
+                  <MapPin className="h-5 w-5 text-[#1A2B4A]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-800 font-[family-name:var(--font-body)]">
@@ -67,8 +67,8 @@ export default function ContactPage() {
 
               {/* Hours */}
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0f766e]/10">
-                  <Clock className="h-5 w-5 text-[#0f766e]" />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A2B4A]/10">
+                  <Clock className="h-5 w-5 text-[#1A2B4A]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-800 font-[family-name:var(--font-body)]">
@@ -82,10 +82,10 @@ export default function ContactPage() {
             </div>
 
             {/* Wholesale */}
-            <div className="mt-10 rounded-xl border border-[#dde2ea] bg-[#0f766e]/5 p-6">
+            <div className="mt-10 rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
               <div className="flex items-center gap-3">
-                <Package className="h-5 w-5 text-[#0f766e]" />
-                <h3 className="text-sm font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+                <Package className="h-5 w-5 text-[#1A2B4A]" />
+                <h3 className="text-sm font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
                   <EditableText settingKey="contact_wholesale_heading">Wholesale Inquiries</EditableText>
                 </h3>
               </div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
                 For bulk or wholesale inquiries, email us at{" "}
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="font-semibold text-[#0d9488] hover:underline"
+                  className="font-semibold text-[#0097A7] hover:underline"
                 >
                   {CONTACT_EMAIL}
                 </a>
@@ -103,7 +103,7 @@ export default function ContactPage() {
 
           {/* RIGHT — Contact Form */}
           <div className="rounded-xl border border-[#dde2ea] bg-white p-6 shadow-sm lg:p-8">
-            <h2 className="mb-6 text-xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="mb-6 text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               <EditableText settingKey="contact_form_heading">Send Us a Message</EditableText>
             </h2>
             <ContactForm />

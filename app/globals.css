@@ -1,24 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  /* Clinical teal — clean, trustworthy, lab-grade */
-  --color-navy-50: #f0fdfb;
-  --color-navy-100: #ccfbf1;
-  --color-navy-200: #99f6e4;
-  --color-navy-300: #5eead4;
-  --color-navy-400: #2dd4bf;
-  --color-navy-500: #0d9488;
-  --color-navy-600: #0f766e;
-  --color-navy-700: #115e59;
-  --color-navy-800: #134e4a;
-  --color-navy-900: #0c312f;
+  /* Purity Lab — white + navy, clinical trust */
+  --color-primary: #1A2B4A;
+  --color-primary-hover: #142238;
+  --color-primary-light: #243B5C;
 
-  --color-success: #22c55e;
-  --color-danger: #e74c3c;
-  --color-warning: #f59e0b;
+  --color-secondary: #0097A7;
+  --color-secondary-hover: #00838F;
+  --color-secondary-light: #4DD0E1;
 
-  --font-heading: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --color-surface: #FFFFFF;
+  --color-background: #FAFAFA;
+  --color-border: #E2E8F0;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #64748B;
+
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+  --color-danger: #DC2626;
+
+  --font-heading: "Instrument Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
 }
 
 @layer base {
@@ -29,7 +34,7 @@
 
   body {
     font-family: var(--font-body);
-    color: #1a1a2e;
+    color: var(--color-text-primary);
     line-height: 1.65;
     overflow-x: hidden;
   }
@@ -40,7 +45,7 @@
 
   /* Visible focus rings for keyboard navigation (WCAG 2.4.7) */
   :focus-visible {
-    outline: 2px solid #0d9488;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
     border-radius: 4px;
   }

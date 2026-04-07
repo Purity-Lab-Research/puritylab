@@ -23,7 +23,7 @@ const faqSections = [
       {
         question: "Who can purchase from Purity Lab?",
         answer:
-          "You must be 21 years of age or older and confirm that your purchase is intended for in-vitro research purposes only. By placing an order, you agree to our terms of service and acknowledge that our products are not for human consumption.",
+          "You must be 18 years of age or older and confirm that your purchase is intended for in-vitro research purposes only. By placing an order, you agree to our terms of service and acknowledge that our products are not for human consumption.",
       },
       {
         question: "How do you verify purity?",
@@ -89,9 +89,9 @@ export default function FaqPage() {
         <FaqAccordion sections={faqSections} useDynamic />
 
         {/* CTA */}
-        <div className="mt-16 rounded-xl border border-[#dde2ea] bg-[#0f766e]/5 p-8 text-center">
-          <MessageCircle className="mx-auto mb-3 h-8 w-8 text-[#0f766e]" />
-          <h3 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+        <div className="mt-16 rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-8 text-center">
+          <MessageCircle className="mx-auto mb-3 h-8 w-8 text-[#1A2B4A]" />
+          <h3 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
             <EditableText settingKey="faq_cta_heading">Still have questions?</EditableText>
           </h3>
           <p className="mt-2 text-sm text-gray-600 font-[family-name:var(--font-body)]">

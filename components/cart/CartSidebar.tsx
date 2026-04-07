@@ -73,7 +73,7 @@ export default function CartSidebar() {
                 onClick={() => setTab("cart")}
                 className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors ${
                   tab === "cart"
-                    ? "border-[#0f766e] text-[#0f766e]"
+                    ? "border-[#1A2B4A] text-[#1A2B4A]"
                     : "border-transparent text-gray-400 hover:text-gray-600"
                 }`}
               >
@@ -114,7 +114,7 @@ export default function CartSidebar() {
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-block rounded-lg bg-[#0f766e] px-7 py-3 text-sm font-semibold text-white hover:bg-[#115e59] transition-all font-[family-name:var(--font-body)]"
+                  className="inline-block rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
                 >
                   Browse Products
                 </Link>
@@ -217,7 +217,7 @@ export default function CartSidebar() {
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="block w-full text-center rounded-lg bg-[#0f766e] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#115e59] transition-all font-[family-name:var(--font-body)]"
+                  className="block w-full text-center rounded-lg bg-[#1A2B4A] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
                 >
                   Proceed to Checkout
                 </Link>
@@ -241,7 +241,7 @@ export default function CartSidebar() {
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-block rounded-lg bg-[#0f766e] px-7 py-3 text-sm font-semibold text-white hover:bg-[#115e59] transition-all font-[family-name:var(--font-body)]"
+                  className="inline-block rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-all font-[family-name:var(--font-body)]"
                 >
                   Browse Products
                 </Link>
@@ -279,7 +279,7 @@ export default function CartSidebar() {
                         <Link
                           href={`/shop/${product.slug}`}
                           onClick={closeCart}
-                          className="text-sm font-semibold text-gray-900 truncate block hover:text-[#0d9488] transition-colors"
+                          className="text-sm font-semibold text-gray-900 truncate block hover:text-[#0097A7] transition-colors"
                         >
                           {product.name}
                         </Link>
@@ -302,7 +302,7 @@ export default function CartSidebar() {
                               });
                               setTab("cart");
                             }}
-                            className="text-xs font-semibold text-[#0d9488] hover:underline"
+                            className="text-xs font-semibold text-[#0097A7] hover:underline"
                           >
                             Add to Cart
                           </button>

@@ -154,7 +154,7 @@ export default async function AdminDashboard() {
       value: totalOrders.toLocaleString(),
       sub: "All time",
       icon: ShoppingBag,
-      color: "text-blue-600 bg-blue-50",
+      color: "text-blue-600 bg-primary/5",
       href: "/admin/orders",
     },
     {
@@ -170,7 +170,7 @@ export default async function AdminDashboard() {
       value: activeProducts.toLocaleString(),
       sub: "In catalog",
       icon: Package,
-      color: "text-[#0f766e] bg-[#0d9488]/10",
+      color: "text-[#1A2B4A] bg-[#0097A7]/10",
       href: "/admin/products",
     },
     {
@@ -252,14 +252,14 @@ export default async function AdminDashboard() {
             <Link
               key={stat.label}
               href={stat.href}
-              className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:shadow-md hover:border-[#0d9488]/30 group cursor-pointer"
+              className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:shadow-md hover:border-[#0097A7]/30 group cursor-pointer"
             >
               <div className="flex items-center gap-4">
                 <div className={`rounded-lg p-2.5 ${stat.color}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm text-gray-500 group-hover:text-[#0f766e] transition-colors">{stat.label}</p>
+                  <p className="text-sm text-gray-500 group-hover:text-[#1A2B4A] transition-colors">{stat.label}</p>
                   <p className="truncate text-2xl font-bold text-gray-900">
                     {stat.value}
                   </p>

@@ -93,7 +93,7 @@ export default function CoaForm({ coa, products }: Props) {
   }
 
   const inputCls =
-    "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]";
+    "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]";
 
   return (
     <form onSubmit={handleSubmit} className="max-w-xl space-y-6">
@@ -173,13 +173,13 @@ export default function CoaForm({ coa, products }: Props) {
               href={getCoaUrl(pdfUrl)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0d9488] hover:underline"
+              className="text-[#0097A7] hover:underline"
             >
               View PDF
             </a>
           </p>
         )}
-        <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0d9488] hover:text-[#0d9488]">
+        <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0097A7] hover:text-[#0097A7]">
           {uploading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (

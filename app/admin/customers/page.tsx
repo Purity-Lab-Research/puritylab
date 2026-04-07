@@ -322,7 +322,7 @@ export default function AdminCustomersPage() {
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-blue-50 p-2 text-[#0d9488]">
+            <div className="rounded-lg bg-primary/5 p-2 text-[#0097A7]">
               <Users className="h-5 w-5" />
             </div>
             <div>
@@ -375,7 +375,7 @@ export default function AdminCustomersPage() {
             placeholder="Search by name, email, or phone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]"
+            className="w-full rounded-lg border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
           />
         </div>
 
@@ -386,7 +386,7 @@ export default function AdminCustomersPage() {
               onClick={() => setRoleFilter(r)}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                 roleFilter === r
-                  ? "bg-[#0f766e] text-white"
+                  ? "bg-[#1A2B4A] text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -453,7 +453,7 @@ export default function AdminCustomersPage() {
                     value={customer.role}
                     onChange={(e) => changeRole(customer, e.target.value as Customer["role"])}
                     disabled={updatingRole === customer.id}
-                    className="rounded-lg border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:border-gray-400 focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488] disabled:opacity-50"
+                    className="rounded-lg border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:border-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] disabled:opacity-50"
                   >
                     <option value="customer">Customer</option>
                     <option value="fulfillment">Fulfillment</option>

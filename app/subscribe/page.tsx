@@ -14,8 +14,8 @@ export default function SubscribePage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto max-w-md rounded-2xl border border-[#dde2ea] bg-white p-10 shadow-sm text-center">
-          <Clock className="mx-auto mb-4 h-10 w-10 text-[#0d9488]" />
-          <h2 className="text-2xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+          <Clock className="mx-auto mb-4 h-10 w-10 text-[#0097A7]" />
+          <h2 className="text-2xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
             Coming Soon
           </h2>
           <p className="mt-3 text-sm text-gray-500 font-[family-name:var(--font-body)]">

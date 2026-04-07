@@ -91,14 +91,14 @@ export default function CookieConsent() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4">
               <p className="text-sm text-gray-600 leading-relaxed">
                 We use cookies for essential site functionality and, with your consent, for analytics to improve your experience.{" "}
-                <Link href="/policies/cookies" className="text-[#0d9488] hover:underline">
+                <Link href="/policies/cookies" className="text-[#0097A7] hover:underline">
                   Cookie Policy
                 </Link>
               </p>
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   onClick={acceptAll}
-                  className="rounded-lg bg-[#0f766e] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors"
+                  className="rounded-lg bg-[#1A2B4A] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors"
                 >
                   Accept All
                 </button>
@@ -110,7 +110,7 @@ export default function CookieConsent() {
                 </button>
                 <button
                   onClick={() => setShowDetails(true)}
-                  className="text-sm text-[#0d9488] hover:underline px-2"
+                  className="text-sm text-[#0097A7] hover:underline px-2"
                 >
                   Customize
                 </button>
@@ -121,14 +121,14 @@ export default function CookieConsent() {
             <div className="py-4 space-y-4">
               <p className="text-sm text-gray-600 leading-relaxed">
                 Manage your cookie preferences below.{" "}
-                <Link href="/policies/privacy" className="text-[#0d9488] hover:underline">
+                <Link href="/policies/privacy" className="text-[#0097A7] hover:underline">
                   Privacy Policy
                 </Link>
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <label className="flex items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
-                  <input type="checkbox" checked disabled className="mt-0.5 rounded border-gray-300 text-[#0d9488]" />
+                  <input type="checkbox" checked disabled className="mt-0.5 rounded border-gray-300 text-[#0097A7]" />
                   <div>
                     <span className="text-sm font-medium text-gray-900">Essential</span>
                     <p className="text-xs text-gray-400 mt-0.5">Required for the site to function.</p>
@@ -140,7 +140,7 @@ export default function CookieConsent() {
                     type="checkbox"
                     checked={prefs.analytics}
                     onChange={(e) => setPrefs((p) => ({ ...p, analytics: e.target.checked }))}
-                    className="mt-0.5 rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                    className="mt-0.5 rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                   />
                   <div>
                     <span className="text-sm font-medium text-gray-900">Analytics</span>
@@ -153,7 +153,7 @@ export default function CookieConsent() {
                     type="checkbox"
                     checked={prefs.marketing}
                     onChange={(e) => setPrefs((p) => ({ ...p, marketing: e.target.checked }))}
-                    className="mt-0.5 rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                    className="mt-0.5 rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                   />
                   <div>
                     <span className="text-sm font-medium text-gray-900">Marketing</span>
@@ -165,7 +165,7 @@ export default function CookieConsent() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={acceptSelected}
-                  className="rounded-lg bg-[#0f766e] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors"
+                  className="rounded-lg bg-[#1A2B4A] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors"
                 >
                   Save Preferences
                 </button>

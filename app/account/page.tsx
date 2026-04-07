@@ -64,7 +64,7 @@ export default async function AccountPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#0f766e]">
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A]">
           Welcome, {displayName}
         </h1>
         <p className="text-sm text-gray-500 mt-1">Member since {memberSince}</p>
@@ -74,11 +74,11 @@ export default async function AccountPage() {
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-500">Total Orders</p>
-          <p className="text-2xl font-bold text-[#0f766e]">{count ?? 0}</p>
+          <p className="text-2xl font-bold text-[#1A2B4A]">{count ?? 0}</p>
         </div>
         <div className="bg-white rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-500">Account Created</p>
-          <p className="text-sm font-semibold text-[#0f766e] mt-1">
+          <p className="text-sm font-semibold text-[#1A2B4A] mt-1">
             {memberSince}
           </p>
         </div>
@@ -89,7 +89,7 @@ export default async function AccountPage() {
         {isAdmin && (
           <Link
             href="/admin"
-            className="flex flex-col items-center gap-2 bg-[#0f766e] rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
+            className="flex flex-col items-center gap-2 bg-[#1A2B4A] rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
           >
             <Shield className="w-6 h-6 text-white" />
             <span className="text-sm font-medium text-white">Admin Dashboard</span>
@@ -99,35 +99,35 @@ export default async function AccountPage() {
           href="/account/orders"
           className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
         >
-          <Package className="w-6 h-6 text-[#0d9488]" />
+          <Package className="w-6 h-6 text-[#0097A7]" />
           <span className="text-sm font-medium text-gray-700">Orders</span>
         </Link>
         <Link
           href="/track"
           className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
         >
-          <Truck className="w-6 h-6 text-[#0d9488]" />
+          <Truck className="w-6 h-6 text-[#0097A7]" />
           <span className="text-sm font-medium text-gray-700">Track Order</span>
         </Link>
         <Link
           href="/account/addresses"
           className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
         >
-          <MapPin className="w-6 h-6 text-[#0d9488]" />
+          <MapPin className="w-6 h-6 text-[#0097A7]" />
           <span className="text-sm font-medium text-gray-700">Addresses</span>
         </Link>
         <Link
           href="/shop"
           className="flex flex-col items-center gap-2 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center"
         >
-          <ShoppingBag className="w-6 h-6 text-[#0d9488]" />
+          <ShoppingBag className="w-6 h-6 text-[#0097A7]" />
           <span className="text-sm font-medium text-gray-700">Shop</span>
         </Link>
       </div>
 
       {/* Recent Orders */}
       <div>
-        <h2 className="text-lg font-semibold text-[#0f766e] mb-3">
+        <h2 className="text-lg font-semibold text-[#1A2B4A] mb-3">
           Recent Orders
         </h2>
 
@@ -167,7 +167,7 @@ export default async function AccountPage() {
             <p className="text-gray-500 text-sm">No orders yet.</p>
             <Link
               href="/shop"
-              className="text-[#0d9488] text-sm font-medium hover:underline mt-2 inline-block"
+              className="text-[#0097A7] text-sm font-medium hover:underline mt-2 inline-block"
             >
               Start shopping
             </Link>

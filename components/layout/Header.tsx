@@ -10,11 +10,10 @@ import { formatPrice } from "@/lib/utils";
 import MobileNav from "./MobileNav";
 
 const NAV_LINKS = [
+  { href: "/protocols", label: "Protocols" },
   { href: "/shop", label: "Shop" },
-  { href: "/subscribe", label: "Subscribe" },
-  { href: "/coa", label: "COAs" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
+  { href: "/coa", label: "CoA Library" },
+  { href: "/education", label: "Education" },
 ];
 
 interface SearchResult {
@@ -150,16 +149,13 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 group flex items-center -ml-8">
-              <Image src="/images/logo.png" alt="Purity Lab" width={128} height={128} className="h-28 w-28 flex-shrink-0 object-contain -my-6 -mr-4" unoptimized />
-              <div className="flex flex-col leading-none">
-                <span className="font-[family-name:var(--font-heading)] text-[1.35rem] sm:text-[1.6rem] font-extrabold tracking-tight text-[#0f766e]">
-                  PURITY LAB
-                </span>
-                <span className="text-[0.65rem] sm:text-[0.7rem] font-bold tracking-[0.15em] text-[#0d9488] uppercase -mt-0.5">
-                  Research Peptides
-                </span>
+            <Link href="/" className="flex-shrink-0 group flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#1A2B4A]">
+                <span className="font-[family-name:var(--font-heading)] text-sm font-bold text-white tracking-tight">PL</span>
               </div>
+              <span className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight text-[#1A2B4A]">
+                PURITY LAB
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -175,8 +171,8 @@ export default function Header() {
                     href={link.href}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                       isActive
-                        ? "text-[#0d9488] bg-blue-50"
-                        : "text-gray-700 hover:text-[#0d9488] hover:bg-blue-50"
+                        ? "text-[#0097A7] bg-primary/5"
+                        : "text-gray-700 hover:text-[#0097A7] hover:bg-primary/5"
                     }`}
                   >
                     {link.label}
@@ -191,7 +187,7 @@ export default function Header() {
               <button
                 onClick={() => setSearchOpen((prev) => !prev)}
                 aria-label={searchOpen ? "Close search" : "Open search"}
-                className="relative p-2 rounded-full text-gray-600 hover:text-[#0f766e] hover:bg-gray-100 transition-colors"
+                className="relative p-2 rounded-full text-gray-600 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
               >
                 {searchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
               </button>
@@ -200,7 +196,7 @@ export default function Header() {
               <Link
                 href="/account"
                 aria-label="Account"
-                className="relative p-2 rounded-full text-gray-600 hover:text-[#0f766e] hover:bg-gray-100 transition-colors"
+                className="relative p-2 rounded-full text-gray-600 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
               >
                 <User className="h-5 w-5" />
               </Link>
@@ -209,11 +205,11 @@ export default function Header() {
               <button
                 onClick={openCart}
                 aria-label="Open cart"
-                className="relative p-2 rounded-full text-gray-600 hover:text-[#0f766e] hover:bg-gray-100 transition-colors"
+                className="relative p-2 rounded-full text-gray-600 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0d9488] text-[10px] font-bold text-white">
+                  <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0097A7] text-[10px] font-bold text-white">
                     {itemCount > 99 ? "99+" : itemCount}
                   </span>
                 )}
@@ -223,7 +219,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="lg:hidden p-2 rounded-full text-gray-600 hover:text-[#0f766e] hover:bg-gray-100 transition-colors"
+                className="lg:hidden p-2 rounded-full text-gray-600 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
               >
                 <Menu className="h-5 w-5" />
               </button>
@@ -247,7 +243,7 @@ export default function Header() {
                 value={searchQuery}
                 onChange={handleSearchChange}
                 placeholder="Search for peptides..."
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-12 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0d9488] focus:ring-2 focus:ring-[#0d9488]/20 focus:bg-white outline-none transition-all"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-12 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0097A7] focus:ring-2 focus:ring-[#0097A7]/20 focus:bg-white outline-none transition-all"
               />
               {isSearching && (
                 <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 animate-spin" />
@@ -289,7 +285,7 @@ export default function Header() {
                               {product.category?.name}
                             </p>
                           </div>
-                          <span className="text-sm font-semibold text-[#0f766e] whitespace-nowrap">
+                          <span className="text-sm font-semibold text-[#1A2B4A] whitespace-nowrap">
                             {formatPrice(product.price)}
                           </span>
                         </button>
@@ -302,7 +298,7 @@ export default function Header() {
                           router.push(`/shop?q=${encodeURIComponent(searchQuery.trim())}`);
                           setSearchOpen(false);
                         }}
-                        className="flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-[#0d9488] transition-colors hover:bg-blue-50"
+                        className="flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-[#0097A7] transition-colors hover:bg-primary/5"
                       >
                         View all results
                         <Search className="h-3.5 w-3.5" />
@@ -317,7 +313,7 @@ export default function Header() {
                     <Link
                       href="/shop"
                       onClick={() => setSearchOpen(false)}
-                      className="mt-2 inline-block text-sm font-medium text-[#0d9488] hover:underline"
+                      className="mt-2 inline-block text-sm font-medium text-[#0097A7] hover:underline"
                     >
                       Browse all products
                     </Link>
@@ -338,7 +334,7 @@ export default function Header() {
                       setSearchQuery(term);
                       searchProducts(term);
                     }}
-                    className="rounded-full border border-gray-200 px-3 py-1 text-xs text-gray-600 transition-colors hover:border-[#0d9488] hover:text-[#0d9488]"
+                    className="rounded-full border border-gray-200 px-3 py-1 text-xs text-gray-600 transition-colors hover:border-[#0097A7] hover:text-[#0097A7]"
                   >
                     {term}
                   </button>

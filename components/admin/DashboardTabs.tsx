@@ -19,7 +19,7 @@ export default function DashboardTabs({ children }: Props) {
           onClick={() => setTab("overview")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
             tab === "overview"
-              ? "border-[#0f766e] text-[#0f766e]"
+              ? "border-[#1A2B4A] text-[#1A2B4A]"
               : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
           }`}
         >
@@ -30,7 +30,7 @@ export default function DashboardTabs({ children }: Props) {
           onClick={() => setTab("analytics")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
             tab === "analytics"
-              ? "border-[#0f766e] text-[#0f766e]"
+              ? "border-[#1A2B4A] text-[#1A2B4A]"
               : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
           }`}
         >

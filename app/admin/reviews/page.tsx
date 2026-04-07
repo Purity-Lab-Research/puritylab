@@ -92,7 +92,7 @@ export default function AdminReviewsPage() {
               onClick={() => setFilter(f)}
               className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                 filter === f
-                  ? "bg-[#0f766e] text-white"
+                  ? "bg-[#1A2B4A] text-white"
                   : "text-gray-600 hover:bg-gray-100"
               }`}
             >

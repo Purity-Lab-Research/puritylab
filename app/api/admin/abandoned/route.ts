@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
 
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
@@ -69,14 +69,14 @@ export async function POST(req: NextRequest) {
               We noticed you started an order <strong>(#${orderNumber})</strong> for <strong>${formattedTotal} CAD</strong> but didn't complete checkout. Your items are still waiting for you!
             </p>
             <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:#555;">
-              If you ran into any issues or have questions, email us at <a href="mailto:support@puritylabresearch.com" style="color:#0d9488;">support@puritylabresearch.com</a> - we're happy to help.
+              If you ran into any issues or have questions, email us at <a href="mailto:support@puritylabresearch.com" style="color:#0097A7;">support@puritylabresearch.com</a> - we're happy to help.
             </p>
           </td>
         </tr>
 
         <tr>
           <td style="padding:8px 24px 24px;text-align:center;">
-            <a href="${siteUrl}/shop" style="display:inline-block;background:#0f766e;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/shop" style="display:inline-block;background:#1A2B4A;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
               Return to Shop
             </a>
           </td>

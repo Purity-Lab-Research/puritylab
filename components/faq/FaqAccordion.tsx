@@ -68,7 +68,7 @@ export default function FaqAccordion({
         const slug = sectionSlugs[si] || `section_${si + 1}`;
         return (
         <div key={si}>
-          <h2 className="mb-4 text-xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+          <h2 className="mb-4 text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
             <EditableText settingKey={`faq_${slug}_heading`}>{section.title}</EditableText>
           </h2>
 
@@ -89,9 +89,9 @@ export default function FaqAccordion({
                       <EditableText settingKey={`faq_${slug}_${qi + 1}_q`}>{item.question}</EditableText>
                     </span>
                     {isOpen ? (
-                      <Minus className="h-4 w-4 shrink-0 text-[#0d9488]" />
+                      <Minus className="h-4 w-4 shrink-0 text-[#0097A7]" />
                     ) : (
-                      <Plus className="h-4 w-4 shrink-0 text-[#0d9488]" />
+                      <Plus className="h-4 w-4 shrink-0 text-[#0097A7]" />
                     )}
                   </button>
 

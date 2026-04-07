@@ -33,7 +33,7 @@ export default function ShareButtons({ url, title }: Props) {
       {/* Copy link */}
       <button
         onClick={copyLink}
-        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-[#0f766e] transition-colors"
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-[#1A2B4A] transition-colors"
         title="Copy link"
       >
         {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Link2 className="h-3.5 w-3.5" />}

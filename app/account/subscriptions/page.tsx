@@ -4,12 +4,12 @@ import { Bell } from "lucide-react";
 export default function SubscriptionsPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#0f766e] mb-6">
+      <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-6">
         Subscriptions
       </h1>
 
       <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-        <Bell className="w-10 h-10 text-[#0d9488] mx-auto mb-4" />
+        <Bell className="w-10 h-10 text-[#0097A7] mx-auto mb-4" />
         <h2 className="text-lg font-semibold text-gray-900 mb-2">
           Coming Soon
         </h2>
@@ -19,7 +19,7 @@ export default function SubscriptionsPage() {
         </p>
         <Link
           href="/subscribe"
-          className="text-[#0d9488] text-sm font-medium hover:underline"
+          className="text-[#0097A7] text-sm font-medium hover:underline"
         >
           Learn more about subscriptions
         </Link>

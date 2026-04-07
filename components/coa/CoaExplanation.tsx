@@ -7,8 +7,8 @@ export default function CoaExplanation() {
   return (
     <div className="mt-16 rounded-xl border border-[#dde2ea] bg-white p-8">
       <div className="mb-4 flex items-center gap-3">
-        <Info className="h-5 w-5 text-[#0f766e]" />
-        <h2 className="text-xl font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+        <Info className="h-5 w-5 text-[#1A2B4A]" />
+        <h2 className="text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
           <EditableText settingKey="coa_explanation_heading">
             Understanding Our COAs
           </EditableText>
@@ -58,7 +58,7 @@ export default function CoaExplanation() {
             product, please{" "}
             <a
               href="/contact"
-              className="font-semibold text-[#0d9488] underline hover:text-[#0f766e]"
+              className="font-semibold text-[#0097A7] underline hover:text-[#1A2B4A]"
             >
               contact us
             </a>

@@ -55,38 +55,42 @@ export default function AgeGate() {
               Access Denied
             </h2>
             <p className="text-sm leading-relaxed text-gray-600">
-              You must be 21 years of age or older to access this website. Please
+              You must be 18 years of age or older to access this website. Please
               return when you meet the age requirement.
             </p>
           </>
         ) : (
           <>
-            <h1 className="mb-1 text-3xl font-bold tracking-wider text-[#0f766e]">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#1A2B4A]">
+              <span className="font-[family-name:var(--font-heading)] text-lg font-bold text-white tracking-tight">PL</span>
+            </div>
+            <h1 className="mb-1 text-2xl font-bold tracking-tight text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               <EditableText settingKey="agegate_heading">PURITY LAB</EditableText>
             </h1>
-            <p className="mb-6 text-xs font-semibold tracking-[0.2em] text-[#0d9488] uppercase">
-              Research Peptides
+            <p className="mb-6 text-xs font-medium tracking-wide text-[#64748B]">
+              For Research Use Only
             </p>
 
             <div className="mb-8">
               <p className="text-sm leading-relaxed text-gray-600">
-                <EditableText settingKey="agegate_description">This website contains products intended for laboratory research
-                use only. You must be 21 years of age or older to enter.</EditableText>
+                <EditableText settingKey="agegate_description">This website sells research peptides intended for laboratory and
+                in-vitro research use only. Not for human consumption.
+                You must be 18 years of age or older to enter.</EditableText>
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={handleConfirm}
-                className="flex-1 rounded-lg bg-[#0f766e] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0d9488] focus:outline-none focus:ring-2 focus:ring-[#0d9488] focus:ring-offset-2"
+                className="flex-1 rounded-lg bg-[#1A2B4A] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#142238] focus:outline-none focus:ring-2 focus:ring-[#1A2B4A] focus:ring-offset-2"
               >
-                I Am 21+
+                I Am 18+
               </button>
               <button
                 onClick={handleDeny}
                 className="flex-1 rounded-lg bg-gray-200 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
               >
-                I Am Under 21
+                I Am Under 18
               </button>
             </div>
           </>

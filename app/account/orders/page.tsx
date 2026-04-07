@@ -27,7 +27,7 @@ export default async function OrdersPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#0f766e] mb-6">
+      <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-6">
         Order History
       </h1>
 
@@ -68,7 +68,7 @@ export default async function OrdersPage() {
                   <td className="px-5 py-4 text-right">
                     <Link
                       href={`/account/orders/${order.id}`}
-                      className="text-sm text-[#0d9488] hover:underline font-medium"
+                      className="text-sm text-[#0097A7] hover:underline font-medium"
                     >
                       View
                     </Link>
@@ -113,7 +113,7 @@ export default async function OrdersPage() {
           <p className="text-gray-500 mb-3">No orders yet.</p>
           <Link
             href="/shop"
-            className="text-[#0d9488] font-medium hover:underline"
+            className="text-[#0097A7] font-medium hover:underline"
           >
             Browse our products
           </Link>

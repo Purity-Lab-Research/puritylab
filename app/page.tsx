@@ -3,18 +3,21 @@ import { createClient } from "@/lib/supabase/server";
 import type { Product } from "@/lib/types";
 import Hero from "@/components/home/Hero";
 import TrustStrip from "@/components/home/TrustStrip";
+import HowItWorks from "@/components/home/HowItWorks";
+import Protocols from "@/components/home/Protocols";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
-import HowPeptidesWork from "@/components/home/HowPeptidesWork";
+import WhyPurityLab from "@/components/home/WhyPurityLab";
+import EducationPreview from "@/components/home/EducationPreview";
 import CTABanner from "@/components/home/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Purity Lab | Premium Research Peptides",
+  title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
   description:
-    "Shop 99%+ purity research peptides with third-party COAs. Same-day processing, 3-8 business day delivery. Worldwide shipping.",
+    "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.",
   openGraph: {
-    title: "Purity Lab | Premium Research Peptides",
+    title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
     description:
-      "Shop 99%+ purity research peptides with third-party COAs. Same-day processing, 3-8 business day delivery. Worldwide shipping.",
+      "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.",
   },
 };
 
@@ -40,8 +43,11 @@ export default async function HomePage() {
     <>
       <Hero />
       <TrustStrip />
+      <HowItWorks />
+      <Protocols />
       <FeaturedProducts products={products} />
-      <HowPeptidesWork />
+      <WhyPurityLab />
+      <EducationPreview />
       <CTABanner />
     </>
   );

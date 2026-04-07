@@ -31,7 +31,7 @@ export default function InlineEditBar() {
             transform: translateX(-50%);
             font-size: 10px;
             font-family: system-ui, sans-serif;
-            background: #0d9488;
+            background: #0097A7;
             color: white;
             padding: 2px 6px;
             border-radius: 3px;
@@ -42,7 +42,7 @@ export default function InlineEditBar() {
             letter-spacing: 0.01em;
           }
           .editable-field:focus {
-            border-color: #0d9488 !important;
+            border-color: #0097A7 !important;
             border-style: solid !important;
             box-shadow: 0 0 0 2px rgba(26, 109, 227, 0.2);
           }
@@ -72,7 +72,7 @@ export default function InlineEditBar() {
           <button
             onClick={toggleEditMode}
             style={{
-              background: "#0d9488",
+              background: "#0097A7",
               color: "white",
               border: "none",
               borderRadius: "6px",

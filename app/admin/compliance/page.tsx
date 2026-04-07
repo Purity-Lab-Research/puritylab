@@ -20,7 +20,7 @@ function Checkbox({ children }: { children: React.ReactNode }) {
     <label className="flex items-start gap-3 py-1.5 cursor-pointer select-none">
       <input
         type="checkbox"
-        className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488] shrink-0"
+        className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7] shrink-0"
         readOnly
       />
       <span className="text-sm text-gray-700">{children}</span>
@@ -44,7 +44,7 @@ function SectionCard({
   return (
     <div className="rounded-xl border border-gray-200 bg-white">
       <div className="flex items-center gap-3 border-b border-gray-100 px-6 py-4">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0d9488] text-sm font-bold text-white">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0097A7] text-sm font-bold text-white">
           {step}
         </span>
         <div className="flex-1">
@@ -223,7 +223,7 @@ export default async function CompliancePage() {
       >
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0d9488]">
+            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0097A7]">
               Access
             </h3>
             <p className="text-sm text-gray-700">
@@ -233,7 +233,7 @@ export default async function CompliancePage() {
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0d9488]">
+            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0097A7]">
               Deletion
             </h3>
             <p className="text-sm text-gray-700">
@@ -246,7 +246,7 @@ export default async function CompliancePage() {
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0d9488]">
+            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0097A7]">
               Correction
             </h3>
             <p className="text-sm text-gray-700">
@@ -255,7 +255,7 @@ export default async function CompliancePage() {
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0d9488]">
+            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#0097A7]">
               Portability
             </h3>
             <p className="text-sm text-gray-700">
@@ -379,7 +379,7 @@ export default async function CompliancePage() {
       <div className="rounded-lg border border-gray-200 bg-white px-5 py-4 text-center">
         <p className="text-sm font-medium text-gray-700">
           Check{" "}
-          <span className="font-semibold text-[#0f766e]">
+          <span className="font-semibold text-[#1A2B4A]">
             support@puritylabresearch.com
           </span>{" "}
           at minimum every 48 hours. A missed deadline is a violation.

@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 const NAV_LINKS = [
+  { href: "/protocols", label: "Protocols" },
   { href: "/shop", label: "Shop" },
-  { href: "/subscribe", label: "Subscribe" },
-  { href: "/coa", label: "COAs" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
+  { href: "/coa", label: "CoA Library" },
+  { href: "/education", label: "Education" },
 ];
 
 interface MobileNavProps {
@@ -57,21 +55,18 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-200 px-4 h-16">
-          <div className="flex items-center">
-            <Image src="/images/logo.png" alt="Purity Lab" width={128} height={128} className="h-28 w-28 flex-shrink-0 object-contain -my-6 -mr-4 -ml-4" unoptimized />
-            <div className="flex flex-col leading-none">
-              <span className="font-[family-name:var(--font-heading)] text-[1.35rem] font-extrabold tracking-tight text-[#0f766e]">
-                PURITY LAB
-              </span>
-              <span className="text-[0.65rem] font-bold tracking-[0.15em] text-[#0d9488] uppercase -mt-0.5">
-                Research Peptides
-              </span>
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#1A2B4A]">
+              <span className="font-[family-name:var(--font-heading)] text-sm font-bold text-white tracking-tight">PL</span>
             </div>
+            <span className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight text-[#1A2B4A]">
+              PURITY LAB
+            </span>
           </div>
           <button
             onClick={onClose}
             aria-label="Close menu"
-            className="p-2 -mr-2 rounded-full text-gray-500 hover:text-[#0f766e] hover:bg-gray-100 transition-colors"
+            className="p-2 -mr-2 rounded-full text-gray-500 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
           >
             <X className="h-6 w-6" />
           </button>
@@ -102,8 +97,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     onClick={onClose}
                     className={`flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${
                       isActive
-                        ? "bg-blue-50 text-[#0d9488]"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-[#0f766e]"
+                        ? "bg-primary/5 text-[#0097A7]"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-[#1A2B4A]"
                     }`}
                   >
                     {link.label}
@@ -126,7 +121,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               href={SOCIAL_LINKS.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-[#0f766e] hover:text-white transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-[#1A2B4A] hover:text-white transition-colors"
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

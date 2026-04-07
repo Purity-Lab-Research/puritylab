@@ -101,7 +101,7 @@ export default function SentView({ onComposeTo }: Props) {
                   onComposeTo?.(viewingEmail.to, viewingEmail.subject);
                   setViewingEmail(null);
                 }}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-medium text-white hover:bg-[#115e59] transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-medium text-white hover:bg-[#142238] transition-colors"
               >
                 <Mail className="h-3.5 w-3.5" />
                 Reply

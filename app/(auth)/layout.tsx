@@ -17,7 +17,7 @@ export default function AuthLayout({
       <div className="w-full max-w-md">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-[#0f766e] hover:text-[#0d9488] mb-6 transition-colors font-[family-name:var(--font-body)]"
+          className="inline-flex items-center gap-1.5 text-sm text-[#1A2B4A] hover:text-[#0097A7] mb-6 transition-colors font-[family-name:var(--font-body)]"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home

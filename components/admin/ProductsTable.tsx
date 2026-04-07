@@ -49,7 +49,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleAll}
-                  className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                  className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                 />
               </th>
               <th className="px-4 py-3">Image</th>
@@ -64,13 +64,13 @@ export default function ProductsTable({ items }: { items: Product[] }) {
           </thead>
           <tbody className="divide-y">
             {items.map((p) => (
-              <tr key={p.id} className={`hover:bg-gray-50 ${selected.has(p.id) ? "bg-blue-50/50" : ""}`}>
+              <tr key={p.id} className={`hover:bg-gray-50 ${selected.has(p.id) ? "bg-primary/5/50" : ""}`}>
                 <td className="px-4 py-3">
                   <input
                     type="checkbox"
                     checked={selected.has(p.id)}
                     onChange={() => toggleOne(p.id)}
-                    className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                    className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                   />
                 </td>
                 <td className="px-4 py-3">
@@ -98,7 +98,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                 <td className="px-4 py-3 text-right">{p.stock_quantity}</td>
                 <td className="px-4 py-3">
                   {p.badge ? (
-                    <span className="inline-block rounded-full bg-[#0d9488]/10 px-2.5 py-0.5 text-xs font-medium text-[#0f766e]">
+                    <span className="inline-block rounded-full bg-[#0097A7]/10 px-2.5 py-0.5 text-xs font-medium text-[#1A2B4A]">
                       {p.badge}
                     </span>
                   ) : (
@@ -116,7 +116,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                   <div className="flex items-center gap-3">
                     <Link
                       href={`/admin/products/${p.id}`}
-                      className="text-[#0d9488] hover:underline"
+                      className="text-[#0097A7] hover:underline"
                     >
                       Edit
                     </Link>

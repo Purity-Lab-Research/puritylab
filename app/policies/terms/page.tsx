@@ -24,7 +24,7 @@ export default function TermsPage() {
 
           {/* 1. Acceptance of Terms */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               1. Acceptance of Terms
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -44,13 +44,13 @@ export default function TermsPage() {
 
           {/* 2. Eligibility and Age Requirement */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               2. Eligibility and Age Requirement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              You must be at least 21 years of age to create an account, place an order, or purchase any
+              You must be at least 18 years of age to create an account, place an order, or purchase any
               products from {SITE_NAME}. By using our website or placing an order, you represent and
-              warrant that you are at least 21 years old and have the legal capacity to enter into a
+              warrant that you are at least 18 years old and have the legal capacity to enter into a
               binding agreement.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -61,7 +61,7 @@ export default function TermsPage() {
 
           {/* 3. Research Use Only */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               3. Research Use Only
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -96,7 +96,7 @@ export default function TermsPage() {
 
           {/* 4. Prohibited Uses */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               4. Prohibited Uses
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -133,7 +133,7 @@ export default function TermsPage() {
 
           {/* 5. Account Registration */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               5. Account Registration
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -155,7 +155,7 @@ export default function TermsPage() {
 
           {/* 6. Orders and Payment */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               6. Orders and Payment
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -184,7 +184,7 @@ export default function TermsPage() {
 
           {/* 7. Product Information and Accuracy */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               7. Product Information and Accuracy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -206,7 +206,7 @@ export default function TermsPage() {
 
           {/* 8. Shipping and Delivery */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               8. Shipping and Delivery
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -232,7 +232,7 @@ export default function TermsPage() {
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
               For full details, refer to our{" "}
-              <a href="/policies/shipping" className="text-[#0d9488] hover:underline">
+              <a href="/policies/shipping" className="text-[#0097A7] hover:underline">
                 Shipping Policy
               </a>
               .
@@ -241,7 +241,7 @@ export default function TermsPage() {
 
           {/* 9. Refunds and Returns */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               9. Refunds and Returns
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -265,7 +265,7 @@ export default function TermsPage() {
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
               For full details, refer to our{" "}
-              <a href="/policies/refund" className="text-[#0d9488] hover:underline">
+              <a href="/policies/refund" className="text-[#0097A7] hover:underline">
                 Refund Policy
               </a>
               .
@@ -274,7 +274,7 @@ export default function TermsPage() {
 
           {/* 10. Export Compliance and Sanctions */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               10. Export Compliance and Sanctions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -308,7 +308,7 @@ export default function TermsPage() {
 
           {/* 11. Intellectual Property */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               11. Intellectual Property
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -327,7 +327,7 @@ export default function TermsPage() {
 
           {/* 12. Disclaimer of Warranties */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               12. Disclaimer of Warranties
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
@@ -359,7 +359,7 @@ export default function TermsPage() {
 
           {/* 13. Limitation of Liability */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               13. Limitation of Liability
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
@@ -393,7 +393,7 @@ export default function TermsPage() {
 
           {/* 14. Indemnification */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               14. Indemnification
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -423,14 +423,14 @@ export default function TermsPage() {
 
           {/* 15. Dispute Resolution */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               15. Dispute Resolution
             </h2>
 
             <h3 className="mt-4 text-base font-semibold text-gray-900">15.1 Informal Resolution</h3>
             <p className="mt-2 text-sm leading-relaxed">
               You agree to first attempt to resolve the dispute informally by contacting us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0d9488] hover:underline">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
                 {CONTACT_EMAIL}
               </a>
               . We will make good-faith efforts to resolve the matter within 30 days.
@@ -469,7 +469,7 @@ export default function TermsPage() {
 
           {/* 16. Force Majeure */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               16. Force Majeure
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -483,7 +483,7 @@ export default function TermsPage() {
 
           {/* 17. Severability */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               17. Severability
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -496,7 +496,7 @@ export default function TermsPage() {
 
           {/* 18. Entire Agreement */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               18. Entire Agreement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -509,7 +509,7 @@ export default function TermsPage() {
 
           {/* 19. Governing Law and Jurisdiction */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               19. Governing Law and Jurisdiction
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -530,7 +530,7 @@ export default function TermsPage() {
 
           {/* 20. Contact Information */}
           <div>
-            <h2 className="text-lg font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
               20. Contact Information
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -541,17 +541,17 @@ export default function TermsPage() {
               <p>Windsor, Ontario, Canada</p>
               <p>
                 Email:{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0d9488] hover:underline">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
                   {CONTACT_EMAIL}
                 </a>
               </p>
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#dde2ea] bg-[#0f766e]/5 p-6">
+          <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
             <p className="text-sm leading-relaxed">
-              <strong className="text-[#0f766e]">Questions?</strong> Contact us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0d9488] hover:underline">
+              <strong className="text-[#1A2B4A]">Questions?</strong> Contact us at{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
                 {CONTACT_EMAIL}
               </a>
             </p>

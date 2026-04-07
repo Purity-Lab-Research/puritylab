@@ -41,7 +41,7 @@ export default async function AccountLayout({
         <div className="md:hidden mb-6">
           <div className="flex items-center gap-3 mb-4">
             <div>
-              <p className="font-semibold text-[#0f766e]">{displayName}</p>
+              <p className="font-semibold text-[#1A2B4A]">{displayName}</p>
               <p className="text-xs text-gray-500">{displayEmail}</p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default async function AccountLayout({
           {/* Desktop sidebar */}
           <aside className="hidden md:block w-56 shrink-0">
             <div className="mb-6">
-              <p className="font-semibold text-[#0f766e]">{displayName}</p>
+              <p className="font-semibold text-[#1A2B4A]">{displayName}</p>
               <p className="text-xs text-gray-500">{displayEmail}</p>
             </div>
 
@@ -61,7 +61,7 @@ export default async function AccountLayout({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block rounded-lg px-3 py-2 text-sm text-gray-700 border-l-[3px] border-transparent transition-all duration-200 hover:border-[#0f766e] hover:bg-white hover:text-[#0f766e] hover:translate-x-1 hover:shadow-sm"
+                  className="block rounded-lg px-3 py-2 text-sm text-gray-700 border-l-[3px] border-transparent transition-all duration-200 hover:border-[#1A2B4A] hover:bg-white hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
                 >
                   {link.label}
                 </Link>

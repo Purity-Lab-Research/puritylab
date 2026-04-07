@@ -17,7 +17,7 @@ export default function Error({
   return (
     <section className="min-h-[80vh] flex items-center justify-center px-6">
       <div className="text-center max-w-md">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#1a1a2e] mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-4">
           Something went wrong
         </h1>
         <p className="text-gray-600 mb-8 leading-relaxed">

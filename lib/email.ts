@@ -133,7 +133,7 @@ export async function sendOrderConfirmation(
 
         <!-- Header -->
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
@@ -221,7 +221,7 @@ export async function sendOrderConfirmation(
             <p style="margin:0 0 12px;font-size:14px;color:#333;">
               <strong>Track your order and save your info for next time!</strong>
             </p>
-            <a href="${siteUrl}/register" style="display:inline-block;background:#0f766e;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/register" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
               Create a Free Account
             </a>
             <p style="margin:8px 0 0;font-size:12px;color:#999;">View order history, save addresses, and check out faster.</p>
@@ -386,10 +386,10 @@ export async function sendShippingNotification(
       <tr>
         <td style="padding:20px 24px;">
           <div style="background:#f0f4ff;border:1px solid #d0daea;border-radius:8px;padding:20px;">
-            <h3 style="margin:0 0 8px;font-size:14px;color:#0f766e;">Tracking Information</h3>
+            <h3 style="margin:0 0 8px;font-size:14px;color:#1A2B4A;">Tracking Information</h3>
             ${carrier ? `<p style="margin:0 0 4px;font-size:14px;color:#555;">Carrier: <strong>${carrier}</strong></p>` : ""}
             <p style="margin:0 0 12px;font-size:14px;color:#555;">Tracking Number: <strong style="font-family:monospace;">${trackingNumber}</strong></p>
-            ${trackingUrlProvider ? `<a href="${escapeHtml(trackingUrlProvider)}" style="display:inline-block;background:#0f766e;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold;">Track with ${carrier || "Carrier"}</a>` : ""}
+            ${trackingUrlProvider ? `<a href="${escapeHtml(trackingUrlProvider)}" style="display:inline-block;background:#1A2B4A;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold;">Track with ${carrier || "Carrier"}</a>` : ""}
           </div>
         </td>
       </tr>`
@@ -405,7 +405,7 @@ export async function sendShippingNotification(
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
 
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
@@ -437,7 +437,7 @@ export async function sendShippingNotification(
 
         <tr>
           <td style="padding:20px 24px;">
-            <a href="${siteUrl}/track" style="display:inline-block;background:#0f766e;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/track" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:bold;">
               Track Your Order
             </a>
           </td>
@@ -650,7 +650,7 @@ export async function sendBackInStockNotification(
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
 
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
@@ -679,7 +679,7 @@ export async function sendBackInStockNotification(
 
         <tr>
           <td style="padding:24px;text-align:center;">
-            <a href="${siteUrl}/shop/${productSlug}" style="display:inline-block;background:#0f766e;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/shop/${productSlug}" style="display:inline-block;background:#1A2B4A;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
               Shop Now
             </a>
           </td>
@@ -741,7 +741,7 @@ export async function sendReviewRequest(
     .map((item) => {
       const name = escapeHtml(item.product_name);
       return `<li style="margin-bottom:8px;">
-        <a href="${siteUrl}/shop/${item.slug}" style="color:#0d9488;text-decoration:none;font-weight:600;">${name}</a>
+        <a href="${siteUrl}/shop/${item.slug}" style="color:#0097A7;text-decoration:none;font-weight:600;">${name}</a>
       </li>`;
     })
     .join("");
@@ -756,7 +756,7 @@ export async function sendReviewRequest(
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
 
         <tr>
-          <td style="background:#0f766e;padding:14px 24px;">
+          <td style="background:#1A2B4A;padding:14px 24px;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
                 <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
@@ -795,7 +795,7 @@ export async function sendReviewRequest(
 
         <tr>
           <td style="padding:0 24px 24px;text-align:center;">
-            <a href="${siteUrl}/account/orders" style="display:inline-block;background:#0f766e;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/account/orders" style="display:inline-block;background:#1A2B4A;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
               Leave a Review
             </a>
           </td>

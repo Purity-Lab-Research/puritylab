@@ -165,9 +165,9 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
     <section className="mx-auto max-w-7xl px-6 py-10 md:py-14">
       {/* Search Banner */}
       {searchQuery && (
-        <div className="mb-6 flex items-center justify-between rounded-lg bg-blue-50 border border-blue-100 px-4 py-3">
+        <div className="mb-6 flex items-center justify-between rounded-lg bg-primary/5 border border-blue-100 px-4 py-3">
           <p className="text-sm text-gray-700">
-            Showing results for <span className="font-semibold text-[#0f766e]">&quot;{searchQuery}&quot;</span>
+            Showing results for <span className="font-semibold text-[#1A2B4A]">&quot;{searchQuery}&quot;</span>
             <span className="text-gray-400 ml-1">({filteredProducts.length} found)</span>
           </p>
           <button
@@ -190,7 +190,7 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
             className={cn(
               "rounded-full border px-5 py-2 text-sm font-medium transition-all duration-200 font-[family-name:var(--font-body)]",
               activeFilter === cat.slug
-                ? "border-[#0d9488] bg-[#0d9488]/10 text-[#0f766e]"
+                ? "border-[#0097A7] bg-[#0097A7]/10 text-[#1A2B4A]"
                 : "border-gray-200 text-gray-600 hover:border-gray-400"
             )}
           >
@@ -210,7 +210,7 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
               className={cn(
                 "rounded-full border px-3 py-1 text-xs font-medium transition-all duration-200",
                 activeTag === tag.slug
-                  ? "border-[#0d9488] bg-[#0d9488]/10 text-[#0f766e]"
+                  ? "border-[#0097A7] bg-[#0097A7]/10 text-[#1A2B4A]"
                   : "border-gray-200 text-gray-500 hover:border-gray-400"
               )}
             >
@@ -229,8 +229,8 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
             onChange={(e) => setSortBy(e.target.value as SortOption)}
             className={cn(
               "appearance-none rounded-full border border-gray-200 bg-white pl-4 pr-9 py-2 text-sm font-medium text-gray-600 transition-all duration-200 font-[family-name:var(--font-body)]",
-              "hover:border-gray-400 focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]/30",
-              sortBy !== "newest" && "border-[#0d9488] bg-[#0d9488]/10 text-[#0f766e]"
+              "hover:border-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]/30",
+              sortBy !== "newest" && "border-[#0097A7] bg-[#0097A7]/10 text-[#1A2B4A]"
             )}
           >
             {SORT_OPTIONS.map((opt) => (
@@ -243,7 +243,7 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
         </div>
 
         {/* Price Range Filter */}
-        <div className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 transition-all duration-200 hover:border-gray-400 focus-within:border-[#0d9488] focus-within:ring-1 focus-within:ring-[#0d9488]/30">
+        <div className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 transition-all duration-200 hover:border-gray-400 focus-within:border-[#0097A7] focus-within:ring-1 focus-within:ring-[#0097A7]/30">
           <SlidersHorizontal className="h-3.5 w-3.5 text-gray-400 shrink-0" />
           <span className="text-xs text-gray-400 font-[family-name:var(--font-body)]">$</span>
           <input
@@ -272,7 +272,7 @@ export default function ShopContent({ products, categories, tags = [] }: ShopCon
         {/* Active Filters Badge + Clear All */}
         {activeFilterCount > 0 && (
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#0d9488]/10 px-3 py-1.5 text-xs font-semibold text-[#0f766e] font-[family-name:var(--font-body)]">
+            <span className="rounded-full bg-[#0097A7]/10 px-3 py-1.5 text-xs font-semibold text-[#1A2B4A] font-[family-name:var(--font-body)]">
               {activeFilterCount} {activeFilterCount === 1 ? "filter" : "filters"}
             </span>
             <button

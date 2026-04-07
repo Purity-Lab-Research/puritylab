@@ -105,7 +105,7 @@ function Section({
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center gap-3 px-5 py-4 text-left text-sm font-semibold text-gray-800 hover:bg-gray-50 transition-colors"
       >
-        <Icon className="h-4 w-4 text-[#0d9488]" />
+        <Icon className="h-4 w-4 text-[#0097A7]" />
         <span className="flex-1">{title}</span>
         {open ? (
           <ChevronDown className="h-4 w-4 text-gray-400" />
@@ -147,7 +147,7 @@ function PreviewCard({
       {/* Badge */}
       <div className="relative aspect-[5/4] w-full bg-white">
         {badge && (
-          <span className="absolute top-3 left-3 z-10 rounded-md bg-[#0d9488] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+          <span className="absolute top-3 left-3 z-10 rounded-md bg-[#0097A7] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             {badge}
           </span>
         )}
@@ -180,7 +180,7 @@ function PreviewCard({
           {size && <> &middot; {size}</>}
         </p>
         <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-base font-bold text-[#0f766e]">
+          <span className="text-base font-bold text-[#1A2B4A]">
             {formatPrice(price)}
           </span>
           {originalPrice && originalPrice > price && (
@@ -190,7 +190,7 @@ function PreviewCard({
           )}
         </div>
         <div className="mt-3 flex gap-2">
-          <span className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#0d9488] px-3 py-2 text-xs font-semibold text-white">
+          <span className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#0097A7] px-3 py-2 text-xs font-semibold text-white">
             <ShoppingCart className="h-3.5 w-3.5" />
             Add to Cart
           </span>
@@ -592,7 +592,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
   }
 
   const inputCls =
-    "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488]";
+    "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]";
 
   const IMAGE_LABELS = ["Product Image", "COA Certificate"];
 
@@ -611,7 +611,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
           <button
             type="button"
             onClick={() => setShowPreview((v) => !v)}
-            className="inline-flex items-center gap-1.5 text-sm text-[#0d9488] hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm text-[#0097A7] hover:underline"
           >
             <Eye className="h-4 w-4" />
             {showPreview ? "Hide Preview" : "Show Preview"}
@@ -786,7 +786,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                   setHasVariants(e.target.checked);
                   if (e.target.checked && variants.length === 0) addVariant();
                 }}
-                className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
               />
               This product has multiple sizes
             </label>
@@ -812,7 +812,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                             type="button"
                             onClick={() => moveVariant(idx, "up")}
                             disabled={idx === 0}
-                            className="p-1 text-gray-400 hover:text-[#0f766e] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            className="p-1 text-gray-400 hover:text-[#1A2B4A] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                             title="Move up"
                           >
                             <ArrowUp className="h-3.5 w-3.5" />
@@ -821,7 +821,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                             type="button"
                             onClick={() => moveVariant(idx, "down")}
                             disabled={idx === variants.length - 1}
-                            className="p-1 text-gray-400 hover:text-[#0f766e] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            className="p-1 text-gray-400 hover:text-[#1A2B4A] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                             title="Move down"
                           >
                             <ArrowDown className="h-3.5 w-3.5" />
@@ -831,7 +831,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                               type="checkbox"
                               checked={v.active}
                               onChange={(e) => updateVariant(idx, "active", e.target.checked)}
-                              className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                              className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                             />
                             Active
                           </label>
@@ -932,7 +932,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                               </button>
                             </div>
                           ))}
-                          <label className="inline-flex h-14 w-14 cursor-pointer items-center justify-center rounded-lg border border-dashed border-gray-300 text-gray-400 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors">
+                          <label className="inline-flex h-14 w-14 cursor-pointer items-center justify-center rounded-lg border border-dashed border-gray-300 text-gray-400 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors">
                             {uploading ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
@@ -955,7 +955,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                 <button
                   type="button"
                   onClick={addVariant}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors"
                 >
                   <Plus className="h-4 w-4" />
                   Add Variant
@@ -1058,7 +1058,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
             </p>
 
             {/* Upload button */}
-            <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors">
+            <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors">
               {uploading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
@@ -1232,7 +1232,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                   }
                   setTagInput("");
                 }}
-                className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors"
+                className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-600 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors"
               >
                 Add
               </button>
@@ -1300,7 +1300,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                         }}
                         className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
                       >
-                        <Plus className="h-3.5 w-3.5 text-[#0d9488]" />
+                        <Plus className="h-3.5 w-3.5 text-[#0097A7]" />
                         {p.name}
                       </button>
                     ))}
@@ -1402,7 +1402,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                             href={getCoaUrl(coa.pdf_url)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs text-[#0d9488] hover:underline truncate max-w-[120px]"
+                            className="inline-flex items-center gap-1 text-xs text-[#0097A7] hover:underline truncate max-w-[120px]"
                           >
                             <ExternalLink className="h-3 w-3 flex-shrink-0" />
                             View PDF
@@ -1416,7 +1416,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                           </button>
                         </div>
                       ) : (
-                        <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-3 py-1.5 text-xs text-gray-500 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors">
+                        <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-3 py-1.5 text-xs text-gray-500 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors">
                           {uploading ? (
                             <Loader2 className="h-3 w-3 animate-spin" />
                           ) : (
@@ -1441,7 +1441,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                         type="button"
                         onClick={() => saveCoa(idx)}
                         disabled={coa._saving || !coa.batch_number}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#0f766e] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#0d9488] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#0097A7] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {coa._saving ? (
                           <Loader2 className="h-3 w-3 animate-spin" />
@@ -1460,7 +1460,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
               <button
                 type="button"
                 onClick={addCoa}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0d9488] hover:text-[#0d9488] transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 hover:border-[#0097A7] hover:text-[#0097A7] transition-colors"
               >
                 <Plus className="h-4 w-4" />
                 Add COA Document
@@ -1477,7 +1477,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                   type="checkbox"
                   checked={form.featured}
                   onChange={(e) => updateField("featured", e.target.checked)}
-                  className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                  className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                 />
                 <Star className="h-4 w-4 text-amber-400" />
                 Featured
@@ -1487,7 +1487,7 @@ export default function ProductForm({ product, categories, coaDocuments = [], al
                   type="checkbox"
                   checked={form.active}
                   onChange={(e) => updateField("active", e.target.checked)}
-                  className="rounded border-gray-300 text-[#0d9488] focus:ring-[#0d9488]"
+                  className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
                 />
                 Active
               </label>

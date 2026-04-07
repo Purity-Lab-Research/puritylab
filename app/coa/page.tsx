@@ -48,8 +48,8 @@ export default async function CoaPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         {/* Info Box */}
-        <div className="mb-10 flex items-start gap-4 rounded-xl border border-[#0d9488]/20 bg-[#0d9488]/5 p-5">
-          <FlaskConical className="mt-0.5 h-5 w-5 shrink-0 text-[#0d9488]" />
+        <div className="mb-10 flex items-start gap-4 rounded-xl border border-[#0097A7]/20 bg-[#0097A7]/5 p-5">
+          <FlaskConical className="mt-0.5 h-5 w-5 shrink-0 text-[#0097A7]" />
           <p className="text-sm text-gray-700 font-[family-name:var(--font-body)]">
             All products undergo rigorous HPLC and Mass Spectrometry analysis by
             independent third-party laboratories.
@@ -69,9 +69,9 @@ export default async function CoaPage() {
                 key={coa.id}
                 className="flex flex-col rounded-xl border border-[#dde2ea] bg-white p-5 shadow-sm"
               >
-                <FileText className="mb-3 h-8 w-8 text-[#0f766e]" />
+                <FileText className="mb-3 h-8 w-8 text-[#1A2B4A]" />
 
-                <h3 className="text-sm font-bold text-[#0f766e] font-[family-name:var(--font-heading)]">
+                <h3 className="text-sm font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
                   {coa.product?.name ?? "Unknown Product"}
                 </h3>
 

@@ -58,12 +58,12 @@ export default function OrderNotes({ orderId }: { orderId: string }) {
             onChange={(e) => setBody(e.target.value)}
             placeholder="Add an internal note..."
             rows={2}
-            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488] resize-none"
+            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] resize-none"
           />
           <button
             onClick={handleAdd}
             disabled={saving || !body.trim()}
-            className="self-end rounded-lg bg-[#0f766e] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0d9488] transition-colors disabled:opacity-50"
+            className="self-end rounded-lg bg-[#1A2B4A] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors disabled:opacity-50"
           >
             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
           </button>

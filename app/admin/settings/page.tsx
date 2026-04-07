@@ -116,7 +116,7 @@ function SectionCard({
         {Icon && (
           <div
             className={`mt-0.5 rounded-lg p-2 ${
-              danger ? "bg-red-100 text-red-600" : "bg-blue-50 text-[#0d9488]"
+              danger ? "bg-red-100 text-red-600" : "bg-primary/5 text-[#0097A7]"
             }`}
           >
             <Icon className="h-4 w-4" />
@@ -142,7 +142,7 @@ function SectionCard({
 /*  Reusable field components                                          */
 /* ------------------------------------------------------------------ */
 const INPUT_CLS =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0d9488] focus:outline-none focus:ring-1 focus:ring-[#0d9488] transition-colors";
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] transition-colors";
 
 function Field({
   label,

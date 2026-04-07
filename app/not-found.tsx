@@ -26,7 +26,7 @@ export default function NotFound() {
           <Button href="/" variant="fill" size="lg">
             Back to Home
           </Button>
-          <Button href="/shop" variant="ghost" size="lg" className="border-white text-white hover:bg-white hover:text-[#0f766e]">
+          <Button href="/shop" variant="ghost" size="lg" className="border-white text-white hover:bg-white hover:text-[#1A2B4A]">
             Browse Shop
           </Button>
         </div>

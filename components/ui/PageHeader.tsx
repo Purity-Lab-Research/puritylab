@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import EditableText from "@/components/admin/EditableText";
@@ -21,16 +20,7 @@ export default function PageHeader({
   descriptionKey,
 }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden mx-4 sm:mx-6 lg:mx-8 my-4 rounded-2xl">
-      <Image
-        src="/images/galaxy-bg.jpg"
-        alt=""
-        fill
-        className="object-cover rounded-2xl"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 bg-[#134e4a]/30 z-[1] rounded-2xl" />
-
+    <section className="relative overflow-hidden mx-4 sm:mx-6 lg:mx-8 my-4 rounded-2xl bg-gradient-to-br from-[#1A2B4A] to-[#243B5C]">
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-9 md:py-14">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (

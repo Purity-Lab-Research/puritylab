@@ -92,7 +92,7 @@ export default function ShippingLabelGenerator({
                 href={existingLabelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#115e59]"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#142238]"
               >
                 <Download className="h-4 w-4" />
                 Download Label
@@ -134,7 +134,7 @@ export default function ShippingLabelGenerator({
                 href={result.labelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#115e59]"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#142238]"
               >
                 <Download className="h-4 w-4" />
                 Download Label
@@ -168,7 +168,7 @@ export default function ShippingLabelGenerator({
       <button
         onClick={handleGenerate}
         disabled={generating}
-        className="inline-flex items-center gap-2 rounded-lg bg-[#0f766e] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#115e59] disabled:opacity-50"
+        className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#142238] disabled:opacity-50"
       >
         {generating ? (
           <>

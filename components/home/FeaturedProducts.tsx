@@ -1,9 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import type { Product } from "@/lib/types";
 import ProductCard from "@/components/shop/ProductCard";
-import Button from "@/components/ui/Button";
-import EditableText from "@/components/admin/EditableText";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface FeaturedProductsProps {
@@ -16,12 +15,15 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   if (products.length === 0) return null;
 
   return (
-    <section className="py-16 md:py-20">
+    <section className="bg-background py-20 border-t border-border">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl text-gray-900">
-            <EditableText settingKey="featured_heading">FEATURED PRODUCTS</EditableText>
+        <div className="text-center mb-14">
+          <h2 className="font-heading text-4xl font-extrabold text-primary">
+            Featured Products
           </h2>
+          <p className="mt-3 text-text-secondary">
+            Individual peptides for researchers who know exactly what they need.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -30,10 +32,26 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
-          <Button variant="ghost" size="md" href="/shop">
+        <div className="text-center mt-10">
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-1.5 text-secondary font-semibold hover:underline"
+          >
             View All Products
-          </Button>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,86 +1,57 @@
-"use client";
-
-import { Shield, Truck, FlaskConical, Award } from "lucide-react";
-import { useState } from "react";
-import EditableText from "@/components/admin/EditableText";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-
 const items = [
   {
-    icon: Shield,
-    title: "Third-Party Tested",
-    description: "HPLC & MS verified with COAs",
+    label: "Every Batch Third-Party Tested",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
   },
   {
-    icon: Truck,
-    title: "Same-Day Processing",
-    description: "3-8 business day delivery",
+    label: "98%+ Verified Purity",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" />
+        <path d="M8.5 2h7" />
+      </svg>
+    ),
   },
   {
-    icon: FlaskConical,
-    title: "99%+ Purity",
-    description: "Industry-leading standards",
+    label: "Full CoA on Every Product",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="m9 15 2 2 4-4" />
+      </svg>
+    ),
   },
   {
-    icon: Award,
-    title: "Quality Guarantee",
-    description: "If quality is not correct, we make it right",
+    label: "Same-Day Fulfillment",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="3" width="15" height="13" />
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
+      </svg>
+    ),
   },
 ];
 
-function TrustItem({ item, index }: { item: (typeof items)[number]; index: number }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="flex flex-col items-center text-center gap-3 cursor-default rounded-xl p-4"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        transition: "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hovered ? "0 12px 24px rgba(0, 0, 0, 0.08)" : "none",
-        backgroundColor: hovered ? "#ffffff" : "transparent",
-      }}
-    >
-      <div
-        className="flex h-14 w-14 items-center justify-center rounded-xl"
-        style={{
-          transition: "background-color 0.3s ease, transform 0.3s ease",
-          backgroundColor: hovered ? "#0f766e" : "#e8effa",
-          transform: hovered ? "scale(1.1)" : "scale(1)",
-        }}
-      >
-        <item.icon
-          className="h-6 w-6"
-          strokeWidth={1.75}
-          style={{
-            transition: "color 0.3s ease",
-            color: hovered ? "#ffffff" : "#0f766e",
-          }}
-        />
-      </div>
-      <div>
-        <h3 className="text-sm font-semibold text-gray-900">
-          <EditableText settingKey={`trust_${index + 1}_title`}>{item.title}</EditableText>
-        </h3>
-        <p className="mt-1 text-xs text-gray-500 leading-relaxed">
-          <EditableText settingKey={`trust_${index + 1}_desc`}>{item.description}</EditableText>
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export default function TrustStrip() {
-  const animRef = useScrollAnimation();
-
   return (
-    <section className="bg-[#f7f9fc] py-10 md:py-14">
-      <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {items.map((item, index) => (
-            <TrustItem key={item.title} item={item} index={index} />
+    <section className="bg-surface border-b border-border">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+        <div className="grid grid-cols-2 md:flex md:items-center md:justify-center gap-y-4 gap-x-6 md:gap-12">
+          {items.map((item) => (
+            <div key={item.label} className="inline-flex items-center gap-2.5">
+              <span className="text-secondary flex-shrink-0">{item.icon}</span>
+              <span className="text-xs font-semibold text-text-secondary tracking-wide">
+                {item.label}
+              </span>
+            </div>
           ))}
         </div>
       </div>
