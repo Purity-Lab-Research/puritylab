@@ -13,7 +13,7 @@ export default async function AdminAffiliatesPage() {
   const [affiliatesRes, pendingAppsRes] = await Promise.all([
     supabase
       .from("affiliates")
-      .select("*, profiles:user_id(full_name, email)")
+      .select("*")
       .order("created_at", { ascending: false }),
     supabase
       .from("affiliate_applications")
@@ -21,8 +21,22 @@ export default async function AdminAffiliatesPage() {
       .eq("status", "pending"),
   ]);
 
+  // Fetch profile info for each affiliate
+  const affiliateUserIds = (affiliatesRes.data || []).map((a: { user_id: string }) => a.user_id);
+  const { data: profilesData } = affiliateUserIds.length > 0
+    ? await supabase
+        .from("profiles")
+        .select("id, full_name, email")
+        .in("id", affiliateUserIds)
+    : { data: [] };
+
+  const profileMap = new Map(
+    (profilesData || []).map((p: { id: string; full_name: string | null; email: string }) => [p.id, p])
+  );
+
   const affiliates = (affiliatesRes.data || []) as Array<{
     id: string;
+    user_id: string;
     affiliate_code: string;
     status: string;
     total_clicks: number;
@@ -33,7 +47,6 @@ export default async function AdminAffiliatesPage() {
     commission_rate_first: number;
     commission_rate_recurring: number;
     created_at: string;
-    profiles: { full_name: string | null; email: string } | null;
   }>;
 
   const totalActive = affiliates.filter((a) => a.status === "active").length;
@@ -124,6 +137,7 @@ export default async function AdminAffiliatesPage() {
               </thead>
               <tbody>
                 {affiliates.map((a) => {
+                  const profile = profileMap.get(a.user_id) as { full_name: string | null; email: string } | undefined;
                   const convRate =
                     a.total_clicks > 0
                       ? ((a.total_conversions / a.total_clicks) * 100).toFixed(1)
@@ -132,9 +146,9 @@ export default async function AdminAffiliatesPage() {
                     <tr key={a.id} className="border-t border-[#F0F0F0] hover:bg-[#FAFAFA]">
                       <td className="py-3 px-4">
                         <p className="font-medium text-[#111111]">
-                          {a.profiles?.full_name || "N/A"}
+                          {profile?.full_name || "N/A"}
                         </p>
-                        <p className="text-xs text-[#6B7280]">{a.profiles?.email}</p>
+                        <p className="text-xs text-[#6B7280]">{profile?.email}</p>
                       </td>
                       <td className="py-3 px-4 font-mono text-xs text-[#111111]">
                         {a.affiliate_code}

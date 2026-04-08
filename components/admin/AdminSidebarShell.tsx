@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useSidebar } from "./AdminSidebarContext";
 import AdminNav from "./AdminNav";
 import { cn } from "@/lib/utils";
@@ -21,14 +22,22 @@ export default function AdminSidebarShell({ role }: { role: StaffRole }) {
         collapsed ? "justify-center px-2 py-4" : "px-6 py-4"
       )}>
         {collapsed ? (
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111111]">
-            <span className="text-xs font-bold text-white">PL</span>
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt="Purity Lab"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
         ) : (
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111111]">
-              <span className="text-xs font-bold text-white">PL</span>
-            </div>
+            <Image
+              src="/images/logo.png"
+              alt="Purity Lab"
+              width={36}
+              height={36}
+              className="rounded-lg"
+            />
             <div>
               <h1 className="text-sm font-bold tracking-tight text-[#111111]">
                 Purity Lab
