@@ -452,6 +452,7 @@ export async function sendAdminOrderNotification(
     to: [ADMIN_NOTIFICATION_EMAIL],
     subject: `New Order #${safeOrderNumber} -${formatCurrency(order.total, currency)}`,
     html,
+    skipSuppressionCheck: true,
   });
 
   if (!result.success) {
@@ -723,6 +724,7 @@ export async function sendAdminNewAccountNotification(
     to: [ADMIN_NOTIFICATION_EMAIL],
     subject: `New Account: ${safeEmail}`,
     html,
+    skipSuppressionCheck: true,
   });
 
   if (!result.success) {

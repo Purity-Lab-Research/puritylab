@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
     await sendEmail({
       to: [ADMIN_NOTIFICATION_EMAIL],
       subject: `New Affiliate Application: ${data.name}`,
+      skipSuppressionCheck: true,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
           <h2 style="color:#111111;">New Affiliate Application</h2>
