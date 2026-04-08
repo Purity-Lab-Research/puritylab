@@ -93,6 +93,7 @@ export async function POST(req: NextRequest) {
     direction: "outbound",
     sender_name: "Purity Lab",
     sender_email: `support@${domain}`,
+    recipient_email: to,
     subject: `Re: ${subject}`,
     body,
     is_read: true,

@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { rateLimit } from "@/lib/rate-limit";
 import { verifyCsrf } from "@/lib/csrf";
 import { sendEmail } from "@/lib/email";
+import { ADMIN_NOTIFICATION_EMAIL } from "@/lib/constants";
 
 const ApplicationSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -87,9 +88,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Notify admin
-    const adminEmail = process.env.ADMIN_EMAIL || "support@puritylabresearch.com";
     await sendEmail({
-      to: [adminEmail],
+      to: [ADMIN_NOTIFICATION_EMAIL],
       subject: `New Affiliate Application: ${data.name}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">

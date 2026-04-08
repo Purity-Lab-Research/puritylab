@@ -29,13 +29,6 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
     }
   }, [defaults, onClearDefaults]);
 
-  function saveSentEmail(email: { to: string; subject: string; body: string; sentAt: string }) {
-    try {
-      const saved = JSON.parse(localStorage.getItem("puritylab_sent_emails") || "[]");
-      localStorage.setItem("puritylab_sent_emails", JSON.stringify([email, ...saved].slice(0, 50)));
-    } catch { /* ignore */ }
-  }
-
   function handlePreview(e: React.FormEvent) {
     e.preventDefault();
     if (!to || !subject || !body) return;
@@ -58,7 +51,6 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
         throw new Error(data.error || "Failed to send");
       }
 
-      saveSentEmail({ to, subject, body, sentAt: new Date().toISOString() });
       setStatus("sent");
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Failed to send email");
@@ -108,26 +100,29 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
               Email Preview
             </h2>
             <div className="space-y-2 text-sm">
-              <div className="flex gap-2"><span className="font-medium text-gray-500 w-16">From:</span><span className="text-gray-900">Purity Lab &lt;noreply@puritylabresearch.com&gt;</span></div>
+              <div className="flex gap-2"><span className="font-medium text-gray-500 w-16">From:</span><span className="text-gray-900">Purity Lab Support &lt;support@puritylabresearch.com&gt;</span></div>
               <div className="flex gap-2"><span className="font-medium text-gray-500 w-16">To:</span><span className="text-gray-900">{to}</span></div>
               <div className="flex gap-2"><span className="font-medium text-gray-500 w-16">Subject:</span><span className="text-gray-900 font-medium">{subject}</span></div>
             </div>
           </div>
-          <div className="rounded-xl border border-gray-200 overflow-hidden bg-[#f5f5f5]">
-            <div style={{ maxWidth: 600, margin: "0 auto" }} className="bg-white rounded-lg overflow-hidden my-6 mx-auto shadow-sm">
-              <div className="bg-[#1A2B4A] px-6 py-3.5 flex items-center gap-3">
+          <div className="rounded-xl border border-gray-200 overflow-hidden bg-[#FAFAFA]">
+            <div style={{ maxWidth: 600, margin: "0 auto" }} className="bg-white rounded-xl overflow-hidden my-6 mx-auto shadow-sm border border-gray-100">
+              {/* Header — matches brandedEmailWrapper */}
+              <div className="px-6 py-5 border-b border-gray-100 flex items-center gap-2.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icon.png" alt="" width={36} height={36} className="rounded-full" />
-                <div>
-                  <p className="text-white text-lg font-extrabold tracking-[1.5px] m-0">PURITY LAB</p>
-                  <p className="text-[#7fb3f0] text-[8px] font-bold tracking-[2.5px] uppercase m-0">Research Peptides</p>
-                </div>
+                <img src="/images/email-logo.png" alt="Purity Lab" width={36} height={36} className="block" />
+                <p className="text-lg font-extrabold tracking-[0.5px] text-gray-900 m-0">PURITY LAB</p>
               </div>
+              {/* Body */}
               <div className="px-6 py-8">
-                <p className="text-[15px] leading-relaxed text-gray-700 whitespace-pre-wrap">{body}</p>
+                <p className="text-[15px] leading-[1.8] text-gray-700 whitespace-pre-wrap m-0">{body}</p>
               </div>
-              <div className="px-6 py-4 bg-gray-50 border-t text-center">
-                <p className="text-xs text-gray-400">Questions? Email us at support@puritylabresearch.com</p>
+              {/* Footer */}
+              <div className="px-6 py-5 bg-[#FAFAFA] border-t border-gray-100 text-center space-y-2">
+                <p className="text-xs text-gray-500 m-0">
+                  Questions? Email us at <span className="text-gray-900 underline">support@puritylabresearch.com</span>
+                </p>
+                <p className="text-[11px] text-gray-400 m-0">&copy; 2026 Purity Lab. All rights reserved.</p>
               </div>
             </div>
           </div>

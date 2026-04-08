@@ -1,4 +1,5 @@
 import type { Order, OrderItem } from "@/lib/types";
+import { ADMIN_NOTIFICATION_EMAIL } from "@/lib/constants";
 
 function unsubscribeFooter(email: string): string {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://puritylabresearch.com";
@@ -448,7 +449,7 @@ export async function sendAdminOrderNotification(
 </html>`;
 
   const result = await sendEmail({
-    to: ["support@puritylabresearch.com"],
+    to: [ADMIN_NOTIFICATION_EMAIL],
     subject: `New Order #${safeOrderNumber} -${formatCurrency(order.total, currency)}`,
     html,
   });
@@ -719,7 +720,7 @@ export async function sendAdminNewAccountNotification(
 </html>`;
 
   const result = await sendEmail({
-    to: ["support@puritylabresearch.com"],
+    to: [ADMIN_NOTIFICATION_EMAIL],
     subject: `New Account: ${safeEmail}`,
     html,
   });

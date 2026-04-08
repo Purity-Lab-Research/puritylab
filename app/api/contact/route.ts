@@ -3,7 +3,7 @@ import { z } from "zod";
 import { rateLimit } from "@/lib/rate-limit";
 import { verifyCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, ADMIN_NOTIFICATION_EMAIL } from "@/lib/constants";
 import { brandedEmailWrapper } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/admin";
 import crypto from "crypto";
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           from: `Purity Lab Contact <noreply@${process.env.RESEND_DOMAIN || "puritylabresearch.com"}>`,
-          to: [CONTACT_EMAIL],
+          to: [ADMIN_NOTIFICATION_EMAIL],
           reply_to: email,
           subject: `[${safeCategory}] Contact from ${name}`,
           html: brandedEmailWrapper({

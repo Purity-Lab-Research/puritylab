@@ -4,6 +4,7 @@ export const SITE_DESCRIPTION =
   "Research-grade peptides with 99%+ purity. Third-party tested with full COA library. Subscription pricing, protocol-based stacks, and same-day processing.";
 
 export const CONTACT_EMAIL = "support@puritylabresearch.com";
+export const ADMIN_NOTIFICATION_EMAIL = "puritylabresearch@gmail.com";
 export const BUSINESS_ADDRESS = "Los Angeles, California";
 export const BUSINESS_HOURS = "Mon-Fri: 9:00 AM - 5:00 PM EST";
 

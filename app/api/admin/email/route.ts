@@ -1,10 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { verifyCsrf } from "@/lib/csrf";
 import { sendEmail, brandedEmailWrapper } from "@/lib/email";
 import { writeAuditLog } from "@/lib/audit";
 import { logger } from "@/lib/logger";
 import { z } from "zod";
+import { randomUUID } from "crypto";
+
+// GET sent emails from DB
+export async function GET() {
+  const admin = await requireAdmin();
+  if (!admin) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("inbox_messages")
+    .select("*")
+    .eq("direction", "outbound")
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json(data ?? []);
+}
 
 const schema = z.object({
   to: z.string().email(),
@@ -66,6 +90,21 @@ export async function POST(req: NextRequest) {
     logger.error("Failed to send admin email", { to, subject, error: result.error });
     return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
   }
+
+  // Save to inbox_messages so it shows in Sent history
+  const db = createAdminClient();
+  const threadId = randomUUID();
+  await db.from("inbox_messages").insert({
+    thread_id: threadId,
+    direction: "outbound",
+    sender_name: "Purity Lab",
+    sender_email: `support@${domain}`,
+    recipient_email: to,
+    subject,
+    category: "composed",
+    body,
+    is_read: true,
+  });
 
   writeAuditLog({
     admin_id: admin.id,
