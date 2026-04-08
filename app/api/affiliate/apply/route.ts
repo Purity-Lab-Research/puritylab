@@ -88,7 +88,9 @@ export async function POST(request: NextRequest) {
     });
 
     // Notify admin
+    const domain = process.env.RESEND_DOMAIN || "puritylabresearch.com";
     await sendEmail({
+      from: `Purity Lab Affiliates <affiliate@${domain}>`,
       to: [ADMIN_NOTIFICATION_EMAIL],
       subject: `New Affiliate Application: ${data.name}`,
       skipSuppressionCheck: true,
