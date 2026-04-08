@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     let query = supabase
       .from("affiliate_payouts")
-      .select("*, affiliates(affiliate_code, user_id, profiles:user_id(full_name, email))")
+      .select("*, affiliates(affiliate_code, user_id)")
       .order("created_at", { ascending: false });
 
     if (status) {
@@ -30,7 +30,44 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ payouts: data || [] });
+    // Enrich with profile/auth data
+    const userIds = [...new Set(
+      (data || [])
+        .map((p: { affiliates?: { user_id?: string } }) => p.affiliates?.user_id)
+        .filter(Boolean) as string[]
+    )];
+
+    const [profilesRes, usersRes, appsRes] = await Promise.all([
+      userIds.length > 0
+        ? supabase.from("profiles").select("id, full_name, email").in("id", userIds)
+        : Promise.resolve({ data: [] }),
+      userIds.length > 0
+        ? supabase.auth.admin.listUsers()
+        : Promise.resolve({ data: { users: [] } }),
+      supabase.from("affiliate_applications").select("name, email").eq("status", "approved"),
+    ]);
+
+    const profileMap = new Map((profilesRes.data || []).map((p) => [p.id, p]));
+    const authMap = new Map((usersRes.data?.users || []).map((u) => [u.id, u]));
+    const appMap = new Map((appsRes.data || []).map((a) => [a.email, a.name]));
+
+    const enriched = (data || []).map((p: Record<string, unknown>) => {
+      const aff = p.affiliates as { affiliate_code: string; user_id: string } | null;
+      const userId = aff?.user_id;
+      const profile = userId ? profileMap.get(userId) : null;
+      const authUser = userId ? authMap.get(userId) : null;
+      const email = profile?.email || authUser?.email || "";
+      const name = profile?.full_name || appMap.get(email) || authUser?.user_metadata?.full_name || null;
+      return {
+        ...p,
+        affiliates: aff ? {
+          affiliate_code: aff.affiliate_code,
+          profiles: { full_name: name, email },
+        } : null,
+      };
+    });
+
+    return NextResponse.json({ payouts: enriched });
   } catch (err) {
     console.error("Admin payouts GET error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
@@ -85,21 +122,25 @@ export async function POST(request: NextRequest) {
           })
           .eq("id", affiliateId);
 
-        // Get profile for email
+        // Get email from profile or auth user
         const { data: profile } = await supabase
           .from("profiles")
           .select("email, full_name")
           .eq("id", affiliate.user_id)
           .single();
 
-        if (profile?.email) {
+        const { data: authData } = await supabase.auth.admin.getUserById(affiliate.user_id);
+        const recipientEmail = profile?.email || authData?.user?.email || affiliate.payment_email;
+        const recipientName = profile?.full_name || authData?.user?.user_metadata?.full_name || "there";
+
+        if (recipientEmail) {
           await sendEmail({
-            to: [profile.email],
+            to: [recipientEmail],
             subject: `Payout Processed - $${amount.toFixed(2)}`,
             html: `
               <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
                 <h2 style="color:#111111;">Payout Processed</h2>
-                <p style="color:#6B7280;">Hi ${profile.full_name || "there"},</p>
+                <p style="color:#6B7280;">Hi ${recipientName},</p>
                 <p style="color:#6B7280;">Your affiliate payout of <strong style="color:#111111;">$${amount.toFixed(2)}</strong> has been processed and is on its way.</p>
                 <p style="color:#6B7280;">View your payout history in your <a href="https://puritylabresearch.com/affiliate/dashboard" style="color:#10B981;">affiliate dashboard</a>.</p>
                 <p style="color:#6B7280;margin-top:24px;">Best,<br/>Purity Lab Team</p>
