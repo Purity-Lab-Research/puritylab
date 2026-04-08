@@ -29,12 +29,21 @@ export async function GET(request: NextRequest) {
             .eq("guest_email", user.email)
             .is("user_id", null);
 
-          // Check if this is a brand-new account (created within last 60 seconds)
-          const createdAt = new Date(user.created_at).getTime();
-          const now = Date.now();
-          const isNewAccount = now - createdAt < 60_000;
+          // Check if this is a new signup by looking for a welcome_email_sent flag
+          const { data: profile } = await admin
+            .from("profiles")
+            .select("welcome_email_sent")
+            .eq("id", user.id)
+            .single();
+
+          const isNewAccount = !profile?.welcome_email_sent;
 
           if (isNewAccount) {
+            // Mark as sent so we never send again on future logins
+            await admin
+              .from("profiles")
+              .update({ welcome_email_sent: true })
+              .eq("id", user.id);
             // Notify admin of new signup (non-blocking)
             sendAdminNewAccountNotification(user.email).catch((err) => {
               console.error("Failed to send admin signup notification:", err);
