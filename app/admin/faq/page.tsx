@@ -46,7 +46,7 @@ const DEFAULT_FAQ_DATA: FaqSection[] = [
       {
         question: "Who can purchase from Purity Lab?",
         answer:
-          "You must be 18 years of age or older and confirm that your purchase is intended for in-vitro research purposes only. By placing an order, you agree to our terms of service and acknowledge that our products are not for human consumption.",
+          "You must be 21 years of age or older and confirm that your purchase is intended for in-vitro research purposes only. By placing an order, you agree to our terms of service and acknowledge that our products are not for human consumption.",
       },
       {
         question: "How do you verify purity?",

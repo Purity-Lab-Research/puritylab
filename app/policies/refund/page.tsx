@@ -17,21 +17,21 @@ export default function RefundPolicyPage() {
       />
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700 font-[family-name:var(--font-body)]">
+        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700">
           <p className="text-sm text-gray-500">
             Effective Date: March 30, 2026 &nbsp;|&nbsp; Last Updated: March 30, 2026
           </p>
 
           {/* 1. Scope */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               1. Scope
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               This Refund Policy applies to all orders placed through puritylabresearch.com. By placing an order,
               you agree to the terms of this policy. This policy forms part of and should be read
               together with our{" "}
-              <a href="/policies/terms" className="text-[#0097A7] hover:underline">
+              <a href="/policies/terms" className="text-[#10B981] hover:underline">
                 Terms of Service
               </a>
               .
@@ -40,7 +40,7 @@ export default function RefundPolicyPage() {
 
           {/* 2. Eligibility for Refund or Replacement */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               2. Eligibility for Refund or Replacement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -69,12 +69,12 @@ export default function RefundPolicyPage() {
 
           {/* 3. How to Submit a Claim */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               3. How to Submit a Claim
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               To request a refund or replacement, email us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                 {CONTACT_EMAIL}
               </a>{" "}
               with the following information:
@@ -95,7 +95,7 @@ export default function RefundPolicyPage() {
 
           {/* 4. Verification Process */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               4. Verification Process
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -112,7 +112,7 @@ export default function RefundPolicyPage() {
 
           {/* 5. Refund or Replacement */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               5. Refund or Replacement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -129,7 +129,7 @@ export default function RefundPolicyPage() {
                 <strong>Replacement:</strong> We will ship a replacement product at no additional cost.
                 Replacement orders are processed with the same priority as new orders and are subject to
                 the estimated delivery times in our{" "}
-                <a href="/policies/shipping" className="text-[#0097A7] hover:underline">
+                <a href="/policies/shipping" className="text-[#10B981] hover:underline">
                   Shipping Policy
                 </a>
                 .
@@ -139,7 +139,7 @@ export default function RefundPolicyPage() {
 
           {/* 6. Non-Refundable Situations */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               6. Non-Refundable Situations
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -150,7 +150,7 @@ export default function RefundPolicyPage() {
                 Products seized, held, detained, or destroyed by customs or border authorities in the
                 destination country. International buyers assume all risk associated with customs
                 clearance (see our{" "}
-                <a href="/policies/shipping" className="text-[#0097A7] hover:underline">
+                <a href="/policies/shipping" className="text-[#10B981] hover:underline">
                   Shipping Policy
                 </a>{" "}
                 for details).
@@ -166,7 +166,7 @@ export default function RefundPolicyPage() {
               <li>
                 Delays in delivery caused by carrier issues, customs processing, or events beyond our
                 control (see our{" "}
-                <a href="/policies/shipping" className="text-[#0097A7] hover:underline">
+                <a href="/policies/shipping" className="text-[#10B981] hover:underline">
                   Shipping Policy
                 </a>
                 ).
@@ -176,7 +176,7 @@ export default function RefundPolicyPage() {
 
           {/* 7. Fraudulent Claims */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               7. Fraudulent Claims
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -196,7 +196,7 @@ export default function RefundPolicyPage() {
 
           {/* 8. European Union Consumer Rights */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               8. European Union Consumer Rights
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -214,7 +214,7 @@ export default function RefundPolicyPage() {
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               To exercise your right of withdrawal (where applicable), contact us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                 {CONTACT_EMAIL}
               </a>{" "}
               within 14 days of delivery. Return shipping costs for EU right-of-withdrawal claims are
@@ -225,7 +225,7 @@ export default function RefundPolicyPage() {
 
           {/* 9. Currency */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               9. Currency
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -237,7 +237,7 @@ export default function RefundPolicyPage() {
 
           {/* 10. Contact */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               10. Contact
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -246,7 +246,7 @@ export default function RefundPolicyPage() {
             <div className="mt-2 text-sm leading-relaxed">
               <p>
                 Email:{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                   {CONTACT_EMAIL}
                 </a>
               </p>
@@ -256,7 +256,7 @@ export default function RefundPolicyPage() {
 
           {/* Subscription Refunds */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               Subscription Refund Policy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -271,10 +271,10 @@ export default function RefundPolicyPage() {
             </ul>
           </div>
 
-          <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
+          <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-6">
             <p className="text-sm leading-relaxed">
-              <strong className="text-[#1A2B4A]">Need help?</strong> Email us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <strong className="text-[#111111]">Need help?</strong> Email us at{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                 {CONTACT_EMAIL}
               </a>{" "}
               and we&apos;ll take care of it.

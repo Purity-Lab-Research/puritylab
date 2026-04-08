@@ -2,8 +2,9 @@
 
 import { useState, useMemo, useCallback } from "react";
 import type { Product } from "@/lib/types";
+import { getSubscriptionPrice, getFrequencyDiscount, getAnnualPrice, getAnnualMonthlyPrice } from "@/lib/utils";
 
-/* ─── Types ─── */
+/* Types */
 interface StackItem {
   productId: string;
   product: Product;
@@ -14,7 +15,7 @@ interface StackBuilderProps {
   products: Product[];
 }
 
-/* ─── Constants ─── */
+/* Constants */
 const CATEGORY_LABELS: Record<string, string> = {
   recovery: "Recovery",
   fat_loss: "Fat Loss",
@@ -25,71 +26,26 @@ const CATEGORY_LABELS: Record<string, string> = {
 const CATEGORY_ORDER = ["recovery", "fat_loss", "performance", "supplies"];
 
 const RECOMMENDATIONS: Record<string, { slug: string; message: string }[]> = {
-  "bpc-157-5mg": [
-    {
-      slug: "tb500-5mg",
-      message:
-        "Most athletes stack BPC-157 with TB500 for enhanced recovery.",
-    },
-  ],
-  "bpc-157-10mg": [
-    {
-      slug: "tb500-10mg",
-      message:
-        "Most athletes stack BPC-157 with TB500 for enhanced recovery.",
-    },
-  ],
-  "bpc-157-20mg": [
-    {
-      slug: "tb500-10mg",
-      message:
-        "Most athletes stack BPC-157 with TB500 for enhanced recovery.",
-    },
-  ],
-  "tb500-5mg": [
-    {
-      slug: "bpc-157-5mg",
-      message:
-        "BPC-157 and TB500 work synergistically for faster tissue repair.",
-    },
-  ],
-  "tb500-10mg": [
-    {
-      slug: "bpc-157-10mg",
-      message:
-        "BPC-157 and TB500 work synergistically for faster tissue repair.",
-    },
-  ],
-  "cjc-ipa-blend-5-5mg": [
-    {
-      slug: "ipamorelin-10mg",
-      message:
-        "Add standalone Ipamorelin for amplified growth hormone release.",
-    },
-  ],
+  "bpc-157-5mg": [{ slug: "tb500-5mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
+  "bpc-157-10mg": [{ slug: "tb500-10mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
+  "bpc-157-20mg": [{ slug: "tb500-10mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
+  "tb500-5mg": [{ slug: "bpc-157-5mg", message: "BPC-157 and TB500 work synergistically for faster tissue repair." }],
+  "tb500-10mg": [{ slug: "bpc-157-10mg", message: "BPC-157 and TB500 work synergistically for faster tissue repair." }],
+  "cjc-ipa-blend-5-5mg": [{ slug: "ipamorelin-10mg", message: "Add standalone Ipamorelin for amplified growth hormone release." }],
 };
 
 const SUPPLY_SLUGS = ["bac-water-10ml", "syringes"];
+const FREE_SHIPPING_THRESHOLD = 200;
 
-/* ─── Helpers ─── */
+/* Helpers */
 function formatPrice(cents: number) {
   return `$${cents.toFixed(2)}`;
 }
 
-/* ─── Icons (inline SVGs) ─── */
+/* Icons */
 function ChevronDown({ open }: { open: boolean }) {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-    >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-[#6B7280] transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
       <polyline points="6 9 12 15 18 9" />
     </svg>
   );
@@ -97,38 +53,29 @@ function ChevronDown({ open }: { open: boolean }) {
 
 function MinusIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /></svg>
   );
 }
 
 function PlusIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19" />
-      <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
   );
 }
 
 function XIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
   );
 }
 
-/* ─── Main Component ─── */
+/* Main Component */
 export default function StackBuilder({ products }: StackBuilderProps) {
   const [stack, setStack] = useState<StackItem[]>([]);
   const [subscribe, setSubscribe] = useState(true);
   const [frequency, setFrequency] = useState(4);
-  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(
-    new Set()
-  );
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
+  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(new Set());
   const [dismissedSupplyHint, setDismissedSupplyHint] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
 
@@ -155,36 +102,22 @@ export default function StackBuilder({ products }: StackBuilderProps) {
     return groups;
   }, [products]);
 
-  /* Stack has any non-supply peptide? */
-  const hasPeptide = stack.some(
-    (item) =>
-      item.product.goal_category !== "supplies"
-  );
+  const hasPeptide = stack.some((item) => item.product.goal_category !== "supplies");
 
-  /* Show supply recommendation? */
   const needsSupplyHint =
     hasPeptide &&
     !dismissedSupplyHint &&
-    !SUPPLY_SLUGS.every((slug) =>
-      stack.some((item) => item.product.slug === slug)
-    );
+    !SUPPLY_SLUGS.every((slug) => stack.some((item) => item.product.slug === slug));
 
-  const addItem = useCallback(
-    (product: Product) => {
-      setStack((prev) => {
-        const existing = prev.find((i) => i.productId === product.id);
-        if (existing) {
-          return prev.map((i) =>
-            i.productId === product.id
-              ? { ...i, quantity: i.quantity + 1 }
-              : i
-          );
-        }
-        return [...prev, { productId: product.id, product, quantity: 1 }];
-      });
-    },
-    []
-  );
+  const addItem = useCallback((product: Product) => {
+    setStack((prev) => {
+      const existing = prev.find((i) => i.productId === product.id);
+      if (existing) {
+        return prev.map((i) => i.productId === product.id ? { ...i, quantity: i.quantity + 1 } : i);
+      }
+      return [...prev, { productId: product.id, product, quantity: 1 }];
+    });
+  }, []);
 
   const removeItem = useCallback((productId: string) => {
     setStack((prev) => prev.filter((i) => i.productId !== productId));
@@ -192,11 +125,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
 
   const setQuantity = useCallback((productId: string, qty: number) => {
     if (qty < 1) return;
-    setStack((prev) =>
-      prev.map((i) =>
-        i.productId === productId ? { ...i, quantity: qty } : i
-      )
-    );
+    setStack((prev) => prev.map((i) => i.productId === productId ? { ...i, quantity: qty } : i));
   }, []);
 
   const toggleSection = useCallback((cat: string) => {
@@ -213,49 +142,52 @@ export default function StackBuilder({ products }: StackBuilderProps) {
     let sub = 0;
     let oneTime = 0;
     stack.forEach((item) => {
-      const subPrice = item.product.subscription_price ?? item.product.price;
-      sub += subPrice * item.quantity;
+      if (billingCycle === "annual") {
+        sub += getAnnualPrice(item.product.price) * item.quantity;
+      } else {
+        sub += getSubscriptionPrice(item.product.price, frequency) * item.quantity;
+      }
       oneTime += item.product.price * item.quantity;
     });
     return {
-      subTotal: sub,
-      oneTimeTotal: oneTime,
-      savings: oneTime - sub,
+      subTotal: Math.round(sub * 100) / 100,
+      oneTimeTotal: Math.round(oneTime * 100) / 100,
+      savings: Math.round((oneTime - sub) * 100) / 100,
     };
-  }, [stack]);
+  }, [stack, frequency, billingCycle]);
 
   const displayTotal = subscribe ? subTotal : oneTimeTotal;
   const itemCount = stack.reduce((sum, i) => sum + i.quantity, 0);
+  const shippingProgress = Math.min((displayTotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+  const freeShippingReached = displayTotal >= FREE_SHIPPING_THRESHOLD;
 
-  /* ─── Recommendation logic ─── */
+  /* Recommendation logic */
   function getRecommendationsFor(product: Product) {
     const recs = RECOMMENDATIONS[product.slug];
     if (!recs) return [];
     return recs.filter(
-      (rec) =>
-        !stack.some((item) => item.product.slug === rec.slug) &&
-        productsBySlug.has(rec.slug)
+      (rec) => !stack.some((item) => item.product.slug === rec.slug) && productsBySlug.has(rec.slug)
     );
   }
 
-  /* ─── Render helpers ─── */
+  /* Render helpers */
   function renderQuantityControl(item: StackItem) {
     return (
       <div className="flex items-center gap-0">
         <button
           onClick={() => setQuantity(item.productId, item.quantity - 1)}
           disabled={item.quantity <= 1}
-          className="w-7 h-7 flex items-center justify-center rounded-l-md border border-border text-text-secondary hover:bg-background disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="w-8 h-8 flex items-center justify-center rounded-full border border-[#F0F0F0] text-[#6B7280] hover:bg-[#FAFAFA] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           aria-label="Decrease quantity"
         >
           <MinusIcon />
         </button>
-        <span className="w-8 h-7 flex items-center justify-center border-t border-b border-border text-xs font-medium text-text-primary">
+        <span className="w-8 h-8 flex items-center justify-center text-xs font-semibold text-[#111111]">
           {item.quantity}
         </span>
         <button
           onClick={() => setQuantity(item.productId, item.quantity + 1)}
-          className="w-7 h-7 flex items-center justify-center rounded-r-md border border-border text-text-secondary hover:bg-background transition-colors"
+          className="w-8 h-8 flex items-center justify-center rounded-full border border-[#F0F0F0] text-[#6B7280] hover:bg-[#FAFAFA] transition-colors"
           aria-label="Increase quantity"
         >
           <PlusIcon />
@@ -271,49 +203,40 @@ export default function StackBuilder({ products }: StackBuilderProps) {
     return (
       <div key={product.id}>
         <div
-          className={`flex items-center gap-4 px-4 py-3 transition-colors hover:bg-background ${
-            inStack ? "border-l-2 border-l-secondary bg-secondary/[0.03]" : ""
+          className={`flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-[#FAFAFA] ${
+            inStack ? "bg-[#10B981]/[0.03]" : ""
           }`}
         >
-          {/* Info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-2">
-              <span className="text-sm font-medium text-text-primary">
-                {product.name}
-              </span>
+              <span className="text-sm font-medium text-[#111111]">{product.name}</span>
               {product.size && (
-                <span className="text-xs text-text-secondary">
-                  {product.size}
-                </span>
+                <span className="text-xs text-[#6B7280]">{product.size}</span>
               )}
             </div>
             {product.short_description && (
-              <p className="text-xs text-text-secondary mt-0.5 line-clamp-1">
-                {product.short_description}
-              </p>
+              <p className="text-xs text-[#6B7280] mt-0.5 line-clamp-1">{product.short_description}</p>
             )}
           </div>
 
-          {/* Price */}
           <div className="text-right flex-shrink-0">
-            <span className="text-sm font-semibold text-primary">
-              {formatPrice(product.price)}
-            </span>
-            {subscribe && product.subscription_price && (
-              <span className="block text-[10px] text-success font-medium">
-                {formatPrice(product.subscription_price)} /sub
+            <span className="text-sm font-semibold text-[#111111]">{formatPrice(product.price)}</span>
+            {subscribe && (
+              <span className="block text-[10px] text-[#10B981] font-medium">
+                {billingCycle === "annual"
+                  ? `${formatPrice(getAnnualPrice(product.price))}/yr`
+                  : `${formatPrice(getSubscriptionPrice(product.price, frequency))}/delivery`}
               </span>
             )}
           </div>
 
-          {/* Action */}
           <div className="flex-shrink-0 w-[100px] flex justify-end">
             {inStack ? (
               renderQuantityControl(inStack)
             ) : (
               <button
                 onClick={() => addItem(product)}
-                className="bg-primary text-white rounded-md px-3 py-1.5 text-xs font-semibold hover:bg-primary-hover transition-colors"
+                className="bg-[#111111] text-white rounded-full px-4 py-1.5 text-xs font-semibold hover:bg-black transition-colors"
               >
                 Add
               </button>
@@ -328,14 +251,12 @@ export default function StackBuilder({ products }: StackBuilderProps) {
             return (
               <div
                 key={rec.slug}
-                className="bg-secondary/5 border border-secondary/20 rounded-lg p-3 mx-4 mt-1 mb-2 flex items-center gap-3"
+                className="bg-[#F0FDF4] border border-[#D1FAE5] rounded-lg p-3 mx-5 mt-1 mb-2 flex items-center gap-3"
               >
-                <p className="text-xs text-text-secondary flex-1">
-                  {rec.message}
-                </p>
+                <p className="text-xs text-[#6B7280] flex-1">{rec.message}</p>
                 <button
                   onClick={() => addItem(recProduct)}
-                  className="text-xs text-secondary font-semibold hover:underline whitespace-nowrap"
+                  className="text-xs text-[#10B981] font-semibold hover:underline whitespace-nowrap"
                 >
                   Add {recProduct.name}
                 </button>
@@ -349,36 +270,32 @@ export default function StackBuilder({ products }: StackBuilderProps) {
   function renderSummaryContent() {
     return (
       <>
-        {/* Item list */}
         {stack.length === 0 ? (
-          <p className="text-sm text-text-secondary py-8 text-center">
+          <p className="text-sm text-[#6B7280] py-8 text-center">
             Add peptides from the{" "}
             <span className="hidden md:inline">left</span>
-            <span className="md:hidden">catalog</span> to build your custom
-            stack.
+            <span className="md:hidden">catalog</span> to build your custom stack.
           </p>
         ) : (
-          <div className="divide-y divide-border">
+          <div className="divide-y divide-[#F0F0F0]">
             {stack.map((item) => {
               const price = subscribe
-                ? (item.product.subscription_price ?? item.product.price)
+                ? (billingCycle === "annual"
+                  ? getAnnualPrice(item.product.price)
+                  : getSubscriptionPrice(item.product.price, frequency))
                 : item.product.price;
               return (
                 <div key={item.productId} className="flex items-center gap-3 py-3">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-text-primary truncate">
-                      {item.product.name}
-                    </p>
-                    <p className="text-xs text-text-secondary">
-                      Qty: {item.quantity}
-                    </p>
+                    <p className="text-sm font-medium text-[#111111] truncate">{item.product.name}</p>
+                    <p className="text-xs text-[#6B7280]">Qty: {item.quantity}</p>
                   </div>
-                  <span className="text-sm font-semibold text-primary flex-shrink-0">
+                  <span className="text-sm font-semibold text-[#111111] flex-shrink-0">
                     {formatPrice(price * item.quantity)}
                   </span>
                   <button
                     onClick={() => removeItem(item.productId)}
-                    className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-text-secondary hover:text-error hover:bg-error/10 transition-colors"
+                    className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-[#6B7280] hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors"
                     aria-label={`Remove ${item.product.name}`}
                   >
                     <XIcon />
@@ -389,62 +306,94 @@ export default function StackBuilder({ products }: StackBuilderProps) {
           </div>
         )}
 
-        {/* Subscribe toggle */}
         {stack.length > 0 && (
-          <div className="border-t border-border pt-5 mt-2 space-y-4">
-            {/* Toggle */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-text-primary">
-                Subscribe &amp; Save
-              </span>
+          <div className="border-t border-[#F0F0F0] pt-5 mt-2 space-y-4">
+            {/* Subscribe toggle */}
+            <div className="flex gap-2">
               <button
-                onClick={() => setSubscribe(!subscribe)}
-                className={`relative w-11 h-6 rounded-full transition-colors ${
-                  subscribe ? "bg-secondary" : "bg-border"
+                onClick={() => setSubscribe(true)}
+                className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all ${
+                  subscribe ? "bg-[#111111] text-white" : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 }`}
-                role="switch"
-                aria-checked={subscribe}
               >
-                <span
-                  className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                    subscribe ? "translate-x-5" : "translate-x-0"
-                  }`}
-                />
+                Subscribe &amp; Save
+              </button>
+              <button
+                onClick={() => setSubscribe(false)}
+                className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all ${
+                  !subscribe ? "bg-[#111111] text-white" : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
+                }`}
+              >
+                One-time
               </button>
             </div>
 
-            {/* Frequency */}
+            {/* Billing cycle + Frequency */}
             {subscribe && (
-              <div>
-                <label className="text-xs text-text-secondary block mb-1.5">
-                  Delivery frequency
-                </label>
-                <select
-                  value={frequency}
-                  onChange={(e) => setFrequency(Number(e.target.value))}
-                  className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-secondary focus:ring-1 focus:ring-secondary/20 outline-none"
-                >
-                  <option value={4}>Every 4 weeks</option>
-                  <option value={6}>Every 6 weeks</option>
-                  <option value={8}>Every 8 weeks</option>
-                </select>
+              <div className="space-y-3">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setBillingCycle("monthly")}
+                    className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all ${
+                      billingCycle === "monthly" ? "bg-[#111111] text-white" : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
+                    }`}
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    onClick={() => setBillingCycle("annual")}
+                    className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all ${
+                      billingCycle === "annual" ? "bg-[#111111] text-white" : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
+                    }`}
+                  >
+                    Annual (2 mo free)
+                  </button>
+                </div>
+
+                {billingCycle === "monthly" && (
+                  <div>
+                    <label className="text-xs text-[#6B7280] block mb-1.5">Delivery frequency</label>
+                    <select
+                      value={frequency}
+                      onChange={(e) => setFrequency(Number(e.target.value))}
+                      className="w-full rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none"
+                    >
+                      <option value={4}>Every 4 weeks (Save 15%)</option>
+                      <option value={6}>Every 6 weeks (Save 10%)</option>
+                      <option value={8}>Every 8 weeks (Save 5%)</option>
+                    </select>
+                  </div>
+                )}
+
+                {billingCycle === "annual" && (
+                  <p className="text-xs text-[#6B7280]">Ships every 4 weeks. Billed annually (10 months for the price of 12).</p>
+                )}
               </div>
             )}
+
+            {/* Free shipping progress */}
+            <div>
+              <div className="flex justify-between text-xs text-[#6B7280] mb-1.5">
+                <span>{freeShippingReached ? "Free shipping unlocked!" : `$${(FREE_SHIPPING_THRESHOLD - displayTotal).toFixed(0)} away from free shipping`}</span>
+              </div>
+              <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#10B981] rounded-full transition-all duration-300"
+                  style={{ width: `${shippingProgress}%` }}
+                />
+              </div>
+            </div>
 
             {/* Totals */}
             <div className="space-y-2 pt-2">
               <div className="flex justify-between text-sm">
-                <span className="text-text-secondary">Subtotal</span>
-                <span className="font-semibold text-primary">
-                  {formatPrice(displayTotal)}
-                </span>
+                <span className="text-[#6B7280]">Subtotal</span>
+                <span className="font-semibold text-[#111111]">{formatPrice(displayTotal)}</span>
               </div>
               {subscribe && savings > 0 && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-success font-semibold">You save</span>
-                  <span className="text-success font-semibold">
-                    {formatPrice(savings)}
-                  </span>
+                  <span className="text-[#10B981] font-semibold">You save</span>
+                  <span className="text-[#10B981] font-semibold">{formatPrice(savings)}</span>
                 </div>
               )}
             </div>
@@ -452,11 +401,11 @@ export default function StackBuilder({ products }: StackBuilderProps) {
             {/* CTA */}
             <button
               disabled={stack.length === 0}
-              className="block w-full bg-primary text-white text-center rounded-lg py-3.5 font-bold text-base hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="block w-full bg-[#111111] text-white text-center rounded-full py-4 font-bold text-base hover:bg-black hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Proceed to Checkout
             </button>
-            <p className="text-xs text-text-secondary text-center">
+            <p className="text-xs text-[#6B7280] text-center">
               Free shipping on orders over $200
             </p>
           </div>
@@ -468,62 +417,46 @@ export default function StackBuilder({ products }: StackBuilderProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* ─── LEFT: Product Selector ─── */}
+        {/* LEFT: Product Selector */}
         <div className="flex-1 lg:w-[60%] min-w-0">
-          {CATEGORY_ORDER.filter((cat) => (grouped[cat]?.length ?? 0) > 0).map(
-            (cat) => {
-              const isOpen = !collapsedSections.has(cat);
-              return (
-                <div
-                  key={cat}
-                  className="bg-surface border border-border rounded-xl mb-4 overflow-hidden"
+          {CATEGORY_ORDER.filter((cat) => (grouped[cat]?.length ?? 0) > 0).map((cat) => {
+            const isOpen = !collapsedSections.has(cat);
+            return (
+              <div key={cat} className="bg-white border border-[#F0F0F0] rounded-2xl mb-4 overflow-hidden">
+                <button
+                  onClick={() => toggleSection(cat)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-[#FAFAFA] transition-colors"
                 >
-                  {/* Section header */}
-                  <button
-                    onClick={() => toggleSection(cat)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-background/50 transition-colors"
-                  >
-                    <h3 className="font-heading text-base font-bold text-primary">
-                      {CATEGORY_LABELS[cat] ?? cat}
-                    </h3>
-                    <ChevronDown open={isOpen} />
-                  </button>
-
-                  {/* Products */}
-                  {isOpen && (
-                    <div className="border-t border-border divide-y divide-border/50">
-                      {grouped[cat].map((product) =>
-                        renderProductRow(product)
-                      )}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-          )}
+                  <h3 className="text-base font-bold text-[#111111]">{CATEGORY_LABELS[cat] ?? cat}</h3>
+                  <ChevronDown open={isOpen} />
+                </button>
+                {isOpen && (
+                  <div className="border-t border-[#F0F0F0] divide-y divide-[#F0F0F0]/50">
+                    {grouped[cat].map((product) => renderProductRow(product))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           {/* Supply recommendation */}
           {needsSupplyHint && (
-            <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 flex items-center gap-4">
+            <div className="bg-[#F0FDF4] border border-[#D1FAE5] rounded-2xl p-4 flex items-center gap-4">
               <div className="flex-1">
-                <p className="text-xs text-text-secondary">
-                  <span className="font-semibold text-text-primary">
-                    Don&apos;t forget supplies.
-                  </span>{" "}
-                  You&apos;ll need bacteriostatic water and syringes to
-                  reconstitute and dose your peptides.
+                <p className="text-xs text-[#6B7280]">
+                  <span className="font-semibold text-[#111111]">Don&apos;t forget supplies.</span>{" "}
+                  You&apos;ll need bacteriostatic water and syringes to reconstitute and dose your peptides.
                 </p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 {SUPPLY_SLUGS.map((slug) => {
                   const p = productsBySlug.get(slug);
-                  if (!p || stack.some((i) => i.product.slug === slug))
-                    return null;
+                  if (!p || stack.some((i) => i.product.slug === slug)) return null;
                   return (
                     <button
                       key={slug}
                       onClick={() => addItem(p)}
-                      className="text-xs text-secondary font-semibold hover:underline whitespace-nowrap"
+                      className="text-xs text-[#10B981] font-semibold hover:underline whitespace-nowrap"
                     >
                       + {p.name}
                     </button>
@@ -531,7 +464,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
                 })}
                 <button
                   onClick={() => setDismissedSupplyHint(true)}
-                  className="text-text-secondary hover:text-text-primary ml-1"
+                  className="text-[#6B7280] hover:text-[#111111] ml-1"
                   aria-label="Dismiss"
                 >
                   <XIcon />
@@ -541,13 +474,13 @@ export default function StackBuilder({ products }: StackBuilderProps) {
           )}
         </div>
 
-        {/* ─── RIGHT: Desktop Stack Summary ─── */}
+        {/* RIGHT: Desktop Stack Summary */}
         <div className="hidden lg:block lg:w-[40%]">
-          <div className="sticky top-24 bg-surface border border-border rounded-xl p-6">
-            <h2 className="font-heading text-lg font-bold text-primary mb-1">
+          <div className="sticky top-24 bg-white border border-[#F0F0F0] rounded-2xl p-6">
+            <h2 className="text-lg font-bold text-[#111111] mb-1">
               Your Stack
               {itemCount > 0 && (
-                <span className="text-sm font-normal text-text-secondary ml-2">
+                <span className="text-sm font-normal text-[#6B7280] ml-2">
                   ({itemCount} {itemCount === 1 ? "item" : "items"})
                 </span>
               )}
@@ -557,22 +490,20 @@ export default function StackBuilder({ products }: StackBuilderProps) {
         </div>
       </div>
 
-      {/* ─── MOBILE: Fixed Bottom Bar ─── */}
+      {/* MOBILE: Fixed Bottom Bar */}
       {stack.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-surface border-t border-border px-4 py-3 safe-area-bottom">
+        <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-[#111111] px-4 py-3 safe-area-bottom">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-primary">
-                {formatPrice(displayTotal)}
-              </p>
-              <p className="text-xs text-text-secondary">
+              <p className="text-sm font-semibold text-white">{formatPrice(displayTotal)}</p>
+              <p className="text-xs text-white/60">
                 {itemCount} {itemCount === 1 ? "item" : "items"}
                 {subscribe && " · Subscription"}
               </p>
             </div>
             <button
               onClick={() => setMobileSheetOpen(true)}
-              className="bg-primary text-white rounded-lg px-5 py-2.5 text-sm font-semibold hover:bg-primary-hover transition-colors"
+              className="bg-white text-[#111111] rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-gray-100 transition-colors"
             >
               View Stack
             </button>
@@ -580,24 +511,24 @@ export default function StackBuilder({ products }: StackBuilderProps) {
         </div>
       )}
 
-      {/* ─── MOBILE: Slide-up Sheet ─── */}
+      {/* MOBILE: Slide-up Sheet */}
       {mobileSheetOpen && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
             onClick={() => setMobileSheetOpen(false)}
           />
-          <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden bg-surface rounded-t-2xl border-t border-border max-h-[85vh] overflow-y-auto safe-area-bottom animate-slide-up">
-            <div className="px-5 pt-4 pb-2 flex items-center justify-between border-b border-border sticky top-0 bg-surface z-10">
-              <h2 className="font-heading text-lg font-bold text-primary">
+          <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden bg-white rounded-t-2xl border-t border-[#F0F0F0] max-h-[85vh] overflow-y-auto safe-area-bottom animate-slide-up">
+            <div className="px-5 pt-4 pb-2 flex items-center justify-between border-b border-[#F0F0F0] sticky top-0 bg-white z-10">
+              <h2 className="text-lg font-bold text-[#111111]">
                 Your Stack
-                <span className="text-sm font-normal text-text-secondary ml-2">
+                <span className="text-sm font-normal text-[#6B7280] ml-2">
                   ({itemCount} {itemCount === 1 ? "item" : "items"})
                 </span>
               </h2>
               <button
                 onClick={() => setMobileSheetOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-background transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#FAFAFA] transition-colors"
                 aria-label="Close"
               >
                 <XIcon />

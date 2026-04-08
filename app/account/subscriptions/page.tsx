@@ -24,7 +24,11 @@ interface SubRow {
   paused_at: string | null;
   cancelled_at: string | null;
   created_at: string;
-  protocol?: { name: string } | null;
+  cycle_management: boolean;
+  cycle_management_fee: number;
+  cycle_phase: string | null;
+  cycle_week: number | null;
+  protocol?: { name: string; slug: string } | null;
   items?: SubItem[];
 }
 
@@ -37,7 +41,7 @@ export default async function SubscriptionsPage() {
   const { data: subscriptions } = await supabase
     .from("subscriptions")
     .select(
-      "*, protocol:protocols(name), items:subscription_items(id, quantity, product:products(name, size, price, subscription_price))"
+      "*, protocol:protocols(name, slug), items:subscription_items(id, quantity, product:products(name, size, price))"
     )
     .eq("user_id", user!.id)
     .order("created_at", { ascending: false })
@@ -52,12 +56,12 @@ export default async function SubscriptionsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-heading text-2xl font-bold text-primary tracking-tight">
+        <h1 className="text-2xl font-extrabold text-[#111111] tracking-tight">
           Subscriptions
         </h1>
         <Link
           href="/protocols"
-          className="text-sm text-secondary font-semibold hover:underline"
+          className="text-sm text-[#10B981] font-semibold hover:underline"
         >
           Browse Protocols
         </Link>
@@ -70,7 +74,7 @@ export default async function SubscriptionsPage() {
           ))}
         </div>
       ) : (
-        <div className="bg-surface border border-border rounded-xl p-12 text-center">
+        <div className="bg-white border border-[#F0F0F0] rounded-2xl p-12 text-center">
           <svg
             width="40"
             height="40"
@@ -91,7 +95,7 @@ export default async function SubscriptionsPage() {
             No subscriptions yet
           </h2>
           <p className="text-sm text-text-secondary max-w-sm mx-auto mb-6">
-            Subscribe to a protocol and save 10% on every delivery. Pause or
+            Subscribe to a protocol and save up to 15% on every delivery. Pause or
             cancel anytime.
           </p>
           <Link

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe } from "@/lib/stripe";
-import { generateOrderNumber } from "@/lib/utils";
+import { generateOrderNumber, getSubscriptionPrice, getAnnualPrice, calculateShipping } from "@/lib/utils";
 import { rateLimit } from "@/lib/rate-limit";
 import { verifyCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
@@ -19,6 +19,7 @@ const CartItemSchema = z.object({
   quantity: z.number().int().positive(),
   purchaseType: z.enum(["one-time", "subscription"]),
   deliveryFrequencyWeeks: z.number().int().min(1).default(4),
+  billingCycle: z.enum(["monthly", "annual"]).default("monthly"),
 });
 
 const ShippingSchema = z.object({
@@ -31,14 +32,6 @@ const ShippingSchema = z.object({
   country: z.string().min(1),
 });
 
-const ShippingRateSchema = z.object({
-  id: z.string(),
-  carrier: z.string(),
-  service: z.string(),
-  rate: z.number().min(0).max(500),
-  shipment_id: z.string(),
-});
-
 const CheckoutSchema = z.object({
   items: z.array(CartItemSchema).min(1, "Cart cannot be empty"),
   shipping: ShippingSchema,
@@ -47,7 +40,9 @@ const CheckoutSchema = z.object({
   researchDisclaimerAccepted: z.literal(true),
   ageVerified: z.literal(true),
   termsAccepted: z.literal(true),
-  shippingRate: ShippingRateSchema,
+  applyReferralCredits: z.number().min(0).default(0),
+  cycleManagement: z.boolean().default(false),
+  affiliateCode: z.string().nullable().optional(),
   createAccount: z.boolean().optional(),
   password: z
     .string()
@@ -80,7 +75,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { items, shipping, email, paymentMethod, researchDisclaimerAccepted, ageVerified, termsAccepted, shippingRate, createAccount, password } = parsed.data;
+    const { items, shipping, email, paymentMethod, researchDisclaimerAccepted, ageVerified, termsAccepted, applyReferralCredits, cycleManagement, createAccount, password, affiliateCode: bodyAffCode } = parsed.data;
+
+    // Read affiliate code from httpOnly cookie or request body
+    const cookieAffCode = request.cookies.get("pl_aff")?.value;
+    const affiliateCode = bodyAffCode || cookieAffCode || null;
     const supabase = createAdminClient();
 
     // Fetch actual prices from database - never trust client prices
@@ -155,23 +154,42 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Calculate totals from verified DB prices (use subscription price when applicable)
+    // Calculate totals from verified DB prices (use tiered subscription pricing)
     const subtotal = items.reduce((sum, item) => {
       if (item.variantId) {
         const variant = variantMap.get(item.variantId)!;
         return sum + variant.price * item.quantity;
       }
       const product = productMap.get(item.productId)!;
-      const unitPrice =
-        item.purchaseType === "subscription" && product.subscription_price
-          ? product.subscription_price
-          : product.price;
+      let unitPrice: number;
+      if (item.purchaseType === "subscription") {
+        if (item.billingCycle === "annual") {
+          unitPrice = getAnnualPrice(product.price);
+        } else {
+          unitPrice = getSubscriptionPrice(product.price, item.deliveryFrequencyWeeks);
+        }
+      } else {
+        unitPrice = product.price;
+      }
       return sum + unitPrice * item.quantity;
     }, 0);
 
-    const shippingCost = shippingRate.rate;
-    const tax = Math.round(subtotal * TAX_RATE * 100) / 100;
-    const total = Math.round((subtotal + shippingCost + tax) * 100) / 100;
+    // Use tiered shipping: free for subscriptions, free for $200+, $9.95 for $100-199, $12.95 under $100
+    const hasSubItems = items.some((i) => i.purchaseType === "subscription");
+    const shippingCost = calculateShipping(subtotal, hasSubItems);
+    const cycleManagementFee = cycleManagement ? 14.99 : 0;
+    const referralCreditApplied = Math.min(applyReferralCredits, subtotal + cycleManagementFee);
+    const taxableSubtotal = subtotal + cycleManagementFee - referralCreditApplied;
+    const tax = Math.round(taxableSubtotal * TAX_RATE * 100) / 100;
+    const total = Math.round((taxableSubtotal + shippingCost + tax) * 100) / 100;
+
+    // Enforce $50 minimum order
+    if (subtotal < 50) {
+      return NextResponse.json(
+        { error: "Minimum order is $50. Please add more items to your cart." },
+        { status: 400 }
+      );
+    }
 
     const orderNumber = generateOrderNumber();
 
@@ -195,9 +213,6 @@ export async function POST(request: NextRequest) {
         shipping_postal: shipping.postalCode,
         shipping_country: shipping.country,
         payment_method: paymentMethod,
-        carrier: shippingRate.carrier,
-        shippo_shipment_id: shippingRate.shipment_id,
-        shippo_rate_id: shippingRate.id,
         research_disclaimer_accepted: researchDisclaimerAccepted,
         age_verified: ageVerified,
         terms_accepted: termsAccepted,
@@ -219,8 +234,10 @@ export async function POST(request: NextRequest) {
       const variant = item.variantId ? variantMap.get(item.variantId) : null;
       const unitPrice = variant
         ? variant.price
-        : item.purchaseType === "subscription" && product.subscription_price
-          ? product.subscription_price
+        : item.purchaseType === "subscription"
+          ? (item.billingCycle === "annual"
+            ? getAnnualPrice(product.price)
+            : getSubscriptionPrice(product.price, item.deliveryFrequencyWeeks))
           : product.price;
       return {
         order_id: order.id,
@@ -258,11 +275,14 @@ export async function POST(request: NextRequest) {
       const { data: subscription, error: subError } = await supabase
         .from("subscriptions")
         .insert({
-          user_id: null, // Will be linked if user creates account
+          user_id: null,
           status: "active",
           plan_name: `Custom Stack (${subscriptionItems.length} items)`,
           delivery_frequency_weeks: deliveryWeeks,
           next_delivery_date: nextDelivery.toISOString(),
+          cycle_management: cycleManagement,
+          cycle_phase: cycleManagement ? "active" : null,
+          cycle_week: cycleManagement ? 1 : null,
         })
         .select("id")
         .single();
@@ -285,6 +305,81 @@ export async function POST(request: NextRequest) {
       } else if (subError) {
         // Non-fatal: log but don't fail the order
         log.warn("Failed to create subscription record", { orderId: order.id, error: subError.message });
+      }
+    }
+
+    // Affiliate tracking: record conversion if affiliate code is present
+    let affiliateDiscountApplied = false;
+    if (affiliateCode) {
+      const { data: affiliate } = await supabase
+        .from("affiliates")
+        .select("id, commission_rate_first, commission_rate_recurring, status")
+        .eq("affiliate_code", affiliateCode.toUpperCase())
+        .eq("status", "active")
+        .maybeSingle();
+
+      if (affiliate) {
+        // Check if customer has previous orders (to determine first vs recurring)
+        const { count: previousOrders } = await supabase
+          .from("orders")
+          .select("id", { count: "exact", head: true })
+          .eq("guest_email", email)
+          .neq("id", order.id)
+          .in("status", ["processing", "shipped", "delivered"]);
+
+        const isFirstOrder = !previousOrders || previousOrders === 0;
+        const commissionRate = isFirstOrder
+          ? Number(affiliate.commission_rate_first)
+          : Number(affiliate.commission_rate_recurring);
+        const commissionAmount = Math.round(subtotal * (commissionRate / 100) * 100) / 100;
+
+        // Create conversion record
+        await supabase.from("affiliate_conversions").insert({
+          affiliate_id: affiliate.id,
+          order_id: order.id,
+          customer_user_id: null,
+          order_total: subtotal,
+          commission_rate: commissionRate,
+          commission_amount: commissionAmount,
+          is_first_order: isFirstOrder,
+        });
+
+        // Update affiliate stats
+        const { data: currentAff } = await supabase
+          .from("affiliates")
+          .select("total_conversions, total_earnings, pending_balance")
+          .eq("id", affiliate.id)
+          .single();
+
+        if (currentAff) {
+          await supabase
+            .from("affiliates")
+            .update({
+              total_conversions: (currentAff.total_conversions || 0) + 1,
+              total_earnings: Number(currentAff.total_earnings || 0) + commissionAmount,
+              pending_balance: Number(currentAff.pending_balance || 0) + commissionAmount,
+            })
+            .eq("id", affiliate.id);
+        }
+
+        // Store affiliate info on order
+        await supabase
+          .from("orders")
+          .update({
+            affiliate_id: affiliate.id,
+            affiliate_code: affiliateCode.toUpperCase(),
+          })
+          .eq("id", order.id);
+
+        affiliateDiscountApplied = isFirstOrder;
+
+        log.info("Affiliate conversion recorded", {
+          orderId: order.id,
+          affiliateId: affiliate.id,
+          commissionRate,
+          commissionAmount,
+          isFirstOrder,
+        });
       }
     }
 
@@ -365,6 +460,27 @@ export async function POST(request: NextRequest) {
           .update({ user_id: signupData.user.id })
           .eq("guest_email", email)
           .neq("status", "pending");
+      }
+    }
+
+    // Deduct referral credits if applied
+    if (referralCreditApplied > 0) {
+      // Try to find the user by email and deduct credits
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("id, referral_credits_balance")
+        .eq("email", email)
+        .single();
+
+      if (profile && profile.referral_credits_balance >= referralCreditApplied) {
+        await supabase
+          .from("profiles")
+          .update({
+            referral_credits_balance: Math.max(0, profile.referral_credits_balance - referralCreditApplied),
+          })
+          .eq("id", profile.id);
+
+        log.info("Referral credits applied", { email, amount: referralCreditApplied });
       }
     }
 

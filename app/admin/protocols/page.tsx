@@ -8,8 +8,8 @@ interface ProtocolRow {
   id: string;
   name: string;
   slug: string;
-  subscription_price: number;
-  one_time_price: number;
+  subscription_price: number | null;
+  one_time_price: number | null;
   badge: string | null;
   sort_order: number;
   active: boolean;
@@ -64,10 +64,10 @@ export default async function AdminProtocolsPage() {
                     {protocol.slug}
                   </td>
                   <td className="px-5 py-3 text-right text-gray-900">
-                    {formatPrice(protocol.subscription_price)}
+                    {formatPrice(protocol.subscription_price ?? 0)}
                   </td>
                   <td className="px-5 py-3 text-right text-gray-500">
-                    {formatPrice(protocol.one_time_price)}
+                    {formatPrice(protocol.one_time_price ?? 0)}
                   </td>
                   <td className="px-5 py-3">
                     {protocol.badge ? (

@@ -72,6 +72,52 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
+  // Affiliate tracking: capture ?ref= or ?aff= parameter and set cookie
+  const refCode = request.nextUrl.searchParams.get("ref") || request.nextUrl.searchParams.get("aff");
+  if (refCode && !request.nextUrl.pathname.startsWith("/api/")) {
+    supabaseResponse.cookies.set("pl_aff", refCode.toUpperCase(), {
+      maxAge: 30 * 24 * 60 * 60, // 30 days
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+    supabaseResponse.cookies.set("pl_aff_ts", Date.now().toString(), {
+      maxAge: 30 * 24 * 60 * 60,
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+    // Readable flag for UI discount notice (no sensitive data)
+    supabaseResponse.cookies.set("pl_aff_active", "1", {
+      maxAge: 30 * 24 * 60 * 60,
+      path: "/",
+      httpOnly: false,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    // Fire click tracking asynchronously (non-blocking)
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://puritylabresearch.com";
+    fetch(`${siteUrl}/api/affiliate/click`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: refCode.toUpperCase(),
+        landingPage: pathname,
+      }),
+    }).catch(() => {});
+  }
+
+  // Protect affiliate dashboard
+  if (pathname.startsWith("/affiliate/dashboard") && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(url);
+  }
+
   // Protect account routes
   if (pathname.startsWith("/account") && !user) {
     const url = request.nextUrl.clone();
@@ -131,5 +177,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/admin/:path*", "/login", "/register", "/api/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|images/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)"],
 };

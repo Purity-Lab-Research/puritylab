@@ -13,17 +13,24 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f7f9fc] px-4 py-12">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAFAFA] px-4 py-12">
       <div className="w-full max-w-md">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-[#1A2B4A] hover:text-[#0097A7] mb-6 transition-colors font-[family-name:var(--font-body)]"
+          className="inline-flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-[#111111] mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
 
-        <div className="bg-white rounded-xl shadow-md p-8">{children}</div>
+        <div className="bg-white rounded-2xl shadow-sm border border-[#F0F0F0] p-8">
+          {/* Logo */}
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <img src="/images/logo.svg" alt="Purity Lab" width={32} height={32} className="h-8 w-8" />
+            <span className="text-lg font-extrabold tracking-tight text-[#111111]">PURITY LAB</span>
+          </div>
+          {children}
+        </div>
       </div>
     </div>
   );

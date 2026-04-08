@@ -61,6 +61,7 @@ export interface Product {
   cycle_length: string;
   storage_info: string;
   reconstitution_info: string;
+  subscription_only: boolean;
   variants?: ProductVariant[];
   tags?: ProductTag[];
 }
@@ -188,6 +189,7 @@ export interface CartItem {
   quantity: number;
   purchaseType: "one-time" | "subscription";
   deliveryFrequencyWeeks: number;
+  billingCycle: "monthly" | "annual";
 }
 
 export interface SiteSetting {
@@ -211,8 +213,8 @@ export interface Protocol {
   tagline: string;
   description: string;
   cycle_length: string;
-  subscription_price: number;
-  one_time_price: number;
+  subscription_price: number | null;
+  one_time_price: number | null;
   badge: string | null;
   accent_color: string;
   sort_order: number;

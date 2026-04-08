@@ -7,8 +7,9 @@ import HowItWorks from "@/components/home/HowItWorks";
 import Protocols from "@/components/home/Protocols";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import WhyPurityLab from "@/components/home/WhyPurityLab";
+import QualitySection from "@/components/home/QualitySection";
+import CommunitySection from "@/components/home/CommunitySection";
 import EducationPreview from "@/components/home/EducationPreview";
-import CTABanner from "@/components/home/CTABanner";
 
 export const metadata: Metadata = {
   title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
@@ -35,7 +36,7 @@ export default async function HomePage() {
         .eq("active", true)
         .eq("featured", true)
         .order("created_at", { ascending: false })
-        .limit(6),
+        .limit(12),
       supabase
         .from("protocols")
         .select("*, items:protocol_items(*, product:products(name, slug))")
@@ -53,12 +54,13 @@ export default async function HomePage() {
     <>
       <Hero />
       <TrustStrip />
+      <FeaturedProducts products={products} />
       <HowItWorks />
       <Protocols protocols={protocols} />
-      <FeaturedProducts products={products} />
       <WhyPurityLab />
+      <QualitySection />
       <EducationPreview />
-      <CTABanner />
+      <CommunitySection />
     </>
   );
 }

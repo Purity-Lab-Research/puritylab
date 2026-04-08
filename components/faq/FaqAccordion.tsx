@@ -16,7 +16,6 @@ interface FaqSection {
 
 interface FaqAccordionProps {
   sections: FaqSection[];
-  /** When true, tries to load FAQ data from site_settings and falls back to `sections` prop */
   useDynamic?: boolean;
 }
 
@@ -59,7 +58,6 @@ export default function FaqAccordion({
     setOpenKey((prev) => (prev === key ? null : key));
   }
 
-  // Map section index to a slug for setting keys
   const sectionSlugs = ["general", "orders", "subscriptions"];
 
   return (
@@ -68,11 +66,11 @@ export default function FaqAccordion({
         const slug = sectionSlugs[si] || `section_${si + 1}`;
         return (
         <div key={si}>
-          <h2 className="mb-4 text-xl font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+          <h2 className="mb-4 text-xl font-bold text-[#111111]">
             <EditableText settingKey={`faq_${slug}_heading`}>{section.title}</EditableText>
           </h2>
 
-          <div className="divide-y divide-[#dde2ea] rounded-xl border border-[#dde2ea] bg-white">
+          <div className="divide-y divide-[#F0F0F0] rounded-2xl border border-[#F0F0F0] bg-white overflow-hidden">
             {section.items.map((item, qi) => {
               const key = `${si}-${qi}`;
               const isOpen = openKey === key;
@@ -82,17 +80,19 @@ export default function FaqAccordion({
                   <button
                     type="button"
                     onClick={() => toggle(key)}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-gray-800 transition-colors hover:bg-gray-50 font-[family-name:var(--font-body)]"
+                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold text-[#111111] transition-colors hover:bg-[#FAFAFA]"
                     aria-expanded={isOpen}
                   >
                     <span>
                       <EditableText settingKey={`faq_${slug}_${qi + 1}_q`}>{item.question}</EditableText>
                     </span>
-                    {isOpen ? (
-                      <Minus className="h-4 w-4 shrink-0 text-[#0097A7]" />
-                    ) : (
-                      <Plus className="h-4 w-4 shrink-0 text-[#0097A7]" />
-                    )}
+                    <span className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen ? "bg-[#111111]" : "bg-[#F0F0F0]"}`}>
+                      {isOpen ? (
+                        <Minus className="h-3.5 w-3.5 text-white" />
+                      ) : (
+                        <Plus className="h-3.5 w-3.5 text-[#6B7280]" />
+                      )}
+                    </span>
                   </button>
 
                   <div
@@ -102,7 +102,7 @@ export default function FaqAccordion({
                       opacity: isOpen ? 1 : 0,
                     }}
                   >
-                    <p className="px-5 pb-4 text-sm leading-relaxed text-gray-600 font-[family-name:var(--font-body)]">
+                    <p className="px-5 pb-4 text-sm leading-relaxed text-[#6B7280]">
                       <EditableText settingKey={`faq_${slug}_${qi + 1}_a`}>{item.answer}</EditableText>
                     </p>
                   </div>

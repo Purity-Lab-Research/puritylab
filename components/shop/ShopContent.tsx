@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductCard from "@/components/shop/ProductCard";
 import type { Product } from "@/lib/types";
+import { SearchX } from "lucide-react";
 
 type SortOption = "popular" | "price-asc" | "price-desc" | "newest";
 
@@ -27,6 +28,7 @@ const TYPE_FILTERS = [
   { value: "single", label: "Single Peptides" },
   { value: "blend", label: "Blends" },
   { value: "supplies", label: "Supplies" },
+  { value: "exclusive", label: "Subscriber Exclusives" },
 ];
 
 function getEffectivePrice(product: Product): number {
@@ -77,7 +79,6 @@ export default function ShopContent({ products }: ShopContentProps) {
   const filteredProducts = useMemo(() => {
     let filtered = products;
 
-    // Search
     if (searchQuery) {
       filtered = filtered.filter(
         (p) =>
@@ -87,14 +88,10 @@ export default function ShopContent({ products }: ShopContentProps) {
       );
     }
 
-    // Goal filter
     if (goalFilter !== "all") {
-      filtered = filtered.filter(
-        (p) => p.goal_category === goalFilter
-      );
+      filtered = filtered.filter((p) => p.goal_category === goalFilter);
     }
 
-    // Type filter
     if (typeFilter === "single") {
       filtered = filtered.filter(
         (p) =>
@@ -109,12 +106,11 @@ export default function ShopContent({ products }: ShopContentProps) {
           p.name.toLowerCase().includes("wolverine")
       );
     } else if (typeFilter === "supplies") {
-      filtered = filtered.filter(
-        (p) => p.goal_category === "supplies"
-      );
+      filtered = filtered.filter((p) => p.goal_category === "supplies");
+    } else if (typeFilter === "exclusive") {
+      filtered = filtered.filter((p) => p.subscription_only);
     }
 
-    // Price range
     const min = priceMin ? parseFloat(priceMin) : null;
     const max = priceMax ? parseFloat(priceMax) : null;
     if (min !== null && !isNaN(min)) {
@@ -124,7 +120,6 @@ export default function ShopContent({ products }: ShopContentProps) {
       filtered = filtered.filter((p) => getEffectivePrice(p) <= max);
     }
 
-    // Sort
     const sorted = [...filtered];
     switch (sortBy) {
       case "popular":
@@ -152,7 +147,7 @@ export default function ShopContent({ products }: ShopContentProps) {
       <>
         {/* Goal */}
         <div className="mb-6">
-          <h3 className="font-heading text-xs font-bold text-primary uppercase tracking-wider mb-3">
+          <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-3">
             Goal
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -160,10 +155,10 @@ export default function ShopContent({ products }: ShopContentProps) {
               <button
                 key={f.value}
                 onClick={() => setGoalFilter(f.value)}
-                className={`border rounded-full px-4 py-2 text-sm transition-all ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   goalFilter === f.value
-                    ? "bg-secondary text-white border-secondary"
-                    : "border-border text-text-secondary hover:border-secondary"
+                    ? "bg-[#111111] text-white"
+                    : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 }`}
               >
                 {f.label}
@@ -174,7 +169,7 @@ export default function ShopContent({ products }: ShopContentProps) {
 
         {/* Type */}
         <div className="mb-6">
-          <h3 className="font-heading text-xs font-bold text-primary uppercase tracking-wider mb-3">
+          <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-3">
             Type
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -182,10 +177,10 @@ export default function ShopContent({ products }: ShopContentProps) {
               <button
                 key={f.value}
                 onClick={() => setTypeFilter(f.value)}
-                className={`border rounded-full px-4 py-2 text-sm transition-all ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   typeFilter === f.value
-                    ? "bg-secondary text-white border-secondary"
-                    : "border-border text-text-secondary hover:border-secondary"
+                    ? "bg-[#111111] text-white"
+                    : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 }`}
               >
                 {f.label}
@@ -196,13 +191,13 @@ export default function ShopContent({ products }: ShopContentProps) {
 
         {/* Sort */}
         <div className="mb-6">
-          <h3 className="font-heading text-xs font-bold text-primary uppercase tracking-wider mb-3">
+          <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-3">
             Sort By
           </h3>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text-primary focus:border-secondary focus:ring-1 focus:ring-secondary/20 outline-none"
+            className="w-full rounded-lg border border-[#F0F0F0] bg-white px-3 py-2.5 text-sm text-[#111111] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none"
           >
             {SORT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -214,7 +209,7 @@ export default function ShopContent({ products }: ShopContentProps) {
 
         {/* Price Range */}
         <div className="mb-6">
-          <h3 className="font-heading text-xs font-bold text-primary uppercase tracking-wider mb-3">
+          <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-3">
             Price Range
           </h3>
           <div className="flex items-center gap-2">
@@ -225,10 +220,10 @@ export default function ShopContent({ products }: ShopContentProps) {
                 value={priceMin}
                 onChange={(e) => setPriceMin(e.target.value)}
                 min="0"
-                className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary focus:border-secondary focus:ring-1 focus:ring-secondary/20 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-full rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#9CA3AF] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
-            <span className="text-text-secondary text-xs">–</span>
+            <span className="text-[#9CA3AF] text-xs">to</span>
             <div className="flex-1">
               <input
                 type="number"
@@ -236,7 +231,7 @@ export default function ShopContent({ products }: ShopContentProps) {
                 value={priceMax}
                 onChange={(e) => setPriceMax(e.target.value)}
                 min="0"
-                className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary focus:border-secondary focus:ring-1 focus:ring-secondary/20 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-full rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#9CA3AF] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
           </div>
@@ -246,7 +241,7 @@ export default function ShopContent({ products }: ShopContentProps) {
         {activeFilterCount > 0 && (
           <button
             onClick={clearAllFilters}
-            className="text-sm text-text-secondary hover:text-error transition-colors"
+            className="text-sm text-[#6B7280] hover:text-[#EF4444] transition-colors"
           >
             Clear all filters ({activeFilterCount})
           </button>
@@ -259,19 +254,19 @@ export default function ShopContent({ products }: ShopContentProps) {
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
       {/* Search Banner */}
       {searchQuery && (
-        <div className="mb-6 flex items-center justify-between rounded-xl bg-secondary/5 border border-secondary/20 px-4 py-3">
-          <p className="text-sm text-text-secondary">
+        <div className="mb-6 flex items-center justify-between rounded-xl bg-[#10B981]/5 border border-[#10B981]/20 px-4 py-3">
+          <p className="text-sm text-[#6B7280]">
             Results for{" "}
-            <span className="font-semibold text-primary">
+            <span className="font-semibold text-[#111111]">
               &quot;{searchQuery}&quot;
             </span>
-            <span className="ml-1 text-text-secondary">
+            <span className="ml-1 text-[#6B7280]">
               ({filteredProducts.length} found)
             </span>
           </p>
           <button
             onClick={() => router.replace("/shop", { scroll: false })}
-            className="text-xs font-medium text-text-secondary hover:text-error transition-colors"
+            className="text-xs font-medium text-[#6B7280] hover:text-[#EF4444] transition-colors"
           >
             Clear
           </button>
@@ -290,7 +285,7 @@ export default function ShopContent({ products }: ShopContentProps) {
           <div className="flex items-center justify-between mb-6 lg:hidden">
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="inline-flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm font-medium text-text-primary hover:border-secondary transition-colors"
+              className="inline-flex items-center gap-2 border border-[#F0F0F0] rounded-full px-4 py-2 text-sm font-medium text-[#111111] hover:border-[#111111] transition-colors"
             >
               <svg
                 width="16"
@@ -314,12 +309,12 @@ export default function ShopContent({ products }: ShopContentProps) {
               </svg>
               Filters
               {activeFilterCount > 0 && (
-                <span className="bg-secondary text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="bg-[#111111] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                   {activeFilterCount}
                 </span>
               )}
             </button>
-            <span className="text-sm text-text-secondary">
+            <span className="text-sm text-[#6B7280]">
               {filteredProducts.length}{" "}
               {filteredProducts.length === 1 ? "product" : "products"}
             </span>
@@ -327,7 +322,7 @@ export default function ShopContent({ products }: ShopContentProps) {
 
           {/* Desktop results count */}
           <div className="hidden lg:flex items-center justify-between mb-6">
-            <span className="text-sm text-text-secondary">
+            <span className="text-sm text-[#6B7280]">
               {filteredProducts.length}{" "}
               {filteredProducts.length === 1 ? "product" : "products"}
             </span>
@@ -342,12 +337,18 @@ export default function ShopContent({ products }: ShopContentProps) {
             </div>
           ) : (
             <div className="py-20 text-center">
-              <p className="text-text-secondary">
-                No products found matching your filters.
+              <div className="w-16 h-16 rounded-full bg-[#FAFAFA] flex items-center justify-center mx-auto mb-4">
+                <SearchX className="h-7 w-7 text-[#9CA3AF]" />
+              </div>
+              <p className="text-[#111111] font-semibold mb-1">
+                No products match your filters
+              </p>
+              <p className="text-sm text-[#6B7280] mb-4">
+                Try adjusting your selection.
               </p>
               <button
                 onClick={clearAllFilters}
-                className="mt-3 text-sm text-secondary font-semibold hover:underline"
+                className="text-sm text-[#111111] font-semibold hover:underline"
               >
                 Clear all filters
               </button>
@@ -357,41 +358,47 @@ export default function ShopContent({ products }: ShopContentProps) {
       </div>
 
       {/* Mobile Filter Drawer */}
-      {mobileFiltersOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
-            onClick={() => setMobileFiltersOpen(false)}
-          />
-          <div className="fixed inset-y-0 left-0 z-50 w-[300px] bg-surface p-6 overflow-y-auto lg:hidden animate-slide-right">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="font-heading text-lg font-bold text-primary">
-                Filters
-              </h2>
-              <button
-                onClick={() => setMobileFiltersOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-background transition-colors"
-                aria-label="Close filters"
+      <div
+        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+          mobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          onClick={() => setMobileFiltersOpen(false)}
+        />
+        <div
+          className={`absolute inset-y-0 left-0 w-[300px] bg-white p-6 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${
+            mobileFiltersOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-[#111111]">
+              Filters
+            </h2>
+            <button
+              onClick={() => setMobileFiltersOpen(false)}
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#FAFAFA] transition-colors"
+              aria-label="Close filters"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-            </div>
-            {renderFilters()}
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
           </div>
-        </>
-      )}
+          {renderFilters()}
+        </div>
+      </div>
     </section>
   );
 }

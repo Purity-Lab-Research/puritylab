@@ -48,7 +48,7 @@ export default async function OrderDetailPage({ params }: PageProps) {
     <div className="space-y-6">
       <Link
         href="/account/orders"
-        className="inline-flex items-center gap-1.5 text-sm text-[#0097A7] hover:underline"
+        className="inline-flex items-center gap-1.5 text-sm text-[#10B981] hover:underline"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Orders
@@ -57,7 +57,7 @@ export default async function OrderDetailPage({ params }: PageProps) {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A]">
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#111111]">
             Order #{order.order_number}
           </h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -156,7 +156,7 @@ export default async function OrderDetailPage({ params }: PageProps) {
                     href={order.tracking_url_provider}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#0097A7] underline hover:text-[#1A2B4A]"
+                    className="text-[#10B981] underline hover:text-[#111111]"
                   >
                     {order.tracking_number}
                   </a>

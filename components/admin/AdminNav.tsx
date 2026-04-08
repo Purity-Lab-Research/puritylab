@@ -17,6 +17,7 @@ import {
   Users,
   Star,
   Mail,
+  UserPlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { StaffRole } from "@/lib/admin";
@@ -33,6 +34,7 @@ const navItems: NavItem[] = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Orders", href: "/admin/orders", icon: ShoppingBag, roles: ["admin", "fulfillment"] },
   { label: "Customers", href: "/admin/customers", icon: Users },
+  { label: "Affiliates", href: "/admin/affiliates", icon: UserPlus },
   { label: "Email", href: "/admin/email", icon: Mail },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Protocols", href: "/admin/protocols", icon: Layers },
@@ -72,8 +74,8 @@ export default function AdminNav({ role }: { role: StaffRole }) {
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all duration-200",
                   active
-                    ? "bg-[#0097A7]/10 font-semibold text-[#1A2B4A] border-l-[3px] border-[#1A2B4A]"
-                    : "text-gray-600 border-l-[3px] border-transparent hover:border-[#0097A7] hover:bg-[#0097A7]/5 hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
+                    ? "bg-[#10B981]/10 font-semibold text-[#111111] border-l-[3px] border-[#10B981]"
+                    : "text-gray-600 border-l-[3px] border-transparent hover:border-[#10B981] hover:bg-[#10B981]/5 hover:text-[#111111]"
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -86,7 +88,7 @@ export default function AdminNav({ role }: { role: StaffRole }) {
 
       <Link
         href="/"
-        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-gray-500 border-l-[3px] border-transparent transition-all duration-200 hover:border-gray-400 hover:bg-gray-100 hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
+        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-gray-500 border-l-[3px] border-transparent transition-all duration-200 hover:border-[#10B981] hover:bg-gray-100 hover:text-[#111111]"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Site

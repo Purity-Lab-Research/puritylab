@@ -1,67 +1,50 @@
 "use client";
 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Package, BadgePercent, Truck, Users, FlaskConical, ShieldCheck } from "lucide-react";
 
 const reasons = [
   {
-    title: "Radical Transparency",
-    description:
-      "We publish every CoA, every batch, every time. Enter your batch number and see exactly what\u2019s in your vial.",
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <path d="m9 15 2 2 4-4" />
-      </svg>
-    ),
+    title: "Always in Stock",
+    description: "Popular peptides are always available. No backorders, no waiting.",
+    icon: Package,
+    iconBg: "bg-[#10B981]/10",
+    iconColor: "text-[#10B981]",
   },
   {
-    title: "Built for Athletes",
-    description:
-      "Protocols designed around recovery, performance, and body composition. Not a random catalog of chemicals.",
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
+    title: "Volume Discounts",
+    description: "Subscribe and save up to 15%. Larger orders get better pricing.",
+    icon: BadgePercent,
+    iconBg: "bg-amber-50",
+    iconColor: "text-amber-500",
   },
   {
-    title: "No Mystery Sourcing",
-    description:
-      "We tell you where it\u2019s tested, how it\u2019s tested, and what the results are. If a batch doesn\u2019t meet 98%+ purity, it doesn\u2019t ship.",
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" />
-        <path d="M8.5 2h7" />
-      </svg>
-    ),
+    title: "Cold Chain Shipping",
+    description: "Temperature-controlled packaging to protect peptide integrity in transit.",
+    icon: Truck,
+    iconBg: "bg-blue-50",
+    iconColor: "text-blue-500",
+  },
+  {
+    title: "Community Access",
+    description: "Every purchase unlocks access to our private community of researchers.",
+    icon: Users,
+    iconBg: "bg-purple-50",
+    iconColor: "text-purple-500",
+  },
+  {
+    title: "99%+ Purity",
+    description: "Every batch independently tested with full Certificates of Analysis published.",
+    icon: FlaskConical,
+    iconBg: "bg-[#10B981]/10",
+    iconColor: "text-[#10B981]",
+  },
+  {
+    title: "Shipment Protection",
+    description: "Every order insured. If anything arrives damaged, we replace it free.",
+    icon: ShieldCheck,
+    iconBg: "bg-rose-50",
+    iconColor: "text-rose-500",
   },
 ];
 
@@ -69,30 +52,30 @@ export default function WhyPurityLab() {
   const animRef = useScrollAnimation();
 
   return (
-    <section className="bg-background py-20 border-t border-border">
+    <section className="bg-[#F0FDF4] py-16 sm:py-20">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="font-heading text-4xl font-extrabold text-primary">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
             Why Purity Lab
           </h2>
-          <p className="mt-3 text-text-secondary">
+          <p className="mt-3 text-[#6B7280]">
             We don&apos;t just sell peptides. We prove what&apos;s in them.
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {reasons.map((reason) => (
             <div
               key={reason.title}
-              className="bg-surface border border-border rounded-xl p-9 flex-1 max-w-[340px] mx-auto md:mx-0"
+              className="bg-white rounded-2xl p-7 hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col h-full"
             >
-              <div className="w-12 h-12 rounded-[10px] bg-secondary/10 flex items-center justify-center mb-5 text-secondary">
-                {reason.icon}
+              <div className={`w-11 h-11 rounded-xl ${reason.iconBg} flex items-center justify-center mb-4`}>
+                <reason.icon className={`h-5 w-5 ${reason.iconColor}`} strokeWidth={2} />
               </div>
-              <h3 className="font-heading text-xl font-bold text-primary mb-2.5">
+              <h3 className="text-base font-bold text-[#111111] mb-1.5">
                 {reason.title}
               </h3>
-              <p className="font-body text-sm text-text-secondary leading-relaxed">
+              <p className="text-sm text-[#6B7280] leading-relaxed">
                 {reason.description}
               </p>
             </div>

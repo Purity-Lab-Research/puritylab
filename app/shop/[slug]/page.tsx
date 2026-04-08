@@ -165,12 +165,14 @@ export default async function ProductPage({ params }: PageProps) {
       {/* Customers also bought */}
       {relatedProducts.length > 0 && (
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-14">
-          <h2 className="font-heading text-2xl font-bold text-primary mb-6">
+          <h2 className="text-2xl font-bold text-[#111111] mb-6">
             Customers Also Bought
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible sm:pb-0">
             {relatedProducts.slice(0, 4).map((rp) => (
-              <ProductCard key={rp.id} product={rp} />
+              <div key={rp.id} className="flex-shrink-0 w-[260px] snap-start sm:w-auto">
+                <ProductCard product={rp} />
+              </div>
             ))}
           </div>
         </section>

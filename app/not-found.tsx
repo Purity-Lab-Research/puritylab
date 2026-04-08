@@ -4,15 +4,11 @@ export default function NotFound() {
   return (
     <section className="min-h-[80vh] flex items-center justify-center bg-background">
       <div className="text-center px-6 max-w-lg">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary mx-auto mb-6">
-          <span className="font-heading text-sm font-bold text-white tracking-tight">
-            PL
-          </span>
-        </div>
-        <p className="font-heading text-7xl font-extrabold text-border tracking-tight mb-2">
+        <img src="/images/logo.svg" alt="Purity Lab" width={48} height={48} className="h-12 w-12 mx-auto mb-6" />
+        <p className="text-8xl font-extrabold text-[#F0F0F0] tracking-tight mb-2">
           404
         </p>
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-3">
+        <h1 className="text-2xl font-bold text-[#111111] mb-3">
           Page Not Found
         </h1>
         <p className="text-text-secondary mb-8 leading-relaxed">
@@ -21,13 +17,13 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href="/"
-            className="inline-block bg-primary text-white rounded-lg px-7 py-3 font-semibold hover:bg-primary-hover transition-colors"
+            className="inline-block bg-[#111111] text-white rounded-full px-7 py-3 font-semibold hover:opacity-90 transition-colors"
           >
             Go Home
           </Link>
           <Link
             href="/protocols"
-            className="inline-block border border-border text-primary rounded-lg px-7 py-3 font-medium hover:border-primary transition-colors"
+            className="inline-block border border-[#F0F0F0] text-[#111111] rounded-full px-7 py-3 font-medium hover:border-[#111111] transition-colors"
           >
             Browse Protocols
           </Link>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { Order } from "@/lib/types";
+import { ShoppingBag } from "lucide-react";
 
 export default async function OrdersPage() {
   const supabase = await createClient();
@@ -17,26 +18,26 @@ export default async function OrdersPage() {
     .returns<Order[]>();
 
   const statusColors: Record<string, string> = {
-    pending: "bg-yellow-100 text-yellow-800",
-    processing: "bg-blue-100 text-blue-800",
-    shipped: "bg-purple-100 text-purple-800",
-    delivered: "bg-green-100 text-green-800",
-    cancelled: "bg-red-100 text-red-800",
-    refunded: "bg-gray-100 text-gray-700",
+    pending: "bg-[#FEF3C7] text-[#F59E0B]",
+    processing: "bg-[#DBEAFE] text-[#3B82F6]",
+    shipped: "bg-[#EDE9FE] text-[#8B5CF6]",
+    delivered: "bg-[#D1FAE5] text-[#10B981]",
+    cancelled: "bg-[#FEE2E2] text-[#EF4444]",
+    refunded: "bg-[#F0F0F0] text-[#6B7280]",
   };
 
   return (
     <div>
-      <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-6">
+      <h1 className="text-2xl font-extrabold tracking-tight text-[#111111] mb-6">
         Order History
       </h1>
 
       {orders && orders.length > 0 ? (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-[#F0F0F0] rounded-2xl overflow-hidden">
           {/* Desktop table */}
           <table className="w-full hidden sm:table">
             <thead>
-              <tr className="border-b text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <tr className="border-b border-[#F0F0F0] text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider">
                 <th className="px-5 py-3">Order</th>
                 <th className="px-5 py-3">Date</th>
                 <th className="px-5 py-3">Status</th>
@@ -44,31 +45,31 @@ export default async function OrdersPage() {
                 <th className="px-5 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-[#F0F0F0]">
               {orders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-4 text-sm font-semibold text-gray-900">
+                <tr key={order.id} className="hover:bg-[#FAFAFA] transition-colors">
+                  <td className="px-5 py-4 text-sm font-semibold text-[#111111]">
                     #{order.order_number}
                   </td>
-                  <td className="px-5 py-4 text-sm text-gray-600">
-                    {new Date(order.created_at).toLocaleDateString("en-CA")}
+                  <td className="px-5 py-4 text-sm text-[#6B7280]">
+                    {new Date(order.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </td>
                   <td className="px-5 py-4">
                     <span
-                      className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${
-                        statusColors[order.status] || "bg-gray-100 text-gray-700"
+                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full capitalize ${
+                        statusColors[order.status] || "bg-[#F0F0F0] text-[#6B7280]"
                       }`}
                     >
                       {order.status}
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-sm font-semibold text-gray-900 text-right">
+                  <td className="px-5 py-4 text-sm font-semibold text-[#111111] text-right">
                     ${order.total.toFixed(2)}
                   </td>
                   <td className="px-5 py-4 text-right">
                     <Link
                       href={`/account/orders/${order.id}`}
-                      className="text-sm text-[#0097A7] hover:underline font-medium"
+                      className="text-sm text-[#10B981] hover:underline font-semibold"
                     >
                       View
                     </Link>
@@ -79,42 +80,42 @@ export default async function OrdersPage() {
           </table>
 
           {/* Mobile list */}
-          <div className="sm:hidden divide-y">
+          <div className="sm:hidden divide-y divide-[#F0F0F0]">
             {orders.map((order) => (
               <Link
                 key={order.id}
                 href={`/account/orders/${order.id}`}
-                className="flex items-center justify-between px-5 py-4 hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-between px-5 py-4 hover:bg-[#FAFAFA] transition-colors"
               >
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-sm font-semibold text-[#111111]">
                     #{order.order_number}
                   </p>
-                  <p className="text-xs text-gray-500">
-                    {new Date(order.created_at).toLocaleDateString("en-CA")}
+                  <p className="text-xs text-[#6B7280]">
+                    {new Date(order.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${
-                      statusColors[order.status] || "bg-gray-100 text-gray-700"
+                    className={`text-[10px] font-bold px-2.5 py-1 rounded-full capitalize ${
+                      statusColors[order.status] || "bg-[#F0F0F0] text-[#6B7280]"
                     }`}
                   >
                     {order.status}
                   </span>
-                  <span className="text-sm font-semibold">${order.total.toFixed(2)}</span>
+                  <span className="text-sm font-semibold text-[#111111]">${order.total.toFixed(2)}</span>
                 </div>
               </Link>
             ))}
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-          <p className="text-gray-500 mb-3">No orders yet.</p>
-          <Link
-            href="/shop"
-            className="text-[#0097A7] font-medium hover:underline"
-          >
+        <div className="bg-white border border-[#F0F0F0] rounded-2xl p-12 text-center">
+          <div className="w-14 h-14 rounded-full bg-[#FAFAFA] flex items-center justify-center mx-auto mb-4">
+            <ShoppingBag className="h-6 w-6 text-[#9CA3AF]" />
+          </div>
+          <p className="text-[#6B7280] mb-3">No orders yet.</p>
+          <Link href="/shop" className="text-[#10B981] font-semibold hover:underline">
             Browse our products
           </Link>
         </div>

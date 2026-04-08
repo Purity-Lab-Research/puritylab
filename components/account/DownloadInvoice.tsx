@@ -29,7 +29,7 @@ export default function DownloadInvoice({ order, items }: Props) {
   <title>Invoice ${order.order_number}</title>
   <style>
     body { font-family: Arial, sans-serif; color: #333; max-width: 700px; margin: 0 auto; padding: 40px 20px; }
-    h1 { font-size: 28px; color: #1A2B4A; margin: 0; }
+    h1 { font-size: 28px; color: #111111; margin: 0; }
     .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
     .invoice-info { text-align: right; font-size: 13px; color: #666; }
     .invoice-info strong { color: #333; }
@@ -46,7 +46,7 @@ export default function DownloadInvoice({ order, items }: Props) {
   <div class="header">
     <div>
       <h1>PURITY LAB</h1>
-      <p style="margin:4px 0 0;font-size:12px;color:#0097A7;letter-spacing:1px;">RESEARCH PEPTIDES</p>
+      <p style="margin:4px 0 0;font-size:12px;color:#10B981;letter-spacing:1px;">RESEARCH PEPTIDES</p>
     </div>
     <div class="invoice-info">
       <p><strong>Invoice</strong></p>

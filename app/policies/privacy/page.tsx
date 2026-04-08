@@ -19,14 +19,14 @@ export default function PrivacyPolicyPage() {
       />
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700 font-[family-name:var(--font-body)]">
+        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700">
           <p className="text-sm text-gray-500">
             Effective Date: March 30, 2026 &nbsp;|&nbsp; Last Updated: March 30, 2026
           </p>
 
           {/* Section 1 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               1. Introduction and Scope
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 2 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               2. Data Controller and Privacy Officer
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
             <div className="mt-2 text-sm leading-relaxed pl-5">
               <p><strong>Purity Lab</strong></p>
               <p>Email:{" "}
-                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                   {PRIVACY_EMAIL}
                 </a>
               </p>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
             <div className="mt-2 text-sm leading-relaxed pl-5">
               <p><strong>Privacy Officer</strong></p>
               <p>Email:{" "}
-                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                   {PRIVACY_EMAIL}
                 </a>
               </p>
@@ -99,7 +99,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 3 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               3. Personal Information We Collect
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -107,7 +107,7 @@ export default function PrivacyPolicyPage() {
               policy. The categories of information we collect include:
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               3.1 Information You Provide Directly
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               3.2 Information Collected Automatically
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -141,7 +141,7 @@ export default function PrivacyPolicyPage() {
               <li>Cookies and similar tracking technologies (see Section 10)</li>
             </ul>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               3.3 Information from Third Parties
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -153,7 +153,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 4 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               4. Legal Basis for Processing (GDPR/UK GDPR)
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -193,7 +193,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 5 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               5. Purposes for Collecting Personal Information
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -238,7 +238,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 6 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               6. Consent (CCPA)
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -263,7 +263,7 @@ export default function PrivacyPolicyPage() {
               ability to provide certain products or services to you.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               6.1 Quebec Residents (Law 25)
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -277,7 +277,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 7 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               7. Disclosure and Sharing of Personal Information
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -334,7 +334,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 8 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               8. International Data Transfers
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -344,7 +344,7 @@ export default function PrivacyPolicyPage() {
               own, including the United States and other jurisdictions.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               8.1 Transfers from the EEA, UK, and Switzerland
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -356,7 +356,7 @@ export default function PrivacyPolicyPage() {
               Commission or the UK International Data Transfer Agreement/Addendum, as applicable.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               8.2 General International Transfers
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -370,7 +370,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 9 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               9. Data Retention
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -415,7 +415,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 10 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               10. Cookies and Tracking Technologies
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -448,7 +448,7 @@ export default function PrivacyPolicyPage() {
               cookies. Disabling certain cookies may affect website functionality.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               10.1 Do Not Track / Global Privacy Control
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -460,7 +460,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 11 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               11. Data Security Safeguards
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -516,12 +516,12 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 12 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               12. Age Restrictions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               Our products are intended for qualified researchers and professionals. You must be at
-              least 18 years of age (or the age of majority in your jurisdiction of residence,
+              least 21 years of age (or the age of majority in your jurisdiction of residence,
               whichever is greater) to use our website, create an account, or place an order.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -538,7 +538,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 13 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               13. Your Rights
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -546,7 +546,7 @@ export default function PrivacyPolicyPage() {
               region:
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.1 All Customers (CCPA)
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -569,7 +569,7 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.2 Quebec Residents (Law 25)
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -590,7 +590,7 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.3 European Economic Area, UK, and Swiss Residents (GDPR / UK GDPR)
             </h3>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
@@ -633,7 +633,7 @@ export default function PrivacyPolicyPage() {
               described in Article 22 of the GDPR.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.4 California Residents (CCPA/CPRA)
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -672,14 +672,14 @@ export default function PrivacyPolicyPage() {
             <p className="mt-2 text-sm leading-relaxed">
               To exercise your CCPA/CPRA rights, you (or your authorized agent) may submit a
               verifiable consumer request by contacting us at{" "}
-              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                 {PRIVACY_EMAIL}
               </a>
               . We will verify your identity before processing your request and respond within 45
               calendar days, with the possibility of a 45-day extension if reasonably necessary.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.5 Other Jurisdictions
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
@@ -690,13 +690,13 @@ export default function PrivacyPolicyPage() {
               Contact our Privacy Officer for details.
             </p>
 
-            <h3 className="mt-4 text-base font-semibold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h3 className="mt-4 text-base font-semibold text-[#111111]">
               13.6 How to Exercise Your Rights
             </h3>
             <p className="mt-2 text-sm leading-relaxed">
               To exercise any of the rights described above, submit a written request to our Privacy
               Officer at{" "}
-              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                 {PRIVACY_EMAIL}
               </a>{" "}
               or by mail to the address listed in Section 2. We will verify your identity before
@@ -722,7 +722,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 14 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               14. Third-Party Links
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -734,7 +734,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 15 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               15. Product Use Disclaimer and Export Compliance
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -762,7 +762,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 16 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               16. Changes to This Privacy Policy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -791,7 +791,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Section 17 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               17. Contact Us and Supervisory Authorities
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -801,7 +801,7 @@ export default function PrivacyPolicyPage() {
             <div className="mt-2 text-sm leading-relaxed pl-5">
               <p><strong>Privacy Officer</strong></p>
               <p>Email:{" "}
-                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                   {PRIVACY_EMAIL}
                 </a>
               </p>
@@ -834,10 +834,10 @@ export default function PrivacyPolicyPage() {
           </div>
 
           {/* Contact box */}
-          <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
+          <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-6">
             <p className="text-sm leading-relaxed">
-              <strong className="text-[#1A2B4A]">Questions?</strong> Contact our Privacy Officer at{" "}
-              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <strong className="text-[#111111]">Questions?</strong> Contact our Privacy Officer at{" "}
+              <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                 {PRIVACY_EMAIL}
               </a>
             </p>

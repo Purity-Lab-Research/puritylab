@@ -15,6 +15,7 @@ const CartItemSchema = z.object({
   purchaseType: z.enum(["one-time", "subscription"]),
   subscriptionPrice: z.number().nullable().optional(),
   deliveryFrequencyWeeks: z.number().int().min(1).default(4),
+  billingCycle: z.enum(["monthly", "annual"]).default("monthly"),
 });
 
 const ShippingSchema = z.object({
@@ -60,6 +61,7 @@ const validItem = {
   purchaseType: "one-time" as const,
   subscriptionPrice: null,
   deliveryFrequencyWeeks: 4,
+  billingCycle: "monthly" as const,
 };
 
 const validShipping = {

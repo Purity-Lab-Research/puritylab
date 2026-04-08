@@ -38,7 +38,7 @@ const sections = [
     key: "fda_section_5",
     title: "Purchaser Responsibility",
     content:
-      "By purchasing from Purity Lab, you confirm that you are at least 18 years of age and that all products are being acquired exclusively for legitimate in-vitro research purposes. You accept full responsibility for the lawful handling, storage, and use of all products. You further agree not to resell these products for human or animal consumption.",
+      "By purchasing from Purity Lab, you confirm that you are at least 21 years of age and that all products are being acquired exclusively for legitimate in-vitro research purposes. You accept full responsibility for the lawful handling, storage, and use of all products. You further agree not to resell these products for human or animal consumption.",
   },
   {
     icon: ClipboardCheck,
@@ -67,10 +67,10 @@ export default function FdaPage() {
             return (
               <div key={section.key} className="p-6 md:p-8">
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1A2B4A]/10">
-                    <Icon className="h-5 w-5 text-[#1A2B4A]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#111111]/10">
+                    <Icon className="h-5 w-5 text-[#111111]" />
                   </div>
-                  <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+                  <h2 className="text-lg font-bold text-[#111111] font-[family-name:var(--font-heading)]">
                     <EditableText settingKey={`${section.key}_title`}>
                       {section.title}
                     </EditableText>

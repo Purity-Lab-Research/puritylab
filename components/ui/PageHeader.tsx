@@ -20,32 +20,32 @@ export default function PageHeader({
   descriptionKey,
 }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden mx-4 sm:mx-6 lg:mx-8 my-4 rounded-2xl bg-gradient-to-br from-[#1A2B4A] to-[#243B5C]">
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-9 md:py-14">
+    <section className="bg-[#FAFAFA] pt-24 pb-8 border-b border-[#F0F0F0]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"
-            className="mb-4 flex items-center gap-1 text-sm text-white/70 font-[family-name:var(--font-body)]"
+            className="mb-3 flex items-center gap-1 text-sm text-text-secondary"
           >
             <Link
               href="/"
-              className="hover:text-white transition-colors"
+              className="hover:text-primary transition-colors"
             >
               Home
             </Link>
             {breadcrumbs.map((crumb, i) => (
               <span key={i} className="flex items-center gap-1">
-                <ChevronRight className="w-3.5 h-3.5 text-white/40" />
+                <ChevronRight className="w-3.5 h-3.5 text-text-secondary/40" />
                 {crumb.href ? (
                   <Link
                     href={crumb.href}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     {crumb.label}
                   </Link>
                 ) : (
-                  <span className="text-white">{crumb.label}</span>
+                  <span className="text-primary">{crumb.label}</span>
                 )}
               </span>
             ))}
@@ -53,7 +53,7 @@ export default function PageHeader({
         )}
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white font-[family-name:var(--font-heading)]">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
           {titleKey ? (
             <EditableText settingKey={titleKey}>{title}</EditableText>
           ) : (
@@ -63,7 +63,7 @@ export default function PageHeader({
 
         {/* Description */}
         {description && (
-          <p className="mt-3 max-w-2xl text-base text-white/80 font-[family-name:var(--font-body)]">
+          <p className="mt-2 max-w-2xl text-base text-text-secondary">
             {descriptionKey ? (
               <EditableText settingKey={descriptionKey}>{description}</EditableText>
             ) : (

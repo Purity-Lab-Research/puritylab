@@ -232,9 +232,9 @@ export async function sendOrderConfirmation(
         <tr>
           <td style="padding:16px 24px;background:#fdf6e3;border-top:1px solid #eee;">
             <p style="margin:0;font-size:12px;color:#856404;line-height:1.5;text-align:center;">
-              <strong>For Research Use Only.</strong> Products sold by Purity Lab are intended solely for
-              laboratory and research purposes. They are not intended for human or animal consumption,
-              medical, therapeutic, or diagnostic use.
+              <strong>For Research Use Only.</strong> All products sold by Purity Lab are for in-vitro laboratory research and educational purposes only. Not for human or animal consumption. The purchaser assumes full responsibility for
+              the lawful use of all products. Purity Lab assumes no liability for
+              the use or misuse of any products sold. You must be 21+ to purchase.
             </p>
           </td>
         </tr>
@@ -446,7 +446,7 @@ export async function sendShippingNotification(
         <tr>
           <td style="padding:16px 24px;background:#fdf6e3;border-top:1px solid #eee;">
             <p style="margin:0;font-size:12px;color:#856404;line-height:1.5;text-align:center;">
-              <strong>For Research Use Only.</strong> Products sold by Purity Lab are intended solely for
+              <strong>For Research Use Only.</strong> All products sold by Purity Lab are for in-vitro laboratory research and educational purposes only. Not for human or animal consumption. The purchaser assumes full responsibility for
               laboratory and research purposes.
             </p>
           </td>
@@ -688,7 +688,7 @@ export async function sendBackInStockNotification(
         <tr>
           <td style="padding:16px 24px;background:#fdf6e3;border-top:1px solid #eee;">
             <p style="margin:0;font-size:12px;color:#856404;line-height:1.5;text-align:center;">
-              <strong>For Research Use Only.</strong> Products sold by Purity Lab are intended solely for
+              <strong>For Research Use Only.</strong> All products sold by Purity Lab are for in-vitro laboratory research and educational purposes only. Not for human or animal consumption. The purchaser assumes full responsibility for
               laboratory and research purposes.
             </p>
           </td>

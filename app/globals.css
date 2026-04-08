@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  /* Purity Lab — white + navy, clinical trust */
-  --color-primary: #1A2B4A;
-  --color-primary-hover: #142238;
-  --color-primary-light: #243B5C;
+  /* Purity Lab — clean, light, modern */
+  --color-primary: #111111;
+  --color-primary-hover: #000000;
+  --color-primary-light: #333333;
 
-  --color-secondary: #0097A7;
-  --color-secondary-hover: #00838F;
-  --color-secondary-light: #4DD0E1;
+  --color-secondary: #10B981;
+  --color-secondary-hover: #059669;
+  --color-secondary-light: #D1FAE5;
 
   --color-surface: #FFFFFF;
   --color-background: #FAFAFA;
-  --color-border: #E2E8F0;
+  --color-border: #F0F0F0;
 
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #64748B;
+  --color-text-primary: #111111;
+  --color-text-secondary: #6B7280;
 
-  --color-success: #16A34A;
+  --color-success: #10B981;
   --color-warning: #F59E0B;
-  --color-error: #DC2626;
-  --color-danger: #DC2626;
+  --color-error: #EF4444;
+  --color-danger: #EF4444;
 
-  --font-heading: "Instrument Sans", sans-serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
 }
 
 @layer base {
@@ -111,6 +111,15 @@
 
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Hide scrollbar for carousel */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   .animate-slide-right {

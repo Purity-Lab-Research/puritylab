@@ -39,7 +39,7 @@ Set these in **Vercel Dashboard > Project Settings > Environment Variables**.
 
 | Variable | Description | Where to Get It |
 |----------|-------------|-----------------|
-| `SHIPPO_API_TOKEN` | Shippo API token | Shippo Dashboard > API |
+
 
 #### Email
 

@@ -78,7 +78,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-4 text-sm font-semibold text-[#0097A7] underline hover:text-[#1A2B4A] font-[family-name:var(--font-body)]"
+          className="mt-4 text-sm font-semibold text-[#10B981] underline hover:text-[#111111] font-[family-name:var(--font-body)]"
         >
           Send another message
         </button>
@@ -87,7 +87,7 @@ export default function ContactForm() {
   }
 
   const inputClasses =
-    "w-full rounded-lg border border-[#dde2ea] bg-white px-4 py-3 text-sm text-gray-800 outline-none transition-colors focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7]/30 font-[family-name:var(--font-body)]";
+    "w-full rounded-lg border border-[#dde2ea] bg-white px-4 py-3 text-sm text-gray-800 outline-none transition-colors focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981]/30 font-[family-name:var(--font-body)]";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -202,7 +202,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white transition-all duration-250 hover:bg-[#142238] disabled:cursor-not-allowed disabled:opacity-60 font-[family-name:var(--font-body)]"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#111111] px-7 py-3 text-sm font-semibold text-white transition-all duration-250 hover:bg-[#000000] disabled:cursor-not-allowed disabled:opacity-60 font-[family-name:var(--font-body)]"
       >
         <Send className="h-4 w-4" />
         {loading ? "Sending..." : "Send Message"}

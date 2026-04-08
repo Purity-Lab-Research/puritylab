@@ -38,6 +38,7 @@ export default function ReorderButton({ items }: Props) {
           image: product?.images?.[0] ?? null,
           purchaseType: "one-time",
           deliveryFrequencyWeeks: 4,
+      billingCycle: "monthly",
           quantity: item.quantity,
         });
       }
@@ -56,7 +57,7 @@ export default function ReorderButton({ items }: Props) {
     <button
       onClick={handleReorder}
       disabled={loading}
-      className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0097A7] transition-colors disabled:opacity-50"
+      className="inline-flex items-center gap-2 rounded-lg bg-[#111111] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#10B981] transition-colors disabled:opacity-50"
     >
       {loading ? (
         <Loader2 className="h-4 w-4 animate-spin" />

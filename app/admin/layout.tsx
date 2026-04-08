@@ -35,16 +35,16 @@ export default async function AdminLayout({
     <div className="flex h-screen">
       <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-gray-200 bg-white">
         <div className="px-6 py-5">
-          <h1 className="text-sm font-bold tracking-widest text-[#1A2B4A]">
+          <h1 className="text-sm font-bold tracking-widest text-[#111111]">
             PURITY LAB ADMIN
           </h1>
         </div>
         <AdminNav role={role} />
       </aside>
 
-      <div className="ml-64 flex-1 overflow-y-auto bg-gray-50">
+      <div className="ml-64 flex-1 overflow-y-auto bg-[#FAFAFA]">
         {/* Top bar with notifications */}
-        <div className="sticky top-0 z-20 flex items-center justify-end bg-gray-50 px-8 py-3 border-b border-gray-200/50">
+        <div className="sticky top-0 z-20 flex items-center justify-end bg-[#FAFAFA] px-8 py-3 border-b border-[#F0F0F0]">
           <AdminNotifications />
         </div>
         <div className="p-8 pt-4">

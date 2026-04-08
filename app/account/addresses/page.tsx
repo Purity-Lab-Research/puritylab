@@ -141,7 +141,7 @@ export default function AddressesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 border-2 border-[#1A2B4A] border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#111111] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -149,7 +149,7 @@ export default function AddressesPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A]">
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#111111]">
           Addresses
         </h1>
         {!showForm && (
@@ -186,7 +186,7 @@ export default function AddressesPage() {
                 required
                 value={form.full_name}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div className="sm:col-span-2">
@@ -198,7 +198,7 @@ export default function AddressesPage() {
                 required
                 value={form.line1}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div className="sm:col-span-2">
@@ -210,7 +210,7 @@ export default function AddressesPage() {
                 name="line2"
                 value={form.line2}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div>
@@ -222,7 +222,7 @@ export default function AddressesPage() {
                 required
                 value={form.city}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div>
@@ -234,7 +234,7 @@ export default function AddressesPage() {
                 required
                 value={form.province_state}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div>
@@ -246,7 +246,7 @@ export default function AddressesPage() {
                 required
                 value={form.postal_code}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               />
             </div>
             <div>
@@ -257,7 +257,7 @@ export default function AddressesPage() {
                 name="country"
                 value={form.country}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors bg-white"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors bg-white"
               >
                 {COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -274,7 +274,7 @@ export default function AddressesPage() {
               name="is_default"
               checked={form.is_default}
               onChange={handleChange}
-              className="rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
+              className="rounded border-gray-300 text-[#111111] focus:ring-[#10B981]"
             />
             Set as default address
           </label>
@@ -307,7 +307,7 @@ export default function AddressesPage() {
               className="bg-white rounded-xl shadow-sm p-5 relative"
             >
               {addr.is_default && (
-                <span className="absolute top-4 right-4 inline-flex items-center gap-1 text-xs font-medium text-[#1A2B4A] bg-primary/5 px-2 py-0.5 rounded-full">
+                <span className="absolute top-4 right-4 inline-flex items-center gap-1 text-xs font-medium text-[#111111] bg-primary/5 px-2 py-0.5 rounded-full">
                   <Star className="w-3 h-3 fill-current" />
                   Default
                 </span>
@@ -324,7 +324,7 @@ export default function AddressesPage() {
               <div className="flex gap-2 mt-4">
                 <button
                   onClick={() => openEdit(addr)}
-                  className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-[#0097A7] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-[#10B981] transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
                   Edit

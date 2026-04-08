@@ -4,12 +4,13 @@ export const SITE_DESCRIPTION =
   "Research-grade peptides with 99%+ purity. Third-party tested with full COA library. Subscription pricing, protocol-based stacks, and same-day processing.";
 
 export const CONTACT_EMAIL = "support@puritylabresearch.com";
-export const BUSINESS_ADDRESS = "Windsor, Ontario, Canada";
-export const BUSINESS_HOURS = "Mon–Fri: 9:00 AM – 5:00 PM EST";
+export const BUSINESS_ADDRESS = "Los Angeles, California";
+export const BUSINESS_HOURS = "Mon-Fri: 9:00 AM - 5:00 PM EST";
 
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/puritylabresearch",
   tiktok: "https://www.tiktok.com/@puritylabresearch",
+  youtube: "https://youtube.com/@puritylabresearch",
 };
 
 export const SHIPPING_INFO = {
@@ -20,7 +21,7 @@ export const SHIPPING_INFO = {
 
 export const SHIPPING_COST = 15;
 export const TAX_RATE = 0.13;
-export const SUBSCRIPTION_DISCOUNT = 0.10;
+export const SUBSCRIPTION_DISCOUNTS: Record<number, number> = { 4: 0.15, 6: 0.10, 8: 0.05 };
 export const AGE_REQUIREMENT = 18;
 export const MAX_QUANTITY = 20;
 

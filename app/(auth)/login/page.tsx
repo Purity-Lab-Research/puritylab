@@ -49,7 +49,7 @@ function LoginForm() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-6">
+      <h1 className="text-2xl font-extrabold tracking-tight text-[#111111] mb-6 text-center">
         Welcome Back
       </h1>
 
@@ -61,7 +61,7 @@ function LoginForm() {
         )}
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-[#111111] mb-1">
             Email
           </label>
           <input
@@ -70,13 +70,13 @@ function LoginForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+            className="w-full rounded-lg border border-[#F0F0F0] px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
             placeholder="you@example.com"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-[#111111] mb-1">
             Password
           </label>
           <div className="relative">
@@ -86,7 +86,7 @@ function LoginForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 pr-11 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+              className="w-full rounded-lg border border-[#F0F0F0] px-4 py-2.5 pr-11 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
               placeholder="••••••••"
             />
             <button
@@ -105,7 +105,7 @@ function LoginForm() {
         </div>
 
         <div className="flex justify-end">
-          <Link href="/forgot-password" className="text-xs text-[#0097A7] hover:underline">
+          <Link href="/forgot-password" className="text-xs text-[#10B981] hover:underline">
             Forgot password?
           </Link>
         </div>
@@ -117,7 +117,7 @@ function LoginForm() {
 
       <p className="mt-6 text-center text-sm text-gray-600">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-[#0097A7] hover:underline font-medium">
+        <Link href="/register" className="text-[#10B981] hover:underline font-medium">
           Sign up
         </Link>
       </p>

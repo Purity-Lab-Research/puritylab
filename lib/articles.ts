@@ -11,7 +11,7 @@ export interface Article {
 }
 
 const DISCLAIMER =
-  "Disclaimer: All products discussed are for research purposes only. This content is for educational purposes and does not constitute medical advice. Consult a qualified healthcare professional before beginning any research protocol.";
+  "IMPORTANT DISCLAIMER: This article is provided for educational and informational purposes only. All information is compiled from published peer-reviewed research and is intended to provide context for laboratory researchers. Nothing in this article constitutes medical, pharmaceutical, therapeutic, diagnostic, or healthcare advice of any kind. This article does not recommend, suggest, or endorse the use of any product for human or animal consumption. All products referenced are for in-vitro laboratory research only. Dosing information, protocols, cycle recommendations, and stacking suggestions referenced herein are drawn from published research studies and are provided solely as educational context for researchers. They do not constitute instructions or recommendations for human use. Purity Lab, its owners, employees, and affiliates assume no liability for any actions taken based on the information in this article. Always consult a qualified, licensed healthcare professional before making any health-related decisions. Use of any product in a manner inconsistent with its labeled research purpose is strictly prohibited and done entirely at the user's own risk.";
 
 export const articles: Article[] = [
   // ─── Getting Started ───

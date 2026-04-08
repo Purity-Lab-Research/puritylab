@@ -36,7 +36,7 @@ interface ShippingForm {
   country: string;
 }
 
-interface ShippingRate {
+interface _ShippingRate {
   id: string;
   carrier: string;
   service: string;
@@ -58,11 +58,11 @@ const INITIAL_SHIPPING: ShippingForm = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400";
+  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 placeholder:text-gray-400";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotal, savings, hasSubscriptionItems, clearCart } = useCart();
+  const { items, subtotal, savings, shippingCost: cartShipping, hasSubscriptionItems, clearCart } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -82,6 +82,7 @@ export default function CheckoutPage() {
     researchDisclaimer: false,
     ageVerified: false,
     termsAccepted: false,
+    researchAcknowledgment: false,
   });
   const [countrySearch, setCountrySearch] = useState("");
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
@@ -100,14 +101,8 @@ export default function CheckoutPage() {
   // Delivery method: "ship" or "pickup"
   const [deliveryMethod, setDeliveryMethod] = useState<"ship" | "pickup">("ship");
 
-  // Shipping rates state
-  const [shippingRates, setShippingRates] = useState<ShippingRate[]>([]);
-  const [selectedRate, setSelectedRate] = useState<ShippingRate | null>(null);
-  const [loadingRates, setLoadingRates] = useState(false);
-  const [ratesError, setRatesError] = useState<string | null>(null);
-  const [ratesFetched, setRatesFetched] = useState(false);
-
-  const shippingCost = deliveryMethod === "pickup" ? 0 : (selectedRate?.rate ?? 0);
+  // Flat rate shipping (calculated from cart)
+  const shippingCost = deliveryMethod === "pickup" ? 0 : cartShipping;
   const discountAmount = discountData?.discount ?? 0;
   const discountedSubtotal = Math.max(0, subtotal - discountAmount);
   const tax = Math.round(discountedSubtotal * TAX_RATE * 100) / 100;
@@ -127,64 +122,7 @@ export default function CheckoutPage() {
     return () => clearTimeout(timer);
   }, [shipping]);
 
-  const fetchShippingRates = useCallback(async () => {
-    if (!shipping.city || !shipping.country || !shipping.postalCode || !shipping.line1) return;
-
-    setLoadingRates(true);
-    setRatesError(null);
-
-    try {
-      const res = await fetch("/api/shipping/rates", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          address: {
-            name: shipping.fullName,
-            line1: shipping.line1,
-            line2: shipping.line2 || "",
-            city: shipping.city,
-            province: shipping.province,
-            postal: shipping.postalCode,
-            country: shipping.country,
-          },
-          items: items.map((item) => ({
-            productId: item.productId,
-            quantity: item.quantity,
-          })),
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to fetch shipping rates");
-      }
-
-      setShippingRates(data.rates || []);
-      setRatesFetched(true);
-
-      // Auto-select cheapest rate
-      if (data.rates && data.rates.length > 0) {
-        setSelectedRate(data.rates[0]);
-      } else {
-        setSelectedRate(null);
-        setRatesError(data.error || "No shipping options available for this address. Please verify your address or try a different one.");
-      }
-    } catch (err) {
-      setRatesError(err instanceof Error ? err.message : "Failed to fetch rates");
-      setShippingRates([]);
-      setSelectedRate(null);
-    } finally {
-      setLoadingRates(false);
-    }
-  }, [shipping.fullName, shipping.line1, shipping.line2, shipping.city, shipping.province, shipping.postalCode, shipping.country, items]);
-
-  // Reset rates when address changes
-  useEffect(() => {
-    setRatesFetched(false);
-    setSelectedRate(null);
-    setShippingRates([]);
-  }, [shipping.city, shipping.country, shipping.postalCode, shipping.province, shipping.line1]);
+  // Shipping is flat rate, no need to fetch rates
 
   async function applyDiscount() {
     if (!discountCode.trim()) return;
@@ -266,15 +204,16 @@ export default function CheckoutPage() {
       }
     }
 
-    if (!compliance.researchDisclaimer || !compliance.ageVerified || !compliance.termsAccepted) {
+    if (!compliance.researchDisclaimer || !compliance.ageVerified || !compliance.termsAccepted || !compliance.researchAcknowledgment) {
       errors.fullName = errors.fullName || "";
       setError("Please acknowledge all required checkboxes before proceeding.");
       setFieldErrors(errors);
       return false;
     }
 
-    if (deliveryMethod === "ship" && !selectedRate) {
-      setError("Please select a shipping method.");
+    // Minimum order check
+    if (subtotal < 50) {
+      setError("Minimum order is $50.");
       setFieldErrors(errors);
       return false;
     }
@@ -321,15 +260,6 @@ export default function CheckoutPage() {
           researchDisclaimerAccepted: compliance.researchDisclaimer,
           ageVerified: compliance.ageVerified,
           termsAccepted: compliance.termsAccepted,
-          shippingRate: deliveryMethod === "pickup"
-            ? { id: "pickup", carrier: "Local Pickup", service: "In-Person", rate: 0, shipment_id: "pickup" }
-            : {
-                id: selectedRate!.id,
-                carrier: selectedRate!.carrier,
-                service: selectedRate!.service,
-                rate: selectedRate!.rate,
-                shipment_id: selectedRate!.shipment_id,
-              },
           createAccount: createAccount || undefined,
           password: createAccount ? password : undefined,
         }),
@@ -365,29 +295,31 @@ export default function CheckoutPage() {
             <div className="flex items-center gap-2">
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
-                  currentStep >= 1
-                    ? "bg-[#1A2B4A] text-white"
-                    : "bg-gray-200 text-gray-500"
+                  currentStep > 1
+                    ? "bg-[#10B981] text-white"
+                    : currentStep === 1
+                      ? "bg-[#111111] text-white"
+                      : "bg-[#F0F0F0] text-[#6B7280]"
                 }`}
               >
-                1
+                {currentStep > 1 ? <Check className="h-4 w-4" /> : "1"}
               </span>
-              <span className={`text-sm font-medium ${currentStep >= 1 ? "text-[#1A2B4A]" : "text-gray-400"}`}>
+              <span className={`text-sm font-medium ${currentStep >= 1 ? "text-[#111111]" : "text-gray-400"}`}>
                 Shipping
               </span>
             </div>
-            <div className="h-px w-12 bg-gray-300" />
+            <div className={`h-px w-12 ${currentStep >= 2 ? "bg-[#10B981]" : "bg-[#F0F0F0]"}`} />
             <div className="flex items-center gap-2">
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
                   currentStep >= 2
-                    ? "bg-[#1A2B4A] text-white"
-                    : "bg-gray-200 text-gray-500"
+                    ? "bg-[#111111] text-white"
+                    : "bg-[#F0F0F0] text-[#6B7280]"
                 }`}
               >
                 2
               </span>
-              <span className={`text-sm font-medium ${currentStep >= 2 ? "text-[#1A2B4A]" : "text-gray-400"}`}>
+              <span className={`text-sm font-medium ${currentStep >= 2 ? "text-[#111111]" : "text-gray-400"}`}>
                 Payment
               </span>
             </div>
@@ -400,10 +332,10 @@ export default function CheckoutPage() {
             {/* Step 1: Shipping */}
             {currentStep === 1 && (
               <form onSubmit={handleContinueToPayment} className="space-y-6">
-                <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
+                <div className="rounded-2xl bg-white border border-[#F0F0F0] p-6 sm:p-8">
                   <div className="flex items-center gap-2 mb-6">
-                    <Truck className="h-5 w-5 text-[#1A2B4A]" />
-                    <h2 className="text-xl font-bold text-[#1A2B4A]">
+                    <Truck className="h-5 w-5 text-[#111111]" />
+                    <h2 className="text-xl font-bold text-[#111111]">
                       Shipping Information
                     </h2>
                   </div>
@@ -467,7 +399,7 @@ export default function CheckoutPage() {
                               setPasswordError(null);
                             }
                           }}
-                          className="rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
+                          className="rounded border-gray-300 text-[#111111] focus:ring-[#10B981]"
                         />
                         <span className="text-sm text-gray-700">
                           Create an account for faster checkout next time
@@ -509,13 +441,13 @@ export default function CheckoutPage() {
                           onClick={() => setDeliveryMethod("ship")}
                           className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 transition-all ${
                             deliveryMethod === "ship"
-                              ? "border-[#1A2B4A] bg-[#1A2B4A]/5"
+                              ? "border-[#111111] bg-[#111111]/5"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
-                          <Truck className={`h-5 w-5 ${deliveryMethod === "ship" ? "text-[#1A2B4A]" : "text-gray-400"}`} />
+                          <Truck className={`h-5 w-5 ${deliveryMethod === "ship" ? "text-[#111111]" : "text-gray-400"}`} />
                           <div className="text-left">
-                            <p className={`text-sm font-medium ${deliveryMethod === "ship" ? "text-[#1A2B4A]" : "text-gray-700"}`}>
+                            <p className={`text-sm font-medium ${deliveryMethod === "ship" ? "text-[#111111]" : "text-gray-700"}`}>
                               Ship to Address
                             </p>
                             <p className="text-xs text-gray-400">Worldwide delivery</p>
@@ -526,13 +458,13 @@ export default function CheckoutPage() {
                           onClick={() => setDeliveryMethod("pickup")}
                           className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 transition-all ${
                             deliveryMethod === "pickup"
-                              ? "border-[#1A2B4A] bg-[#1A2B4A]/5"
+                              ? "border-[#111111] bg-[#111111]/5"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
-                          <Package className={`h-5 w-5 ${deliveryMethod === "pickup" ? "text-[#1A2B4A]" : "text-gray-400"}`} />
+                          <Package className={`h-5 w-5 ${deliveryMethod === "pickup" ? "text-[#111111]" : "text-gray-400"}`} />
                           <div className="text-left">
-                            <p className={`text-sm font-medium ${deliveryMethod === "pickup" ? "text-[#1A2B4A]" : "text-gray-700"}`}>
+                            <p className={`text-sm font-medium ${deliveryMethod === "pickup" ? "text-[#111111]" : "text-gray-700"}`}>
                               Local Pickup
                             </p>
                             <p className="text-xs text-gray-400">Windsor, ON</p>
@@ -544,11 +476,11 @@ export default function CheckoutPage() {
                     {/* Pickup Info */}
                     {deliveryMethod === "pickup" && (
                       <div className="sm:col-span-2 rounded-lg border border-blue-200 bg-primary/5 p-4 space-y-2">
-                        <p className="text-sm font-semibold text-[#1A2B4A]">Local Pickup  -  Windsor, Ontario</p>
+                        <p className="text-sm font-semibold text-[#111111]">Local Pickup  -  Windsor, Ontario</p>
                         <p className="text-sm text-gray-600">
                           Free pickup is available in <strong>Windsor, Ontario, Canada</strong> only.
                           To arrange a pickup time, email us at{" "}
-                          <a href="mailto:support@puritylabresearch.com" className="text-[#0097A7] hover:underline font-medium">
+                          <a href="mailto:support@puritylabresearch.com" className="text-[#10B981] hover:underline font-medium">
                             support@puritylabresearch.com
                           </a>{" "}
                           after placing your order. You can pay online now or in person at pickup.
@@ -733,11 +665,11 @@ export default function CheckoutPage() {
                                       setCountrySearch("");
                                     }}
                                     className={`flex w-full items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[#f0f4ff] ${
-                                      shipping.country === c.code ? "bg-[#f0f4ff] text-[#1A2B4A] font-medium" : "text-gray-700"
+                                      shipping.country === c.code ? "bg-[#f0f4ff] text-[#111111] font-medium" : "text-gray-700"
                                     }`}
                                   >
                                     {c.name}
-                                    {shipping.country === c.code && <Check className="h-4 w-4 text-[#1A2B4A]" />}
+                                    {shipping.country === c.code && <Check className="h-4 w-4 text-[#111111]" />}
                                   </button>
                                 </li>
                               ));
@@ -752,101 +684,38 @@ export default function CheckoutPage() {
 
                 {/* Shipping Method Selection (hidden for pickup) */}
                 {deliveryMethod === "ship" && (
-                <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
+                <div className="rounded-2xl bg-white border border-[#F0F0F0] p-6 sm:p-8">
                   <div className="flex items-center gap-2 mb-4">
-                    <Package className="h-5 w-5 text-[#1A2B4A]" />
-                    <h2 className="text-lg font-bold text-[#1A2B4A]">
-                      Shipping Method
+                    <Package className="h-5 w-5 text-[#111111]" />
+                    <h2 className="text-lg font-bold text-[#111111]">
+                      Shipping
                     </h2>
                   </div>
 
-                  {!ratesFetched && !loadingRates && (
-                    <div className="text-center py-6">
-                      <p className="text-sm text-gray-500 mb-3">
-                        Enter your shipping address above to see available shipping options.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={fetchShippingRates}
-                        disabled={!canFetchRates || loadingRates}
-                        className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <Truck className="h-4 w-4" />
-                        Get Shipping Rates
-                      </button>
+                  <div className="rounded-lg border border-gray-200 p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">
+                          {shippingCost === 0 ? "Free Shipping" : `Flat Rate: ${formatPrice(shippingCost)}`}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {hasSubscriptionItems
+                            ? "Free shipping on all subscriptions"
+                            : subtotal >= 200
+                              ? "Free shipping on orders over $200"
+                              : "Estimated 2-4 business days"}
+                        </p>
+                      </div>
+                      <span className={`text-sm font-bold ${shippingCost === 0 ? "text-green-600" : "text-gray-900"}`}>
+                        {shippingCost === 0 ? "FREE" : formatPrice(shippingCost)}
+                      </span>
                     </div>
-                  )}
-
-                  {loadingRates && (
-                    <div className="flex items-center justify-center gap-2 py-8">
-                      <Loader2 className="h-5 w-5 animate-spin text-[#1A2B4A]" />
-                      <span className="text-sm text-gray-600">Fetching shipping rates...</span>
-                    </div>
-                  )}
-
-                  {ratesError && (
-                    <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700 mb-3">
-                      {ratesError}
-                      <button
-                        type="button"
-                        onClick={fetchShippingRates}
-                        className="ml-2 font-medium underline"
-                      >
-                        Try again
-                      </button>
-                    </div>
-                  )}
-
-                  {ratesFetched && shippingRates.length === 0 && !loadingRates && (
-                    <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-700">
-                      No shipping options available for this address. Please verify your address or try a different one.
-                    </div>
-                  )}
-
-                  {shippingRates.length > 0 && (
-                    <div className="space-y-2">
-                      {shippingRates.map((rate) => (
-                        <label
-                          key={rate.id}
-                          className={`flex items-center gap-4 rounded-lg border p-4 cursor-pointer transition-all ${
-                            selectedRate?.id === rate.id
-                              ? "border-[#1A2B4A] bg-[#f0f4ff] ring-1 ring-[#1A2B4A]"
-                              : "border-gray-200 hover:border-gray-300"
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="shippingRate"
-                            value={rate.id}
-                            checked={selectedRate?.id === rate.id}
-                            onChange={() => setSelectedRate(rate)}
-                            className="text-[#1A2B4A] focus:ring-[#0097A7]"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900">
-                              {rate.carrier} &middot; {rate.service}
-                            </p>
-                            <p className="text-xs text-gray-500">{rate.delivery_days}</p>
-                          </div>
-                          <span className="text-sm font-bold text-gray-900 whitespace-nowrap">
-                            {formatPrice(rate.rate)}
-                          </span>
-                        </label>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={fetchShippingRates}
-                        className="text-xs text-[#0097A7] hover:underline mt-1"
-                      >
-                        Refresh rates
-                      </button>
-                    </div>
-                  )}
+                  </div>
                 </div>
                 )}
 
                 {/* Research Compliance */}
-                <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
+                <div className="rounded-2xl bg-white border border-[#F0F0F0] p-6 sm:p-8">
                   <div className="rounded-lg border border-amber-200 bg-amber-50 p-5 space-y-4">
                     <div className="flex items-start gap-2.5">
                       <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
@@ -865,37 +734,26 @@ export default function CheckoutPage() {
                         type="checkbox"
                         checked={compliance.researchDisclaimer}
                         onChange={(e) => setCompliance((p) => ({ ...p, researchDisclaimer: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
+                        className="mt-1 rounded border-gray-300 text-[#111111] focus:ring-[#10B981] flex-shrink-0"
                       />
-                      <span className="text-sm text-gray-700">
-                        I acknowledge that these products are for <strong>research use only</strong> and are not for human consumption.
+                      <span className="text-[11px] text-gray-700 leading-relaxed">
+                        I hereby confirm under penalty of perjury that: (1) I am at least 21 years of age; (2) All products in this order are for in-vitro laboratory research and educational purposes only; (3) I will not use, consume, administer, or permit any product to be used for human or animal consumption; (4) These products are not FDA-approved drugs, supplements, or food products; (5) I have read and agree to the{" "}
+                        <a href="/policies/terms" target="_blank" className="text-[#10B981] underline">Terms of Service</a>,{" "}
+                        <a href="/policies/privacy" target="_blank" className="text-[#10B981] underline">Privacy Policy</a>, and{" "}
+                        <a href="/policies/refund" target="_blank" className="text-[#10B981] underline">Refund Policy</a>;
+                        (6) I acknowledge that Purity Lab makes no claims regarding therapeutic efficacy and assumes no liability for the use or misuse of products; (7) All sales are subject to the limitation of liability provisions in the Terms of Service; (8) I will comply with all applicable laws regarding research chemicals in my jurisdiction.
                       </span>
                     </label>
 
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={compliance.ageVerified}
-                        onChange={(e) => setCompliance((p) => ({ ...p, ageVerified: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
+                        checked={compliance.researchAcknowledgment}
+                        onChange={(e) => setCompliance((p) => ({ ...p, researchAcknowledgment: e.target.checked }))}
+                        className="mt-1 rounded border-gray-300 text-[#111111] focus:ring-[#10B981] flex-shrink-0"
                       />
-                      <span className="text-sm text-gray-700">
-                        I confirm that I am <strong>18 years of age or older</strong>.
-                      </span>
-                    </label>
-
-                    <label className="flex items-start gap-3 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={compliance.termsAccepted}
-                        onChange={(e) => setCompliance((p) => ({ ...p, termsAccepted: e.target.checked }))}
-                        className="mt-0.5 rounded border-gray-300 text-[#1A2B4A] focus:ring-[#0097A7]"
-                      />
-                      <span className="text-sm text-gray-700">
-                        I agree to the{" "}
-                        <a href="/policies/terms" target="_blank" className="text-[#0097A7] underline">Terms of Service</a>
-                        {" "}and{" "}
-                        <a href="/policies/privacy" target="_blank" className="text-[#0097A7] underline">Privacy Policy</a>.
+                      <span className="text-[11px] text-gray-700 leading-relaxed">
+                        I acknowledge that I have read the Research Use Disclaimer on this website and understand that all products are sold strictly for in-vitro laboratory research purposes. I accept full responsibility for the use, handling, storage, and disposal of all products in this order.
                       </span>
                     </label>
                   </div>
@@ -903,8 +761,8 @@ export default function CheckoutPage() {
                   <div className="mt-6">
                     <button
                       type="submit"
-                      disabled={isSubmitting || !compliance.researchDisclaimer || !compliance.ageVerified || !compliance.termsAccepted || !selectedRate}
-                      className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#1A2B4A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={isSubmitting || !compliance.researchDisclaimer || !compliance.ageVerified || !compliance.termsAccepted || !compliance.researchAcknowledgment }
+                      className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#111111] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#000000] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -925,10 +783,10 @@ export default function CheckoutPage() {
 
             {/* Step 2: Payment */}
             {currentStep === 2 && clientSecret && orderId && (
-              <div className="rounded-xl bg-white p-6 shadow-sm sm:p-8">
+              <div className="rounded-2xl bg-white border border-[#F0F0F0] p-6 sm:p-8">
                 <div className="flex items-center gap-2 mb-6">
-                  <CreditCard className="h-5 w-5 text-[#1A2B4A]" />
-                  <h2 className="text-xl font-bold text-[#1A2B4A]">
+                  <CreditCard className="h-5 w-5 text-[#111111]" />
+                  <h2 className="text-xl font-bold text-[#111111]">
                     Payment
                   </h2>
                 </div>
@@ -943,16 +801,14 @@ export default function CheckoutPage() {
                         {shipping.line2 ? `, ${shipping.line2}` : ""}, {shipping.city}, {shipping.province} {shipping.postalCode}
                       </p>
                       <p className="text-xs text-gray-500">{shipping.email}</p>
-                      {selectedRate && (
-                        <p className="text-xs text-[#1A2B4A] font-medium mt-1">
-                          {selectedRate.carrier} &middot; {selectedRate.service} ({selectedRate.delivery_days})
-                        </p>
-                      )}
+                      <p className="text-xs text-[#111111] font-medium mt-1">
+                        {shippingCost === 0 ? "Free Shipping" : `Shipping: ${formatPrice(shippingCost)}`}
+                      </p>
                     </div>
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      className="text-xs font-medium text-[#0097A7] hover:underline"
+                      className="text-xs font-medium text-[#10B981] hover:underline"
                     >
                       Edit
                     </button>
@@ -966,7 +822,7 @@ export default function CheckoutPage() {
                     appearance: {
                       theme: "stripe",
                       variables: {
-                        colorPrimary: "#1A2B4A",
+                        colorPrimary: "#111111",
                         borderRadius: "8px",
                         fontFamily: "inherit",
                       },
@@ -984,7 +840,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="mt-4 flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-[#0097A7]"
+                  className="mt-4 flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-[#10B981]"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   Back to Shipping
@@ -995,8 +851,8 @@ export default function CheckoutPage() {
 
           {/* Order Summary Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 rounded-xl bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-lg font-bold text-[#1A2B4A]">
+            <div className="sticky top-24 rounded-2xl bg-white border border-[#F0F0F0] p-6">
+              <h3 className="mb-4 text-lg font-bold text-[#111111]">
                 Order Summary
               </h3>
 
@@ -1088,13 +944,13 @@ export default function CheckoutPage() {
                           if (discountError) setDiscountError(null);
                         }}
                         placeholder="Enter code"
-                        className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400"
+                        className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm transition-all focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 placeholder:text-gray-400"
                       />
                       <button
                         type="button"
                         onClick={applyDiscount}
                         disabled={applyingDiscount || !discountCode.trim()}
-                        className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#000000] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {applyingDiscount ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -1144,20 +1000,25 @@ export default function CheckoutPage() {
                 )}
                 <div className="flex justify-between text-gray-600">
                   <span>{deliveryMethod === "pickup" ? "Local Pickup" : "Shipping"}</span>
-                  <span>
+                  <span className={shippingCost === 0 ? "text-green-600 font-medium" : ""}>
                     {deliveryMethod === "pickup"
-                      ? <span className="text-green-600 font-medium">Free</span>
-                      : selectedRate
-                        ? formatPrice(shippingCost)
-                        : <span className="text-gray-400 italic">Select method</span>
+                      ? "Free"
+                      : shippingCost === 0
+                        ? "Free"
+                        : formatPrice(shippingCost)
                     }
                   </span>
                 </div>
+                {shippingCost === 0 && deliveryMethod !== "pickup" && (
+                  <p className="text-[10px] text-success">
+                    {hasSubscriptionItems ? "Free shipping on all subscriptions" : "Free shipping on orders $200+"}
+                  </p>
+                )}
                 <div className="flex justify-between text-gray-600">
                   <span>Tax (13% HST)</span>
                   <span>{formatPrice(tax)}</span>
                 </div>
-                <div className="flex justify-between border-t border-gray-100 pt-2 text-base font-bold text-[#1A2B4A]">
+                <div className="flex justify-between border-t border-gray-100 pt-2 text-base font-bold text-[#111111]">
                   <span>Total</span>
                   <span>{formatPrice(total)}</span>
                 </div>
@@ -1174,8 +1035,8 @@ export default function CheckoutPage() {
                   Secure payment via Stripe
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <Truck className="h-3.5 w-3.5 text-[#0097A7]" />
-                  {selectedRate ? selectedRate.delivery_days : "Multiple carrier options"}
+                  <Truck className="h-3.5 w-3.5 text-[#10B981]" />
+                  Estimated 2-4 business days
                 </div>
               </div>
 

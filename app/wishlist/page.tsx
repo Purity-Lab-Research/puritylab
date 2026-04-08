@@ -38,7 +38,7 @@ export default function WishlistPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-10 md:py-14">
-      <h1 className="text-3xl font-bold tracking-tight text-[#1A2B4A] font-[family-name:var(--font-heading)] mb-8">
+      <h1 className="text-3xl font-bold tracking-tight text-[#111111] font-[family-name:var(--font-heading)] mb-8">
         My Wishlist
       </h1>
 
@@ -61,7 +61,7 @@ export default function WishlistPage() {
           </p>
           <Link
             href="/shop"
-            className="inline-block rounded-lg bg-[#1A2B4A] px-7 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-colors"
+            className="inline-block rounded-lg bg-[#111111] px-7 py-3 text-sm font-semibold text-white hover:bg-[#000000] transition-colors"
           >
             Browse Products
           </Link>

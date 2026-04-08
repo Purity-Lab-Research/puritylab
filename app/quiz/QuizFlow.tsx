@@ -116,16 +116,16 @@ function getReasonText(
         : "$300+/month";
 
   if (goal === "recovery") {
-    return `Based on your focus on injury recovery${focusStr ? ` - specifically ${focusStr}` : ""} - the ${protocol.name} gives you the essential BPC-157 and TB500 combination that athletes rely on for soft tissue healing. At $${protocol.subscription_price}/month with a subscription, it fits well within your ${budgetLabel} budget.`;
+    return `Based on your focus on injury recovery${focusStr ? ` - specifically ${focusStr}` : ""} - the ${protocol.name} gives you the essential BPC-157 and TB500 combination that athletes rely on for soft tissue healing. At $${protocol.subscription_price ?? "TBD"}/month with a subscription, it fits well within your ${budgetLabel} budget.`;
   }
   if (goal === "fat_loss") {
     if (protocol.slug === "performance") {
       return `For fat loss on a budget ${budgetLabel}, the ${protocol.name} is the smartest entry point. CJC-1295/Ipamorelin supports growth hormone release which aids both body composition and metabolic function${focusStr ? `, making it a strong match for your interest in ${focusStr}` : ""}.`;
     }
-    return `Based on your fat loss goals${focusStr ? ` and focus on ${focusStr}` : ""}, the ${protocol.name} combines MOTS-C and AOD 9604 - two peptides specifically studied for metabolic optimization and targeted fat reduction. At $${protocol.subscription_price}/month, it fits your ${budgetLabel} budget.`;
+    return `Based on your fat loss goals${focusStr ? ` and focus on ${focusStr}` : ""}, the ${protocol.name} combines MOTS-C and AOD 9604 - two peptides specifically studied for metabolic optimization and targeted fat reduction. At $${protocol.subscription_price ?? "TBD"}/month, it fits your ${budgetLabel} budget.`;
   }
   if (goal === "performance") {
-    return `For muscle and performance goals${focusStr ? ` with a focus on ${focusStr}` : ""}, the ${protocol.name} delivers clean growth hormone support through CJC-1295/Ipamorelin without cortisol or prolactin spikes. At $${protocol.subscription_price}/month, it's an efficient stack for your ${budgetLabel} budget.`;
+    return `For muscle and performance goals${focusStr ? ` with a focus on ${focusStr}` : ""}, the ${protocol.name} delivers clean growth hormone support through CJC-1295/Ipamorelin without cortisol or prolactin spikes. At $${protocol.subscription_price ?? "TBD"}/month, it's an efficient stack for your ${budgetLabel} budget.`;
   }
   // multiple
   if (protocol.slug === "full-recomp") {
@@ -266,11 +266,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
       <div className="sticky top-0 z-10 bg-background">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 pt-5 pb-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="font-heading text-xs font-bold text-white tracking-tight">
-                PL
-              </span>
-            </div>
+            <img src="/images/logo.svg" alt="Purity Lab" width={32} height={32} className="h-8 w-8" />
           </Link>
           {!showResults && (
             <span className="text-xs text-text-secondary">
@@ -538,12 +534,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                     </span>
                   </div>
                   <p className="text-xs text-text-secondary">
-                    One-time: ${recommended.one_time_price} - Save $
-                    {(
-                      recommended.one_time_price -
-                      recommended.subscription_price
-                    ).toFixed(0)}
-                    /mo with subscription
+                    One-time: ${recommended.one_time_price}. Save up to 15% with subscription.
                   </p>
                 </div>
               </div>

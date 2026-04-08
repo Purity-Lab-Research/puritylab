@@ -158,7 +158,7 @@ export default function HowWeTestPage() {
             <ScrollReveal>
               <div className="grid grid-cols-7 gap-0 relative">
                 {/* Connecting line */}
-                <div className="absolute top-5 left-[calc(100%/14)] right-[calc(100%/14)] h-0 border-t-2 border-dashed border-border" />
+                <div className="absolute top-5 left-[calc(100%/14)] right-[calc(100%/14)] h-0 border-t-2 border-dashed border-[#F0F0F0]" />
 
                 {STEPS.map((step) => (
                   <div
@@ -166,16 +166,16 @@ export default function HowWeTestPage() {
                     className="flex flex-col items-center text-center relative z-10"
                   >
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white mb-4 ${
-                        step.accent ? "bg-error" : "bg-primary"
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white mb-4 ${
+                        step.accent ? "bg-[#EF4444]" : "bg-[#111111]"
                       }`}
                     >
                       {step.number}
                     </div>
-                    <h3 className="font-heading text-sm font-bold text-primary mb-1.5 leading-tight">
+                    <h3 className="text-sm font-bold text-[#111111] mb-1.5 leading-tight">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-text-secondary leading-relaxed max-w-[140px]">
+                    <p className="text-xs text-[#6B7280] leading-relaxed max-w-[140px]">
                       {step.description}
                     </p>
                   </div>
@@ -188,7 +188,7 @@ export default function HowWeTestPage() {
           <div className="lg:hidden">
             <div className="relative pl-12">
               {/* Vertical line */}
-              <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-border" />
+              <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-[#F0F0F0]" />
 
               {STEPS.map((step, i) => (
                 <ScrollReveal
@@ -196,16 +196,16 @@ export default function HowWeTestPage() {
                   className={`relative pb-10 ${i === STEPS.length - 1 ? "pb-0" : ""}`}
                 >
                   <div
-                    className={`absolute left-[-32px] w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white ${
-                      step.accent ? "bg-error" : "bg-primary"
+                    className={`absolute left-[-32px] w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white ${
+                      step.accent ? "bg-[#EF4444]" : "bg-[#111111]"
                     }`}
                   >
                     {step.number}
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-primary mb-1">
+                  <h3 className="text-lg font-bold text-[#111111] mb-1">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">
+                  <p className="text-sm text-[#6B7280] leading-relaxed">
                     {step.description}
                   </p>
                 </ScrollReveal>

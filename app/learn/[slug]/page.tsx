@@ -65,7 +65,7 @@ export default async function ArticlePage({ params }: PageProps) {
       <PageHeader
         title={article.title}
         breadcrumbs={[
-          { label: "Learn", href: "/learn" },
+          { label: "Learn & Resources", href: "/resources" },
           { label: article.title },
         ]}
       />

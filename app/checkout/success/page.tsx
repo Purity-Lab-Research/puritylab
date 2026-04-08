@@ -56,7 +56,7 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
 
         <h1
           className={`mb-2 text-3xl font-bold ${
-            isFailed ? "text-red-700" : "text-[#1A2B4A]"
+            isFailed ? "text-red-700" : "text-[#111111]"
           }`}
         >
           {isFailed
@@ -82,12 +82,12 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
         )}
 
         {order && !isFailed && (
-          <div className="mb-8 rounded-xl bg-white p-6 text-left shadow-sm">
+          <div className="mb-8 rounded-2xl bg-white border border-[#F0F0F0] p-6 text-left">
             <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-4">
-              <Package className="h-5 w-5 text-[#0097A7]" />
+              <Package className="h-5 w-5 text-[#10B981]" />
               <div>
                 <p className="text-sm text-gray-500">Order Number</p>
-                <p className="text-lg font-bold text-[#1A2B4A]">
+                <p className="text-lg font-bold text-[#111111]">
                   {order.order_number}
                 </p>
               </div>
@@ -119,21 +119,21 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
                 </span>
               </div>
               <div className="flex justify-between border-t border-gray-100 pt-3">
-                <span className="font-bold text-[#1A2B4A]">Total</span>
-                <span className="font-bold text-[#1A2B4A]">
+                <span className="font-bold text-[#111111]">Total</span>
+                <span className="font-bold text-[#111111]">
                   {formatPrice(order.total)}
                 </span>
               </div>
             </div>
 
-            <div className="mt-4 rounded-lg bg-primary/5 p-3 text-center text-sm text-[#1A2B4A]">
+            <div className="mt-4 rounded-lg bg-primary/5 p-3 text-center text-sm text-[#111111]">
               Estimated delivery: 3-8 business days
             </div>
           </div>
         )}
 
         {!order && !order_id && !isFailed && (
-          <div className="mb-8 rounded-xl bg-white p-6 shadow-sm">
+          <div className="mb-8 rounded-2xl bg-white border border-[#F0F0F0] p-6">
             <p className="text-sm text-gray-600">
               If you have any questions about your order, please contact our
               support team.

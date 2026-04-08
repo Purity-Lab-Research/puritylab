@@ -12,6 +12,7 @@ export interface CartContextType {
   itemCount: number;
   subtotal: number;
   savings: number;
+  shippingCost: number;
   hasSubscriptionItems: boolean;
   isOpen: boolean;
   openCart: () => void;

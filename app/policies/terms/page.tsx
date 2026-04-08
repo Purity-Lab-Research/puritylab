@@ -17,14 +17,20 @@ export default function TermsPage() {
       />
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700 font-[family-name:var(--font-body)]">
+        <div className="max-w-none space-y-8 text-[#6B7280] text-base leading-relaxed">
+          <div className="rounded-lg bg-amber-50 border border-amber-200 p-4 mb-4">
+            <p className="text-sm font-bold text-amber-800">
+              IMPORTANT: PLEASE READ THESE TERMS CAREFULLY BEFORE USING THIS WEBSITE OR PURCHASING ANY PRODUCTS.
+            </p>
+          </div>
+
           <p className="text-sm text-gray-500">
-            Effective Date: March 30, 2026 &nbsp;|&nbsp; Last Updated: March 30, 2026
+            Effective Date: April 7, 2026 &nbsp;|&nbsp; Last Updated: April 7, 2026
           </p>
 
           {/* 1. Acceptance of Terms */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               1. Acceptance of Terms
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -44,13 +50,13 @@ export default function TermsPage() {
 
           {/* 2. Eligibility and Age Requirement */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               2. Eligibility and Age Requirement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              You must be at least 18 years of age to create an account, place an order, or purchase any
+              You must be at least 21 years of age to create an account, place an order, or purchase any
               products from {SITE_NAME}. By using our website or placing an order, you represent and
-              warrant that you are at least 18 years old and have the legal capacity to enter into a
+              warrant that you are at least 21 years old and have the legal capacity to enter into a
               binding agreement.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -61,42 +67,30 @@ export default function TermsPage() {
 
           {/* 3. Research Use Only */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              3. Research Use Only
+            <h2 className="text-lg font-bold text-[#111111] ">
+              3. Research Use Only Agreement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              All products sold by {SITE_NAME} are intended strictly for in-vitro laboratory research,
-              scientific experimentation, and educational purposes only. By placing an order, you
-              represent and warrant that:
+              All products sold by {SITE_NAME} are intended exclusively for in-vitro laboratory research, scientific investigation, and educational purposes. They are not intended, marketed, sold, or distributed for human consumption, self-administration, veterinary use, therapeutic application, diagnostic purposes, or any form of bodily introduction by any route including but not limited to injection, ingestion, inhalation, topical application, or any other method. By accessing this website, creating an account, or placing an order, you represent and warrant that:
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>
-                You are a qualified researcher, laboratory professional, or are purchasing on behalf of
-                a legitimate research institution or organization.
-              </li>
-              <li>
-                Products will be used exclusively for lawful research purposes in compliance with all
-                applicable laws and regulations in your jurisdiction.
-              </li>
-              <li>
-                Products will not be used for human consumption, veterinary use, therapeutic use,
-                self-administration, food, drug, cosmetic, or agricultural applications.
-              </li>
-              <li>
-                Products will not be resold, redistributed, or provided to any individual or entity for
-                purposes other than legitimate research.
-              </li>
+              <li>(a) You are at least 21 years of age.</li>
+              <li>(b) You are legally permitted to purchase research chemicals in your jurisdiction.</li>
+              <li>(c) All products purchased will be used exclusively for lawful in-vitro laboratory research or educational purposes.</li>
+              <li>(d) You will not resell, redistribute, or provide any products to any person under the age of 21.</li>
+              <li>(e) You will not use or permit any product to be used for human or animal consumption or any therapeutic purpose.</li>
+              <li>(f) You have the legal authority and scientific knowledge necessary to handle research chemicals safely.</li>
+              <li>(g) You understand that research peptides are not FDA-approved drugs, supplements, or food products.</li>
+              <li>(h) You will comply with all applicable federal, state, and local laws regarding the purchase, possession, handling, storage, and disposal of research chemicals.</li>
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
-              Any violation of this section constitutes a material breach of these Terms and may result
-              in immediate termination of your account, cancellation of pending orders, and referral to
-              appropriate authorities.
+              Any violation of this section constitutes a material breach of these Terms and may result in immediate termination of your account, cancellation of pending orders, and referral to appropriate authorities.
             </p>
           </div>
 
           {/* 4. Prohibited Uses */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               4. Prohibited Uses
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -133,7 +127,7 @@ export default function TermsPage() {
 
           {/* 5. Account Registration */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               5. Account Registration
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -155,7 +149,7 @@ export default function TermsPage() {
 
           {/* 6. Orders and Payment */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               6. Orders and Payment
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -184,7 +178,7 @@ export default function TermsPage() {
 
           {/* 7. Subscriptions */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               7. Subscriptions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -217,7 +211,7 @@ export default function TermsPage() {
 
           {/* 8. Product Information and Accuracy */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               7. Product Information and Accuracy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -239,7 +233,7 @@ export default function TermsPage() {
 
           {/* 8. Shipping and Delivery */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               8. Shipping and Delivery
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -265,7 +259,7 @@ export default function TermsPage() {
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
               For full details, refer to our{" "}
-              <a href="/policies/shipping" className="text-[#0097A7] hover:underline">
+              <a href="/policies/shipping" className="text-[#10B981] hover:underline">
                 Shipping Policy
               </a>
               .
@@ -274,7 +268,7 @@ export default function TermsPage() {
 
           {/* 9. Refunds and Returns */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               9. Refunds and Returns
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -298,7 +292,7 @@ export default function TermsPage() {
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
               For full details, refer to our{" "}
-              <a href="/policies/refund" className="text-[#0097A7] hover:underline">
+              <a href="/policies/refund" className="text-[#10B981] hover:underline">
                 Refund Policy
               </a>
               .
@@ -307,7 +301,7 @@ export default function TermsPage() {
 
           {/* 10. Export Compliance and Sanctions */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               10. Export Compliance and Sanctions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -341,7 +335,7 @@ export default function TermsPage() {
 
           {/* 11. Intellectual Property */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111] ">
               11. Intellectual Property
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -358,213 +352,135 @@ export default function TermsPage() {
             </p>
           </div>
 
-          {/* 12. Disclaimer of Warranties */}
+          {/* Assumption of Risk */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              12. Disclaimer of Warranties
+            <h2 className="text-lg font-bold text-[#111111] ">
+              12. Assumption of Risk and Release of Claims
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              You expressly acknowledge and assume all risks associated with the purchase, possession, storage, handling, transport, use, and disposal of all products. These risks include but are not limited to: improper storage leading to product degradation; contamination from improper handling; adverse reactions from misuse; legal consequences from non-compliant use; financial loss from product that does not meet your expectations. You voluntarily and knowingly release, waive, and forever discharge {SITE_NAME}, its owners, officers, directors, employees, agents, affiliates, suppliers, manufacturers, fulfillment partners, and their respective successors and assigns (collectively &quot;Released Parties&quot;) from any and all claims, demands, causes of action, suits, damages, losses, liabilities, costs, and expenses of every kind and nature, whether known or unknown, suspected or unsuspected, disclosed or undisclosed, that arise from or relate in any way to your purchase, possession, or use of any products. This release applies to claims arising under contract, tort, negligence, strict liability, product liability, consumer protection statutes, or any other legal theory.
+            </p>
+          </div>
+
+          {/* Disclaimer of Warranties */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              13. Disclaimer of Warranties
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
-              To the maximum extent permitted by applicable law, all products and services are provided
-              &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranties of any kind, whether express, implied, or
-              statutory, including but not limited to implied warranties of merchantability, fitness for
-              a particular purpose, and non-infringement.
+              ALL PRODUCTS AND SERVICES ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. {SITE_NAME} EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO: IMPLIED WARRANTIES OF MERCHANTABILITY; FITNESS FOR A PARTICULAR PURPOSE; NON-INFRINGEMENT; WARRANTIES ARISING FROM COURSE OF DEALING OR USAGE OF TRADE; WARRANTIES REGARDING THE ACCURACY, RELIABILITY, OR COMPLETENESS OF ANY PRODUCT DESCRIPTION, CERTIFICATE OF ANALYSIS, PURITY CLAIM, TEST RESULT, OR OTHER CONTENT. {SITE_NAME} DOES NOT WARRANT THAT: (A) PRODUCTS WILL MEET YOUR REQUIREMENTS OR EXPECTATIONS; (B) PRODUCTS WILL BE FREE FROM DEFECTS; (C) CERTIFICATES OF ANALYSIS REFLECT THE CURRENT CONDITION OF THE PRODUCT AFTER SHIPMENT AND STORAGE; (D) THE WEBSITE WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE; (E) ANY INFORMATION PROVIDED IS ACCURATE, COMPLETE, OR CURRENT.
             </p>
-            <p className="mt-2 text-sm leading-relaxed">Without limiting the foregoing:</p>
-            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>
-                We do not warrant that products will achieve any specific research outcome or result.
-              </li>
-              <li>
-                We do not warrant that our website will be uninterrupted, error-free, or free of
-                viruses or other harmful components.
-              </li>
-              <li>
-                We do not warrant that products are authorized for import in every jurisdiction
-                worldwide.
-              </li>
-            </ul>
             <p className="mt-2 text-sm leading-relaxed">
-              Some jurisdictions do not allow the exclusion of implied warranties. In such
-              jurisdictions, the above exclusions apply to the fullest extent permitted by applicable
-              law.
+              Some jurisdictions do not allow the exclusion of implied warranties. In such jurisdictions, the above exclusions apply to the fullest extent permitted by applicable law.
             </p>
           </div>
 
-          {/* 13. Limitation of Liability */}
+          {/* Product Information Disclaimer */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              13. Limitation of Liability
+            <h2 className="text-lg font-bold text-[#111111] ">
+              14. Product Information and Content Disclaimer
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              All product descriptions, dosing protocols, cycle recommendations, stacking suggestions, reconstitution instructions, storage guidelines, educational articles, research references, calculator outputs, and other informational content on this website are provided for educational and research reference purposes only. This information does not constitute and shall not be interpreted as: medical advice; pharmaceutical guidance; therapeutic recommendations; dosing instructions for human use; diagnostic information; or any recommendation to use any product for human or animal consumption. {SITE_NAME} is not a medical provider, pharmacy, or healthcare facility.
+            </p>
+          </div>
+
+          {/* CoA Disclaimer */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              15. Certificate of Analysis Disclaimer
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              Certificates of Analysis (CoAs) represent the test results of a specific batch at the specific time of testing. CoAs do not guarantee the purity, identity, or quality of a product after the testing date. Product quality may be affected by shipping conditions, storage conditions, temperature exposure, handling, time elapsed since testing, reconstitution method, and other factors outside {SITE_NAME}&apos;s control. {SITE_NAME} makes no warranty or guarantee that the product you receive matches the CoA in every respect at the time of delivery. Third-party testing is performed by independent laboratories over which {SITE_NAME} has no control. {SITE_NAME} does not guarantee the accuracy of third-party test results and assumes no liability for errors or omissions in testing.
+            </p>
+          </div>
+
+          {/* Limitation of Liability */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              16. Limitation of Liability
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
-              To the maximum extent permitted by applicable law, {SITE_NAME}, its owners, officers,
-              directors, employees, and agents shall not be liable for any indirect, incidental, special,
-              consequential, or punitive damages, including but not limited to loss of profits, loss of
-              data, loss of business opportunity, personal injury, or property damage arising out of or
-              in connection with:
+              TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL {SITE_NAME} OR ANY OF THE RELEASED PARTIES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY KIND, INCLUDING BUT NOT LIMITED TO: PERSONAL INJURY OR DEATH; PROPERTY DAMAGE; LOSS OF PROFITS, REVENUE, DATA, GOODWILL, OR BUSINESS OPPORTUNITY; COST OF SUBSTITUTE PRODUCTS OR SERVICES; MEDICAL EXPENSES; RESEARCH COSTS OR LOST RESEARCH TIME; REGULATORY FINES OR PENALTIES; LEGAL FEES; OR ANY OTHER PECUNIARY OR NON-PECUNIARY LOSS, ARISING FROM OR RELATED TO: (A) YOUR USE OF THIS WEBSITE; (B) YOUR PURCHASE OF ANY PRODUCTS; (C) YOUR USE, MISUSE, OR INABILITY TO USE ANY PRODUCTS; (D) ANY INFORMATION, CONTENT, CALCULATORS, TOOLS, ARTICLES, PROTOCOLS, OR RECOMMENDATIONS PROVIDED ON THIS WEBSITE; (E) ANY CERTIFICATE OF ANALYSIS, TEST RESULT, PURITY CLAIM, OR PRODUCT DESCRIPTION; (F) ANY DELAY, FAILURE, OR ERROR IN FULFILLMENT OR SHIPPING; (G) ANY ACTIONS TAKEN OR NOT TAKEN BASED ON CONTENT ON THIS WEBSITE. THIS LIMITATION APPLIES REGARDLESS OF THE THEORY OF LIABILITY AND EVEN IF {SITE_NAME} HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL {SITE_NAME}&apos;S AGGREGATE LIABILITY FOR ALL CLAIMS EXCEED THE LESSER OF: (I) THE AMOUNT YOU PAID FOR THE SPECIFIC PRODUCT GIVING RISE TO THE CLAIM, OR (II) ONE HUNDRED DOLLARS ($100.00 USD). SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IN SUCH JURISDICTIONS, OUR LIABILITY SHALL BE LIMITED TO THE MAXIMUM EXTENT PERMITTED BY LAW.
             </p>
-            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>The use or misuse of any products purchased from {SITE_NAME}.</li>
-              <li>The inability to use our website or services.</li>
-              <li>
-                Any errors, inaccuracies, or omissions in product descriptions or website content.
-              </li>
-              <li>Unauthorized access to or alteration of your data or transmissions.</li>
-              <li>Any conduct of third parties on or related to our website.</li>
-            </ul>
+          </div>
+
+          {/* Indemnification */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              17. Indemnification
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              You agree to indemnify, defend, and hold harmless {SITE_NAME} and all Released Parties from and against any and all claims, demands, causes of action, suits, proceedings, investigations, damages, losses, liabilities, penalties, fines, costs, and expenses (including reasonable attorneys&apos; fees, court costs, and expert witness fees) arising from or related to: (a) your use of any products purchased from this site; (b) your violation of these Terms of Service or any applicable law, regulation, or ordinance; (c) any bodily injury, death, or property damage caused by or related to any product; (d) any claim that a product was used for human or animal consumption; (e) any misrepresentation you make regarding the intended use of products; (f) any claim brought by a third party related to your use, distribution, or handling of any product; (g) any regulatory action, investigation, or inquiry related to your purchase or use of any product. This indemnification obligation shall survive the termination of your account and these Terms of Service.
+            </p>
+          </div>
+
+          {/* 18. Dispute Resolution - keep existing but renumber */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              18. Dispute Resolution and Arbitration
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed">
+              Any dispute, controversy, or claim arising out of or relating to these Terms of Service, any product purchased, or this website shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) in accordance with its Commercial Arbitration Rules. The arbitration shall be conducted in Los Angeles County, California, by a single arbitrator. The arbitrator&apos;s decision shall be final and binding and may be entered as a judgment in any court of competent jurisdiction.
+            </p>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
-              In no event shall our total aggregate liability to you for all claims arising out of or
-              relating to these terms or your use of our products or services exceed the total amount
-              you paid to {SITE_NAME} for the specific product(s) giving rise to the claim.
+              YOU AGREE THAT ANY DISPUTE RESOLUTION PROCEEDINGS WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, CONSOLIDATED, OR REPRESENTATIVE ACTION. YOU WAIVE ANY RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION AGAINST {SITE_NAME}.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              The buyer assumes all responsibility for the proper handling, storage, use, and disposal
-              of all products purchased from {SITE_NAME}. You acknowledge that research chemicals carry
-              inherent risks and that you possess the training, equipment, and facilities necessary for
-              their safe use.
+              If any part of this arbitration provision is found to be unenforceable, the remainder shall continue to apply. EU consumers retain rights under mandatory consumer protection laws of their member state.
             </p>
           </div>
 
-          {/* 14. Indemnification */}
+          {/* Keep remaining sections but renumber */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              14. Indemnification
+            <h2 className="text-lg font-bold text-[#111111] ">
+              19. Force Majeure
+            </h2>
+          </div>
+
+          {/* Old sections 15-20 removed - superseded by new sections 12-18 above */}
+
+          {/* 19. Force Majeure (content) */}
+          <div>
+            <p className="mt-2 text-sm leading-relaxed">
+              {SITE_NAME} shall not be liable for any failure or delay in performance resulting from causes beyond our reasonable control, including but not limited to natural disasters, pandemics, government actions or restrictions, sanctions, embargoes, carrier disruptions, wars, acts of terrorism, labor disputes, supply chain interruptions, or internet or telecommunications failures.
+            </p>
+          </div>
+
+          {/* 20. Governing Law */}
+          <div>
+            <h2 className="text-lg font-bold text-[#111111] ">
+              20. Governing Law
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              You agree to indemnify, defend, and hold harmless {SITE_NAME}, its owners, officers,
-              employees, agents, and affiliates from and against any and all claims, damages, losses,
-              liabilities, costs, and expenses (including reasonable legal fees) arising out of or in
-              connection with:
-            </p>
-            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>Your use or misuse of any products purchased from {SITE_NAME}.</li>
-              <li>
-                Your violation of these Terms of Service or any applicable law or regulation.
-              </li>
-              <li>
-                Your violation of any third-party rights, including intellectual property rights.
-              </li>
-              <li>
-                Any claim by a third party related to your use, handling, storage, or disposal of
-                products.
-              </li>
-              <li>
-                Your importation of products in violation of applicable laws or regulations in your
-                jurisdiction.
-              </li>
-            </ul>
-          </div>
-
-          {/* 15. Dispute Resolution */}
-          <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              15. Dispute Resolution
-            </h2>
-
-            <h3 className="mt-4 text-base font-semibold text-gray-900">15.1 Informal Resolution</h3>
-            <p className="mt-2 text-sm leading-relaxed">
-              You agree to first attempt to resolve the dispute informally by contacting us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
-                {CONTACT_EMAIL}
-              </a>
-              . We will make good-faith efforts to resolve the matter within 30 days.
-            </p>
-
-            <h3 className="mt-4 text-base font-semibold text-gray-900">15.2 Binding Arbitration</h3>
-            <p className="mt-2 text-sm leading-relaxed">
-              If the dispute cannot be resolved informally within 30 days, either party may submit the
-              dispute to binding arbitration administered in accordance with the Federal Arbitration Act.
-              The arbitration shall take place in Los Angeles, California. The language of
-              arbitration shall be English. The arbitrator&apos;s decision shall be final and binding.
-            </p>
-
-            <h3 className="mt-4 text-base font-semibold text-gray-900">15.3 Exceptions</h3>
-            <p className="mt-2 text-sm leading-relaxed">
-              Either party may bring a claim in the state or federal courts located in Los Angeles County,
-              California for injunctive or equitable relief, or for claims related to intellectual
-              property infringement.
-            </p>
-
-            <h3 className="mt-4 text-base font-semibold text-gray-900">15.4 Class Action Waiver</h3>
-            <p className="mt-2 text-sm leading-relaxed">
-              To the maximum extent permitted by applicable law, you agree that any dispute resolution
-              proceedings will be conducted on an individual basis only, and not as part of a class,
-              consolidated, or representative action.
-            </p>
-
-            <h3 className="mt-4 text-base font-semibold text-gray-900">15.5 EU Consumer Rights</h3>
-            <p className="mt-2 text-sm leading-relaxed">
-              If you are a consumer in the European Union, nothing in this section restricts your right
-              to bring proceedings before the courts of your member state of residence, nor does it
-              affect your rights under mandatory consumer protection laws. EU consumers may also access
-              the European Commission&apos;s Online Dispute Resolution platform.
+              These Terms of Service shall be governed by and construed in accordance with the laws of the State of California and the federal laws of the United States applicable therein, without regard to conflict of law principles. Any legal action or proceeding not subject to arbitration shall be brought exclusively in the federal or state courts located in Los Angeles County, California. You consent to the personal jurisdiction of such courts.
             </p>
           </div>
 
-          {/* 16. Force Majeure */}
+          {/* 21. Severability */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              16. Force Majeure
+            <h2 className="text-lg font-bold text-[#111111] ">
+              21. Severability
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              {SITE_NAME} shall not be liable for any failure or delay in performance resulting from
-              causes beyond our reasonable control, including but not limited to natural disasters,
-              pandemics, government actions or restrictions, sanctions, embargoes, customs delays,
-              carrier disruptions, wars, acts of terrorism, labour disputes, supply chain interruptions,
-              or internet or telecommunications failures.
+              If any provision of these Terms is found to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect. The invalid provision shall be modified to the minimum extent necessary to make it valid and enforceable while preserving the original intent.
             </p>
           </div>
 
-          {/* 17. Severability */}
+          {/* 22. Entire Agreement */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              17. Severability
+            <h2 className="text-lg font-bold text-[#111111] ">
+              22. Entire Agreement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              If any provision of these Terms is found to be invalid, illegal, or unenforceable by a
-              court of competent jurisdiction, the remaining provisions shall continue in full force and
-              effect. The invalid provision shall be modified to the minimum extent necessary to make it
-              valid and enforceable while preserving its original intent.
+              These Terms of Service, together with the Privacy Policy, Refund Policy, Shipping Policy, Legal Disclaimer, and any other policies referenced herein, constitute the entire agreement between you and {SITE_NAME}. No oral or written statement by any representative of {SITE_NAME} shall modify these terms.
             </p>
           </div>
 
-          {/* 18. Entire Agreement */}
+          {/* 23. Contact */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              18. Entire Agreement
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed">
-              These Terms of Service, together with our Privacy Policy, Refund Policy, and Shipping
-              Policy, constitute the entire agreement between you and {SITE_NAME} regarding your use of
-              our website and purchase of our products. These terms supersede all prior agreements,
-              representations, and understandings.
-            </p>
-          </div>
-
-          {/* 19. Governing Law and Jurisdiction */}
-          <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              19. Governing Law and Jurisdiction
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed">
-              These Terms of Service shall be governed by and construed in accordance with the laws of
-              the State of California and the federal laws of the United States applicable therein,
-              without regard to conflict of law principles.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed">
-              Subject to the arbitration provisions in Section 15, any legal proceedings arising under
-              these Terms shall be brought exclusively in the state or federal courts located in
-              Los Angeles County, California.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed">
-              If you are a consumer in the European Union, this clause does not affect your right to
-              rely on mandatory consumer protection provisions of the law of your country of residence.
-            </p>
-          </div>
-
-          {/* 20. Contact Information */}
-          <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
-              20. Contact Information
+            <h2 className="text-lg font-bold text-[#111111] ">
+              23. Contact Information
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               For questions or concerns regarding these Terms of Service, please contact:
@@ -574,17 +490,17 @@ export default function TermsPage() {
               <p>United States</p>
               <p>
                 Email:{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                   {CONTACT_EMAIL}
                 </a>
               </p>
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
+          <div className="rounded-xl border border-[#dde2ea] bg-[#111111]/5 p-6">
             <p className="text-sm leading-relaxed">
-              <strong className="text-[#1A2B4A]">Questions?</strong> Contact us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <strong className="text-[#111111]">Questions?</strong> Contact us at{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                 {CONTACT_EMAIL}
               </a>
             </p>

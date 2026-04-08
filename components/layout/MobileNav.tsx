@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { href: "/protocols", label: "Protocols" },
   { href: "/shop", label: "Shop" },
   { href: "/coa", label: "CoA Library" },
-  { href: "/learn", label: "Education" },
-  { href: "/resources", label: "Resources" },
+  { href: "/resources", label: "Learn" },
+  { href: "/affiliate", label: "Affiliate Program" },
 ];
 
 interface MobileNavProps {
@@ -41,7 +41,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
     >
       {/* Backdrop */}
       <div
-        className={`absolute inset-0 bg-black/50 backdrop-blur-md transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-black/30 backdrop-blur-md transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
@@ -55,19 +55,17 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-200 px-4 h-16">
+        <div className="flex items-center justify-between border-b border-border px-4 h-16">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#1A2B4A]">
-              <span className="font-[family-name:var(--font-heading)] text-sm font-bold text-white tracking-tight">PL</span>
-            </div>
-            <span className="font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight text-[#1A2B4A]">
+            <img src="/images/logo.svg" alt="Purity Lab" width={40} height={40} className="h-10 w-10" />
+            <span className="text-xl font-extrabold tracking-tight text-primary">
               PURITY LAB
             </span>
           </div>
           <button
             onClick={onClose}
             aria-label="Close menu"
-            className="p-2 -mr-2 rounded-full text-gray-500 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
+            className="p-2 -mr-2 rounded-full text-text-secondary hover:text-primary hover:bg-gray-50 transition-colors"
           >
             <X className="h-6 w-6" />
           </button>
@@ -96,10 +94,10 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className={`flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                    className={`flex items-center rounded-xl px-4 py-4 text-base font-medium transition-colors ${
                       isActive
-                        ? "bg-primary/5 text-[#0097A7]"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-[#1A2B4A]"
+                        ? "bg-[#10B981]/5 text-[#111111] font-semibold"
+                        : "text-[#6B7280] hover:bg-[#FAFAFA] hover:text-[#111111]"
                     }`}
                   >
                     {link.label}
@@ -112,7 +110,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* Footer area with social links */}
         <div
-          className={`border-t border-gray-100 px-6 py-6 transition-all duration-300 ease-out ${
+          className={`border-t border-border px-6 py-6 transition-all duration-300 ease-out ${
             isOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
           style={{ transitionDelay: isOpen ? "400ms" : "0ms" }}
@@ -122,7 +120,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               href={SOCIAL_LINKS.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-[#1A2B4A] hover:text-white transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 text-text-secondary hover:bg-primary hover:text-white transition-colors"
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -130,7 +128,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               </svg>
             </a>
           </div>
-          <p className="text-xs text-gray-400 text-center">
+          <p className="text-xs text-text-secondary text-center">
             Premium Research Peptides
           </p>
         </div>

@@ -39,17 +39,17 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <div className="text-center py-4">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0097A7]/10">
-          <svg className="h-8 w-8 text-[#0097A7]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#10B981]/10">
+          <svg className="h-8 w-8 text-[#10B981]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-3">
+        <h1 className="text-2xl font-extrabold text-[#111111] text-center mb-3">
           Check Your Email
         </h1>
         <p className="text-gray-600 text-sm leading-relaxed mb-6">
           We&apos;ve sent a password reset link to{" "}
-          <span className="font-semibold text-[#1A2B4A]">{email}</span>.
+          <span className="font-semibold text-[#111111]">{email}</span>.
           <br />
           Click the link in the email to reset your password.
         </p>
@@ -57,7 +57,7 @@ export default function ForgotPasswordPage() {
           Didn&apos;t receive the email? Check your spam folder or{" "}
           <button
             onClick={() => setSent(false)}
-            className="text-[#0097A7] hover:underline font-medium"
+            className="text-[#10B981] hover:underline font-medium"
           >
             try again
           </button>
@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
         </div>
         <Link
           href="/login"
-          className="inline-block mt-5 text-sm text-[#0097A7] hover:underline font-medium"
+          className="inline-block mt-5 text-sm text-[#10B981] hover:underline font-medium"
         >
           Back to Sign In
         </Link>
@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold font-[family-name:var(--font-heading)] tracking-tight text-[#1A2B4A] mb-2">
+      <h1 className="text-2xl font-extrabold text-[#111111] text-center mb-2">
         Forgot Password
       </h1>
       <p className="text-sm text-gray-500 mb-6">
@@ -90,7 +90,7 @@ export default function ForgotPasswordPage() {
         )}
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-[#111111] mb-1">
             Email
           </label>
           <input
@@ -99,7 +99,7 @@ export default function ForgotPasswordPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-[#0097A7] focus:ring-1 focus:ring-[#0097A7] outline-none transition-colors"
+            className="w-full rounded-lg border border-[#F0F0F0] px-4 py-2.5 text-sm focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-colors"
             placeholder="you@example.com"
           />
         </div>
@@ -111,7 +111,7 @@ export default function ForgotPasswordPage() {
 
       <p className="mt-6 text-center text-sm text-gray-600">
         Remember your password?{" "}
-        <Link href="/login" className="text-[#0097A7] hover:underline font-medium">
+        <Link href="/login" className="text-[#10B981] hover:underline font-medium">
           Sign in
         </Link>
       </p>

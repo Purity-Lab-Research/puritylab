@@ -177,7 +177,7 @@ export default async function AdminDashboard() {
       value: activeProducts.toLocaleString(),
       sub: "In catalog",
       icon: Package,
-      color: "text-[#1A2B4A] bg-[#0097A7]/10",
+      color: "text-[#111111] bg-[#10B981]/10",
       href: "/admin/products",
     },
     {
@@ -194,7 +194,7 @@ export default async function AdminDashboard() {
       sub: lowStock > 0 ? "Needs attention" : "All stocked",
       icon: AlertTriangle,
       color:
-        lowStock > 0 ? "text-red-600 bg-red-50" : "text-gray-600 bg-gray-50",
+        lowStock > 0 ? "text-red-600 bg-red-50" : "text-gray-600 bg-[#FAFAFA]",
       href: "/admin/inventory",
     },
     {
@@ -211,7 +211,7 @@ export default async function AdminDashboard() {
       sub: abandonedCount > 0 ? "Awaiting follow-up" : "None pending",
       icon: ShoppingCart,
       color:
-        abandonedCount > 0 ? "text-orange-600 bg-orange-50" : "text-gray-600 bg-gray-50",
+        abandonedCount > 0 ? "text-orange-600 bg-orange-50" : "text-gray-600 bg-[#FAFAFA]",
       href: "#abandoned",
     },
   ];
@@ -227,13 +227,13 @@ export default async function AdminDashboard() {
       label: "View Orders",
       href: "/admin/orders",
       icon: ClipboardList,
-      color: "bg-white hover:bg-gray-50 text-gray-700 border border-gray-300",
+      color: "bg-white hover:bg-[#FAFAFA] text-gray-700 border border-gray-300",
     },
     {
       label: "Site Settings",
       href: "/admin/settings",
       icon: Settings,
-      color: "bg-white hover:bg-gray-50 text-gray-700 border border-gray-300",
+      color: "bg-white hover:bg-[#FAFAFA] text-gray-700 border border-gray-300",
     },
   ];
 
@@ -267,14 +267,14 @@ export default async function AdminDashboard() {
             <Link
               key={stat.label}
               href={stat.href}
-              className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:shadow-md hover:border-[#0097A7]/30 group cursor-pointer"
+              className="rounded-2xl border border-[#F0F0F0] bg-white p-5 transition-all hover:shadow-md hover:border-[#10B981]/30 group cursor-pointer"
             >
               <div className="flex items-center gap-4">
                 <div className={`rounded-lg p-2.5 ${stat.color}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm text-gray-500 group-hover:text-[#1A2B4A] transition-colors">{stat.label}</p>
+                  <p className="text-sm text-gray-500 group-hover:text-[#111111] transition-colors">{stat.label}</p>
                   <p className="truncate text-2xl font-bold text-gray-900">
                     {stat.value}
                   </p>
@@ -288,7 +288,7 @@ export default async function AdminDashboard() {
 
       <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Top Products */}
-        <div className="rounded-xl border border-gray-200 bg-white lg:col-span-1">
+        <div className="rounded-2xl border border-[#F0F0F0] bg-white lg:col-span-1">
           <div className="border-b border-gray-100 px-5 py-4">
             <h2 className="text-lg font-semibold text-gray-900">
               Top Products
@@ -324,7 +324,7 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Recent Orders */}
-        <div className="rounded-xl border border-gray-200 bg-white lg:col-span-2">
+        <div className="rounded-2xl border border-[#F0F0F0] bg-white lg:col-span-2">
           <div className="border-b border-gray-100 px-5 py-4">
             <div className="flex items-center justify-between">
               <div>
@@ -343,7 +343,7 @@ export default async function AdminDashboard() {
           </div>
           <div className="overflow-x-auto max-h-[440px] overflow-y-auto">
             <table className="w-full text-left text-sm">
-              <thead className="border-b bg-gray-50/50 text-xs uppercase text-gray-500 sticky top-0 bg-white z-10">
+              <thead className="border-b bg-[#FAFAFA]/50 text-xs uppercase text-gray-500 sticky top-0 bg-white z-10">
                 <tr>
                   <th className="px-5 py-3 font-medium">Order</th>
                   <th className="px-5 py-3 font-medium">Customer</th>
@@ -356,7 +356,7 @@ export default async function AdminDashboard() {
                 {recentOrders.map((order) => (
                   <tr
                     key={order.id}
-                    className="transition-colors hover:bg-gray-50/50"
+                    className="transition-colors hover:bg-[#FAFAFA]/50"
                   >
                     <td className="whitespace-nowrap px-5 py-3">
                       <Link
@@ -406,7 +406,7 @@ export default async function AdminDashboard() {
 
       {/* Abandoned Checkouts */}
       {abandonedCheckouts.length > 0 && (
-        <div id="abandoned" className="mb-8 rounded-xl border border-amber-200 bg-amber-50/50">
+        <div id="abandoned" className="mb-8 rounded-2xl border border-amber-200 bg-amber-50/50">
           <div className="border-b border-amber-200 px-5 py-4">
             <h2 className="text-lg font-semibold text-amber-800">
               Abandoned Checkouts

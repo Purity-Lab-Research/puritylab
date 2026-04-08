@@ -23,8 +23,8 @@ export default function AccountNav({ links }: AccountNavProps) {
           href={link.href}
           className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm transition-all duration-200 ${
             isActive(link.href)
-              ? "bg-[#1A2B4A] text-white font-semibold border-l-[3px] border-white/40"
-              : "text-gray-700 border-l-[3px] border-transparent hover:border-[#1A2B4A] hover:bg-[#1A2B4A]/5 hover:text-[#1A2B4A] hover:translate-x-1 hover:shadow-sm"
+              ? "bg-[#FAFAFA] text-[#111111] font-semibold border-l-[3px] border-[#10B981]"
+              : "text-[#6B7280] border-l-[3px] border-transparent hover:border-[#10B981] hover:bg-[#FAFAFA] hover:text-[#111111]"
           }`}
         >
           {link.label}

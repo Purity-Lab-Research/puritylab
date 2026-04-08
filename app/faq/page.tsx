@@ -42,7 +42,7 @@ const faqSections = [
       {
         question: "How do subscriptions work?",
         answer:
-          "When you subscribe to a protocol or build a custom stack with the subscribe option, your selected products are automatically shipped on your chosen schedule (every 4, 6, or 8 weeks). You save 10% on every subscription order compared to one-time pricing.",
+          "When you subscribe to a protocol or build a custom stack with the subscribe option, your selected products are automatically shipped on your chosen schedule (every 4, 6, or 8 weeks). You save up to 15% on every subscription order compared to one-time pricing.",
       },
       {
         question: "Can I pause my subscription?",
@@ -97,7 +97,7 @@ const faqSections = [
       {
         question: "What does 'for research use only' mean?",
         answer:
-          "All of our products are sold strictly for research, laboratory, and educational purposes. They are not intended for human consumption, and we do not provide medical advice or dosing guidance for human use.",
+          "All products sold by Purity Lab are intended exclusively for in-vitro laboratory research, scientific investigation, and educational purposes. They are not drugs, supplements, food products, or intended for human or animal consumption by any route of administration. This designation means that the products have not been evaluated by the FDA for safety or efficacy in humans. By purchasing from Purity Lab, you represent that you are at least 21 years of age and that all products will be used exclusively for lawful research purposes. Any use inconsistent with this designation is strictly prohibited and done entirely at the purchaser's own risk. Purity Lab assumes no liability for any misuse of products.",
       },
     ],
   },

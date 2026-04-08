@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Instrument_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import CartProvider from "@/components/cart/CartProvider";
 import WishlistProvider from "@/components/wishlist/WishlistProvider";
@@ -10,20 +10,14 @@ import StructuredData from "@/components/layout/StructuredData";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import SentryInit from "@/components/analytics/SentryInit";
 import CookieConsent from "@/components/layout/CookieConsent";
+// ResearchDisclaimer removed - research acknowledgment is handled by the AgeGate and checkout compliance
 import WebVitals from "@/components/analytics/WebVitals";
 import SiteTracker from "@/components/analytics/SiteTracker";
 
-const instrumentSans = Instrument_Sans({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-heading",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
   display: "swap",
 });
 
@@ -69,7 +63,7 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   other: {
-    "theme-color": "#1A2B4A",
+    "theme-color": "#FFFFFF",
   },
 };
 
@@ -79,8 +73,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${dmSans.variable}`}>
-      <body className="font-[family-name:var(--font-body)] text-text-primary bg-background leading-relaxed overflow-x-hidden">
+    <html lang="en" className={plusJakarta.variable}>
+      <body className="font-[family-name:var(--font-heading)] text-text-primary bg-background leading-relaxed overflow-x-hidden">
         <GoogleAnalytics />
         <SentryInit />
         <WebVitals />

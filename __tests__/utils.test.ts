@@ -3,7 +3,7 @@ import {
   generateOrderNumber,
   formatPrice,
   calculateSavings,
-  subscriptionPrice,
+  getSubscriptionPrice,
 } from "@/lib/utils";
 
 describe("generateOrderNumber", () => {
@@ -71,12 +71,24 @@ describe("calculateSavings", () => {
   });
 });
 
-describe("subscriptionPrice", () => {
-  it("applies 15% discount", () => {
-    expect(subscriptionPrice(100)).toBe(85);
+describe("getSubscriptionPrice", () => {
+  it("applies 15% discount for 4-week frequency", () => {
+    expect(getSubscriptionPrice(100, 4)).toBe(85);
+  });
+
+  it("applies 10% discount for 6-week frequency", () => {
+    expect(getSubscriptionPrice(100, 6)).toBe(90);
+  });
+
+  it("applies 5% discount for 8-week frequency", () => {
+    expect(getSubscriptionPrice(100, 8)).toBe(95);
+  });
+
+  it("defaults to 15% discount when no frequency provided", () => {
+    expect(getSubscriptionPrice(100)).toBe(85);
   });
 
   it("rounds to 2 decimal places", () => {
-    expect(subscriptionPrice(33.33)).toBe(28.33);
+    expect(getSubscriptionPrice(33.33, 4)).toBe(28.33);
   });
 });

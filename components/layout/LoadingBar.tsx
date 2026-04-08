@@ -38,7 +38,7 @@ export default function LoadingBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[100] h-[3px]">
       <div
-        className={`h-full bg-gradient-to-r from-[#1A2B4A] to-[#0097A7] transition-opacity duration-300 ${
+        className={`h-full bg-gradient-to-r from-[#111111] to-[#10B981] transition-opacity duration-300 ${
           loading ? "loading-bar opacity-100" : "opacity-0 w-full"
         }`}
       />

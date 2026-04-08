@@ -68,7 +68,7 @@ export default function StripePaymentForm({ total, orderId, accountCreated }: Pr
       <button
         type="submit"
         disabled={!stripe || isProcessing}
-        className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#1A2B4A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#142238] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#111111] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#000000] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isProcessing ? (
           <>

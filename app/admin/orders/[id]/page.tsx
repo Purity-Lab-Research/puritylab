@@ -189,15 +189,7 @@ export default async function AdminOrderDetailPage({
 
       {/* Shipping Label */}
       <div className="mb-6">
-        <ShippingLabelGenerator
-          orderId={order.id}
-          hasLabel={!!order.shipping_label_url}
-          existingLabelUrl={order.shipping_label_url}
-          existingTrackingNumber={order.tracking_number}
-          existingTrackingUrl={order.tracking_url_provider}
-          existingCarrier={order.carrier}
-          rateId={order.shippo_rate_id}
-        />
+        <ShippingLabelGenerator orderId={order.id} />
       </div>
 
       {/* Internal Notes */}

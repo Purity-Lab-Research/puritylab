@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, type ReactNode } from "react";
 import { CartContext, type CartContextType } from "@/hooks/useCart";
+import { getSubscriptionPrice, getAnnualPrice, calculateShipping } from "@/lib/utils";
 import type { CartItem } from "@/lib/types";
 
 const CART_KEY = "puritylab_cart";
@@ -10,12 +11,26 @@ function cartKey(item: { productId: string; variantId: string | null; purchaseTy
   return `${item.productId}:${item.variantId ?? "base"}:${item.purchaseType}`;
 }
 
-/** Effective price for a cart item based on purchase type */
+/** Effective per-delivery price for a cart item */
 function itemPrice(item: CartItem): number {
-  if (item.purchaseType === "subscription" && item.subscriptionPrice != null) {
-    return item.subscriptionPrice;
+  if (item.purchaseType === "subscription") {
+    if (item.billingCycle === "annual") {
+      return getAnnualPrice(item.price) / item.quantity;
+    }
+    return getSubscriptionPrice(item.price, item.deliveryFrequencyWeeks);
   }
   return item.price;
+}
+
+/** Total cost for a cart item (all units) */
+function itemTotal(item: CartItem): number {
+  if (item.purchaseType === "subscription") {
+    if (item.billingCycle === "annual") {
+      return getAnnualPrice(item.price) * item.quantity;
+    }
+    return getSubscriptionPrice(item.price, item.deliveryFrequencyWeeks) * item.quantity;
+  }
+  return item.price * item.quantity;
 }
 
 export default function CartProvider({ children }: { children: ReactNode }) {
@@ -28,13 +43,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     if (stored) {
       try {
         const parsed = JSON.parse(stored) as CartItem[];
-        // Migrate old cart items that lack new fields
         const migrated = parsed.map((i) => ({
           ...i,
           variantId: i.variantId ?? null,
           subscriptionPrice: i.subscriptionPrice ?? null,
           deliveryFrequencyWeeks: i.deliveryFrequencyWeeks ?? 4,
           purchaseType: i.purchaseType ?? "one-time",
+          billingCycle: i.billingCycle ?? "monthly",
         }));
         setItems(migrated);
       } catch {
@@ -58,6 +73,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         variantId: newItem.variantId ?? null,
         subscriptionPrice: newItem.subscriptionPrice ?? null,
         deliveryFrequencyWeeks: newItem.deliveryFrequencyWeeks ?? 4,
+        billingCycle: newItem.billingCycle ?? "monthly",
         quantity: newItem.quantity || 1,
       };
       setItems((prev) => {
@@ -113,22 +129,25 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     [items]
   );
 
-  // Subtotal uses subscription price for subscription items
   const subtotal = useMemo(
-    () => Math.round(items.reduce((sum, i) => sum + itemPrice(i) * i.quantity, 0) * 100) / 100,
+    () => Math.round(items.reduce((sum, i) => sum + itemTotal(i), 0) * 100) / 100,
     [items]
   );
 
-  // Savings: difference between all-one-time and actual mixed pricing
   const savings = useMemo(() => {
     const oneTimeTotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const actualTotal = items.reduce((sum, i) => sum + itemPrice(i) * i.quantity, 0);
+    const actualTotal = items.reduce((sum, i) => sum + itemTotal(i), 0);
     return Math.round((oneTimeTotal - actualTotal) * 100) / 100;
   }, [items]);
 
   const hasSubscriptionItems = useMemo(
     () => items.some((i) => i.purchaseType === "subscription"),
     [items]
+  );
+
+  const shippingCost = useMemo(
+    () => calculateShipping(subtotal, hasSubscriptionItems),
+    [subtotal, hasSubscriptionItems]
   );
 
   const value: CartContextType = useMemo(
@@ -141,12 +160,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       itemCount,
       subtotal,
       savings,
+      shippingCost,
       hasSubscriptionItems,
       isOpen,
       openCart,
       closeCart,
     }),
-    [items, addItem, removeItem, updateQuantity, clearCart, itemCount, subtotal, savings, hasSubscriptionItems, isOpen, openCart, closeCart]
+    [items, addItem, removeItem, updateQuantity, clearCart, itemCount, subtotal, savings, shippingCost, hasSubscriptionItems, isOpen, openCart, closeCart]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

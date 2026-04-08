@@ -17,25 +17,25 @@ export default function ShippingPolicyPage() {
       />
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700 font-[family-name:var(--font-body)]">
+        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700">
           <p className="text-sm text-gray-500">
             Effective Date: March 30, 2026 &nbsp;|&nbsp; Last Updated: March 30, 2026
           </p>
 
           {/* 1. Scope */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               1. Scope
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               This Shipping Policy applies to all orders placed through puritylabresearch.com. By placing an
               order, you agree to the terms of this policy. This policy forms part of and should be read
               together with our{" "}
-              <a href="/policies/terms" className="text-[#0097A7] hover:underline">
+              <a href="/policies/terms" className="text-[#10B981] hover:underline">
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a href="/policies/refund" className="text-[#0097A7] hover:underline">
+              <a href="/policies/refund" className="text-[#10B981] hover:underline">
                 Refund Policy
               </a>
               .
@@ -44,7 +44,7 @@ export default function ShippingPolicyPage() {
 
           {/* 2. Processing Time */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               2. Processing Time
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -60,7 +60,7 @@ export default function ShippingPolicyPage() {
 
           {/* 3. Estimated Delivery Times */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               3. Estimated Delivery Times
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -80,7 +80,7 @@ export default function ShippingPolicyPage() {
 
           {/* 4. Shipping Carriers */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               4. Shipping Carriers
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -100,7 +100,7 @@ export default function ShippingPolicyPage() {
 
           {/* 5. Shipping Destinations and Restrictions */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               5. Shipping Destinations and Restrictions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -123,7 +123,7 @@ export default function ShippingPolicyPage() {
 
           {/* 6. International Orders and Customs */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               6. International Orders and Customs
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -146,7 +146,7 @@ export default function ShippingPolicyPage() {
 
           {/* 7. Customs Seizures and Import Issues */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               7. Customs Seizures and Import Issues
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -176,7 +176,7 @@ export default function ShippingPolicyPage() {
 
           {/* 8. Packaging */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               8. Packaging
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -193,7 +193,7 @@ export default function ShippingPolicyPage() {
 
           {/* 9. Order Tracking */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               9. Order Tracking
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -210,7 +210,7 @@ export default function ShippingPolicyPage() {
 
           {/* 10. Lost or Delayed Packages */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               10. Lost or Delayed Packages
             </h2>
 
@@ -244,7 +244,7 @@ export default function ShippingPolicyPage() {
 
           {/* 11. Risk of Loss */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               11. Risk of Loss
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -256,7 +256,7 @@ export default function ShippingPolicyPage() {
 
           {/* 12. Shipping Costs */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               12. Shipping Costs
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -272,7 +272,7 @@ export default function ShippingPolicyPage() {
 
           {/* 13. Address Accuracy */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               13. Address Accuracy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -286,7 +286,7 @@ export default function ShippingPolicyPage() {
 
           {/* 14. Contact */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               14. Contact
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -295,7 +295,7 @@ export default function ShippingPolicyPage() {
             <div className="mt-2 text-sm leading-relaxed">
               <p>
                 Email:{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                   {CONTACT_EMAIL}
                 </a>
               </p>
@@ -303,10 +303,10 @@ export default function ShippingPolicyPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#dde2ea] bg-[#1A2B4A]/5 p-6">
+          <div className="rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] p-6">
             <p className="text-sm leading-relaxed">
-              <strong className="text-[#1A2B4A]">Questions about shipping?</strong> Contact us at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#0097A7] hover:underline">
+              <strong className="text-[#111111]">Questions about shipping?</strong> Contact us at{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#10B981] hover:underline">
                 {CONTACT_EMAIL}
               </a>
             </p>

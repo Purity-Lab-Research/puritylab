@@ -19,7 +19,7 @@ export default function CookiePolicyPage() {
       />
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700 font-[family-name:var(--font-body)]">
+        <div className="prose prose-sm prose-gray max-w-none space-y-8 text-gray-700">
           <p className="text-sm text-gray-500">
             Effective Date: April 2, 2026 &nbsp;|&nbsp; Last Updated: April 2,
             2026
@@ -27,7 +27,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 1 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               1. What Are Cookies
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -41,7 +41,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 2 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               2. Cookies We Use
             </h2>
 
@@ -84,7 +84,7 @@ export default function CookiePolicyPage() {
                       puritylab_age_verified
                     </td>
                     <td className="px-4 py-2">
-                      Records that you confirmed you are 18+
+                      Records that you confirmed you are 21+
                     </td>
                     <td className="px-4 py-2">Session</td>
                   </tr>
@@ -128,7 +128,7 @@ export default function CookiePolicyPage() {
                 href="https://stripe.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#0097A7] hover:underline"
+                className="text-[#10B981] hover:underline"
               >
                 Stripe&apos;s Privacy Policy
               </a>
@@ -143,7 +143,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 3 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               3. How to Control Cookies
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -165,7 +165,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 4 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               4. Local Storage
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -179,7 +179,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 5 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               5. Updates to This Policy
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -192,7 +192,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 6 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               6. Governing Law
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -201,7 +201,7 @@ export default function CookiePolicyPage() {
               Electronic Documents Act (CCPA). For full details on how we
               collect, use, and protect your personal information, please see
               our{" "}
-              <a href="/policies/privacy" className="text-[#0097A7] hover:underline">
+              <a href="/policies/privacy" className="text-[#10B981] hover:underline">
                 Privacy Policy
               </a>
               .
@@ -210,7 +210,7 @@ export default function CookiePolicyPage() {
 
           {/* Section 7 */}
           <div>
-            <h2 className="text-lg font-bold text-[#1A2B4A] font-[family-name:var(--font-heading)]">
+            <h2 className="text-lg font-bold text-[#111111]">
               7. Contact Us
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
@@ -218,7 +218,7 @@ export default function CookiePolicyPage() {
               us at{" "}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="text-[#0097A7] hover:underline"
+                className="text-[#10B981] hover:underline"
               >
                 {CONTACT_EMAIL}
               </a>

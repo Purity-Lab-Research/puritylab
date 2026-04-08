@@ -25,11 +25,11 @@ type ButtonAsLink = ButtonBaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<Variant, string> = {
-  fill: "bg-[#1A2B4A] text-white hover:bg-[#142238]",
-  blue: "bg-[#0097A7] text-white hover:bg-[#00838F]",
+  fill: "bg-[#111111] text-white hover:bg-[#000000]",
+  blue: "bg-[#10B981] text-white hover:bg-[#059669]",
   ghost:
-    "border-[1.5px] border-border text-[#1A2B4A] hover:border-[#1A2B4A]",
-  white: "bg-white text-[#1A2B4A] hover:bg-[#FAFAFA]",
+    "border-[1.5px] border-border text-[#111111] hover:border-[#111111]",
+  white: "bg-white text-[#111111] hover:bg-[#FAFAFA]",
 };
 
 const sizeStyles: Record<Size, string> = {
@@ -46,7 +46,7 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-lg font-semibold font-[family-name:var(--font-heading)] hover-scale",
+    "inline-flex items-center justify-center rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]",
     variantStyles[variant],
     sizeStyles[size],
     className
