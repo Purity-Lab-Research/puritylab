@@ -40,7 +40,7 @@ export default async function EditProtocolPage({ params }: PageProps) {
     subscription_price: protocol.subscription_price ?? 0,
     one_time_price: protocol.one_time_price ?? 0,
     badge: protocol.badge ?? "",
-    accent_color: protocol.accent_color ?? "#0097A7",
+    accent_color: protocol.accent_color ?? "#10B981",
     sort_order: protocol.sort_order ?? 0,
     active: protocol.active ?? true,
     items: (protocol.items ?? []).map((item: { product_id: string; quantity: number; sort_order: number; product: { id: string; name: string; size: string; price: number } | null }) => ({

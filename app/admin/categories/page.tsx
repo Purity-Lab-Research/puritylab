@@ -85,7 +85,7 @@ export default function AdminCategoriesPage() {
   }
 
   const inputCls =
-    "rounded border border-gray-300 px-2 py-1 text-sm focus:border-[#0097A7] focus:outline-none";
+    "rounded border border-gray-300 px-2 py-1 text-sm focus:border-[#10B981] focus:outline-none";
 
   if (loading) {
     return (
@@ -102,7 +102,7 @@ export default function AdminCategoriesPage() {
         <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
         <button
           onClick={startAdd}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#142238]"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#000000]"
         >
           <Plus className="h-4 w-4" />
           Add Category
@@ -184,7 +184,7 @@ export default function AdminCategoriesPage() {
                     <div className="flex gap-1">
                       <button
                         onClick={() => startEdit(cat)}
-                        className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#0097A7]"
+                        className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#10B981]"
                       >
                         <Pencil className="h-4 w-4" />
                       </button>

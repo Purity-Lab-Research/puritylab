@@ -49,7 +49,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleAll}
-                  className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
+                  className="rounded border-gray-300 text-[#10B981] focus:ring-[#10B981]"
                 />
               </th>
               <th className="px-4 py-3">Image</th>
@@ -70,7 +70,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                     type="checkbox"
                     checked={selected.has(p.id)}
                     onChange={() => toggleOne(p.id)}
-                    className="rounded border-gray-300 text-[#0097A7] focus:ring-[#0097A7]"
+                    className="rounded border-gray-300 text-[#10B981] focus:ring-[#10B981]"
                   />
                 </td>
                 <td className="px-4 py-3">
@@ -98,7 +98,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                 <td className="px-4 py-3 text-right">{p.stock_quantity}</td>
                 <td className="px-4 py-3">
                   {p.badge ? (
-                    <span className="inline-block rounded-full bg-[#0097A7]/10 px-2.5 py-0.5 text-xs font-medium text-[#1A2B4A]">
+                    <span className="inline-block rounded-full bg-[#10B981]/10 px-2.5 py-0.5 text-xs font-medium text-[#111111]">
                       {p.badge}
                     </span>
                   ) : (
@@ -116,7 +116,7 @@ export default function ProductsTable({ items }: { items: Product[] }) {
                   <div className="flex items-center gap-3">
                     <Link
                       href={`/admin/products/${p.id}`}
-                      className="text-[#0097A7] hover:underline"
+                      className="text-[#10B981] hover:underline"
                     >
                       Edit
                     </Link>

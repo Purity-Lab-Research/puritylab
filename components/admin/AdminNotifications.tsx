@@ -116,7 +116,7 @@ export default function AdminNotifications() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="relative p-2 rounded-lg text-gray-500 hover:text-[#1A2B4A] hover:bg-gray-100 transition-colors"
+        className="relative p-2 rounded-lg text-gray-500 hover:text-[#111111] hover:bg-gray-100 transition-colors"
       >
         <Bell className="h-5 w-5" />
         {notifications.length > 0 && (

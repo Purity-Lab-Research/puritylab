@@ -50,7 +50,7 @@ export default function OrderStatusUpdater({
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as OrderStatus)}
-          className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7]"
+          className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#10B981] focus:outline-none focus:ring-1 focus:ring-[#10B981]"
         >
           {STATUSES.map((s) => (
             <option key={s} value={s}>
@@ -61,7 +61,7 @@ export default function OrderStatusUpdater({
         <button
           onClick={handleSave}
           disabled={saving || status === currentStatus}
-          className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#142238] disabled:opacity-50"
+          className="rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#000000] disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save"}
         </button>

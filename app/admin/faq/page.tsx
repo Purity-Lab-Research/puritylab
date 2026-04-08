@@ -100,7 +100,7 @@ const DEFAULT_FAQ_DATA: FaqSection[] = [
 /*  Styling constants                                                  */
 /* ------------------------------------------------------------------ */
 const INPUT_CLS =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] transition-colors";
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#10B981] focus:outline-none focus:ring-1 focus:ring-[#10B981] transition-colors";
 
 /* ------------------------------------------------------------------ */
 /*  Page component                                                     */
@@ -347,7 +347,7 @@ export default function AdminFaqPage() {
           <button
             onClick={handleSave}
             disabled={saving || !dirty}
-            className="flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A2B4A]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#111111]/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? (
               <>
@@ -395,7 +395,7 @@ export default function AdminFaqPage() {
                   <button
                     type="button"
                     onClick={() => renameSectionStart(si)}
-                    className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#1A2B4A]"
+                    className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#111111]"
                     title="Rename section"
                   >
                     <Pencil className="h-4 w-4" />
@@ -450,7 +450,7 @@ export default function AdminFaqPage() {
                               <button
                                 type="button"
                                 onClick={saveEdit}
-                                className="flex items-center gap-1 rounded-lg bg-[#1A2B4A] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1A2B4A]/90"
+                                className="flex items-center gap-1 rounded-lg bg-[#111111] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#111111]/90"
                               >
                                 <Check className="h-3.5 w-3.5" />
                                 Save
@@ -505,7 +505,7 @@ export default function AdminFaqPage() {
                           <button
                             type="button"
                             onClick={() => startEdit(si, qi)}
-                            className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#1A2B4A]"
+                            className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-[#111111]"
                             title="Edit"
                           >
                             <Pencil className="h-3.5 w-3.5" />
@@ -555,7 +555,7 @@ export default function AdminFaqPage() {
                             type="button"
                             onClick={() => addItem(si)}
                             disabled={!newQuestion.trim() || !newAnswer.trim()}
-                            className="flex items-center gap-1 rounded-lg bg-[#1A2B4A] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1A2B4A]/90 disabled:opacity-50"
+                            className="flex items-center gap-1 rounded-lg bg-[#111111] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#111111]/90 disabled:opacity-50"
                           >
                             <Check className="h-3.5 w-3.5" />
                             Add Question
@@ -584,7 +584,7 @@ export default function AdminFaqPage() {
                           setNewQuestion("");
                           setNewAnswer("");
                         }}
-                        className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-[#0097A7] transition-colors hover:bg-[#0097A7]/5"
+                        className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-[#10B981] transition-colors hover:bg-[#10B981]/5"
                       >
                         <Plus className="h-3.5 w-3.5" />
                         Add Question
@@ -617,7 +617,7 @@ export default function AdminFaqPage() {
                   type="button"
                   onClick={addSection}
                   disabled={!newSectionTitle.trim()}
-                  className="flex items-center gap-1 rounded-lg bg-[#1A2B4A] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1A2B4A]/90 disabled:opacity-50"
+                  className="flex items-center gap-1 rounded-lg bg-[#111111] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#111111]/90 disabled:opacity-50"
                 >
                   <Check className="h-3.5 w-3.5" />
                   Add Section
@@ -640,7 +640,7 @@ export default function AdminFaqPage() {
           <button
             type="button"
             onClick={() => setAddingSection(true)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 py-4 text-sm font-semibold text-gray-500 transition-colors hover:border-[#0097A7] hover:bg-[#0097A7]/5 hover:text-[#0097A7]"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 py-4 text-sm font-semibold text-gray-500 transition-colors hover:border-[#10B981] hover:bg-[#10B981]/5 hover:text-[#10B981]"
           >
             <Plus className="h-4 w-4" />
             Add Section
@@ -676,7 +676,7 @@ export default function AdminFaqPage() {
                 type="button"
                 onClick={handleSave}
                 disabled={saving}
-                className="rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A2B4A]/90 disabled:opacity-50"
+                className="rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#111111]/90 disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>

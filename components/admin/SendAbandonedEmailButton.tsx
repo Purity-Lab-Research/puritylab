@@ -80,7 +80,7 @@ export default function SendAbandonedEmailButton({ email, orderNumber, total }: 
             {/* Header */}
             <div className="sticky top-0 bg-white border-b px-5 py-4 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                <Eye className="h-4 w-4 text-[#1A2B4A]" />
+                <Eye className="h-4 w-4 text-[#111111]" />
                 Preview Email
               </h3>
               <button onClick={() => setStatus("idle")} className="p-1 text-gray-400 hover:text-gray-600">
@@ -156,7 +156,7 @@ export default function SendAbandonedEmailButton({ email, orderNumber, total }: 
               <button
                 onClick={handleSend}
                 disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#142238] transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#111111] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#000000] transition-colors disabled:opacity-50"
               >
                 {status === "sending" ? (
                   <Loader2 className="h-4 w-4 animate-spin" />

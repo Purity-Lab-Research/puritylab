@@ -61,7 +61,7 @@ function Btn({
       title={title}
       className={`p-1.5 rounded transition-all ${
         active
-          ? "bg-[#0097A7] text-white shadow-sm"
+          ? "bg-[#10B981] text-white shadow-sm"
           : disabled
           ? "text-gray-300 cursor-not-allowed"
           : "text-gray-500 hover:bg-gray-200 hover:text-gray-900"
@@ -200,7 +200,7 @@ export default function RichTextEditor({
       }),
       Link.configure({
         openOnClick: false,
-        HTMLAttributes: { class: "text-[#0097A7] underline" },
+        HTMLAttributes: { class: "text-[#10B981] underline" },
       }),
       Underline,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
@@ -227,7 +227,7 @@ export default function RichTextEditor({
   if (!editor) return null;
 
   return (
-    <div className="rte-editor rounded-lg border border-gray-300 focus-within:border-[#0097A7] focus-within:ring-1 focus-within:ring-[#0097A7] overflow-hidden bg-white">
+    <div className="rte-editor rounded-lg border border-gray-300 focus-within:border-[#10B981] focus-within:ring-1 focus-within:ring-[#10B981] overflow-hidden bg-white">
       <Toolbar editor={editor} />
       <EditorContent editor={editor} />
     </div>

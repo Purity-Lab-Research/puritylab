@@ -43,7 +43,7 @@ export default function DuplicateProductButton({ productId, productName }: Props
     <button
       onClick={handleDuplicate}
       disabled={loading}
-      className="inline-flex items-center gap-1 text-gray-400 hover:text-[#0097A7] transition-colors disabled:opacity-50"
+      className="inline-flex items-center gap-1 text-gray-400 hover:text-[#10B981] transition-colors disabled:opacity-50"
       title="Duplicate product"
     >
       {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Copy className="h-3.5 w-3.5" />}

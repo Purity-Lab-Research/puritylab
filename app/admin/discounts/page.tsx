@@ -30,10 +30,10 @@ interface DiscountCode {
 /*  Styling constants                                                  */
 /* ------------------------------------------------------------------ */
 const INPUT_CLS =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] transition-colors";
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#10B981] focus:outline-none focus:ring-1 focus:ring-[#10B981] transition-colors";
 
 const SELECT_CLS =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0097A7] focus:outline-none focus:ring-1 focus:ring-[#0097A7] transition-colors";
+  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#10B981] focus:outline-none focus:ring-1 focus:ring-[#10B981] transition-colors";
 
 /* ------------------------------------------------------------------ */
 /*  Page component                                                     */
@@ -170,7 +170,7 @@ export default function AdminDiscountsPage() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A2B4A]/90"
+            className="flex items-center gap-2 rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#111111]/90"
           >
             <Plus className="h-4 w-4" />
             New Code
@@ -268,7 +268,7 @@ export default function AdminDiscountsPage() {
             <button
               onClick={handleCreate}
               disabled={creating || !formCode.trim() || !formValue}
-              className="flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A2B4A]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 rounded-lg bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#111111]/90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {creating ? (
                 <>
@@ -379,7 +379,7 @@ export default function AdminDiscountsPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => toggleActive(code.id, code.active)}
-                          className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#1A2B4A]"
+                          className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#111111]"
                           title={code.active ? "Deactivate" : "Activate"}
                         >
                           {code.active ? (

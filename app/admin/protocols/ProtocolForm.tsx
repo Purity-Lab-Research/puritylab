@@ -44,7 +44,7 @@ function slugify(text: string) {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400";
+  "w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm transition-all focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 placeholder:text-gray-400";
 
 const labelCls = "block text-sm font-medium text-gray-700 mb-1";
 
@@ -62,7 +62,7 @@ export default function ProtocolForm({ initial, products }: Props) {
       subscription_price: 0,
       one_time_price: 0,
       badge: "",
-      accent_color: "#0097A7",
+      accent_color: "#10B981",
       sort_order: 0,
       active: true,
       items: [],

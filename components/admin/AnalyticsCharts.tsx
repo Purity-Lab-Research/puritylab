@@ -106,7 +106,7 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 const CHART_COLORS = [
-  "#1A2B4A", "#0097A7", "#3b82f6", "#60a5fa", "#93c5fd",
+  "#111111", "#10B981", "#3b82f6", "#60a5fa", "#93c5fd",
   "#6366f1", "#8b5cf6", "#a78bfa", "#22c55e", "#f59e0b",
 ];
 
@@ -232,7 +232,7 @@ function DateRangePicker({ range, setRange, customFrom, customTo, setCustomFrom,
   return (
     <div className="flex flex-wrap items-center gap-2">
       {[7, 14, 30, 60, 90].map((r) => (
-        <button key={r} onClick={() => setRange(r)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${range === r ? "bg-[#1A2B4A] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+        <button key={r} onClick={() => setRange(r)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${range === r ? "bg-[#111111] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
           {r}d
         </button>
       ))}
@@ -268,7 +268,7 @@ function OverviewTab({ data }: { data: AnalyticsData }) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard label="Total Revenue" value={formatCurrency(kpis.totalRevenue)} sub="All time" icon={TrendingUp} color="text-green-600 bg-green-50" />
-        <KPICard label="Total Orders" value={kpis.totalOrders.toLocaleString()} sub="Completed orders" icon={ShoppingBag} color="text-[#1A2B4A] bg-[#0097A7]/10" />
+        <KPICard label="Total Orders" value={kpis.totalOrders.toLocaleString()} sub="Completed orders" icon={ShoppingBag} color="text-[#111111] bg-[#10B981]/10" />
         <KPICard label="Total Customers" value={kpis.totalCustomers.toLocaleString()} sub="Registered accounts" icon={Users} color="text-indigo-600 bg-indigo-50" />
         <KPICard label="Active Products" value={kpis.activeProducts.toLocaleString()} sub="In catalog" icon={Package} color="text-amber-600 bg-amber-50" />
       </div>
@@ -282,15 +282,15 @@ function OverviewTab({ data }: { data: AnalyticsData }) {
             <AreaChart data={filtered}>
               <defs>
                 <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#1A2B4A" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#1A2B4A" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#111111" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#111111" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="date" tickFormatter={formatDateShort} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} interval="preserveStartEnd" />
               <YAxis tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} width={60} />
               <Tooltip content={<CustomTooltip formatter={formatCurrency} />} />
-              <Area type="monotone" dataKey="revenue" name="Revenue" stroke="#1A2B4A" strokeWidth={2} fill="url(#revenueGrad)" />
+              <Area type="monotone" dataKey="revenue" name="Revenue" stroke="#111111" strokeWidth={2} fill="url(#revenueGrad)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -304,7 +304,7 @@ function OverviewTab({ data }: { data: AnalyticsData }) {
               <XAxis dataKey="date" tickFormatter={formatDateShort} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} interval="preserveStartEnd" />
               <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} allowDecimals={false} width={40} />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="orders" name="Orders" fill="#0097A7" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="orders" name="Orders" fill="#10B981" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -343,7 +343,7 @@ function RealtimeTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 className="h-6 w-6 animate-spin text-[#1A2B4A]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#111111]" />
         <span className="ml-2 text-gray-500">Loading real-time data...</span>
       </div>
     );
@@ -423,8 +423,8 @@ function RealtimeTab() {
             <AreaChart data={rt.pageViewsByDay}>
               <defs>
                 <linearGradient id="viewsGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0097A7" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#0097A7" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="uniqueGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.15} />
@@ -435,7 +435,7 @@ function RealtimeTab() {
               <XAxis dataKey="date" tickFormatter={formatDateShort} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} />
               <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} allowDecimals={false} width={40} />
               <Tooltip content={<CustomTooltip />} />
-              <Area type="monotone" dataKey="views" name="Page Views" stroke="#0097A7" strokeWidth={2} fill="url(#viewsGrad)" />
+              <Area type="monotone" dataKey="views" name="Page Views" stroke="#10B981" strokeWidth={2} fill="url(#viewsGrad)" />
               <Area type="monotone" dataKey="unique" name="Unique Visitors" stroke="#8b5cf6" strokeWidth={2} fill="url(#uniqueGrad)" />
             </AreaChart>
           </ResponsiveContainer>
@@ -480,7 +480,7 @@ function RealtimeTab() {
                         <span className="text-sm text-gray-500">{d.count} ({pct}%)</span>
                       </div>
                       <div className="mt-1 h-2 rounded-full bg-gray-100">
-                        <div className="h-2 rounded-full bg-[#0097A7]" style={{ width: `${pct}%` }} />
+                        <div className="h-2 rounded-full bg-[#10B981]" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
                   </div>
@@ -555,7 +555,7 @@ function RealtimeTab() {
                       <td className="px-4 py-2.5 text-right font-semibold text-gray-900">{p.views}</td>
                       <td className="px-4 py-2.5">
                         <div className="h-2 rounded-full bg-gray-100">
-                          <div className="h-2 rounded-full bg-[#0097A7]" style={{ width: `${pct}%` }} />
+                          <div className="h-2 rounded-full bg-[#10B981]" style={{ width: `${pct}%` }} />
                         </div>
                       </td>
                     </tr>
@@ -643,8 +643,8 @@ function SalesTab({ data }: { data: AnalyticsData }) {
             <AreaChart data={filtered}>
               <defs>
                 <linearGradient id="revGrad2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#1A2B4A" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#1A2B4A" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#111111" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#111111" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -652,7 +652,7 @@ function SalesTab({ data }: { data: AnalyticsData }) {
               <YAxis yAxisId="revenue" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} width={60} />
               <YAxis yAxisId="orders" orientation="right" tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} allowDecimals={false} width={40} />
               <Tooltip content={<CustomTooltip formatter={formatCurrency} />} />
-              <Area yAxisId="revenue" type="monotone" dataKey="revenue" name="Revenue" stroke="#1A2B4A" strokeWidth={2} fill="url(#revGrad2)" />
+              <Area yAxisId="revenue" type="monotone" dataKey="revenue" name="Revenue" stroke="#111111" strokeWidth={2} fill="url(#revGrad2)" />
               <Line yAxisId="orders" type="monotone" dataKey="orders" name="Orders" stroke="#f59e0b" strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
@@ -750,7 +750,7 @@ function SalesTab({ data }: { data: AnalyticsData }) {
               <XAxis type="number" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} />
               <YAxis type="category" dataKey="country" width={50} tick={{ fontSize: 12, fill: "#374151", fontWeight: 600 }} tickLine={false} axisLine={false} />
               <Tooltip content={<CustomTooltip formatter={formatCurrency} />} cursor={{ fill: "#f9fafb" }} />
-              <Bar dataKey="revenue" name="Revenue" fill="#1A2B4A" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="revenue" name="Revenue" fill="#111111" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -839,7 +839,7 @@ function ProductsTab({ data }: { data: AnalyticsData }) {
               <XAxis type="number" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} />
               <YAxis type="category" dataKey="name" width={150} tick={{ fontSize: 11, fill: "#374151" }} tickLine={false} axisLine={false} />
               <Tooltip content={<CustomTooltip formatter={formatCurrency} />} cursor={{ fill: "#f9fafb" }} />
-              <Bar dataKey="revenue" name="Revenue" fill="#1A2B4A" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="revenue" name="Revenue" fill="#111111" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -984,7 +984,7 @@ function CustomersTab({ data }: { data: AnalyticsData }) {
                 <XAxis type="number" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} />
                 <YAxis type="category" dataKey="region" width={80} tick={{ fontSize: 11, fill: "#374151" }} tickLine={false} axisLine={false} />
                 <Tooltip content={<CustomTooltip formatter={formatCurrency} />} cursor={{ fill: "#f9fafb" }} />
-                <Bar dataKey="revenue" name="Revenue" fill="#1A2B4A" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="revenue" name="Revenue" fill="#111111" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -1011,7 +1011,7 @@ export default function AnalyticsCharts() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-32">
-        <Loader2 className="h-8 w-8 animate-spin text-[#1A2B4A]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#111111]" />
         <span className="ml-3 text-gray-500">Loading analytics...</span>
       </div>
     );
@@ -1035,7 +1035,7 @@ export default function AnalyticsCharts() {
               className={cn(
                 "flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all",
                 isActive
-                  ? "bg-white text-[#1A2B4A] shadow-sm"
+                  ? "bg-white text-[#111111] shadow-sm"
                   : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
               )}
             >

@@ -111,7 +111,7 @@ export default function InventoryTable({
                       <button
                         onClick={() => saveStock(p.id)}
                         disabled={saving}
-                        className="text-xs text-[#0097A7] hover:underline"
+                        className="text-xs text-[#10B981] hover:underline"
                       >
                         {saving ? "..." : "Save"}
                       </button>
@@ -128,7 +128,7 @@ export default function InventoryTable({
                         setEditing(p.id);
                         setValue(p.stock_quantity.toString());
                       }}
-                      className="text-xs text-[#0097A7] hover:underline"
+                      className="text-xs text-[#10B981] hover:underline"
                     >
                       Edit
                     </button>

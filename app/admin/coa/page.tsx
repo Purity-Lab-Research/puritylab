@@ -59,7 +59,7 @@ export default async function AdminCoaPage() {
                       href={getCoaUrl(coa.pdf_url)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#0097A7] hover:underline"
+                      className="text-[#10B981] hover:underline"
                     >
                       View PDF
                     </a>
@@ -71,7 +71,7 @@ export default async function AdminCoaPage() {
                   <div className="flex items-center gap-3">
                     <Link
                       href={`/admin/coa/${coa.id}`}
-                      className="text-[#0097A7] hover:underline"
+                      className="text-[#10B981] hover:underline"
                     >
                       Edit
                     </Link>

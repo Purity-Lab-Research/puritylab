@@ -9,7 +9,7 @@ interface Props {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400";
+  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 placeholder:text-gray-400";
 
 export default function ComposeView({ defaults, onClearDefaults }: Props) {
   const [to, setTo] = useState("");
@@ -84,7 +84,7 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
               <label className="mb-1.5 block text-sm font-medium text-gray-700">Message</label>
               <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={10} className={`${inputCls} resize-y`} placeholder="Write your message here. Line breaks are preserved in the email." required />
             </div>
-            <button type="submit" disabled={!to || !subject || !body} className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <button type="submit" disabled={!to || !subject || !body} className="inline-flex items-center gap-2 rounded-lg bg-[#111111] px-6 py-3 text-sm font-semibold text-white hover:bg-[#000000] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
               <Eye className="h-4 w-4" />
               Preview Email
             </button>
@@ -96,7 +96,7 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
         <div className="space-y-4 max-w-2xl">
           <div className="rounded-xl border border-gray-200 bg-white p-5">
             <h2 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <Eye className="h-4 w-4 text-[#1A2B4A]" />
+              <Eye className="h-4 w-4 text-[#111111]" />
               Email Preview
             </h2>
             <div className="space-y-2 text-sm">
@@ -128,7 +128,7 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
           </div>
           {errorMsg && <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">{errorMsg}</div>}
           <div className="flex items-center gap-3">
-            <button onClick={handleSend} disabled={status === "sending"} className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-colors disabled:opacity-50">
+            <button onClick={handleSend} disabled={status === "sending"} className="inline-flex items-center gap-2 rounded-lg bg-[#111111] px-6 py-3 text-sm font-semibold text-white hover:bg-[#000000] transition-colors disabled:opacity-50">
               {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               {status === "sending" ? "Sending..." : "Confirm & Send"}
             </button>
@@ -148,7 +148,7 @@ export default function ComposeView({ defaults, onClearDefaults }: Props) {
           <h2 className="text-lg font-bold text-green-800 mb-1">Email Sent!</h2>
           <p className="text-sm text-green-700 mb-1">Successfully sent to <strong>{to}</strong></p>
           <p className="text-xs text-green-600 mb-4">Subject: {subject}</p>
-          <button onClick={resetForm} className="inline-flex items-center gap-2 rounded-lg bg-[#1A2B4A] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#142238] transition-colors">
+          <button onClick={resetForm} className="inline-flex items-center gap-2 rounded-lg bg-[#111111] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#000000] transition-colors">
             <Mail className="h-4 w-4" />
             Send Another Email
           </button>

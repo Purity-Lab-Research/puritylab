@@ -39,7 +39,7 @@ interface Thread {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#0097A7] focus:outline-none focus:ring-2 focus:ring-[#0097A7]/20 placeholder:text-gray-400";
+  "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm transition-all focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 placeholder:text-gray-400";
 
 interface InboxViewProps {
   onComposeTo?: (to: string, subject: string) => void;
@@ -178,7 +178,7 @@ export default function InboxView({ onComposeTo }: InboxViewProps) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 className="h-6 w-6 animate-spin text-[#1A2B4A]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#111111]" />
         <span className="ml-2 text-gray-500">Loading inbox...</span>
       </div>
     );
@@ -339,7 +339,7 @@ export default function InboxView({ onComposeTo }: InboxViewProps) {
                   <button
                     onClick={handleReply}
                     disabled={sending || !replyBody.trim()}
-                    className="self-end inline-flex items-center gap-1.5 rounded-lg bg-[#1A2B4A] px-4 py-3 text-sm font-semibold text-white hover:bg-[#142238] transition-colors disabled:opacity-50"
+                    className="self-end inline-flex items-center gap-1.5 rounded-lg bg-[#111111] px-4 py-3 text-sm font-semibold text-white hover:bg-[#000000] transition-colors disabled:opacity-50"
                   >
                     {sending ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
