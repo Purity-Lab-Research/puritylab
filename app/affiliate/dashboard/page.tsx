@@ -731,7 +731,7 @@ function SettingsTab() {
           View the complete affiliate program terms and conditions.
         </p>
         <Link
-          href="/policies/terms"
+          href="/policies/affiliate-terms"
           className="text-sm font-medium text-[#10B981] hover:underline"
           target="_blank"
         >

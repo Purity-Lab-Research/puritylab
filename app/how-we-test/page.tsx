@@ -285,16 +285,16 @@ export default function HowWeTestPage() {
       {/* ─── Bottom CTA ─── */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="bg-primary rounded-2xl p-10 text-center max-w-2xl mx-auto my-16">
-            <h2 className="font-heading text-2xl font-bold text-white mb-3">
+          <div className="bg-gradient-to-br from-[#F0FDF4] via-[#EFF6FF] to-[#F5F3FF] rounded-2xl p-10 text-center max-w-2xl mx-auto my-16 border border-[#F0F0F0]">
+            <h2 className="font-heading text-2xl font-bold text-[#111111] mb-3">
               Want to verify your vial?
             </h2>
-            <p className="text-white/70 mb-6">
+            <p className="text-[#6B7280] mb-6">
               Look up your batch number in our CoA Library.
             </p>
             <Link
               href="/coa"
-              className="inline-block bg-white text-primary rounded-lg px-8 py-3 font-bold hover:bg-white/90 transition-colors"
+              className="inline-block bg-[#111111] text-white rounded-full px-8 py-3 font-bold hover:bg-black hover:scale-[1.02] transition-all duration-200"
             >
               Go to CoA Library
             </Link>

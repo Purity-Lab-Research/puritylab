@@ -36,6 +36,22 @@ export async function GET() {
       .eq("id", user.id);
   }
 
+  // Check if user is an approved affiliate
+  const { data: affiliate } = await supabase
+    .from("affiliates")
+    .select("id, status")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  // Check if user has a pending affiliate application
+  const { data: application } = await supabase
+    .from("affiliate_applications")
+    .select("id, status")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
   // Get referral history
   const { data: referrals } = await supabase
     .from("referrals")
@@ -54,6 +70,8 @@ export async function GET() {
     referralCount: (referrals ?? []).length,
     completedCount: completed.length,
     referrals: referrals ?? [],
+    isAffiliate: affiliate?.status === "active",
+    affiliateApplicationStatus: application?.status ?? null,
   });
 }
 

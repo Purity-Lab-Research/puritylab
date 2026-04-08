@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin";
 import { verifyCsrf } from "@/lib/csrf";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, brandedEmailWrapper } from "@/lib/email";
 import { writeAuditLog } from "@/lib/audit";
 import { logger } from "@/lib/logger";
 import { z } from "zod";
@@ -38,56 +38,26 @@ export async function POST(req: NextRequest) {
     .replace(/>/g, "&gt;")
     .replace(/\n/g, "<br/>");
 
-  const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="utf-8"/></head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,Helvetica,sans-serif;color:#333;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:24px 0;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
+  const domain = process.env.RESEND_DOMAIN || "puritylabresearch.com";
 
-        <tr>
-          <td style="background:#1A2B4A;padding:14px 24px;">
-            <table cellpadding="0" cellspacing="0" border="0"><tr>
-              <td style="vertical-align:middle;padding-right:12px;">
-                <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
-              </td>
-              <td style="vertical-align:middle;">
-                <h1 style="margin:0;color:#fff;font-size:20px;font-weight:800;letter-spacing:1.5px;font-family:Arial,Helvetica,sans-serif;">PURITY LAB</h1>
-                <p style="margin:1px 0 0;color:#7fb3f0;font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Research Peptides</p>
-              </td>
-            </tr></table>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="padding:32px 24px;">
-            <p style="margin:0;font-size:15px;line-height:1.8;color:#333;">
-              ${bodyHtml}
-            </p>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="padding:20px 24px;background:#fafafa;text-align:center;border-top:1px solid #eee;">
-            <p style="margin:0;font-size:12px;color:#999;">
-              Questions? Email us at
-              <a href="mailto:support@puritylabresearch.com" style="color:#666;">support@puritylabresearch.com</a>.
-            </p>
-            <p style="margin:8px 0 0;font-size:12px;color:#bbb;">&copy; Purity Lab. All rights reserved.</p>
-          </td>
-        </tr>
-
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+  const html = brandedEmailWrapper({
+    recipientEmail: to,
+    showDisclaimer: false,
+    showUnsubscribe: true,
+    body: `
+      <tr>
+        <td style="padding:32px 24px;">
+          <p style="margin:0;font-size:15px;line-height:1.8;color:#333;">
+            ${bodyHtml}
+          </p>
+        </td>
+      </tr>`,
+  });
 
   const result = await sendEmail({
+    from: `Purity Lab Support <support@${domain}>`,
     to: [to],
-    replyTo: "support@puritylabresearch.com",
+    replyTo: `support@${domain}`,
     subject,
     html,
   });

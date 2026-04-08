@@ -4,6 +4,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { verifyCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
 import { CONTACT_EMAIL } from "@/lib/constants";
+import { brandedEmailWrapper } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/admin";
 import crypto from "crypto";
 
@@ -81,15 +82,39 @@ export async function POST(request: NextRequest) {
           to: [CONTACT_EMAIL],
           reply_to: email,
           subject: `[${safeCategory}] Contact from ${name}`,
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${safeEmail}</p>
-            <p><strong>Category:</strong> ${safeCategory}</p>
-            <hr />
-            <p><strong>Message:</strong></p>
-            <p>${safeMessage.replace(/\n/g, "<br />")}</p>
-          `,
+          html: brandedEmailWrapper({
+            showDisclaimer: false,
+            showUnsubscribe: false,
+            body: `
+              <tr>
+                <td style="padding:32px 24px 8px;">
+                  <h2 style="margin:0 0 4px;font-size:20px;color:#111;">New Contact Form Submission</h2>
+                  <p style="margin:0;color:#666;font-size:14px;">${safeCategory}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:16px 24px 24px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
+                    <tr>
+                      <td style="padding:6px 0;font-weight:bold;width:100px;color:#555;">Name</td>
+                      <td style="padding:6px 0;color:#111;">${name}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 0;font-weight:bold;color:#555;">Email</td>
+                      <td style="padding:6px 0;"><a href="mailto:${safeEmail}" style="color:#1A2B4A;">${safeEmail}</a></td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 0;font-weight:bold;color:#555;">Category</td>
+                      <td style="padding:6px 0;color:#111;">${safeCategory}</td>
+                    </tr>
+                  </table>
+                  <div style="margin-top:16px;padding:16px;background:#fafafa;border-radius:6px;border:1px solid #eee;">
+                    <p style="margin:0 0 4px;font-size:12px;font-weight:bold;color:#666;text-transform:uppercase;letter-spacing:0.5px;">Message</p>
+                    <p style="margin:0;font-size:15px;line-height:1.6;color:#333;">${safeMessage.replace(/\n/g, "<br />")}</p>
+                  </div>
+                </td>
+              </tr>`,
+          }),
         }),
       });
 

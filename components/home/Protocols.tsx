@@ -80,54 +80,57 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                 key={protocol.id}
                 className="relative bg-white rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
               >
-                {/* Colored header */}
-                <div className={`${colorClass} px-5 pt-5 pb-4`}>
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-lg font-bold text-[#111111] leading-tight">
-                      {protocol.name}
-                    </h3>
-                    {protocol.badge && (
-                      <span
-                        className={`flex-shrink-0 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full ${BADGE_STYLES[protocol.badge] ?? "bg-[#10B981] text-white"}`}
-                      >
-                        {protocol.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-[#111111]/60 mt-1 line-clamp-1">
-                    {protocol.tagline}
-                  </p>
-                </div>
-
-                {/* Price + items */}
-                <div className="p-5 flex-1 flex flex-col">
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl font-extrabold text-[#111111]">${displaySub}</span>
-                    <span className="text-sm text-[#6B7280]">/mo</span>
-                  </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-[#9CA3AF] line-through">${displayOneTime}</span>
-                    <span className="text-[10px] font-semibold text-[#10B981]">Save {roundPrice(displayOneTime - displaySub > 0 ? ((displayOneTime - displaySub) / displayOneTime) * 100 : 15)}%</span>
+                {/* Clickable card area */}
+                <Link href={`/protocols/${protocol.slug}`} className="flex flex-col flex-1">
+                  {/* Colored header */}
+                  <div className={`${colorClass} px-5 pt-5 pb-4`}>
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-lg font-bold text-[#111111] leading-tight">
+                        {protocol.name}
+                      </h3>
+                      {protocol.badge && (
+                        <span
+                          className={`flex-shrink-0 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full ${BADGE_STYLES[protocol.badge] ?? "bg-[#10B981] text-white"}`}
+                        >
+                          {protocol.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-[#111111]/60 mt-1 line-clamp-1">
+                      {protocol.tagline}
+                    </p>
                   </div>
 
-                  <div className="mt-4 space-y-1.5 flex-1">
-                    {items.map((item) => (
-                      <div key={item.id} className="flex items-center gap-2">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#10B981] flex-shrink-0">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span className="text-xs text-[#111111]">{item.product?.name ?? "Unknown"}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {/* Price + items */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-3xl font-extrabold text-[#111111]">${displaySub}</span>
+                      <span className="text-sm text-[#6B7280]">/mo</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs text-[#9CA3AF] line-through">${displayOneTime}</span>
+                      <span className="text-[10px] font-semibold text-[#10B981]">Save {roundPrice(displayOneTime - displaySub > 0 ? ((displayOneTime - displaySub) / displayOneTime) * 100 : 15)}%</span>
+                    </div>
 
-                  <p className="text-[10px] text-[#6B7280] mt-3">
-                    {protocol.cycle_length} cycle · Free shipping
-                  </p>
-                </div>
+                    <div className="mt-4 space-y-1.5 flex-1">
+                      {items.map((item) => (
+                        <div key={item.id} className="flex items-center gap-2">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#10B981] flex-shrink-0">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                          <span className="text-xs text-[#111111]">{item.product?.name ?? "Unknown"}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="text-[10px] text-[#6B7280] mt-3">
+                      {protocol.cycle_length} cycle · Free shipping
+                    </p>
+                  </div>
+                </Link>
 
                 {/* Buttons */}
-                <div className="px-5 pb-5 space-y-2">
+                <div className="px-5 pb-5 space-y-2 mt-auto">
                   <button
                     onClick={() => addProtocolToCart(protocol, "subscription")}
                     className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"

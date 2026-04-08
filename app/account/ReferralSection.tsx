@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
+import { Copy, Check, Users, Gift, ArrowUpRight } from "lucide-react";
 
 interface Referral {
   id: string;
@@ -21,6 +22,8 @@ interface ReferralData {
   referralCount: number;
   completedCount: number;
   referrals: Referral[];
+  isAffiliate: boolean;
+  affiliateApplicationStatus: string | null;
 }
 
 export default function ReferralSection() {
@@ -45,9 +48,9 @@ export default function ReferralSection() {
 
   if (loading) {
     return (
-      <div className="bg-surface border border-border rounded-xl p-6 animate-pulse">
-        <div className="h-5 w-40 bg-border rounded mb-4" />
-        <div className="h-10 w-full bg-border rounded" />
+      <div className="bg-white border border-[#E5E7EB]/60 rounded-2xl p-6 animate-pulse">
+        <div className="h-5 w-40 bg-[#F3F4F6] rounded mb-4" />
+        <div className="h-10 w-full bg-[#F3F4F6] rounded-xl" />
       </div>
     );
   }
@@ -55,75 +58,128 @@ export default function ReferralSection() {
   if (!data) return null;
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6">
-      <h2 className="font-heading text-lg font-bold text-primary mb-4">Refer a Friend</h2>
-
-      {/* Referral link */}
-      <div className="flex items-center gap-2 mb-4">
-        <input
-          type="text"
-          readOnly
-          value={data.referralLink}
-          className="flex-1 rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-mono text-text-primary select-all"
-        />
-        <button
-          onClick={copyLink}
-          className="bg-primary text-white text-xs font-semibold px-4 py-2.5 rounded-lg hover:bg-primary-hover transition-colors whitespace-nowrap"
-        >
-          {copied ? "Copied!" : "Copy Link"}
-        </button>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="bg-background rounded-lg p-3 text-center">
-          <p className="text-xs text-text-secondary">Referrals</p>
-          <p className="font-heading text-lg font-bold text-primary">{data.referralCount}</p>
+    <div className="bg-white border border-[#E5E7EB]/60 rounded-2xl overflow-hidden">
+      <div className="p-5 sm:p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-base font-bold text-[#111111]">Refer & Earn</h2>
+          {data.isAffiliate ? (
+            <Link
+              href="/affiliate/dashboard"
+              className="text-xs font-semibold text-[#10B981] hover:underline flex items-center gap-1"
+            >
+              Affiliate Dashboard <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          ) : data.affiliateApplicationStatus === "pending" ? (
+            <span className="text-xs font-semibold text-[#D97706] flex items-center gap-1">
+              Application Pending
+            </span>
+          ) : !data.affiliateApplicationStatus || data.affiliateApplicationStatus === "rejected" ? (
+            <Link
+              href="/affiliate/apply"
+              className="text-xs font-semibold text-[#10B981] hover:underline flex items-center gap-1"
+            >
+              Become an Affiliate <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          ) : null}
         </div>
-        <div className="bg-background rounded-lg p-3 text-center">
-          <p className="text-xs text-text-secondary">Earned</p>
-          <p className="font-heading text-lg font-bold text-primary">{formatPrice(data.totalEarned)}</p>
-        </div>
-        <div className="bg-background rounded-lg p-3 text-center">
-          <p className="text-xs text-text-secondary">Balance</p>
-          <p className="font-heading text-lg font-bold text-success">{formatPrice(data.balance)}</p>
-        </div>
-      </div>
 
-      {/* How it works */}
-      <div className="bg-secondary/5 border border-secondary/10 rounded-lg p-4 mb-4">
-        <p className="text-xs font-semibold text-primary mb-1">How it works</p>
-        <p className="text-[10px] text-text-secondary leading-relaxed">
-          Share your link. When someone subscribes using your link, you get $20 off your next shipment and they get 15% off their first month. Referral credits are applied automatically at checkout.
-        </p>
-      </div>
+        {/* Referral link */}
+        <div className="flex items-center gap-2 mb-5">
+          <div className="flex-1 bg-[#F7F7F8] rounded-xl px-4 py-3 text-sm font-mono text-[#6B7280] truncate select-all">
+            {data.referralLink}
+          </div>
+          <button
+            onClick={copyLink}
+            className={`flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 ${
+              copied
+                ? "bg-[#10B981] text-white"
+                : "bg-[#111111] text-white hover:bg-black"
+            }`}
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5" /> Copied
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" /> Copy
+              </>
+            )}
+          </button>
+        </div>
 
-      {/* Affiliate program upsell */}
-      <div className="bg-[#10B981]/5 border border-[#10B981]/10 rounded-lg p-4 mb-4">
-        <p className="text-xs font-semibold text-[#111111] mb-1">Want to earn more?</p>
-        <p className="text-[10px] text-[#6B7280] leading-relaxed mb-2">
-          Earn 15% on first orders and 10% on every reorder with our Affiliate Program. No caps, no limits.
-        </p>
-        <Link
-          href="/affiliate"
-          className="text-xs font-semibold text-[#10B981] hover:underline"
-        >
-          Apply to our Affiliate Program
-        </Link>
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-3 mb-5">
+          <div className="bg-[#F7F7F8] rounded-xl p-3.5 text-center">
+            <p className="text-xs text-[#9CA3AF] mb-1">Referrals</p>
+            <p className="text-lg font-extrabold text-[#111111]">
+              {data.referralCount}
+            </p>
+          </div>
+          <div className="bg-[#F7F7F8] rounded-xl p-3.5 text-center">
+            <p className="text-xs text-[#9CA3AF] mb-1">Earned</p>
+            <p className="text-lg font-extrabold text-[#111111]">
+              {formatPrice(data.totalEarned)}
+            </p>
+          </div>
+          <div className="bg-[#F7F7F8] rounded-xl p-3.5 text-center">
+            <p className="text-xs text-[#9CA3AF] mb-1">Balance</p>
+            <p className="text-lg font-extrabold text-[#10B981]">
+              {formatPrice(data.balance)}
+            </p>
+          </div>
+        </div>
+
+        {/* How it works */}
+        <div className="bg-[#F7F7F8] rounded-xl p-4 flex gap-3">
+          <div className="w-8 h-8 rounded-lg bg-[#10B981]/10 flex items-center justify-center shrink-0 mt-0.5">
+            <Gift className="h-4 w-4 text-[#10B981]" />
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[#111111] mb-0.5">
+              How it works
+            </p>
+            <p className="text-[11px] text-[#9CA3AF] leading-relaxed">
+              Share your link &mdash; they get 15% off their first month, you
+              get $20 off your next shipment. Credits apply automatically.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* History */}
       {data.referrals.length > 0 && (
-        <div>
-          <p className="text-xs font-semibold text-primary mb-2">History</p>
-          <div className="space-y-1.5">
+        <div className="border-t border-[#F3F4F6] px-5 sm:px-6 py-4">
+          <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">
+            History
+          </p>
+          <div className="space-y-2.5">
             {data.referrals.slice(0, 5).map((ref) => (
-              <div key={ref.id} className="flex items-center justify-between text-xs">
-                <span className="text-text-secondary">
-                  {new Date(ref.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                </span>
-                <span className={`font-semibold ${ref.status === "completed" || ref.status === "credited" ? "text-success" : "text-text-secondary"}`}>
-                  {ref.status === "pending" ? "Pending" : `+${formatPrice(ref.credit_amount)}`}
+              <div
+                key={ref.id}
+                className="flex items-center justify-between text-xs"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-[#F7F7F8] flex items-center justify-center">
+                    <Users className="h-3 w-3 text-[#9CA3AF]" />
+                  </div>
+                  <span className="text-[#6B7280]">
+                    {new Date(ref.created_at).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
+                <span
+                  className={`font-semibold ${
+                    ref.status === "completed" || ref.status === "credited"
+                      ? "text-[#10B981]"
+                      : "text-[#9CA3AF]"
+                  }`}
+                >
+                  {ref.status === "pending"
+                    ? "Pending"
+                    : `+${formatPrice(ref.credit_amount)}`}
                 </span>
               </div>
             ))}

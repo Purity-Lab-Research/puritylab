@@ -262,7 +262,7 @@ export default function AffiliateApplyPage() {
             <span className="text-sm text-[#6B7280]">
               I agree to the{" "}
               <Link
-                href="/policies/terms"
+                href="/policies/affiliate-terms"
                 className="text-[#10B981] hover:underline"
                 target="_blank"
               >

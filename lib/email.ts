@@ -10,6 +10,78 @@ function unsubscribeFooter(email: string): string {
   </p>`;
 }
 
+// ---------------------------------------------------------------------------
+// Branded email wrapper — consistent header, footer, and layout for all emails
+// ---------------------------------------------------------------------------
+
+export function brandedEmailWrapper(options: {
+  body: string;
+  recipientEmail?: string;
+  contactEmail?: string;
+  showDisclaimer?: boolean;
+  showUnsubscribe?: boolean;
+}): string {
+  const { body, recipientEmail, contactEmail = "support@puritylabresearch.com", showDisclaimer = true, showUnsubscribe = true } = options;
+
+  const disclaimerBlock = showDisclaimer
+    ? `<tr>
+          <td style="padding:16px 24px;background:#fdf6e3;border-top:1px solid #eee;">
+            <p style="margin:0;font-size:12px;color:#856404;line-height:1.5;text-align:center;">
+              <strong>For Research Use Only.</strong> All products sold by Purity Lab are for in-vitro laboratory research and educational purposes only. Not for human or animal consumption. The purchaser assumes full responsibility for the lawful use of all products.
+            </p>
+          </td>
+        </tr>`
+    : "";
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"/></head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,Helvetica,sans-serif;color:#333;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:24px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#1A2B4A;padding:14px 24px;">
+            <table cellpadding="0" cellspacing="0" border="0"><tr>
+              <td style="vertical-align:middle;padding-right:12px;">
+                <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
+              </td>
+              <td style="vertical-align:middle;">
+                <h1 style="margin:0;color:#fff;font-size:20px;font-weight:800;letter-spacing:1.5px;font-family:Arial,Helvetica,sans-serif;">PURITY LAB</h1>
+                <p style="margin:1px 0 0;color:#7fb3f0;font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Research Peptides</p>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        ${body}
+
+        <!-- Disclaimer -->
+        ${disclaimerBlock}
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:20px 24px;background:#fafafa;text-align:center;border-top:1px solid #eee;">
+            <p style="margin:0;font-size:12px;color:#999;">
+              Questions? Email us at
+              <a href="mailto:${contactEmail}" style="color:#666;">${contactEmail}</a>.
+            </p>
+            <p style="margin:8px 0 0;font-size:12px;color:#bbb;">&copy; Purity Lab. All rights reserved.</p>
+            ${showUnsubscribe && recipientEmail ? unsubscribeFooter(recipientEmail) : ""}
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")

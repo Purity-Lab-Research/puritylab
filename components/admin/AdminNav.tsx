@@ -18,6 +18,7 @@ import {
   Star,
   Mail,
   UserPlus,
+  RefreshCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { StaffRole } from "@/lib/admin";
@@ -36,6 +37,7 @@ const navItems: NavItem[] = [
   { label: "Customers", href: "/admin/customers", icon: Users },
   { label: "Affiliates", href: "/admin/affiliates", icon: UserPlus },
   { label: "Email", href: "/admin/email", icon: Mail },
+  { label: "Subscriptions", href: "/admin/subscriptions", icon: RefreshCw },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Protocols", href: "/admin/protocols", icon: Layers },
   { label: "Inventory", href: "/admin/inventory", icon: Warehouse },

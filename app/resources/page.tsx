@@ -38,11 +38,11 @@ const labelCls =
   "block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1.5";
 
 const sectionTitleCls =
-  "text-2xl md:text-3xl font-extrabold text-[#111111] mb-2";
+  "text-xl sm:text-2xl md:text-3xl font-extrabold text-[#111111] mb-1 sm:mb-2";
 
-const sectionDescCls = "text-sm text-[#6B7280] mb-8 max-w-2xl";
+const sectionDescCls = "text-xs sm:text-sm text-[#6B7280] mb-6 sm:mb-8 max-w-2xl";
 
-const cardCls = "bg-white border border-[#F0F0F0] rounded-2xl p-6 md:p-8";
+const cardCls = "bg-white border border-[#F0F0F0] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8";
 
 /* ─── 4 Simple Tabs ─── */
 const TABS = [
@@ -63,21 +63,22 @@ function ResourceNav({
   return (
     <nav className="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-b border-[#F0F0F0]">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center gap-1 sm:gap-2 py-2.5">
+        <div className="flex items-center justify-around sm:justify-center sm:gap-2 py-2">
           {TABS.map((tab) => {
             const isActive = active === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => onChange(tab.id)}
-                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                aria-label={tab.label}
+                className={`flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-sm font-semibold transition-all min-w-0 ${
                   isActive
                     ? "bg-[#111111] text-white shadow-sm"
                     : "text-[#6B7280] hover:text-[#111111] hover:bg-[#F5F5F5]"
                 }`}
               >
-                <tab.icon className={`w-4 h-4 ${isActive ? "" : "opacity-50"}`} />
-                {tab.label}
+                <tab.icon className={`w-5 h-5 sm:w-4 sm:h-4 shrink-0 ${isActive ? "" : "opacity-50"}`} />
+                <span className="whitespace-nowrap">{tab.label}</span>
               </button>
             );
           })}
@@ -585,12 +586,12 @@ function ArticlesSection() {
               {CATEGORY_LABELS[category]}
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {categoryArticles.map((article, i) => (
                 <ScrollReveal key={article.slug} delay={i * 0.06}>
                   <Link
                     href={`/learn/${article.slug}`}
-                    className="block bg-white border border-[#F0F0F0] rounded-2xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 h-full"
+                    className="block bg-[#FAFAFA] sm:bg-white border border-[#F0F0F0] rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 h-full"
                   >
                     <div className="flex items-center gap-2.5">
                       <span
@@ -1501,27 +1502,27 @@ function ActiveSection({ id, openSubsection, onToggleSubsection }: { id: string;
   const subsections = TAB_SUBSECTIONS[id] || [];
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2 sm:space-y-3">
       {subsections.map((sub) => {
         const isOpen = openSubsection === sub.id;
         return (
-          <div key={sub.id} id={sub.id} className="border border-[#F0F0F0] rounded-2xl overflow-hidden bg-white transition-shadow hover:shadow-sm">
+          <div key={sub.id} id={sub.id} className="border border-[#F0F0F0] rounded-xl sm:rounded-2xl overflow-hidden bg-white transition-shadow hover:shadow-sm">
             <button
               onClick={() => onToggleSubsection(sub.id)}
-              className="w-full flex items-center gap-4 px-6 py-5 text-left transition-colors hover:bg-[#FAFAFA]"
+              className="w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 text-left transition-colors hover:bg-[#FAFAFA]"
             >
-              <div className={`flex items-center justify-center w-10 h-10 rounded-xl shrink-0 transition-colors ${isOpen ? "bg-[#111111] text-white" : "bg-[#F5F5F5] text-[#6B7280]"}`}>
-                <sub.icon className="w-5 h-5" />
+              <div className={`flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl shrink-0 transition-colors ${isOpen ? "bg-[#111111] text-white" : "bg-[#F5F5F5] text-[#6B7280]"}`}>
+                <sub.icon className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-[#111111] text-[15px]">{sub.label}</p>
-                <p className="text-sm text-[#6B7280] mt-0.5">{sub.desc}</p>
+                <p className="font-semibold text-[#111111] text-sm sm:text-[15px]">{sub.label}</p>
+                <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5 hidden sm:block">{sub.desc}</p>
               </div>
-              <ChevronDown className={`w-5 h-5 text-[#9CA3AF] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 text-[#9CA3AF] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
             </button>
 
             {isOpen && (
-              <div className="px-6 pb-6 pt-2 border-t border-[#F0F0F0]">
+              <div className="px-3 sm:px-6 pb-4 sm:pb-6 pt-2 border-t border-[#F0F0F0]">
                 <SubsectionContent id={sub.id} />
               </div>
             )}
@@ -1623,8 +1624,8 @@ export default function ResourcesPage() {
 
       <ResourceNav active={activeTab} onChange={handleTabChange} />
 
-      <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="mb-6">
+      <section className="mx-auto max-w-5xl px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <div className="mb-4 sm:mb-6">
           <h2 className={sectionTitleCls}>{meta.title}</h2>
           <p className={sectionDescCls}>{meta.desc}</p>
         </div>
@@ -1632,8 +1633,8 @@ export default function ResourcesPage() {
         <ActiveSection id={activeTab} openSubsection={openSubsection} onToggleSubsection={handleToggleSubsection} />
 
         {/* Legal Disclaimers */}
-        <div className="mt-12 space-y-8">
-          <div className="bg-surface border border-border rounded-xl p-6 md:p-8 space-y-6">
+        <div className="mt-8 sm:mt-12 space-y-6 sm:space-y-8">
+          <div className="bg-surface border border-border rounded-xl p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
               <div>
