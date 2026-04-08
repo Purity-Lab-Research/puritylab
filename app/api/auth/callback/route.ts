@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { sendAdminNewAccountNotification } from "@/lib/email";
+import { sendAdminNewAccountNotification, sendWelcomeEmail } from "@/lib/email";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
@@ -31,6 +31,10 @@ export async function GET(request: NextRequest) {
 
           // Notify admin of new signup (non-blocking)
           sendAdminNewAccountNotification(user.email).catch(() => {});
+
+          // Send welcome email to new user (non-blocking)
+          const fullName = user.user_metadata?.full_name || "";
+          sendWelcomeEmail(user.email, fullName).catch(() => {});
         }
       } catch {
         // Silently fail  -  linking is a nice-to-have

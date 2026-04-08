@@ -27,6 +27,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Skip middleware for unsubscribe endpoint (one-click from emails)
+  if (request.nextUrl.pathname === "/api/unsubscribe") {
+    return NextResponse.next();
+  }
+
   // Handle CORS preflight for API routes
   if (
     request.nextUrl.pathname.startsWith("/api/") &&

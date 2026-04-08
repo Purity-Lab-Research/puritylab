@@ -43,7 +43,7 @@ export async function sendAffiliateConversionEmail(
         </tr>
         <tr>
           <td style="padding:0 24px 24px;text-align:center;">
-            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#111111;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
               View Dashboard
             </a>
           </td>
@@ -80,7 +80,7 @@ export async function sendPayoutProcessedEmail(
         </tr>
         <tr>
           <td style="padding:24px;text-align:center;">
-            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#111111;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
               View Payout History
             </a>
           </td>
@@ -117,7 +117,7 @@ export async function sendApplicationReceivedEmail(
         </tr>
         <tr>
           <td style="padding:24px;text-align:center;">
-            <a href="${SITE_URL}/shop" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${SITE_URL}/shop" style="display:inline-block;background:#111111;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
               Browse Products
             </a>
           </td>
@@ -163,7 +163,7 @@ export async function sendApplicationApprovedEmail(
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-weight:bold;color:#555;">Referral Link</td>
-                  <td style="padding:6px 0;"><a href="${SITE_URL}/?ref=${affiliateCode}" style="color:#1A2B4A;word-break:break-all;">${SITE_URL}/?ref=${affiliateCode}</a></td>
+                  <td style="padding:6px 0;"><a href="${SITE_URL}/?ref=${affiliateCode}" style="color:#111111;word-break:break-all;">${SITE_URL}/?ref=${affiliateCode}</a></td>
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-weight:bold;color:#555;">Commission</td>
@@ -176,12 +176,12 @@ export async function sendApplicationApprovedEmail(
         ${isNewUser ? `
         <tr>
           <td style="padding:0 24px 8px;">
-            <p style="margin:0;font-size:14px;line-height:1.6;color:#555;">We created an account for you. Please <a href="${SITE_URL}/forgot-password" style="color:#1A2B4A;font-weight:600;">set your password</a> to access the dashboard.</p>
+            <p style="margin:0;font-size:14px;line-height:1.6;color:#555;">We created an account for you. Please <a href="${SITE_URL}/forgot-password" style="color:#111111;font-weight:600;">set your password</a> to access the dashboard.</p>
           </td>
         </tr>` : ""}
         <tr>
           <td style="padding:16px 24px 24px;text-align:center;">
-            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${SITE_URL}/affiliate/dashboard" style="display:inline-block;background:#111111;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
               Go to Dashboard
             </a>
           </td>
@@ -252,7 +252,7 @@ export async function sendNewApplicationAdminNotification(
               </tr>
               <tr>
                 <td style="padding:10px 12px;font-weight:bold;color:#555;border-bottom:1px solid #eee;">Email</td>
-                <td style="padding:10px 12px;color:#111;border-bottom:1px solid #eee;"><a href="mailto:${email}" style="color:#1A2B4A;">${email}</a></td>
+                <td style="padding:10px 12px;color:#111;border-bottom:1px solid #eee;"><a href="mailto:${email}" style="color:#111111;">${email}</a></td>
               </tr>
               <tr style="background:#fafafa;">
                 <td style="padding:10px 12px;font-weight:bold;color:#555;border-bottom:1px solid #eee;">Platform</td>
@@ -268,7 +268,7 @@ export async function sendNewApplicationAdminNotification(
               </tr>
             </table>
             <div style="margin-top:20px;text-align:center;">
-              <a href="${SITE_URL}/admin/affiliates/applications" style="display:inline-block;background:#1A2B4A;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+              <a href="${SITE_URL}/admin/affiliates/applications" style="display:inline-block;background:#111111;color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
                 Review Application
               </a>
             </div>

@@ -38,20 +38,19 @@ export async function POST(req: NextRequest) {
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"/></head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,Helvetica,sans-serif;color:#333;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:24px 0;">
+<body style="margin:0;padding:0;background:#FAFAFA;font-family:'Helvetica Neue',Arial,sans-serif;color:#111111;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAFAFA;padding:32px 0;">
     <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #F0F0F0;">
 
         <tr>
-          <td style="background:#1A2B4A;padding:14px 24px;">
+          <td style="padding:24px 24px 20px;border-bottom:1px solid #F0F0F0;">
             <table cellpadding="0" cellspacing="0" border="0"><tr>
-              <td style="vertical-align:middle;padding-right:12px;">
-                <img src="https://puritylabresearch.com/icon.png" alt="" width="42" height="42" style="display:block;border-radius:50%;" />
+              <td style="vertical-align:middle;padding-right:10px;">
+                <img src="https://puritylabresearch.com/images/logo.png" alt="Purity Lab" width="36" height="36" style="display:block;" />
               </td>
               <td style="vertical-align:middle;">
-                <h1 style="margin:0;color:#fff;font-size:20px;font-weight:800;letter-spacing:1.5px;font-family:Arial,Helvetica,sans-serif;">PURITY LAB</h1>
-                <p style="margin:1px 0 0;color:#7fb3f0;font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Research Peptides</p>
+                <p style="margin:0;color:#111111;font-size:18px;font-weight:800;letter-spacing:0.5px;font-family:'Helvetica Neue',Arial,sans-serif;">PURITY LAB</p>
               </td>
             </tr></table>
           </td>
@@ -69,22 +68,22 @@ export async function POST(req: NextRequest) {
               We noticed you started an order <strong>(#${orderNumber})</strong> for <strong>${formattedTotal} USD</strong> but didn't complete checkout. Your items are still waiting for you!
             </p>
             <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:#555;">
-              If you ran into any issues or have questions, email us at <a href="mailto:support@puritylabresearch.com" style="color:#0097A7;">support@puritylabresearch.com</a> - we're happy to help.
+              If you ran into any issues or have questions, email us at <a href="mailto:support@puritylabresearch.com" style="color:#10B981;">support@puritylabresearch.com</a> - we're happy to help.
             </p>
           </td>
         </tr>
 
         <tr>
           <td style="padding:8px 24px 24px;text-align:center;">
-            <a href="${siteUrl}/shop" style="display:inline-block;background:#1A2B4A;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:bold;">
+            <a href="${siteUrl}/shop" style="display:inline-block;background:#111111;color:#fff;padding:14px 32px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;">
               Return to Shop
             </a>
           </td>
         </tr>
 
         <tr>
-          <td style="padding:16px 24px;background:#fdf6e3;border-top:1px solid #eee;">
-            <p style="margin:0;font-size:12px;color:#856404;line-height:1.5;text-align:center;">
+          <td style="padding:16px 24px;background:#FAFAFA;border-top:1px solid #F0F0F0;">
+            <p style="margin:0;font-size:12px;color:#6B7280;line-height:1.5;text-align:center;">
               <strong>For Research Use Only.</strong> Products sold by Purity Lab are intended solely for
               laboratory and research purposes.
             </p>
