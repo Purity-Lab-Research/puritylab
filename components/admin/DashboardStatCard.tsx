@@ -2,18 +2,41 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  ShoppingBag,
+  ShoppingCart,
+  Package,
+  AlertTriangle,
+  Users,
+  CreditCard,
+  Layers,
+} from "lucide-react";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import type { LucideIcon } from "lucide-react";
+
+const iconMap: Record<string, LucideIcon> = {
+  DollarSign,
+  TrendingUp,
+  ShoppingBag,
+  ShoppingCart,
+  Package,
+  AlertTriangle,
+  Users,
+  CreditCard,
+  Layers,
+};
 
 interface DashboardStatCardProps {
   label: string;
   value: string;
   sub: string;
-  icon: LucideIcon;
+  iconName: string;
   color: string;
   href: string;
-  trend?: number; // percentage change
+  trend?: number;
   sparklineData?: number[];
   staggerIndex?: number;
 }
@@ -22,13 +45,14 @@ export default function DashboardStatCard({
   label,
   value,
   sub,
-  icon: Icon,
+  iconName,
   color,
   href,
   trend,
   sparklineData,
   staggerIndex = 0,
 }: DashboardStatCardProps) {
+  const Icon = iconMap[iconName] ?? Package;
   const trendColor = trend && trend > 0 ? "text-emerald-600" : trend && trend < 0 ? "text-red-500" : "text-gray-400";
   const sparkColor = trend && trend >= 0 ? "#10B981" : "#EF4444";
 
