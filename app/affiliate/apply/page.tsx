@@ -162,7 +162,7 @@ export default function AffiliateApplyPage() {
               Website or Social Media URL
             </label>
             <input
-              type="url"
+              type="text"
               value={form.websiteUrl}
               onChange={(e) => update("websiteUrl", e.target.value)}
               className="w-full rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3 text-sm text-[#111111] focus:border-[#111111] focus:ring-2 focus:ring-[#111111]/10 focus:bg-white outline-none transition-all"
