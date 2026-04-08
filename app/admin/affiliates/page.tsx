@@ -10,7 +10,7 @@ export default async function AdminAffiliatesPage() {
   await requireAdminPage();
   const supabase = createAdminClient();
 
-  const [affiliatesRes, pendingAppsRes] = await Promise.all([
+  const [affiliatesRes, pendingAppsRes, approvedAppsRes] = await Promise.all([
     supabase
       .from("affiliates")
       .select("*")
@@ -19,19 +19,33 @@ export default async function AdminAffiliatesPage() {
       .from("affiliate_applications")
       .select("id", { count: "exact", head: true })
       .eq("status", "pending"),
+    supabase
+      .from("affiliate_applications")
+      .select("name, email, status")
+      .eq("status", "approved"),
   ]);
 
-  // Fetch profile info for each affiliate
+  // Build a lookup from application email -> name
+  const appByEmail = new Map(
+    (approvedAppsRes.data || []).map((a: { name: string; email: string }) => [a.email, a.name])
+  );
+
+  // Fetch profile + auth user info for each affiliate
   const affiliateUserIds = (affiliatesRes.data || []).map((a: { user_id: string }) => a.user_id);
-  const { data: profilesData } = affiliateUserIds.length > 0
-    ? await supabase
-        .from("profiles")
-        .select("id, full_name, email")
-        .in("id", affiliateUserIds)
-    : { data: [] };
+  const [profilesResult, usersResult] = await Promise.all([
+    affiliateUserIds.length > 0
+      ? supabase.from("profiles").select("id, full_name, email").in("id", affiliateUserIds)
+      : Promise.resolve({ data: [] }),
+    affiliateUserIds.length > 0
+      ? supabase.auth.admin.listUsers()
+      : Promise.resolve({ data: { users: [] } }),
+  ]);
 
   const profileMap = new Map(
-    (profilesData || []).map((p: { id: string; full_name: string | null; email: string }) => [p.id, p])
+    (profilesResult.data || []).map((p: { id: string; full_name: string | null; email: string }) => [p.id, p])
+  );
+  const authUserMap = new Map(
+    (usersResult.data?.users || []).map((u) => [u.id, u])
   );
 
   const affiliates = (affiliatesRes.data || []) as Array<{
@@ -138,6 +152,9 @@ export default async function AdminAffiliatesPage() {
               <tbody>
                 {affiliates.map((a) => {
                   const profile = profileMap.get(a.user_id) as { full_name: string | null; email: string } | undefined;
+                  const authUser = authUserMap.get(a.user_id);
+                  const email = profile?.email || authUser?.email || "";
+                  const name = profile?.full_name || appByEmail.get(email) || authUser?.user_metadata?.full_name || "Unknown";
                   const convRate =
                     a.total_clicks > 0
                       ? ((a.total_conversions / a.total_clicks) * 100).toFixed(1)
@@ -146,9 +163,9 @@ export default async function AdminAffiliatesPage() {
                     <tr key={a.id} className="border-t border-[#F0F0F0] hover:bg-[#FAFAFA]">
                       <td className="py-3 px-4">
                         <p className="font-medium text-[#111111]">
-                          {profile?.full_name || "N/A"}
+                          {name}
                         </p>
-                        <p className="text-xs text-[#6B7280]">{profile?.email}</p>
+                        <p className="text-xs text-[#6B7280]">{email}</p>
                       </td>
                       <td className="py-3 px-4 font-mono text-xs text-[#111111]">
                         {a.affiliate_code}
