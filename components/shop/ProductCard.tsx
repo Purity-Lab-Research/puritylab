@@ -165,7 +165,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* View button */}
         <Link
           href={`/shop/${product.slug}`}
-          className="mt-3 w-full bg-[#111111] text-white rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all text-center inline-flex items-center justify-center gap-2"
+          className="mt-5 w-full bg-[#111111] text-white rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all text-center inline-flex items-center justify-center gap-2"
         >
           View
           <ArrowRight className="h-3.5 w-3.5" />

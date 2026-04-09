@@ -39,7 +39,7 @@ export default async function HomePage() {
         .select("*, category:categories(*), variants:product_variants(*)")
         .eq("active", true)
         .eq("featured", true)
-        .order("created_at", { ascending: false })
+        .order("sort_order", { ascending: true })
         .limit(12),
       supabase
         .from("protocols")

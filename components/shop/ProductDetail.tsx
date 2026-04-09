@@ -91,12 +91,12 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
     : null;
 
   const mainImages = product.images?.length ? product.images : [];
-  const variantImages = selectedVariant?.images?.length ? selectedVariant.images : [];
-  // Always lead with main product images, then append any variant-specific images (deduplicated)
-  const images = variantImages.length
-    ? [...mainImages, ...variantImages.filter((vi) => !mainImages.includes(vi))]
-    : mainImages;
-  const hasImages = images.length > 0;
+  const variantImage = selectedVariant?.images?.[0] ?? null;
+  // Thumbnails only show main product images; the active display image
+  // switches to the variant image when a variant is selected
+  const thumbnailImages = mainImages;
+  const activeDisplayImage = variantImage ?? mainImages[mainImage] ?? null;
+  const hasImages = mainImages.length > 0 || !!variantImage;
 
   const activeStock = selectedVariant?.stock_quantity ?? product.stock_quantity;
   const activeLowThreshold = selectedVariant?.low_stock_threshold ?? product.low_stock_threshold;
@@ -139,7 +139,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
       price: regularPrice,
       subscriptionPrice: purchaseMode === "subscribe" ? subPrice : null,
       size: displaySize,
-      image: hasImages ? images[0] : null,
+      image: hasImages ? (mainImages[0] ?? variantImage) : null,
       purchaseType: purchaseMode === "subscribe" ? "subscription" : "one-time",
       deliveryFrequencyWeeks: billingCycle === "annual" ? 4 : deliveryWeeks,
       billingCycle: purchaseMode === "subscribe" ? billingCycle : "monthly",
@@ -159,10 +159,10 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
   const handleTouchEnd = useCallback((e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0 && mainImage < images.length - 1) setMainImage((i) => i + 1);
+      if (diff > 0 && mainImage < thumbnailImages.length - 1) setMainImage((i) => i + 1);
       else if (diff < 0 && mainImage > 0) setMainImage((i) => i - 1);
     }
-  }, [mainImage, images.length]);
+  }, [mainImage, thumbnailImages.length]);
 
   function toggleMobileAccordion(tab: TabId) {
     setMobileAccordion(mobileAccordion === tab ? null : tab);
@@ -346,12 +346,12 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14">
         {/* LEFT - Gallery */}
         <div>
-          {hasImages ? (
+          {hasImages && activeDisplayImage ? (
             <div className="relative" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-              <ImageZoom src={images[mainImage]} alt={product.name} priority />
-              {images.length > 1 && (
+              <ImageZoom src={activeDisplayImage} alt={product.name} priority />
+              {thumbnailImages.length > 1 && !variantImage && (
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 md:hidden">
-                  {images.map((_, i) => (
+                  {thumbnailImages.map((_, i) => (
                     <span key={i} className={`h-1.5 rounded-full transition-all ${i === mainImage ? "w-4 bg-[#111111]" : "w-1.5 bg-[#F0F0F0]"}`} />
                   ))}
                 </div>
@@ -373,20 +373,23 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
               <p className="text-sm font-semibold text-[#111111]/30">{product.name}</p>
             </div>
           )}
-          {images.length > 1 && (
+          {thumbnailImages.length > 1 && (
             <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-              {images.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setMainImage(i)}
-                  className={cn(
-                    "relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 transition",
-                    mainImage === i ? "border-[#111111] ring-1 ring-[#111111]/20" : "border-transparent hover:border-[#F0F0F0]"
-                  )}
-                >
-                  <Image src={img} alt={`${product.name} ${i + 1}`} fill className="object-contain p-1" sizes="80px" />
-                </button>
-              ))}
+              {thumbnailImages.map((img, i) => {
+                const isActive = variantImage ? false : mainImage === i;
+                return (
+                  <button
+                    key={i}
+                    onClick={() => setMainImage(i)}
+                    className={cn(
+                      "relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 transition",
+                      isActive ? "border-[#111111] ring-1 ring-[#111111]/20" : "border-transparent hover:border-[#F0F0F0]"
+                    )}
+                  >
+                    <Image src={img} alt={`${product.name} ${i + 1}`} fill className="object-contain p-1" sizes="80px" />
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

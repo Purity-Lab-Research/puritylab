@@ -99,7 +99,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                   <h3 className="text-xs sm:text-sm font-bold text-[#111111] leading-snug group-hover:text-[#10B981] transition-colors line-clamp-2">
                     {product.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5">
+                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5 mb-3">
                     From {formatPrice(subPrice)}/mo
                   </p>
                 </Link>
