@@ -90,8 +90,12 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
     ? variants.find((v) => v.id === selectedVariantId) ?? variants[0]
     : null;
 
-  const variantImages = selectedVariant?.images?.length ? selectedVariant.images : null;
-  const images = variantImages ?? (product.images?.length ? product.images : []);
+  const mainImages = product.images?.length ? product.images : [];
+  const variantImages = selectedVariant?.images?.length ? selectedVariant.images : [];
+  // Always lead with main product images, then append any variant-specific images (deduplicated)
+  const images = variantImages.length
+    ? [...mainImages, ...variantImages.filter((vi) => !mainImages.includes(vi))]
+    : mainImages;
   const hasImages = images.length > 0;
 
   const activeStock = selectedVariant?.stock_quantity ?? product.stock_quantity;

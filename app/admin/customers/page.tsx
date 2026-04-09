@@ -171,8 +171,8 @@ export default function AdminCustomersPage() {
           const data = await res.json().catch(() => null);
           throw new Error(data?.error || `Failed to load customers (${res.status})`);
         }
-        const data = await res.json();
-        setCustomers(data);
+        const json = await res.json();
+        setCustomers(json.data ?? json);
       } catch (err) {
         setLoadError(err instanceof Error ? err.message : "Failed to load customers");
       } finally {

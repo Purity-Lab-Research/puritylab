@@ -18,7 +18,7 @@ interface StackBuilderProps {
 /* Constants */
 const CATEGORY_LABELS: Record<string, string> = {
   recovery: "Recovery",
-  fat_loss: "Fat Loss",
+  fat_loss: "Weight Management",
   performance: "Performance",
   supplies: "Supplies",
 };

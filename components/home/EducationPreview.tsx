@@ -7,6 +7,9 @@ const TAG_COLORS: Record<string, string> = {
   Beginner: "bg-[#10B981]",
   Guide: "bg-blue-500",
   Trust: "bg-amber-500",
+  "Deep Dive": "bg-purple-500",
+  "Weight Management": "bg-pink-500",
+  Recovery: "bg-emerald-500",
 };
 
 const articles = [

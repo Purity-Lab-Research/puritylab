@@ -19,7 +19,7 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 const GOAL_FILTERS = [
   { value: "all", label: "All" },
   { value: "recovery", label: "Recovery" },
-  { value: "fat_loss", label: "Fat Loss" },
+  { value: "fat_loss", label: "Weight Management" },
   { value: "performance", label: "Performance" },
   { value: "supplies", label: "Supplies" },
 ];

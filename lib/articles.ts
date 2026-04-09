@@ -116,7 +116,7 @@ ${DISCLAIMER}`,
   {
     slug: "peptides-for-fat-loss",
     title: "Peptides for Fat Loss: What Works and What Doesn't",
-    tag: "Fat Loss",
+    tag: "Weight Management",
     category: "by-goal",
     readTime: "6 min read",
     excerpt:
@@ -197,6 +197,64 @@ ${DISCLAIMER}`,
       "ipamorelin-10mg",
     ],
     relatedArticleSlugs: ["peptides-for-fat-loss", "peptides-for-recovery"],
+  },
+
+  {
+    slug: "glp1-peptides-explained",
+    title: "GLP-1 Peptides Explained: Semaglutide, Tirzepatide, and Retatrutide",
+    tag: "Deep Dive",
+    category: "deep-dives",
+    readTime: "10 min read",
+    excerpt:
+      "A comprehensive look at the GLP-1 receptor agonist family, how they differ, what the clinical data shows, and why they dominate metabolic research in 2026.",
+    content: `GLP-1 (glucagon-like peptide-1) receptor agonists have become the most discussed class of peptides in both clinical and research settings. Originally developed for glycemic control, these compounds have demonstrated remarkable effects on body composition, appetite regulation, and metabolic flexibility. Three compounds lead the conversation in 2026: Semaglutide, Tirzepatide, and Retatrutide. Each represents a different generation of receptor targeting, and understanding the differences is essential for any metabolic researcher.
+
+Semaglutide is the single-receptor standard. It targets the GLP-1 receptor exclusively, suppressing appetite through central nervous system signaling, slowing gastric emptying, and improving insulin sensitivity. In the landmark STEP trials, participants on Semaglutide achieved average weight reductions of 15-17% over 68 weeks. Its once-weekly dosing schedule and extensive clinical evidence base (spanning Phase 3 and Phase 4 programs with thousands of participants) make it the reference compound against which all newer metabolic peptides are measured. Semaglutide has full FDA approval for specific indications, giving it the most robust regulatory and clinical backing of any metabolic peptide.
+
+Tirzepatide adds a second receptor to the equation. As a dual GLP-1/GIP (glucose-dependent insulinotropic polypeptide) agonist, it activates two incretin pathways simultaneously. The SURMOUNT trial program demonstrated that this dual mechanism produces greater metabolic effects than GLP-1 alone. Participants on Tirzepatide lost approximately 4-12 additional pounds compared to Semaglutide in head-to-head comparisons. The GIP component enhances insulin secretion in a glucose-dependent manner and appears to amplify the metabolic response beyond what GLP-1 activation achieves independently. Tirzepatide also has FDA approval for specific indications.
+
+Retatrutide pushes the boundary further with triple-receptor activation. It targets GLP-1, GIP, and glucagon receptors simultaneously. Phase 2 trial data showed up to 24% body weight reduction, surpassing anything seen with single or dual-receptor compounds. The glucagon receptor activation is the key differentiator. While GLP-1 and GIP handle appetite suppression and insulin regulation, glucagon receptor activation increases energy expenditure and promotes fat oxidation directly. This three-pronged approach creates a synergistic metabolic effect that has generated extraordinary excitement in the research community. Retatrutide is still in clinical development and does not yet have regulatory approval.
+
+For researchers, the progression from single to dual to triple-receptor targeting illustrates an important principle in peptide pharmacology: multi-receptor engagement can produce effects that exceed the sum of individual receptor contributions. The metabolic signaling network is interconnected, and compounds that address multiple nodes simultaneously tend to produce more robust outcomes. Understanding these mechanisms and their clinical evidence base is fundamental to designing meaningful metabolic research protocols.
+
+${DISCLAIMER}`,
+    relatedProductSlugs: [
+      "semaglutide",
+      "tirzepatide",
+      "retatrutide-glp3",
+      "cagrilintide",
+    ],
+    relatedArticleSlugs: ["peptides-for-fat-loss", "getting-started"],
+  },
+  {
+    slug: "mitochondrial-peptides",
+    title: "Mitochondrial Peptides: MOTS-C, SS-31, and the Future of Cellular Energy Research",
+    tag: "Deep Dive",
+    category: "deep-dives",
+    readTime: "8 min read",
+    excerpt:
+      "How mitochondrial-targeted peptides work, what separates MOTS-C from SS-31, and why cellular energy research is one of the fastest-growing areas in peptide science.",
+    content: `Mitochondria are the primary energy producers in every cell. When mitochondrial function declines, the downstream effects touch virtually every system in the body: reduced ATP production, increased oxidative stress, impaired recovery, accelerated aging, and metabolic dysfunction. Mitochondrial-targeted peptides represent a new frontier in research because they address cellular energy at its source rather than targeting downstream symptoms.
+
+MOTS-C (Mitochondrial Open Reading Frame of the 12S rRNA-c) is a 16-amino acid peptide encoded directly in the mitochondrial genome. This is significant because it means MOTS-C is produced by mitochondria themselves as a signaling molecule. Research has shown that MOTS-C activates AMPK (adenosine monophosphate-activated protein kinase), a master metabolic regulator that influences glucose uptake, fatty acid oxidation, and insulin sensitivity. In animal studies, MOTS-C administration prevented both age-dependent and high-fat-diet-induced insulin resistance. It also demonstrated effects on exercise capacity and metabolic homeostasis under stress conditions. MOTS-C levels naturally decline with age, which has made it a compound of major interest in both metabolic and longevity research. Research dosing typically ranges from 5-10mg administered subcutaneously several times per week.
+
+SS-31 (Elamipretide) takes a fundamentally different approach. Rather than acting as a metabolic signaling molecule like MOTS-C, SS-31 is a synthetic tetrapeptide that physically targets the inner mitochondrial membrane. It concentrates within mitochondria at concentrations 1,000-5,000 times higher than the extracellular space, where it interacts with cardiolipin. Cardiolipin is a phospholipid that is essential for the structural integrity of the electron transport chain and efficient ATP production. When cardiolipin is damaged by oxidative stress (a hallmark of aging and disease), the electron transport chain becomes less efficient, producing less ATP and more reactive oxygen species in a destructive feedback loop. SS-31 stabilizes cardiolipin interactions, restoring electron transport chain efficiency and breaking this cycle. Clinical trials have investigated SS-31 for heart failure, Barth syndrome, age-related mitochondrial dysfunction, and skeletal muscle performance.
+
+The two compounds are complementary rather than competitive. MOTS-C works as a broad metabolic regulator, improving how the body processes energy at a systemic level. SS-31 works as a precision tool at the mitochondrial membrane, restoring the fundamental machinery of ATP production. Researchers studying mitochondrial biology often find value in examining both compounds, as they illuminate different aspects of mitochondrial function and dysfunction.
+
+Other compounds in the mitochondrial research space include NAD+ precursors (which support mitochondrial enzyme function) and Epitalon (which has been studied for its effects on cellular aging markers including telomere maintenance). The convergence of these research areas points to a growing understanding that cellular energy production is central to health, performance, and aging. For researchers, mitochondrial peptides provide tools to investigate these connections at the molecular level.
+
+${DISCLAIMER}`,
+    relatedProductSlugs: [
+      "mots-c-10mg",
+      "ss-31-elamipretide",
+      "nad-500mg",
+      "epitalon",
+    ],
+    relatedArticleSlugs: [
+      "peptides-for-fat-loss",
+      "understanding-growth-hormone-secretagogues",
+    ],
   },
 
   // ─── Trust & Safety ───

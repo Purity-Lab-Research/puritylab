@@ -14,6 +14,7 @@ import CookieConsent from "@/components/layout/CookieConsent";
 import WebVitals from "@/components/analytics/WebVitals";
 import SiteTracker from "@/components/analytics/SiteTracker";
 import { Analytics } from "@vercel/analytics/next";
+import TikTokPixel from "@/components/analytics/TikTokPixel";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({
         <WebVitals />
         <SiteTracker />
         <Analytics />
+        <TikTokPixel />
         <StructuredData />
         <CartProvider>
           <WishlistProvider>

@@ -41,9 +41,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   const activeSize = selectedVariant?.size ?? product.size;
 
   const image =
-    selectedVariant?.images?.length
-      ? selectedVariant.images[0]
-      : product.images?.[0] ?? null;
+    product.images?.[0]
+      ?? selectedVariant?.images?.[0]
+      ?? null;
 
   const shortDesc = product.short_description;
 
@@ -72,14 +72,14 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       {/* Image */}
-      <Link href={`/shop/${product.slug}`} className="block relative">
-        <div className={`relative aspect-[5/4] w-full overflow-hidden ${bgClass}`}>
+      <Link href={`/shop/${product.slug}`} className="block relative p-3">
+        <div className={`relative aspect-square w-full overflow-hidden rounded-xl ${bgClass}`}>
           {image ? (
             <Image
               src={image}
               alt={product.name}
               fill
-              className="object-contain p-4"
+              className="object-cover"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
@@ -89,11 +89,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
           {/* Badge */}
           {product.subscription_only ? (
-            <span className="absolute top-3 left-3 bg-[#F59E0B] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+            <span className="absolute top-2.5 left-2.5 bg-[#F59E0B] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
               Subscribers Only
             </span>
           ) : product.badge ? (
-            <span className="absolute top-3 left-3 bg-[#10B981] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+            <span className="absolute top-2.5 left-2.5 bg-[#10B981] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
               {product.badge}
             </span>
           ) : null}
@@ -101,7 +101,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-5 pt-2">
         <Link href={`/shop/${product.slug}`}>
           <h3 className="text-base font-bold text-[#111111] leading-snug hover:text-[#10B981] transition-colors">
             {product.name}

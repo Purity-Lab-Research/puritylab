@@ -22,8 +22,8 @@ const GOALS = [
   },
   {
     value: "fat_loss" as const,
-    title: "Lose fat",
-    subtitle: "Body composition, stubborn fat, metabolic support",
+    title: "Manage weight",
+    subtitle: "Body composition, metabolic support, GLP-1 research",
   },
   {
     value: "performance" as const,
