@@ -21,6 +21,12 @@ const CATEGORY_GRADIENT: Record<string, string> = {
   supplies: "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]",
 };
 
+const BADGE_MAP: Record<string, { text: string; className: string }> = {
+  "bpc-157-5mg": { text: "Most Popular", className: "bg-[#10B981] text-white" },
+  semaglutide: { text: "New", className: "bg-[#111111] text-white" },
+  "retatrutide-glp3": { text: "New", className: "bg-[#111111] text-white" },
+};
+
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const animRef = useScrollAnimation();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -34,7 +40,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   }
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white py-12 sm:py-14">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-8 sm:mb-10">
           <div>
@@ -63,7 +69,6 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
           </div>
         </div>
 
-        {/* Horizontal scrollable carousel — touch/drag + buttons */}
         <div
           ref={scrollRef}
           className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory scroll-smooth touch-pan-x"
@@ -74,6 +79,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
             const bgClass = CATEGORY_GRADIENT[goalCat] ?? "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]";
             const image = product.images?.[0] ?? null;
             const subPrice = getSubscriptionPrice(product.price);
+            const badge = BADGE_MAP[product.slug] ?? (product.badge ? { text: product.badge, className: "bg-[#10B981] text-white" } : null);
 
             return (
               <div
@@ -81,7 +87,12 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                 className="group flex-shrink-0 w-[160px] sm:w-[220px] md:w-[250px] snap-start flex flex-col"
               >
                 <Link href={`/shop/${product.slug}`} className="block flex-1 flex flex-col">
-                  <div className={`${bgClass} rounded-2xl aspect-square flex items-center justify-center overflow-hidden mb-3 transition-shadow group-hover:shadow-md`}>
+                  <div className={`${bgClass} rounded-2xl aspect-square flex items-center justify-center overflow-hidden mb-3 transition-shadow group-hover:shadow-md relative`}>
+                    {badge && (
+                      <span className={`absolute top-2 left-2 z-10 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full ${badge.className}`}>
+                        {badge.text}
+                      </span>
+                    )}
                     {image ? (
                       <div className="relative w-full h-full p-4">
                         <Image
@@ -99,8 +110,11 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                   <h3 className="text-xs sm:text-sm font-bold text-[#111111] leading-snug group-hover:text-[#10B981] transition-colors line-clamp-2">
                     {product.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5 mb-3">
+                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5">
                     From {formatPrice(subPrice)}/mo
+                  </p>
+                  <p className="text-[10px] sm:text-xs text-[#10B981] font-medium mt-0.5 mb-3">
+                    Free shipping on subscriptions
                   </p>
                 </Link>
                 <Link
@@ -115,7 +129,6 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
           })}
         </div>
 
-        {/* Mobile "View All" */}
         <div className="mt-6 text-center md:hidden">
           <Link
             href="/shop"

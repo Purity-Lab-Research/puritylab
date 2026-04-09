@@ -22,8 +22,20 @@ const CARD_COLORS: Record<string, string> = {
   "full-recomp": "bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE]",
 };
 
+/* Price anchoring order: most expensive first so the first number seen frames all subsequent prices */
+const SLUG_ORDER: Record<string, number> = {
+  "full-recomp": 0,
+  "fat-loss": 1,
+  performance: 2,
+  recovery: 3,
+};
+
 function roundPrice(price: number): number {
   return Math.round(price);
+}
+
+function dailyCost(monthly: number): string {
+  return (monthly / 30).toFixed(2);
 }
 
 export default function Protocols({ protocols }: ProtocolsProps) {
@@ -53,10 +65,17 @@ export default function Protocols({ protocols }: ProtocolsProps) {
 
   if (protocols.length === 0) return null;
 
+  /* Sort protocols by anchoring order */
+  const sorted = [...protocols].sort((a, b) => {
+    const aOrder = SLUG_ORDER[a.slug] ?? 99;
+    const bOrder = SLUG_ORDER[b.slug] ?? 99;
+    return aOrder - bOrder;
+  });
+
   return (
-    <section className="bg-[#FAFAFA] py-16 sm:py-20">
+    <section className="bg-[#FAFAFA] py-12 sm:py-14">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
             Protocols
           </h2>
@@ -67,7 +86,7 @@ export default function Protocols({ protocols }: ProtocolsProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-          {protocols.map((protocol) => {
+          {sorted.map((protocol) => {
             const colorClass = CARD_COLORS[protocol.slug] ?? "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]";
             const oneTimeTotal = (protocol.items ?? []).reduce((sum, item) => sum + (item.product?.price ?? 0) * item.quantity, 0);
             const subTotal = (protocol.items ?? []).reduce((sum, item) => sum + getSubscriptionPrice(item.product?.price ?? 0) * item.quantity, 0);
@@ -80,9 +99,7 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                 key={protocol.id}
                 className="relative bg-white rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
               >
-                {/* Clickable card area */}
                 <Link href={`/protocols/${protocol.slug}`} className="flex flex-col flex-1">
-                  {/* Colored header */}
                   <div className={`${colorClass} px-5 pt-5 pb-4`}>
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="text-lg font-bold text-[#111111] leading-tight">
@@ -101,7 +118,6 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                     </p>
                   </div>
 
-                  {/* Price + items */}
                   <div className="p-5 flex-1 flex flex-col">
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-3xl font-extrabold text-[#111111]">${displaySub}</span>
@@ -111,6 +127,9 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                       <span className="text-xs text-[#9CA3AF] line-through">${displayOneTime}</span>
                       <span className="text-[10px] font-semibold text-[#10B981]">Save {roundPrice(displayOneTime - displaySub > 0 ? ((displayOneTime - displaySub) / displayOneTime) * 100 : 15)}%</span>
                     </div>
+                    <p className="text-[10px] text-[#6B7280] mt-1">
+                      That&apos;s ${dailyCost(displaySub)}/day
+                    </p>
 
                     <div className="mt-4 space-y-1.5 flex-1">
                       {items.map((item) => (
@@ -129,7 +148,6 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                   </div>
                 </Link>
 
-                {/* Buttons */}
                 <div className="px-5 pb-5 space-y-2 mt-auto">
                   <button
                     onClick={() => addProtocolToCart(protocol, "subscription")}
@@ -149,7 +167,6 @@ export default function Protocols({ protocols }: ProtocolsProps) {
           })}
         </div>
 
-        {/* Build Your Own */}
         <div className="text-center mt-10">
           <Link
             href="/protocols/build"

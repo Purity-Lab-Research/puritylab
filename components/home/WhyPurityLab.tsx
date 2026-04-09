@@ -1,50 +1,28 @@
 "use client";
 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Package, BadgePercent, Truck, Users, FlaskConical, ShieldCheck } from "lucide-react";
+import { X, Check } from "lucide-react";
 
-const reasons = [
+const rows = [
   {
-    title: "Always in Stock",
-    description: "Popular peptides are always available. No backorders, no waiting.",
-    icon: Package,
-    iconBg: "bg-[#10B981]/10",
-    iconColor: "text-[#10B981]",
+    industry: "Testing results hidden or unavailable",
+    purityLab: "Full Certificate of Analysis published for every batch",
   },
   {
-    title: "Volume Discounts",
-    description: "Subscribe and save up to 15%. Larger orders get better pricing.",
-    icon: BadgePercent,
-    iconBg: "bg-amber-50",
-    iconColor: "text-amber-500",
+    industry: "No way to verify what's in the vial",
+    purityLab: "Batch number on every vial linked to public lab results",
   },
   {
-    title: "Cold Chain Shipping",
-    description: "Temperature-controlled packaging to protect peptide integrity in transit.",
-    icon: Truck,
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-500",
+    industry: "Standard ground shipping",
+    purityLab: "FedEx 2-Day Cold Chain on every order",
   },
   {
-    title: "Community Access",
-    description: "Every purchase unlocks access to our private community of researchers.",
-    icon: Users,
-    iconBg: "bg-purple-50",
-    iconColor: "text-purple-500",
+    industry: "Same price whether you buy once or monthly",
+    purityLab: "Subscribe and save up to 15% with free shipping",
   },
   {
-    title: "99%+ Purity",
-    description: "Every batch independently tested with full Certificates of Analysis published.",
-    icon: FlaskConical,
-    iconBg: "bg-[#10B981]/10",
-    iconColor: "text-[#10B981]",
-  },
-  {
-    title: "Shipment Protection",
-    description: "Every order insured. If anything arrives damaged, we replace it free.",
-    icon: ShieldCheck,
-    iconBg: "bg-rose-50",
-    iconColor: "text-rose-500",
+    industry: "No traceability after purchase",
+    purityLab: "Track your order, manage subscriptions, view your CoA history",
   },
 ];
 
@@ -52,32 +30,73 @@ export default function WhyPurityLab() {
   const animRef = useScrollAnimation();
 
   return (
-    <section className="bg-[#F0FDF4] py-16 sm:py-20">
+    <section className="bg-white py-12 sm:py-14">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
-            Why Purity Lab
+            What Makes Us Different
           </h2>
-          <p className="mt-3 text-[#6B7280]">
-            We don&apos;t just sell peptides. We prove what&apos;s in them.
+          <p className="mt-3 text-[#6B7280] max-w-lg mx-auto">
+            We built Purity Lab because we were tired of guessing what was
+            actually in the vial.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {reasons.map((reason) => (
-            <div
-              key={reason.title}
-              className="bg-white rounded-2xl p-7 hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col h-full"
-            >
-              <div className={`w-11 h-11 rounded-xl ${reason.iconBg} flex items-center justify-center mb-4`}>
-                <reason.icon className={`h-5 w-5 ${reason.iconColor}`} strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-[#111111] mb-1.5">
-                {reason.title}
+        {/* Desktop comparison table */}
+        <div className="hidden md:block bg-white rounded-2xl border border-[#F0F0F0] shadow-sm overflow-hidden max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="grid grid-cols-2 border-b border-[#F0F0F0]">
+            <div className="px-6 py-4">
+              <h3 className="text-sm font-semibold text-[#9CA3AF]">
+                The Industry Standard
               </h3>
-              <p className="text-sm text-[#6B7280] leading-relaxed">
-                {reason.description}
-              </p>
+            </div>
+            <div className="px-6 py-4 bg-[#FAFAFA]">
+              <h3 className="text-sm font-bold text-[#111111]">
+                <span className="border-b-2 border-[#10B981] pb-0.5">
+                  The Purity Lab Standard
+                </span>
+              </h3>
+            </div>
+          </div>
+
+          {/* Rows */}
+          {rows.map((row, i) => (
+            <div
+              key={i}
+              className={`grid grid-cols-2 ${i < rows.length - 1 ? "border-b border-[#F0F0F0]" : ""}`}
+            >
+              <div className="px-6 py-4 flex items-start gap-3">
+                <X className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-[#9CA3AF]">{row.industry}</span>
+              </div>
+              <div className="px-6 py-4 bg-[#FAFAFA] flex items-start gap-3">
+                <Check className="h-4 w-4 text-[#10B981] flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-[#111111] font-medium">
+                  {row.purityLab}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile stacked list */}
+        <div className="md:hidden space-y-4">
+          {rows.map((row, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl border border-[#F0F0F0] overflow-hidden"
+            >
+              <div className="px-4 py-3 flex items-start gap-2.5 bg-[#FAFAFA]">
+                <X className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-[#9CA3AF]">{row.industry}</span>
+              </div>
+              <div className="px-4 py-3 flex items-start gap-2.5">
+                <Check className="h-4 w-4 text-[#10B981] flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-[#111111] font-medium">
+                  {row.purityLab}
+                </span>
+              </div>
             </div>
           ))}
         </div>

@@ -22,42 +22,52 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-[68vh] sm:min-h-[73vh] lg:min-h-[78vh] flex items-center justify-center">
-      {/* Background image */}
+    <section className="relative overflow-hidden h-[90vh] md:h-[85vh] flex items-center justify-center bg-[#E0D4F0]">
+      {/* Desktop background image */}
       <Image
-        src="/images/hero-vials-v2.jpg"
+        src="/images/herov3.jpg"
         alt="Purity Lab peptide vials including BPC-157, TB-500, GLP-3, NAD+, and Bacteriostatic Water"
         fill
-        className="object-cover" style={{ objectPosition: "center 80%" }}
+        className="object-cover scale-[1.03] hidden md:block"
+        style={{ objectPosition: "center 80%" }}
         priority
       />
-      {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-transparent" />
+      {/* Mobile background image */}
+      <Image
+        src="/images/heromobile.jpg"
+        alt="Purity Lab peptide vials including BPC-157, TB-500, GLP-3, NAD+, and Bacteriostatic Water"
+        fill
+        className="object-cover md:hidden"
+        style={{ objectPosition: "center center" }}
+        priority
+      />
+      {/* Overlay for text readability — lighter on mobile so vials show through */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-transparent md:from-white/90 md:via-white/60" />
 
-      {/* Centered text content */}
-      <div ref={contentRef} className="relative z-10 text-center px-4 sm:px-6 pt-8 pb-20 sm:pb-24 max-w-2xl mx-auto">
+      {/* Centered text content — compact on mobile to leave room for vials */}
+      <div ref={contentRef} className="relative z-10 text-center px-4 sm:px-6 pt-0 pb-4 sm:pb-24 max-w-2xl mx-auto">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#111111] leading-[1.08]">
-          Premium Peptides
+          Every Vial. Tested.
           <br />
-          You Can Trust
+          Published. Proven.
         </h1>
         <p className="mt-4 sm:mt-6 text-base sm:text-lg text-[#555] max-w-lg mx-auto leading-relaxed">
-          Research-grade peptide protocols designed for athletes. Every vial
-          batch-tested by independent US labs with 98%+ verified purity.
+          Research-grade peptides with batch-specific Certificates of Analysis
+          you can verify before you buy. Subscribe and save up to 15%.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             href="/shop"
             className="inline-flex items-center justify-center gap-2 bg-[#111111] text-white rounded-full px-8 sm:px-10 py-3.5 sm:py-4 font-semibold text-base hover:bg-black hover:scale-[1.03] transition-all duration-200"
           >
-            Shop Now
+            Shop Peptides
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/quiz"
+            href="/coa"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#111111] border border-[#111111] rounded-full px-8 sm:px-10 py-3.5 sm:py-4 font-semibold text-base hover:bg-gray-50 hover:scale-[1.03] transition-all duration-200"
           >
-            Find My Protocol
+            See Our Lab Results
           </Link>
         </div>
       </div>

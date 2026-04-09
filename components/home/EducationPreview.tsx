@@ -37,7 +37,7 @@ export default function EducationPreview() {
   const animRef = useScrollAnimation();
 
   return (
-    <section className="bg-white py-16 sm:py-20 border-t border-[#F0F0F0]">
+    <section className="bg-white py-12 sm:py-14 border-t border-[#F0F0F0]">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-end justify-between mb-10">
@@ -46,7 +46,7 @@ export default function EducationPreview() {
               Learn
             </h2>
             <p className="mt-3 text-[#6B7280]">
-              Research-backed guides written for athletes, not scientists.
+              Learn what you&apos;re putting in your research. No jargon, no fluff.
             </p>
           </div>
           <Link
@@ -66,7 +66,7 @@ export default function EducationPreview() {
             <Link
               key={article.title}
               href={article.href}
-              className="p-7 bg-[#FAFAFA] border border-[#F0F0F0] rounded-2xl transition-all hover:shadow-lg hover:-translate-y-0.5"
+              className="p-7 bg-[#FAFAFA] border border-[#F0F0F0] rounded-2xl transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
             >
               <div className="flex items-center gap-2.5 mb-4">
                 <span className="flex items-center gap-1.5">

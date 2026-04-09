@@ -4,14 +4,15 @@ import { createClient } from "@/lib/supabase/server";
 import type { Product, Protocol } from "@/lib/types";
 import Hero from "@/components/home/Hero";
 import TrustStrip from "@/components/home/TrustStrip";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import SocialProof from "@/components/home/SocialProof";
 import HowItWorks from "@/components/home/HowItWorks";
 import Protocols from "@/components/home/Protocols";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
 import WhyPurityLab from "@/components/home/WhyPurityLab";
 
 const QualitySection = dynamic(() => import("@/components/home/QualitySection"));
-const CommunitySection = dynamic(() => import("@/components/home/CommunitySection"));
 const EducationPreview = dynamic(() => import("@/components/home/EducationPreview"));
+const CommunitySection = dynamic(() => import("@/components/home/CommunitySection"));
 
 export const metadata: Metadata = {
   title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
@@ -59,6 +60,7 @@ export default async function HomePage() {
       <Hero />
       <TrustStrip />
       <FeaturedProducts products={products} />
+      <SocialProof />
       <HowItWorks />
       <Protocols protocols={protocols} />
       <WhyPurityLab />

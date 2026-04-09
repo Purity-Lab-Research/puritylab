@@ -1,29 +1,31 @@
 "use client";
 
+import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Target, RefreshCw, ShieldCheck } from "lucide-react";
-
 const steps = [
   {
-    number: "01",
-    title: "Choose Your Goal",
+    number: "1",
+    title: "Pick Your Goal",
     description:
-      "Pick a pre-built protocol or build a custom stack tailored to your needs.",
-    icon: Target,
+      "Recovery, fat loss, performance, or longevity. Choose a pre-built protocol or build your own custom stack.",
+    cta: { label: "Take the quiz", href: "/quiz" },
+    tint: "bg-[#F0FDF4]",
   },
   {
-    number: "02",
-    title: "Subscribe & Save",
+    number: "2",
+    title: "Subscribe or Buy Once",
     description:
-      "Save up to 15% with a monthly subscription. Pause or cancel anytime.",
-    icon: RefreshCw,
+      "Subscribe every 4 weeks and save 15%. Or buy once with no commitment. Pause or cancel anytime.",
+    cta: { label: "See pricing", href: "/protocols" },
+    tint: "bg-[#EFF6FF]",
   },
   {
-    number: "03",
+    number: "3",
     title: "Track Your Purity",
     description:
-      "Every vial ships with a batch number linked to a published Certificate of Analysis.",
-    icon: ShieldCheck,
+      "Every vial ships with a batch number. Look it up in our CoA Library and see the exact purity of what you received.",
+    cta: { label: "Browse CoA Library", href: "/coa" },
+    tint: "bg-[#F5F3FF]",
   },
 ];
 
@@ -31,38 +33,42 @@ export default function HowItWorks() {
   const animRef = useScrollAnimation();
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white py-12 sm:py-14">
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
-            How It Works
+            From Goal to Doorstep in 3 Steps
           </h2>
-          <p className="mt-3 text-[#6B7280]">
-            From goal to doorstep in three simple steps.
-          </p>
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-6">
+        <div className="flex flex-col md:flex-row items-stretch justify-center gap-5 relative">
           {steps.map((step, i) => (
-            <div
-              key={step.number}
-              className="bg-[#FAFAFA] rounded-2xl p-8 flex-1 max-w-[340px] mx-auto md:mx-0"
-              style={{ animationDelay: `${i * 0.15}s` }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-4xl font-extrabold text-[#F0F0F0]">
+            <div key={step.number} className="flex-1 max-w-[380px] mx-auto md:mx-0 flex flex-col relative">
+              {/* Connecting dashed line between cards (desktop only) */}
+              {i < steps.length - 1 && (
+                <div className="hidden md:block absolute top-12 -right-3 w-6 border-t-2 border-dashed border-[#E5E7EB] z-10" />
+              )}
+
+              <div className={`${step.tint} rounded-2xl p-7 sm:p-8 flex-1 flex flex-col`}>
+                <span className="text-4xl font-extrabold text-[#10B981] leading-none mb-4 block">
                   {step.number}
                 </span>
-                <div className="w-10 h-10 rounded-xl bg-[#10B981]/10 flex items-center justify-center">
-                  <step.icon className="h-5 w-5 text-[#10B981]" strokeWidth={2} />
-                </div>
+                <h3 className="text-xl font-bold text-[#111111] mb-2.5">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-[#6B7280] leading-relaxed flex-1">
+                  {step.description}
+                </p>
+                <Link
+                  href={step.cta.href}
+                  className="inline-flex items-center gap-1 text-sm font-semibold text-[#10B981] hover:underline mt-4"
+                >
+                  {step.cta.label}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
-              <h3 className="text-xl font-bold text-[#111111] mb-2.5">
-                {step.title}
-              </h3>
-              <p className="text-sm text-[#6B7280] leading-relaxed">
-                {step.description}
-              </p>
             </div>
           ))}
         </div>
