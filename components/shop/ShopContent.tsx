@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductCard from "@/components/shop/ProductCard";
+import { trackSearch } from "@/lib/analytics";
 import type { Product } from "@/lib/types";
 import { SearchX } from "lucide-react";
 
@@ -53,6 +54,10 @@ export default function ShopContent({ products }: ShopContentProps) {
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    if (searchQuery) trackSearch(searchQuery);
+  }, [searchQuery]);
 
   const clearAllFilters = useCallback(() => {
     setGoalFilter("all");

@@ -6,19 +6,39 @@ import { Redis } from "@upstash/redis";
 const ALLOWED_ORIGIN =
   process.env.NEXT_PUBLIC_SITE_URL || "https://puritylabresearch.com";
 
-// Admin API rate limiter: 30 requests per 60 seconds per IP
-let adminLimiter: Ratelimit | null = null;
-function getAdminLimiter(): Ratelimit | null {
-  if (adminLimiter) return adminLimiter;
+function getRedis(): Redis | null {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token || url.startsWith("your_")) return null;
+  return new Redis({ url, token });
+}
+
+// Admin API rate limiter: 60 requests per 60 seconds per user
+let adminLimiter: Ratelimit | null = null;
+function getAdminLimiter(): Ratelimit | null {
+  if (adminLimiter) return adminLimiter;
+  const redis = getRedis();
+  if (!redis) return null;
   adminLimiter = new Ratelimit({
-    redis: new Redis({ url, token }),
-    limiter: Ratelimit.slidingWindow(30, "60 s"),
+    redis,
+    limiter: Ratelimit.slidingWindow(60, "60 s"),
     prefix: "rl:admin",
   });
   return adminLimiter;
+}
+
+// Global rate limiter: 100 requests per 60 seconds per IP
+let globalLimiter: Ratelimit | null = null;
+function getGlobalLimiter(): Ratelimit | null {
+  if (globalLimiter) return globalLimiter;
+  const redis = getRedis();
+  if (!redis) return null;
+  globalLimiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(100, "60 s"),
+    prefix: "rl:global",
+  });
+  return globalLimiter;
 }
 
 export async function middleware(request: NextRequest) {
@@ -115,6 +135,36 @@ export async function middleware(request: NextRequest) {
     }).catch(() => {});
   }
 
+  // Global rate limit on API routes (100 req/min per IP)
+  if (pathname.startsWith("/api/")) {
+    const limiter = getGlobalLimiter();
+    if (limiter) {
+      const ip =
+        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+        request.headers.get("x-real-ip") ||
+        "unknown";
+      const { success, reset } = await limiter.limit(`global:${ip}`);
+      if (!success) {
+        const retryAfter = Math.ceil((reset - Date.now()) / 1000);
+        return NextResponse.json(
+          { error: "Too many requests. Please try again in a moment." },
+          {
+            status: 429,
+            headers: { "Retry-After": String(Math.max(retryAfter, 1)) },
+          }
+        );
+      }
+    }
+  }
+
+  // Protect checkout (require authentication)
+  if (pathname === "/checkout" && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(url);
+  }
+
   // Protect affiliate dashboard
   if (pathname.startsWith("/affiliate/dashboard") && !user) {
     const url = request.nextUrl.clone();
@@ -151,7 +201,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Rate-limit admin API routes (30 req/min per IP)
+  // Rate-limit admin API routes (60 req/min per user)
   if (pathname.startsWith("/api/admin/")) {
     const limiter = getAdminLimiter();
     if (limiter) {

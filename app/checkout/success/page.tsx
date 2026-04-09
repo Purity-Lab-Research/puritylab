@@ -33,7 +33,18 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
 
   return (
     <main className="min-h-screen bg-[#f8f9fc] py-16">
-      <ClearCart />
+      <ClearCart
+        orderId={order?.id}
+        orderTotal={order?.total}
+        orderShipping={order?.shipping_cost}
+        orderTax={order?.tax}
+        orderItems={order?.items?.map((i) => ({
+          item_id: i.product_id,
+          item_name: i.product_name,
+          price: i.unit_price,
+          quantity: i.quantity,
+        }))}
+      />
       <div className="mx-auto max-w-lg px-4 text-center">
         {/* Status Icon */}
         <div

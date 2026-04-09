@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const categories = [
   "Order Inquiry",
@@ -50,6 +51,7 @@ export default function ContactForm() {
         throw new Error(data?.error ?? "Something went wrong. Please try again.");
       }
 
+      trackEvent("generate_lead", { event_category: "contact", contact_category: form.category });
       setSubmitted(true);
       setForm({
         firstName: "",

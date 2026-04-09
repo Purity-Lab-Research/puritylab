@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/lib/types";
 import AccountNav from "./AccountNav";
-import { LayoutDashboard, ShoppingBag, RefreshCw, MapPin, LogOut } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, RefreshCw, MapPin, CreditCard, LogOut } from "lucide-react";
 
 export default async function AccountLayout({
   children,
@@ -39,6 +39,7 @@ export default async function AccountLayout({
     { href: "/account/orders", label: "Orders", icon: "ShoppingBag" },
     { href: "/account/subscriptions", label: "Subscriptions", icon: "RefreshCw" },
     { href: "/account/addresses", label: "Addresses", icon: "MapPin" },
+    { href: "/account/payment-methods", label: "Payment", icon: "CreditCard" },
   ];
 
   const iconMap: Record<string, React.ReactNode> = {
@@ -46,6 +47,7 @@ export default async function AccountLayout({
     ShoppingBag: <ShoppingBag className="h-4 w-4" />,
     RefreshCw: <RefreshCw className="h-4 w-4" />,
     MapPin: <MapPin className="h-4 w-4" />,
+    CreditCard: <CreditCard className="h-4 w-4" />,
   };
 
   return (

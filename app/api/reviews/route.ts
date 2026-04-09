@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { verifyCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
+import { createNotification } from "@/lib/notifications";
 
 // GET reviews for a product (public)
 export async function GET(req: NextRequest) {
@@ -23,10 +24,12 @@ export async function GET(req: NextRequest) {
     .order("created_at", { ascending: false });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load reviews" }, { status: 500 });
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+  });
 }
 
 const reviewSchema = z.object({
@@ -94,7 +97,19 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to submit review" }, { status: 500 });
+  }
+
+  // Create admin notification for new review
+  if (review) {
+    createNotification({
+      type: "new_review",
+      title: `New review from ${parsed.data.author_name}`,
+      description: `${"★".repeat(parsed.data.rating)}${"☆".repeat(5 - parsed.data.rating)} — awaiting approval`,
+      href: "/admin/reviews",
+      entity_type: "review",
+      entity_id: review.id,
+    }).catch(() => {});
   }
 
   return NextResponse.json(review, { status: 201 });

@@ -23,6 +23,7 @@ import {
   Check,
 } from "lucide-react";
 import { COUNTRIES, PRIORITY_COUNTRIES, getCountryConfig } from "@/lib/countries";
+import { trackBeginCheckout, trackAddShippingInfo, trackAddPaymentInfo } from "@/lib/analytics";
 import type { CountryConfig } from "@/lib/countries";
 
 interface ShippingForm {
@@ -101,10 +102,41 @@ export default function CheckoutPage() {
   // Delivery method: "ship" or "pickup"
   const [deliveryMethod, setDeliveryMethod] = useState<"ship" | "pickup">("ship");
 
+  // Referral discount & store credit
+  const [referralEligible, setReferralEligible] = useState(false);
+  const [storeCredit, setStoreCredit] = useState(0);
+  const [applyStoreCredit, setApplyStoreCredit] = useState(false);
+  const [referralChecked, setReferralChecked] = useState(false);
+
+  // Check referral eligibility when email changes (debounced)
+  useEffect(() => {
+    if (!shipping.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(shipping.email)) return;
+    const timer = setTimeout(() => {
+      fetch("/api/checkout/referral-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: shipping.email }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setReferralEligible(data.eligible ?? false);
+          setStoreCredit(data.storeCredit ?? 0);
+          setReferralChecked(true);
+        })
+        .catch(() => {
+          setReferralEligible(false);
+          setReferralChecked(true);
+        });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [shipping.email]);
+
   // Flat rate shipping (calculated from cart)
   const shippingCost = deliveryMethod === "pickup" ? 0 : cartShipping;
   const discountAmount = discountData?.discount ?? 0;
-  const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+  const referralDiscountAmount = referralEligible ? Math.round(subtotal * 0.10 * 100) / 100 : 0;
+  const storeCreditApplied = applyStoreCredit ? Math.min(storeCredit, Math.max(0, subtotal - discountAmount - referralDiscountAmount)) : 0;
+  const discountedSubtotal = Math.max(0, subtotal - discountAmount - referralDiscountAmount - storeCreditApplied);
   const tax = Math.round(discountedSubtotal * TAX_RATE * 100) / 100;
   const total = Math.round((discountedSubtotal + shippingCost + tax) * 100) / 100;
 
@@ -113,6 +145,17 @@ export default function CheckoutPage() {
       router.push("/shop");
     }
   }, [items, router, clientSecret, orderId]);
+
+  // Track begin_checkout on mount
+  useEffect(() => {
+    if (items.length > 0) {
+      trackBeginCheckout(
+        items.map((i) => ({ item_id: i.productId, item_name: i.name, price: i.price, quantity: i.quantity })),
+        subtotal
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Autosave shipping form to sessionStorage (debounced)
   useEffect(() => {
@@ -256,6 +299,7 @@ export default function CheckoutPage() {
               },
           email: shipping.email,
           discountCode: discountData ? discountCode.trim() : undefined,
+          applyReferralCredits: storeCreditApplied,
           paymentMethod: "stripe",
           researchDisclaimerAccepted: compliance.researchDisclaimer,
           ageVerified: compliance.ageVerified,
@@ -274,6 +318,11 @@ export default function CheckoutPage() {
       setClientSecret(data.clientSecret);
       setOrderId(data.orderId);
       setAccountCreated(data.accountCreated === true);
+
+      const gaItems = items.map((i) => ({ item_id: i.productId, item_name: i.name, price: i.price, quantity: i.quantity }));
+      trackAddShippingInfo(gaItems, total, deliveryMethod === "pickup" ? "Local Pickup" : "Flat Rate");
+      trackAddPaymentInfo(gaItems, total, "Stripe");
+
       setCurrentStep(2);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -981,6 +1030,27 @@ export default function CheckoutPage() {
                 )}
               </div>
 
+              {storeCredit > 0 && (
+                <div className="mt-3 rounded-lg border border-green-200 bg-green-50 p-3">
+                  <label className="flex items-center justify-between cursor-pointer">
+                    <div>
+                      <p className="text-sm font-medium text-green-700">
+                        Apply store credit
+                      </p>
+                      <p className="text-xs text-green-600">
+                        You have {formatPrice(storeCredit)} available
+                      </p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={applyStoreCredit}
+                      onChange={(e) => setApplyStoreCredit(e.target.checked)}
+                      className="h-4 w-4 rounded border-gray-300 text-[#10B981] focus:ring-[#10B981]"
+                    />
+                  </label>
+                </div>
+              )}
+
               <div className="space-y-2 border-t border-gray-100 pt-4 text-sm">
                 {hasSubscriptionItems && savings > 0 && (
                   <div className="flex justify-between text-green-600">
@@ -996,6 +1066,18 @@ export default function CheckoutPage() {
                   <div className="flex justify-between text-green-600">
                     <span>Discount ({discountCode.trim().toUpperCase()})</span>
                     <span>-{formatPrice(discountAmount)}</span>
+                  </div>
+                )}
+                {referralEligible && referralDiscountAmount > 0 && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Referral discount (10%)</span>
+                    <span>-{formatPrice(referralDiscountAmount)}</span>
+                  </div>
+                )}
+                {storeCreditApplied > 0 && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Store credit</span>
+                    <span>-{formatPrice(storeCreditApplied)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-gray-600">

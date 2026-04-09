@@ -3,6 +3,8 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { verifyCsrf } from "@/lib/csrf";
+import { rateLimit } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 const SettingsSchema = z.object({
   paymentMethod: z.enum(["ach", "paypal"]).nullable().optional(),
@@ -22,6 +24,9 @@ async function getAffiliate(userId: string) {
 }
 
 export async function GET(request: NextRequest) {
+  const rateLimited = await rateLimit(request, { limit: 30, windowMs: 60_000 });
+  if (rateLimited) return rateLimited;
+
   try {
     const supabase = await createClient();
     const {
@@ -44,8 +49,8 @@ export async function GET(request: NextRequest) {
       bankAccountLast4: affiliate.bank_account_last4,
     });
   } catch (err) {
-    console.error("Affiliate settings GET error:", err);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    logger.error("Affiliate settings GET error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }
 
@@ -98,7 +103,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Affiliate settings PUT error:", err);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    logger.error("Affiliate settings PUT error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }

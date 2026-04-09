@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { trackSignUp } from "@/lib/analytics";
 import Button from "@/components/ui/Button";
 
 export default function RegisterPage() {
@@ -64,6 +65,7 @@ export default function RegisterPage() {
       return;
     }
 
+    trackSignUp("email");
     setSuccess(true);
     setLoading(false);
   }

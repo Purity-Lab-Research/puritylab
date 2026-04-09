@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { trackLogin } from "@/lib/analytics";
 import Button from "@/components/ui/Button";
 
 function LoginForm() {
@@ -33,6 +34,8 @@ function LoginForm() {
         setLoading(false);
         return;
       }
+
+      trackLogin("email");
 
       // Link any guest orders to this account
       fetch("/api/auth/link-orders", { method: "POST" }).catch(() => {});

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, type ReactNode } from "react";
 import { WishlistContext, type WishlistContextType } from "@/hooks/useWishlist";
+import { trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "puritylab_wishlist";
 
@@ -35,11 +36,13 @@ export default function WishlistProvider({ children }: { children: ReactNode }) 
   }, [wishlistIds, mounted]);
 
   const toggleWishlist = useCallback((productId: string) => {
-    setWishlistIds((prev) =>
-      prev.includes(productId)
+    setWishlistIds((prev) => {
+      const removing = prev.includes(productId);
+      trackEvent(removing ? "remove_from_wishlist" : "add_to_wishlist", { item_id: productId });
+      return removing
         ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
+        : [...prev, productId];
+    });
   }, []);
 
   const isWishlisted = useCallback(

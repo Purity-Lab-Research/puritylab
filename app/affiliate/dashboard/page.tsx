@@ -126,14 +126,14 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-sm text-[#6B7280]">{label}</span>
-        <div className={`w-9 h-9 rounded-lg bg-[#FAFAFA] flex items-center justify-center`}>
-          <Icon className={`h-4 w-4 ${color}`} />
+    <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
+      <div className="flex items-center justify-between mb-2 sm:mb-3">
+        <span className="text-xs sm:text-sm text-[#6B7280]">{label}</span>
+        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#FAFAFA] flex items-center justify-center`}>
+          <Icon className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${color}`} />
         </div>
       </div>
-      <p className="text-2xl font-bold text-[#111111]">{value}</p>
+      <p className="text-xl sm:text-2xl font-bold text-[#111111]">{value}</p>
     </div>
   );
 }
@@ -165,25 +165,25 @@ function OverviewTab({ data }: { data: AffiliateData }) {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 text-center">
-          <p className="text-xs text-[#6B7280]">Clicks (30d)</p>
-          <p className="text-xl font-bold text-[#111111]">{data.stats.clicks30d}</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white rounded-xl border border-[#F0F0F0] p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-[#6B7280]">Clicks (30d)</p>
+          <p className="text-lg sm:text-xl font-bold text-[#111111]">{data.stats.clicks30d}</p>
         </div>
-        <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 text-center">
-          <p className="text-xs text-[#6B7280]">Conversions (30d)</p>
-          <p className="text-xl font-bold text-[#111111]">{data.stats.conversions30d}</p>
+        <div className="bg-white rounded-xl border border-[#F0F0F0] p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-[#6B7280]">Conversions (30d)</p>
+          <p className="text-lg sm:text-xl font-bold text-[#111111]">{data.stats.conversions30d}</p>
         </div>
-        <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 text-center">
-          <p className="text-xs text-[#6B7280]">Conversion Rate</p>
-          <p className="text-xl font-bold text-[#111111]">{data.stats.conversionRate}%</p>
+        <div className="bg-white rounded-xl border border-[#F0F0F0] p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-[#6B7280]">Conv. Rate</p>
+          <p className="text-lg sm:text-xl font-bold text-[#111111]">{data.stats.conversionRate}%</p>
         </div>
       </div>
 
       {/* Earnings chart */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-4">Earnings (Last 30 Days)</h3>
-        <div className="h-64">
+        <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data.chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#F0F0F0" />
@@ -223,7 +223,7 @@ function OverviewTab({ data }: { data: AffiliateData }) {
       </div>
 
       {/* Recent conversions */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-4">Recent Conversions</h3>
         {data.conversions.length === 0 ? (
           <p className="text-sm text-[#6B7280] text-center py-6">
@@ -279,24 +279,24 @@ function LinksTab({ links }: { links: LinksData | null }) {
   return (
     <div className="space-y-6">
       {/* Affiliate link */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Affiliate Link</h3>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <input
             type="text"
             readOnly
             value={links.referralLink}
-            className="flex-1 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] px-3 py-2.5 text-sm font-mono text-[#111111] select-all"
+            className="w-full sm:flex-1 rounded-lg border border-[#F0F0F0] bg-[#FAFAFA] px-3 py-2.5 text-xs sm:text-sm font-mono text-[#111111] select-all truncate"
           />
           <CopyButton text={links.referralLink} label="Copy Link" />
         </div>
       </div>
 
       {/* Discount code */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Discount Code</h3>
         <div className="flex items-center gap-2">
-          <span className="text-lg font-bold text-[#111111] bg-[#FAFAFA] px-4 py-2 rounded-lg border border-[#F0F0F0]">
+          <span className="text-base sm:text-lg font-bold text-[#111111] bg-[#FAFAFA] px-3 sm:px-4 py-2 rounded-lg border border-[#F0F0F0]">
             {links.discountCode}
           </span>
           <CopyButton text={links.discountCode} label="Copy Code" />
@@ -307,9 +307,9 @@ function LinksTab({ links }: { links: LinksData | null }) {
       </div>
 
       {/* Share links */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-3">Share</h3>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <a
             href={links.shareLinks.twitter}
             target="_blank"
@@ -330,7 +330,7 @@ function LinksTab({ links }: { links: LinksData | null }) {
       </div>
 
       {/* Share text suggestions */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
         <h3 className="text-sm font-semibold text-[#111111] mb-3">Suggested Share Text</h3>
         <div className="space-y-3">
           {links.shareTexts.map((text, i) => (
@@ -372,11 +372,11 @@ function ConversionsTab({ data }: { data: AffiliateData }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111]"
+          className="rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-xs sm:text-sm text-[#111111]"
         >
           <option value="all">All Statuses</option>
           <option value="pending">Pending</option>
@@ -386,10 +386,11 @@ function ConversionsTab({ data }: { data: AffiliateData }) {
         </select>
         <button
           onClick={exportCSV}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-[#10B981] hover:text-[#059669]"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#10B981] hover:text-[#059669] whitespace-nowrap"
         >
           <Download className="h-4 w-4" />
-          Export CSV
+          <span className="hidden sm:inline">Export CSV</span>
+          <span className="sm:hidden">Export</span>
         </button>
       </div>
 
@@ -469,9 +470,9 @@ function PayoutsTab() {
 
   return (
     <div className="space-y-4">
-      <div className="bg-[#F0FDF4] rounded-xl p-4 flex items-center gap-3">
-        <CreditCard className="h-5 w-5 text-[#10B981]" />
-        <p className="text-sm text-[#111111]">
+      <div className="bg-[#F0FDF4] rounded-xl p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+        <CreditCard className="h-5 w-5 text-[#10B981] flex-shrink-0" />
+        <p className="text-xs sm:text-sm text-[#111111]">
           Next payout:{" "}
           <span className="font-semibold">
             {nextPayout.toLocaleDateString("en-US", {
@@ -825,10 +826,10 @@ export default function AffiliateDashboardPage() {
 
   return (
     <section className="bg-[#FAFAFA] min-h-screen">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
+        <div className="flex items-center justify-between mb-5 sm:mb-6">
+          <div className="min-w-0">
             <Link
               href="/affiliate"
               className="inline-flex items-center gap-1 text-sm text-[#6B7280] hover:text-[#111111] mb-2 transition-colors"
@@ -836,12 +837,12 @@ export default function AffiliateDashboardPage() {
               <ArrowLeft className="h-3.5 w-3.5" />
               Affiliate Program
             </Link>
-            <h1 className="text-2xl font-extrabold text-[#111111]">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#111111] truncate">
               Affiliate Dashboard
             </h1>
           </div>
           <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+            className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-semibold flex-shrink-0 ml-3 ${
               data.affiliate.status === "active"
                 ? "bg-green-50 text-green-700"
                 : "bg-yellow-50 text-yellow-700"
@@ -853,21 +854,22 @@ export default function AffiliateDashboardPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-6 overflow-x-auto pb-1">
+        <div className="flex gap-1 mb-5 sm:mb-6 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                   activeTab === tab.id
                     ? "bg-[#111111] text-white"
                     : "bg-white text-[#6B7280] hover:text-[#111111] border border-[#F0F0F0]"
                 }`}
               >
                 <Icon className="h-4 w-4" />
-                {tab.label}
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.label}</span>
               </button>
             );
           })}

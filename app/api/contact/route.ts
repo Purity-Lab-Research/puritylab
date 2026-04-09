@@ -6,6 +6,7 @@ import { logger } from "@/lib/logger";
 import { CONTACT_EMAIL, ADMIN_NOTIFICATION_EMAIL } from "@/lib/constants";
 import { brandedEmailWrapper } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createNotification } from "@/lib/notifications";
 import crypto from "crypto";
 
 function escapeHtml(str: string): string {
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
     const threadId = crypto.randomUUID();
     try {
       const db = createAdminClient();
-      await db.from("inbox_messages").insert({
+      const { data: inserted } = await db.from("inbox_messages").insert({
         thread_id: threadId,
         direction: "inbound",
         sender_name: `${firstName} ${lastName}`,
@@ -64,7 +65,18 @@ export async function POST(request: NextRequest) {
         category,
         body: message,
         is_read: false,
-      });
+      }).select("id").single();
+
+      if (inserted) {
+        createNotification({
+          type: "inbox_message",
+          title: `Message from ${firstName} ${lastName}`,
+          description: `[${category}] ${message.slice(0, 80)}`,
+          href: "/admin/email",
+          entity_type: "inbox_message",
+          entity_id: inserted.id,
+        }).catch(() => {});
+      }
     } catch (dbErr) {
       logger.error("Failed to save contact message to inbox", { error: String(dbErr) });
     }

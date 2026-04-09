@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { createClient } from "@/lib/supabase/client";
 import { formatPrice, getSubscriptionPrice, getFrequencyDiscount, getAnnualPrice, freeShippingRemaining, freeShippingProgress } from "@/lib/utils";
+import { trackViewCart } from "@/lib/analytics";
 import type { Product } from "@/lib/types";
 
 type Tab = "cart" | "wishlist";
@@ -71,10 +72,23 @@ export default function CartSidebar() {
       });
   }, [tab, wishlistIds]);
 
-  // Reset to cart tab when sidebar opens
+  // Reset to cart tab when sidebar opens + track view_cart
   useEffect(() => {
-    if (isOpen) setTab("cart");
-  }, [isOpen]);
+    if (isOpen) {
+      setTab("cart");
+      if (items.length > 0) {
+        trackViewCart(
+          items.map((i) => ({
+            item_id: i.productId,
+            item_name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+          })),
+          subtotal
+        );
+      }
+    }
+  }, [isOpen, items, subtotal]);
 
   // Get max delivery frequency from subscription items
   const subFrequency = items

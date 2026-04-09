@@ -12,6 +12,7 @@ import ImageZoom from "@/components/shop/ImageZoom";
 import ShareButtons from "@/components/shop/ShareButtons";
 import BackInStockForm from "@/components/shop/BackInStockForm";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import { trackViewItem } from "@/lib/analytics";
 import type { Product, CoaDocument } from "@/lib/types";
 
 interface ProductDetailProps {
@@ -71,7 +72,13 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
 
   useEffect(() => {
     addViewed(product.id);
-  }, [product.id, addViewed]);
+    trackViewItem({
+      item_id: product.id,
+      item_name: product.name,
+      item_category: product.goal_category ?? product.category?.slug,
+      price: product.price,
+    });
+  }, [product.id, product.name, product.price, product.goal_category, product.category?.slug, addViewed]);
 
   // Variants
   const variants = (product.variants?.filter((v) => v.active) ?? []).sort((a, b) => a.sort_order - b.sort_order);

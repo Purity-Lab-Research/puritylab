@@ -5,6 +5,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { verifyCsrf } from "@/lib/csrf";
 import { sendEmail } from "@/lib/email";
 import { ADMIN_NOTIFICATION_EMAIL } from "@/lib/constants";
+import { createNotification } from "@/lib/notifications";
 
 const ApplicationSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -52,7 +53,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { error: insertError } = await supabase
+    const { data: inserted, error: insertError } = await supabase
       .from("affiliate_applications")
       .insert({
         name: data.name,
@@ -62,7 +63,9 @@ export async function POST(request: NextRequest) {
         audience_size: data.audienceSize ?? null,
         promotion_plan: data.promotionPlan ?? null,
         previous_experience: data.previousExperience,
-      });
+      })
+      .select("id")
+      .single();
 
     if (insertError) {
       console.error("Failed to insert affiliate application:", insertError.message);
@@ -70,6 +73,18 @@ export async function POST(request: NextRequest) {
         { error: "Failed to submit application" },
         { status: 500 }
       );
+    }
+
+    // Create admin notification
+    if (inserted) {
+      createNotification({
+        type: "new_affiliate_app",
+        title: `Affiliate application from ${data.name}`,
+        description: `${data.email} — ${data.platform ?? "No platform specified"}`,
+        href: "/admin/affiliates",
+        entity_type: "affiliate_application",
+        entity_id: inserted.id,
+      }).catch(() => {});
     }
 
     // Send confirmation to applicant

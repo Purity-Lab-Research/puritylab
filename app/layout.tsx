@@ -13,6 +13,7 @@ import CookieConsent from "@/components/layout/CookieConsent";
 // ResearchDisclaimer removed - research acknowledgment is handled by the AgeGate and checkout compliance
 import WebVitals from "@/components/analytics/WebVitals";
 import SiteTracker from "@/components/analytics/SiteTracker";
+import { Analytics } from "@vercel/analytics/next";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -79,6 +80,7 @@ export default function RootLayout({
         <SentryInit />
         <WebVitals />
         <SiteTracker />
+        <Analytics />
         <StructuredData />
         <CartProvider>
           <WishlistProvider>

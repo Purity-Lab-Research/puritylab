@@ -27,6 +27,8 @@ interface ProductWithCoas {
   coas: CoaRow[];
 }
 
+export const revalidate = 60;
+
 export default async function CoaPage() {
   let productCoas: ProductWithCoas[] = [];
 

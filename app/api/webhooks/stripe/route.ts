@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendOrderConfirmation, sendAdminOrderNotification } from "@/lib/email";
+import { createNotification } from "@/lib/notifications";
 import { logger } from "@/lib/logger";
 import type Stripe from "stripe";
 
@@ -101,6 +102,16 @@ export async function POST(request: NextRequest) {
           orderId: order.id,
           paymentIntentId: paymentIntent.id,
         });
+
+        // Create admin notification for new order
+        createNotification({
+          type: "new_order",
+          title: `New order received`,
+          description: `Payment confirmed — order is processing`,
+          href: "/admin/orders",
+          entity_type: "order",
+          entity_id: order.id,
+        }).catch(() => {});
 
         // Send confirmation + admin notification emails (non-blocking)
         try {

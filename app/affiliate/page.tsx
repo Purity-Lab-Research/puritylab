@@ -234,7 +234,7 @@ function EarningsCalculator() {
             </div>
             <div className="bg-[#F0FDF4] border border-[#10B981]/20 rounded-xl p-5 text-center">
               <p className="text-sm text-[#6B7280] mb-1">Projected annual earnings</p>
-              <p className="text-3xl font-extrabold text-[#10B981]">
+              <p className="text-2xl sm:text-3xl font-extrabold text-[#10B981]">
                 ${earnings.annual.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
               </p>
               <p className="text-xs text-[#6B7280]/60 mt-1">
@@ -278,25 +278,25 @@ export default function AffiliatePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-14 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left side */}
             <div>
               <span className="inline-flex items-center rounded-full bg-[#10B981]/10 px-4 py-1.5 text-xs font-semibold text-[#10B981] mb-6">
                 EARN WHILE YOU SHARE
               </span>
-              <h1 className="text-5xl font-extrabold text-[#111111] leading-[1.1] mb-5">
+              <h1 className="text-3xl sm:text-5xl font-extrabold text-[#111111] leading-[1.1] mb-5">
                 Turn Your Audience Into Income
               </h1>
-              <p className="text-lg text-[#6B7280] mb-8 max-w-lg">
+              <p className="text-base sm:text-lg text-[#6B7280] mb-8 max-w-lg">
                 Recommend research peptides you believe in. Earn 15% on every
                 first order and 10% on every reorder. No caps, no limits, no
                 expiration.
               </p>
               <Link
                 href="/affiliate/apply"
-                className="inline-flex items-center gap-2 bg-[#111111] text-white rounded-full px-10 py-4 font-semibold text-base hover:opacity-90 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-[#111111] text-white rounded-full px-8 sm:px-10 py-3.5 sm:py-4 font-semibold text-sm sm:text-base hover:opacity-90 transition-all duration-200 w-full sm:w-auto"
               >
                 Apply Now
                 <ArrowRight className="h-4 w-4" />
@@ -313,60 +313,60 @@ export default function AffiliatePage() {
             </div>
 
             {/* Right side - Stats preview card */}
-            <div className="bg-[#FAFAFA] rounded-2xl p-8 border border-[#F0F0F0]">
-              <p className="text-sm font-semibold text-[#6B7280] uppercase tracking-wider mb-6">
+            <div className="bg-[#FAFAFA] rounded-2xl p-5 sm:p-8 border border-[#F0F0F0]">
+              <p className="text-sm font-semibold text-[#6B7280] uppercase tracking-wider mb-5 sm:mb-6">
                 Affiliate Overview
               </p>
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
-                      <DollarSign className="h-5 w-5 text-[#10B981]" />
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
+                      <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-[#10B981]" />
                     </div>
-                    <span className="text-sm text-[#111111] font-medium">
+                    <span className="text-xs sm:text-sm text-[#111111] font-medium">
                       First Order Commission
                     </span>
                   </div>
-                  <span className="text-2xl font-extrabold text-[#111111]">
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#111111]">
                     15%
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
-                      <Repeat className="h-5 w-5 text-[#10B981]" />
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
+                      <Repeat className="h-4 w-4 sm:h-5 sm:w-5 text-[#10B981]" />
                     </div>
-                    <span className="text-sm text-[#111111] font-medium">
+                    <span className="text-xs sm:text-sm text-[#111111] font-medium">
                       Recurring Commission
                     </span>
                   </div>
-                  <span className="text-2xl font-extrabold text-[#111111]">
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#111111]">
                     10%
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
-                      <Clock className="h-5 w-5 text-[#10B981]" />
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
+                      <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-[#10B981]" />
                     </div>
-                    <span className="text-sm text-[#111111] font-medium">
+                    <span className="text-xs sm:text-sm text-[#111111] font-medium">
                       Cookie Duration
                     </span>
                   </div>
-                  <span className="text-2xl font-extrabold text-[#111111]">
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#111111]">
                     30 days
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
-                      <Zap className="h-5 w-5 text-[#10B981]" />
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center">
+                      <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-[#10B981]" />
                     </div>
-                    <span className="text-sm text-[#111111] font-medium">
+                    <span className="text-xs sm:text-sm text-[#111111] font-medium">
                       Approval Time
                     </span>
                   </div>
-                  <span className="text-2xl font-extrabold text-[#111111]">
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#111111]">
                     24hr
                   </span>
                 </div>
@@ -377,15 +377,15 @@ export default function AffiliatePage() {
       </section>
 
       {/* Stats row */}
-      <section className="bg-[#FAFAFA] py-14">
+      <section className="bg-[#FAFAFA] py-10 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-5xl font-extrabold text-[#111111]">
+                <p className="text-3xl sm:text-5xl font-extrabold text-[#111111]">
                   {s.value}
                 </p>
-                <p className="text-sm text-[#6B7280] mt-1">{s.label}</p>
+                <p className="text-xs sm:text-sm text-[#6B7280] mt-1">{s.label}</p>
               </div>
             ))}
           </div>
@@ -401,7 +401,7 @@ export default function AffiliatePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step) => (
               <div key={step.number} className="bg-[#FAFAFA] rounded-2xl p-7">
-                <span className="text-4xl font-extrabold text-[#F0F0F0] block mb-3">
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#F0F0F0] block mb-3">
                   {step.number}
                 </span>
                 <h3 className="text-lg font-bold text-[#111111] mb-1.5">
@@ -450,8 +450,8 @@ export default function AffiliatePage() {
             Commission Breakdown
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl p-7 border border-[#F0F0F0]">
-              <p className="text-4xl font-extrabold text-[#10B981] mb-2">15%</p>
+            <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#F0F0F0]">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#10B981] mb-2">15%</p>
               <p className="text-base font-bold text-[#111111] mb-2">
                 First Order
               </p>
@@ -466,8 +466,8 @@ export default function AffiliatePage() {
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded-2xl p-7 border border-[#F0F0F0]">
-              <p className="text-4xl font-extrabold text-[#10B981] mb-2">10%</p>
+            <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#F0F0F0]">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#10B981] mb-2">10%</p>
               <p className="text-base font-bold text-[#111111] mb-2">
                 Lifetime Recurring
               </p>
@@ -493,7 +493,7 @@ export default function AffiliatePage() {
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] text-center mb-10">
             Who Should Apply
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
             {audiences.map((a) => (
               <div
                 key={a.label}
@@ -526,7 +526,7 @@ export default function AffiliatePage() {
       {/* Bottom CTA */}
       <section className="bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#F0FDF4] border border-[#10B981]/20 rounded-2xl p-12 text-center">
+          <div className="bg-[#F0FDF4] border border-[#10B981]/20 rounded-2xl p-7 sm:p-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] mb-4">
               Ready to start earning?
             </h2>

@@ -41,6 +41,10 @@ import {
   CreditCard,
   AlertCircle,
   RefreshCw,
+  Activity,
+  Search,
+  MousePointerClick,
+  Heart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -93,7 +97,22 @@ interface RealtimeData {
   visitors: { page: string; country: string; city: string; device: string; lastSeen: number }[];
 }
 
-type TabId = "overview" | "realtime" | "sales" | "products" | "customers";
+interface EventsData {
+  kpis: {
+    totalEvents: number; todayEvents: number; totalSearches: number; totalSignups: number;
+    totalLogins: number; totalAddToCart: number; totalCheckouts: number; totalPurchases: number;
+    totalWishlistAdds: number; totalContactForms: number;
+  };
+  funnel: { step: string; count: number }[];
+  eventTimeSeries: { date: string; views: number; addToCart: number; checkouts: number; purchases: number; searches: number; signups: number; logins: number }[];
+  eventCounts: { event: string; count: number }[];
+  topSearches: { term: string; count: number }[];
+  topViewedProducts: { name: string; count: number }[];
+  topCartProducts: { name: string; count: number }[];
+  recentActivity: { event: string; properties: Record<string, unknown>; page: string; time: string }[];
+}
+
+type TabId = "overview" | "realtime" | "sales" | "products" | "customers" | "activity";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -220,6 +239,7 @@ const TABS: { id: TabId; label: string; icon: typeof BarChart3 }[] = [
   { id: "sales", label: "Sales", icon: DollarSign },
   { id: "products", label: "Products", icon: Package },
   { id: "customers", label: "Customers", icon: Users },
+  { id: "activity", label: "Activity", icon: Activity },
 ];
 
 // ─── Overview Tab ────────────────────────────────────────────────────────────
@@ -994,6 +1014,209 @@ function CustomersTab({ data }: { data: AnalyticsData }) {
   );
 }
 
+// ─── Activity Tab ───────────────────────────────────────────────────────────
+
+const EVENT_LABELS: Record<string, string> = {
+  view_item: "Product View", add_to_cart: "Add to Cart", remove_from_cart: "Remove from Cart",
+  view_cart: "Cart Opened", begin_checkout: "Checkout Started", add_shipping_info: "Shipping Added",
+  add_payment_info: "Payment Added", purchase: "Purchase", search: "Search", sign_up: "Sign Up",
+  login: "Login", generate_lead: "Contact Form", add_to_wishlist: "Wishlist Add", remove_from_wishlist: "Wishlist Remove",
+};
+
+const EVENT_BADGE_COLORS: Record<string, string> = {
+  view_item: "bg-blue-100 text-blue-700", add_to_cart: "bg-green-100 text-green-700",
+  remove_from_cart: "bg-red-100 text-red-700", begin_checkout: "bg-amber-100 text-amber-700",
+  purchase: "bg-emerald-100 text-emerald-700", search: "bg-violet-100 text-violet-700",
+  sign_up: "bg-indigo-100 text-indigo-700", login: "bg-sky-100 text-sky-700",
+  generate_lead: "bg-pink-100 text-pink-700", add_to_wishlist: "bg-rose-100 text-rose-700",
+};
+
+function ActivityTab() {
+  const [evData, setEvData] = useState<EventsData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/admin/analytics/events")
+      .then((r) => r.json())
+      .then(setEvData)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <Loader2 className="h-6 w-6 animate-spin text-[#111111]" />
+        <span className="ml-2 text-gray-500">Loading activity data...</span>
+      </div>
+    );
+  }
+
+  if (!evData) {
+    return <p className="py-16 text-center text-gray-500">Failed to load activity data.</p>;
+  }
+
+  const { kpis, funnel, eventTimeSeries, topSearches, topViewedProducts, topCartProducts, recentActivity } = evData;
+
+  const funnelWithRates = funnel.map((step, i) => ({
+    ...step,
+    label: EVENT_LABELS[step.step] ?? step.step,
+    rate: i === 0 ? 100 : funnel[0].count > 0 ? Math.round((step.count / funnel[0].count) * 1000) / 10 : 0,
+    stepRate: i === 0 ? 100 : funnel[i - 1].count > 0 ? Math.round((step.count / funnel[i - 1].count) * 1000) / 10 : 0,
+  }));
+
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <KPICard label="Events Today" value={kpis.todayEvents.toLocaleString()} sub="All events" icon={Activity} color="text-blue-600 bg-primary/5" />
+        <KPICard label="Add to Cart (30d)" value={kpis.totalAddToCart.toLocaleString()} sub="Last 30 days" icon={ShoppingCart} color="text-green-600 bg-green-50" />
+        <KPICard label="Searches (30d)" value={kpis.totalSearches.toLocaleString()} sub="Product searches" icon={Search} color="text-violet-600 bg-violet-50" />
+        <KPICard label="Signups (30d)" value={kpis.totalSignups.toLocaleString()} sub="New registrations" icon={UserPlus} color="text-indigo-600 bg-indigo-50" />
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <KPICard label="Product Views (30d)" value={kpis.totalEvents.toLocaleString()} sub="All tracked events" icon={Eye} color="text-sky-600 bg-sky-50" />
+        <KPICard label="Checkouts (30d)" value={kpis.totalCheckouts.toLocaleString()} sub="Checkout started" icon={CreditCard} color="text-amber-600 bg-amber-50" />
+        <KPICard label="Wishlist Adds (30d)" value={kpis.totalWishlistAdds.toLocaleString()} sub="Products saved" icon={Heart} color="text-rose-600 bg-rose-50" />
+        <KPICard label="Contact Forms (30d)" value={kpis.totalContactForms.toLocaleString()} sub="Inquiries sent" icon={MousePointerClick} color="text-pink-600 bg-pink-50" />
+      </div>
+
+      {/* Conversion Funnel */}
+      <ChartCard title="Conversion Funnel" subtitle="Last 30 days - from product view to purchase">
+        <div className="space-y-3">
+          {funnelWithRates.map((step, i) => {
+            const maxCount = funnelWithRates[0]?.count || 1;
+            const widthPct = Math.max(5, (step.count / maxCount) * 100);
+            return (
+              <div key={step.step}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-medium text-gray-700">{step.label}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold text-gray-900">{step.count.toLocaleString()}</span>
+                    {i > 0 && <span className="text-xs text-gray-400">{step.stepRate}% from prev</span>}
+                  </div>
+                </div>
+                <div className="h-8 rounded-lg bg-gray-100 overflow-hidden">
+                  <div className="h-full rounded-lg bg-gradient-to-r from-[#111111] to-[#10B981] flex items-center justify-end pr-2 transition-all" style={{ width: `${widthPct}%` }}>
+                    <span className="text-xs font-semibold text-white">{step.rate}%</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </ChartCard>
+
+      {/* Activity Over Time */}
+      <ChartCard title="Activity Over Time" subtitle="Daily events - last 30 days">
+        <div className="h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={eventTimeSeries}>
+              <defs>
+                <linearGradient id="viewsEvGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="cartEvGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#22c55e" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis dataKey="date" tickFormatter={formatDateShort} tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} interval="preserveStartEnd" />
+              <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} tickLine={false} axisLine={false} allowDecimals={false} width={40} />
+              <Tooltip content={<CustomTooltip />} />
+              <Area type="monotone" dataKey="views" name="Product Views" stroke="#3b82f6" strokeWidth={2} fill="url(#viewsEvGrad)" />
+              <Area type="monotone" dataKey="addToCart" name="Add to Cart" stroke="#22c55e" strokeWidth={2} fill="url(#cartEvGrad)" />
+              <Line type="monotone" dataKey="checkouts" name="Checkouts" stroke="#f59e0b" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="purchases" name="Purchases" stroke="#111111" strokeWidth={2} dot={false} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </ChartCard>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <ChartCard title="Top Searches" subtitle="What visitors are searching for">
+          {topSearches.length === 0 ? (
+            <p className="py-8 text-center text-sm text-gray-400">No searches yet</p>
+          ) : (
+            <div className="divide-y">
+              {topSearches.map((s) => (
+                <div key={s.term} className="flex items-center justify-between py-2.5">
+                  <span className="text-sm text-gray-700">&ldquo;{s.term}&rdquo;</span>
+                  <span className="text-sm font-semibold text-gray-900">{s.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </ChartCard>
+        <ChartCard title="Most Viewed Products" subtitle="Product page visits">
+          {topViewedProducts.length === 0 ? (
+            <p className="py-8 text-center text-sm text-gray-400">No product views yet</p>
+          ) : (
+            <div className="divide-y">
+              {topViewedProducts.map((p) => (
+                <div key={p.name} className="flex items-center justify-between py-2.5">
+                  <span className="text-sm text-gray-700 truncate mr-2">{p.name}</span>
+                  <span className="text-sm font-semibold text-gray-900 shrink-0">{p.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </ChartCard>
+        <ChartCard title="Most Added to Cart" subtitle="Products added to cart">
+          {topCartProducts.length === 0 ? (
+            <p className="py-8 text-center text-sm text-gray-400">No cart activity yet</p>
+          ) : (
+            <div className="divide-y">
+              {topCartProducts.map((p) => (
+                <div key={p.name} className="flex items-center justify-between py-2.5">
+                  <span className="text-sm text-gray-700 truncate mr-2">{p.name}</span>
+                  <span className="text-sm font-semibold text-gray-900 shrink-0">{p.count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </ChartCard>
+      </div>
+
+      {/* Recent Activity Feed */}
+      <ChartCard title="Recent Activity" subtitle="Latest events from your site">
+        {recentActivity.length === 0 ? (
+          <p className="py-8 text-center text-sm text-gray-400">No activity recorded yet. Events will appear here once visitors interact with your site.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b bg-gray-50/50 text-xs uppercase text-gray-500">
+                <tr>
+                  <th className="px-4 py-3 font-medium">Event</th>
+                  <th className="px-4 py-3 font-medium">Details</th>
+                  <th className="px-4 py-3 font-medium">Page</th>
+                  <th className="px-4 py-3 font-medium">Time</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {recentActivity.map((a, i) => {
+                  const label = EVENT_LABELS[a.event] ?? a.event;
+                  const colorCls = EVENT_BADGE_COLORS[a.event] ?? "bg-gray-100 text-gray-700";
+                  const detail = a.properties?.item_name ? String(a.properties.item_name) : a.properties?.search_term ? `"${a.properties.search_term}"` : a.properties?.total ? `$${Number(a.properties.total).toFixed(2)}` : "";
+                  const timeStr = new Date(a.time).toLocaleString("en-CA", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+                  return (
+                    <tr key={i} className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2.5"><span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${colorCls}`}>{label}</span></td>
+                      <td className="px-4 py-2.5 text-gray-700 max-w-xs truncate">{detail}</td>
+                      <td className="px-4 py-2.5 font-mono text-xs text-gray-500 max-w-xs truncate">{a.page}</td>
+                      <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">{timeStr}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </ChartCard>
+    </div>
+  );
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function AnalyticsCharts() {
@@ -1058,6 +1281,7 @@ export default function AnalyticsCharts() {
       {activeTab === "sales" && <SalesTab data={data} />}
       {activeTab === "products" && <ProductsTab data={data} />}
       {activeTab === "customers" && <CustomersTab data={data} />}
+      {activeTab === "activity" && <ActivityTab />}
     </div>
   );
 }

@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Complete peptide stacks designed for specific goals. Recovery, fat loss, performance, and full recomp protocols with 10% subscription savings.",
 };
 
+export const revalidate = 60;
+
 export default async function ProtocolsPage() {
   let protocols: Protocol[] = [];
 

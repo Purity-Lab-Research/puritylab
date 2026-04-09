@@ -8,8 +8,21 @@ import ProductStructuredData from "@/components/shop/ProductStructuredData";
 import type { Product, CoaDocument } from "@/lib/types";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const { createAdminClient } = await import("@/lib/supabase/admin");
+  const db = createAdminClient();
+  const { data } = await db
+    .from("products")
+    .select("slug")
+    .eq("active", true);
+
+  return (data ?? []).map((p: { slug: string }) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

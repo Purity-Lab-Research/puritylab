@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useMemo, type ReactNode } from "react";
 import { CartContext, type CartContextType } from "@/hooks/useCart";
 import { getSubscriptionPrice, getAnnualPrice, calculateShipping } from "@/lib/utils";
+import { trackAddToCart, trackRemoveFromCart } from "@/lib/analytics";
 import type { CartItem } from "@/lib/types";
 
 const CART_KEY = "puritylab_cart";
@@ -76,6 +77,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         billingCycle: newItem.billingCycle ?? "monthly",
         quantity: newItem.quantity || 1,
       };
+      trackAddToCart({
+        item_id: newItem.productId,
+        item_name: newItem.name,
+        price: newItem.price,
+        quantity: newItem.quantity || 1,
+        item_variant: newItem.size ?? undefined,
+      });
       setItems((prev) => {
         const existing = prev.find((i) => cartKey(i) === key);
         if (existing) {
@@ -95,7 +103,18 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   const removeItem = useCallback(
     (productId: string, variantId: string | null, purchaseType: string) => {
       const key = cartKey({ productId, variantId, purchaseType });
-      setItems((prev) => prev.filter((i) => cartKey(i) !== key));
+      setItems((prev) => {
+        const removed = prev.find((i) => cartKey(i) === key);
+        if (removed) {
+          trackRemoveFromCart({
+            item_id: removed.productId,
+            item_name: removed.name,
+            price: removed.price,
+            quantity: removed.quantity,
+          });
+        }
+        return prev.filter((i) => cartKey(i) !== key);
+      });
     },
     []
   );

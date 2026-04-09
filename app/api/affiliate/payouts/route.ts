@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { rateLimit } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 export async function GET(request: NextRequest) {
+  const rateLimited = await rateLimit(request, { limit: 30, windowMs: 60_000 });
+  if (rateLimited) return rateLimited;
+
   try {
     const supabase = await createClient();
     const {
@@ -32,9 +37,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ payouts: payouts || [] });
   } catch (err) {
-    console.error("Affiliate payouts error:", err);
+    logger.error("Affiliate payouts error", { error: String(err) });
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

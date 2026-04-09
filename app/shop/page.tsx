@@ -9,6 +9,8 @@ export const metadata = {
     "Browse research peptides by goal. Recovery, fat loss, performance protocols and supplies. Every batch third-party tested.",
 };
 
+export const revalidate = 60;
+
 export default async function ShopPage() {
   const supabase = await createClient();
 

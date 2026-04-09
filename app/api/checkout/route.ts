@@ -174,12 +174,37 @@ export async function POST(request: NextRequest) {
       return sum + unitPrice * item.quantity;
     }, 0);
 
+    // Check if buyer was referred and this is their first order → 10% off
+    let referralDiscount = 0;
+    const cookieRefCode = request.cookies.get("pl_aff")?.value;
+    if (cookieRefCode) {
+      // Verify the code belongs to a basic referral (not an active affiliate)
+      const { data: refProfile } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("referral_code", cookieRefCode.toUpperCase())
+        .maybeSingle();
+
+      if (refProfile) {
+        // Check if buyer has any previous completed orders
+        const { count: prevOrders } = await supabase
+          .from("orders")
+          .select("id", { count: "exact", head: true })
+          .eq("guest_email", email)
+          .in("status", ["processing", "shipped", "delivered"]);
+
+        if (!prevOrders || prevOrders === 0) {
+          referralDiscount = Math.round(subtotal * 0.10 * 100) / 100;
+        }
+      }
+    }
+
     // Use tiered shipping: free for subscriptions, free for $200+, $9.95 for $100-199, $12.95 under $100
     const hasSubItems = items.some((i) => i.purchaseType === "subscription");
     const shippingCost = calculateShipping(subtotal, hasSubItems);
     const cycleManagementFee = cycleManagement ? 14.99 : 0;
-    const referralCreditApplied = Math.min(applyReferralCredits, subtotal + cycleManagementFee);
-    const taxableSubtotal = subtotal + cycleManagementFee - referralCreditApplied;
+    const referralCreditApplied = Math.min(applyReferralCredits, subtotal + cycleManagementFee - referralDiscount);
+    const taxableSubtotal = subtotal + cycleManagementFee - referralDiscount - referralCreditApplied;
     const tax = Math.round(taxableSubtotal * TAX_RATE * 100) / 100;
     const total = Math.round((taxableSubtotal + shippingCost + tax) * 100) / 100;
 
@@ -201,6 +226,8 @@ export async function POST(request: NextRequest) {
         guest_email: email,
         status: "pending",
         subtotal,
+        discount_amount: referralDiscount > 0 ? referralDiscount : 0,
+        discount_code: referralDiscount > 0 ? `REF-${cookieRefCode?.toUpperCase()}` : null,
         shipping_cost: shippingCost,
         tax,
         total,
@@ -383,6 +410,80 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Basic referral credit: if buyer was referred, give referrer 10% of order as store credit (max $25)
+    if (!affiliateDiscountApplied) {
+      try {
+        // Check if this buyer has a pending referral
+        const { data: referral } = await supabase
+          .from("referrals")
+          .select("id, referrer_user_id, status")
+          .eq("referral_code", (affiliateCode || "").toUpperCase())
+          .eq("status", "pending")
+          .maybeSingle();
+
+        // Also check by referred_by_code on the buyer's profile
+        const { data: buyerProfile } = !referral
+          ? await supabase
+              .from("profiles")
+              .select("referred_by_code")
+              .eq("id", (await supabase.auth.getUser()).data.user?.id || "")
+              .maybeSingle()
+          : { data: null };
+
+        const refCode = referral ? null : buyerProfile?.referred_by_code;
+        const matchedReferral = referral
+          ? referral
+          : refCode
+            ? (await supabase
+                .from("referrals")
+                .select("id, referrer_user_id, status")
+                .eq("referral_code", refCode)
+                .eq("status", "pending")
+                .maybeSingle()).data
+            : null;
+
+        if (matchedReferral) {
+          // 10% of order subtotal, capped at $25
+          const creditAmount = Math.min(Math.round(subtotal * 0.10 * 100) / 100, 25);
+
+          // Complete the referral and record credit amount
+          await supabase
+            .from("referrals")
+            .update({
+              status: "completed",
+              completed_at: new Date().toISOString(),
+              credit_amount: creditAmount,
+            })
+            .eq("id", matchedReferral.id);
+
+          // Add store credit to referrer's balance
+          const { data: referrerProfile } = await supabase
+            .from("profiles")
+            .select("referral_credits_balance")
+            .eq("id", matchedReferral.referrer_user_id)
+            .single();
+
+          if (referrerProfile) {
+            await supabase
+              .from("profiles")
+              .update({
+                referral_credits_balance: Number(referrerProfile.referral_credits_balance || 0) + creditAmount,
+              })
+              .eq("id", matchedReferral.referrer_user_id);
+          }
+
+          log.info("Referral completed — store credit awarded", {
+            referralId: matchedReferral.id,
+            referrerId: matchedReferral.referrer_user_id,
+            orderId: order.id,
+            creditAmount,
+          });
+        }
+      } catch (refErr) {
+        log.warn("Referral credit processing error", { error: String(refErr) });
+      }
+    }
+
     // Create payment session based on selected method
     let clientSecret: string | null = null;
 
@@ -489,6 +590,7 @@ export async function POST(request: NextRequest) {
       orderNumber,
       clientSecret,
       accountCreated,
+      referralDiscount,
     });
   } catch (err) {
     log.error("Checkout error", { error: String(err) });

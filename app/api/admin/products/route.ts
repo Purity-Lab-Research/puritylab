@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin";
 import { verifyCsrf } from "@/lib/csrf";
 import { writeAuditLog } from "@/lib/audit";
+import { logger } from "@/lib/logger";
 import { z } from "zod";
 
 const variantSchema = z.object({
@@ -109,16 +110,22 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("products")
-    .select("*, category:categories(*), variants:product_variants(*)")
-    .order("created_at", { ascending: false });
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select("*, category:categories(*), variants:product_variants(*)")
+      .order("created_at", { ascending: false });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) {
+      logger.error("Admin products GET error", { error: String(error.message) });
+      return NextResponse.json({ error: "Failed to load products" }, { status: 500 });
+    }
+    return NextResponse.json(data);
+  } catch (err) {
+    logger.error("Admin products GET error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
-  return NextResponse.json(data);
 }
 
 export async function POST(req: NextRequest) {
@@ -130,64 +137,70 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await req.json();
-  const parsed = productSchema.safeParse(body);
-  if (!parsed.success) {
-    return NextResponse.json(
-      { error: parsed.error.flatten().fieldErrors },
-      { status: 400 }
-    );
+  try {
+    const body = await req.json();
+    const parsed = productSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: parsed.error.flatten().fieldErrors },
+        { status: 400 }
+      );
+    }
+
+    const { variants, tags, related_product_ids, ...productData } = parsed.data;
+
+    const db = createAdminClient();
+    const { data, error } = await db
+      .from("products")
+      .insert(productData)
+      .select()
+      .single();
+
+    if (error) {
+      logger.error("Admin products POST error", { error: String(error.message) });
+      return NextResponse.json({ error: "Failed to create product" }, { status: 500 });
+    }
+
+    // Save variants if provided
+    if (variants && variants.length > 0) {
+      const variantRows = variants.map((v) => ({
+        product_id: data.id,
+        size: v.size,
+        price: v.price,
+        original_price: v.original_price ?? null,
+        subscription_price: v.subscription_price ?? null,
+        stock_quantity: v.stock_quantity,
+        low_stock_threshold: v.low_stock_threshold,
+        images: v.images ?? [],
+        sort_order: v.sort_order,
+        active: v.active,
+      }));
+      await db.from("product_variants").insert(variantRows);
+    }
+
+    // Save tags
+    if (tags && tags.length > 0) {
+      await saveTags(db, data.id, tags);
+    }
+
+    // Save related products
+    if (related_product_ids && related_product_ids.length > 0) {
+      await saveRelatedProducts(db, data.id, related_product_ids);
+    }
+
+    writeAuditLog({
+      admin_id: admin.id,
+      action: "product.create",
+      entity_type: "product",
+      entity_id: data.id,
+      details: { name: data.name, price: data.price },
+    });
+
+    return NextResponse.json(data, { status: 201 });
+  } catch (err) {
+    logger.error("Admin products POST error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
-
-  const { variants, tags, related_product_ids, ...productData } = parsed.data;
-
-  const db = createAdminClient();
-  const { data, error } = await db
-    .from("products")
-    .insert(productData)
-    .select()
-    .single();
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  // Save variants if provided
-  if (variants && variants.length > 0) {
-    const variantRows = variants.map((v) => ({
-      product_id: data.id,
-      size: v.size,
-      price: v.price,
-      original_price: v.original_price ?? null,
-      subscription_price: v.subscription_price ?? null,
-      stock_quantity: v.stock_quantity,
-      low_stock_threshold: v.low_stock_threshold,
-      images: v.images ?? [],
-      sort_order: v.sort_order,
-      active: v.active,
-    }));
-    await db.from("product_variants").insert(variantRows);
-  }
-
-  // Save tags
-  if (tags && tags.length > 0) {
-    await saveTags(db, data.id, tags);
-  }
-
-  // Save related products
-  if (related_product_ids && related_product_ids.length > 0) {
-    await saveRelatedProducts(db, data.id, related_product_ids);
-  }
-
-  writeAuditLog({
-    admin_id: admin.id,
-    action: "product.create",
-    entity_type: "product",
-    entity_id: data.id,
-    details: { name: data.name, price: data.price },
-  });
-
-  return NextResponse.json(data, { status: 201 });
 }
 
 export async function PUT(req: NextRequest) {
@@ -199,71 +212,77 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await req.json();
-  const { id, ...rest } = body;
-  if (!id) {
-    return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+  try {
+    const body = await req.json();
+    const { id, ...rest } = body;
+    if (!id) {
+      return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+    }
+
+    const parsed = productSchema.safeParse(rest);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: parsed.error.flatten().fieldErrors },
+        { status: 400 }
+      );
+    }
+
+    const { variants, tags, related_product_ids, ...productData } = parsed.data;
+
+    const db = createAdminClient();
+    const { data, error } = await db
+      .from("products")
+      .update({ ...productData, updated_at: new Date().toISOString() })
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) {
+      logger.error("Admin products PUT error", { error: String(error.message), productId: id });
+      return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+    }
+
+    // Replace all variants: delete existing, insert submitted set
+    await db.from("product_variants").delete().eq("product_id", id);
+    if (variants && variants.length > 0) {
+      const variantRows = variants.map((v) => ({
+        product_id: id,
+        size: v.size,
+        price: v.price,
+        original_price: v.original_price ?? null,
+        subscription_price: v.subscription_price ?? null,
+        stock_quantity: v.stock_quantity,
+        low_stock_threshold: v.low_stock_threshold,
+        images: v.images ?? [],
+        sort_order: v.sort_order,
+        active: v.active,
+      }));
+      await db.from("product_variants").insert(variantRows);
+    }
+
+    // Replace tags
+    if (tags !== undefined) {
+      await saveTags(db, id, tags ?? []);
+    }
+
+    // Replace related products
+    if (related_product_ids !== undefined) {
+      await saveRelatedProducts(db, id, related_product_ids ?? []);
+    }
+
+    writeAuditLog({
+      admin_id: admin.id,
+      action: "product.update",
+      entity_type: "product",
+      entity_id: id,
+      details: { name: data.name, price: data.price },
+    });
+
+    return NextResponse.json(data);
+  } catch (err) {
+    logger.error("Admin products PUT error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
-
-  const parsed = productSchema.safeParse(rest);
-  if (!parsed.success) {
-    return NextResponse.json(
-      { error: parsed.error.flatten().fieldErrors },
-      { status: 400 }
-    );
-  }
-
-  const { variants, tags, related_product_ids, ...productData } = parsed.data;
-
-  const db = createAdminClient();
-  const { data, error } = await db
-    .from("products")
-    .update({ ...productData, updated_at: new Date().toISOString() })
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  // Replace all variants: delete existing, insert submitted set
-  await db.from("product_variants").delete().eq("product_id", id);
-  if (variants && variants.length > 0) {
-    const variantRows = variants.map((v) => ({
-      product_id: id,
-      size: v.size,
-      price: v.price,
-      original_price: v.original_price ?? null,
-      subscription_price: v.subscription_price ?? null,
-      stock_quantity: v.stock_quantity,
-      low_stock_threshold: v.low_stock_threshold,
-      images: v.images ?? [],
-      sort_order: v.sort_order,
-      active: v.active,
-    }));
-    await db.from("product_variants").insert(variantRows);
-  }
-
-  // Replace tags
-  if (tags !== undefined) {
-    await saveTags(db, id, tags ?? []);
-  }
-
-  // Replace related products
-  if (related_product_ids !== undefined) {
-    await saveRelatedProducts(db, id, related_product_ids ?? []);
-  }
-
-  writeAuditLog({
-    admin_id: admin.id,
-    action: "product.update",
-    entity_type: "product",
-    entity_id: id,
-    details: { name: data.name, price: data.price },
-  });
-
-  return NextResponse.json(data);
 }
 
 export async function DELETE(req: NextRequest) {
@@ -275,25 +294,31 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
-  if (!id) {
-    return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    if (!id) {
+      return NextResponse.json({ error: "Missing product id" }, { status: 400 });
+    }
+
+    const db = createAdminClient();
+    const { error } = await db.from("products").delete().eq("id", id);
+
+    if (error) {
+      logger.error("Admin products DELETE error", { error: String(error.message), productId: id });
+      return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
+    }
+
+    writeAuditLog({
+      admin_id: admin.id,
+      action: "product.delete",
+      entity_type: "product",
+      entity_id: id,
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    logger.error("Admin products DELETE error", { error: String(err) });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
-
-  const db = createAdminClient();
-  const { error } = await db.from("products").delete().eq("id", id);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  writeAuditLog({
-    admin_id: admin.id,
-    action: "product.delete",
-    entity_type: "product",
-    entity_id: id,
-  });
-
-  return NextResponse.json({ success: true });
 }

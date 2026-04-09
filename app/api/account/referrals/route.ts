@@ -59,16 +59,19 @@ export async function GET() {
     .eq("referrer_user_id", user.id)
     .order("created_at", { ascending: false });
 
-  const completed = (referrals ?? []).filter((r) => r.status === "completed" || r.status === "credited");
-  const totalEarned = completed.reduce((sum, r) => sum + (r.credit_amount ?? 0), 0);
+  // Get click count for this referral code
+  const { count: clickCount } = await supabase
+    .from("referral_clicks")
+    .select("id", { count: "exact", head: true })
+    .eq("referral_code", referralCode);
 
   return NextResponse.json({
     referralCode,
     referralLink: `https://puritylabresearch.com/?ref=${referralCode}`,
-    balance: profile?.referral_credits_balance ?? 0,
-    totalEarned,
+    storeCredit: profile?.referral_credits_balance ?? 0,
+    clickCount: clickCount ?? 0,
     referralCount: (referrals ?? []).length,
-    completedCount: completed.length,
+    completedCount: (referrals ?? []).filter((r) => r.status === "completed" || r.status === "credited").length,
     referrals: referrals ?? [],
     isAffiliate: affiliate?.status === "active",
     affiliateApplicationStatus: application?.status ?? null,

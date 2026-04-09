@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { createClient } from "@/lib/supabase/server";
 import type { Product, Protocol } from "@/lib/types";
 import Hero from "@/components/home/Hero";
@@ -7,9 +8,10 @@ import HowItWorks from "@/components/home/HowItWorks";
 import Protocols from "@/components/home/Protocols";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import WhyPurityLab from "@/components/home/WhyPurityLab";
-import QualitySection from "@/components/home/QualitySection";
-import CommunitySection from "@/components/home/CommunitySection";
-import EducationPreview from "@/components/home/EducationPreview";
+
+const QualitySection = dynamic(() => import("@/components/home/QualitySection"));
+const CommunitySection = dynamic(() => import("@/components/home/CommunitySection"));
+const EducationPreview = dynamic(() => import("@/components/home/EducationPreview"));
 
 export const metadata: Metadata = {
   title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
@@ -21,6 +23,8 @@ export const metadata: Metadata = {
       "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.",
   },
 };
+
+export const revalidate = 60;
 
 export default async function HomePage() {
   let products: Product[] = [];
