@@ -51,13 +51,13 @@ export const metadata: Metadata = {
     siteName: "Purity Lab",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/images/sendmessage.jpg", width: 2400, height: 1790 }],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESC,
-    images: ["/og-image.png"],
+    images: ["/images/sendmessage.jpg"],
   },
   metadataBase: new URL(BASE_URL),
   icons: {
