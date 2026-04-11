@@ -16,9 +16,9 @@ export const SOCIAL_LINKS = {
 };
 
 export const SHIPPING_INFO = {
-  processing: "Same-day processing",
+  processing: "Processed within 1 business day",
   delivery: "3-8 business days",
-  worldwide: true,
+  domesticOnly: true,
 };
 
 export const SHIPPING_COST = 15;

@@ -109,7 +109,7 @@ const PROTOCOL_META: Record<string, ProtocolMeta> = {
       { label: "Research Focus", value: "Tissue repair mechanisms" },
       { label: "Compounds", value: "3 included" },
       { label: "Purity", value: "98%+ HPLC verified" },
-      { label: "Shipping", value: "Free with subscription" },
+      { label: "Shipping", value: "Careful packaging" },
     ],
   },
   "fat-loss": {
@@ -128,7 +128,7 @@ const PROTOCOL_META: Record<string, ProtocolMeta> = {
       { label: "Research Focus", value: "Metabolic pathways" },
       { label: "Compounds", value: "3 included" },
       { label: "Purity", value: "98%+ HPLC verified" },
-      { label: "Shipping", value: "Free with subscription" },
+      { label: "Shipping", value: "Careful packaging" },
     ],
   },
   performance: {
@@ -147,7 +147,7 @@ const PROTOCOL_META: Record<string, ProtocolMeta> = {
       { label: "Research Focus", value: "GH pathway modulation" },
       { label: "Compounds", value: "2 included" },
       { label: "Purity", value: "98%+ HPLC verified" },
-      { label: "Shipping", value: "Free with subscription" },
+      { label: "Shipping", value: "Careful packaging" },
     ],
   },
   "full-recomp": {
@@ -166,7 +166,7 @@ const PROTOCOL_META: Record<string, ProtocolMeta> = {
       { label: "Research Focus", value: "Multi-pathway study" },
       { label: "Compounds", value: "5+ included" },
       { label: "Purity", value: "98%+ HPLC verified" },
-      { label: "Shipping", value: "Free with subscription" },
+      { label: "Shipping", value: "Careful packaging" },
     ],
   },
 };
@@ -707,15 +707,15 @@ export default function ProtocolDetailContent({
                   },
                   {
                     icon: Truck,
-                    label: "Cold Chain",
-                    desc: "Temperature controlled",
+                    label: "Careful Packaging",
+                    desc: "Product integrity preserved",
                     color: "text-purple-500",
                     bg: "bg-purple-50",
                   },
                   {
                     icon: Clock,
-                    label: "Same-Day",
-                    desc: "Order processing",
+                    label: "Fast Processing",
+                    desc: "Within 1 business day",
                     color: "text-amber-500",
                     bg: "bg-amber-50",
                   },
@@ -768,20 +768,13 @@ export default function ProtocolDetailContent({
                   </div>
 
                   <div className="p-6 space-y-5">
-                    {/* Subscription price */}
+                    {/* Price */}
                     <div>
-                      <p className="text-xs font-semibold text-[#10B981] uppercase tracking-wider mb-1">
-                        Scheduled Reorder ({savingsPercent}% off)
-                      </p>
                       <div className="flex items-baseline gap-1.5">
                         <span className="text-4xl font-extrabold text-[#111111]">
-                          ${displaySub}
+                          ${displayOneTime}
                         </span>
-                        <span className="text-sm text-[#6B7280]">/mo</span>
                       </div>
-                      <p className="text-xs text-[#9CA3AF] line-through mt-0.5">
-                        ${displayOneTime} one-time
-                      </p>
                     </div>
 
                     {/* Items summary */}
@@ -819,25 +812,22 @@ export default function ProtocolDetailContent({
 
                     {/* Benefits */}
                     <div className="text-[10px] text-[#6B7280] space-y-1 border-t border-[#F0F0F0] pt-4">
-                      <p>Free shipping on all subscriptions</p>
-                      <p>Cancel or pause anytime</p>
                       <p>Full CoA published for every batch</p>
+                      <p>Careful packaging included</p>
+                      <p>Orders processed within 1 business day</p>
                     </div>
 
                     {/* Buttons */}
                     <div className="space-y-2">
                       <button
-                        onClick={() => addProtocolToCart("subscription")}
+                        onClick={() => addProtocolToCart("one-time")}
                         className="block w-full bg-[#111111] text-white text-center rounded-full py-3 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
                       >
-                        Scheduled Reorder
+                        Add to Cart
                       </button>
-                      <button
-                        onClick={() => addProtocolToCart("one-time")}
-                        className="block w-full text-[#6B7280] text-center text-xs font-medium hover:text-[#111111] transition-colors py-1.5"
-                      >
-                        or buy once for ${displayOneTime}
-                      </button>
+                      <p className="text-[10px] text-[#6B7280] text-center">
+                        Scheduled reorders available at checkout
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -867,13 +857,7 @@ export default function ProtocolDetailContent({
                       CoA Library
                       <ChevronRight className="w-3 h-3" />
                     </Link>
-                    <Link
-                      href="/learn/how-to-reconstitute"
-                      className="flex items-center justify-between text-xs text-[#6B7280] hover:text-[#111111] transition-colors"
-                    >
-                      Reconstitution Guide
-                      <ChevronRight className="w-3 h-3" />
-                    </Link>
+                    {/* Reconstitution Guide link hidden for compliance review */}
                     <Link
                       href="/faq"
                       className="flex items-center justify-between text-xs text-[#6B7280] hover:text-[#111111] transition-colors"

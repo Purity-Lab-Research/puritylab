@@ -19,12 +19,9 @@ const protocolLinks = [
 ];
 
 const learnLinks = [
-  { label: "Peptide Chemistry", href: "/learn/getting-started" },
-  { label: "Laboratory Preparation", href: "/learn/how-to-reconstitute" },
   { label: "CoA Library", href: "/coa" },
   { label: "How We Test", href: "/how-we-test" },
   { label: "FAQ", href: "/faq" },
-  { label: "Resources", href: "/resources" },
 ];
 
 const companyLinks = [
@@ -143,10 +140,10 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Learn */}
+            {/* Resources */}
             <div>
               <h3 className="mb-4 text-sm font-semibold tracking-wider text-[#111111] uppercase">
-                Learn
+                Resources
               </h3>
               <ul className="space-y-2.5">
                 {learnLinks.map((link) => (

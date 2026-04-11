@@ -244,17 +244,12 @@ export default function TermsPage() {
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
-                International buyers are solely responsible for compliance with all import regulations,
-                customs requirements, and local laws governing the importation of research chemicals in
-                their jurisdiction.
-              </li>
-              <li>
-                Customs duties, import taxes, brokerage fees, and any other charges imposed by the
-                destination country are the sole responsibility of the buyer.
+                Purity Lab Research LLC ships exclusively within the United States. We do not accept
+                or fulfill international orders.
               </li>
               <li>Risk of loss passes to the buyer upon delivery to the shipping carrier.</li>
               <li>
-                {SITE_NAME} is not liable for delays caused by customs processing, carrier issues, or
+                {SITE_NAME} is not liable for delays caused by carrier issues or
                 events beyond our reasonable control.
               </li>
             </ul>
@@ -285,7 +280,7 @@ export default function TermsPage() {
                 Claims must be submitted within 3 calendar days of delivery with photographic evidence.
               </li>
               <li>
-                No refunds are issued for packages seized, held, or destroyed by customs authorities.
+                No refunds are issued for packages seized, held, or destroyed by regulatory authorities.
               </li>
               <li>
                 No refunds are issued for buyer&apos;s remorse, change of mind, or incorrect ordering.

@@ -12,12 +12,12 @@ const faqSections = [
       {
         question: "How long does shipping take?",
         answer:
-          "We fulfill orders same-day or next business day. Domestic delivery typically takes 2-4 business days depending on your location and shipping method selected at checkout.",
+          "Orders are processed within 1 business day. Domestic delivery typically takes 2-4 business days depending on your location and shipping method selected at checkout.",
       },
       {
         question: "Do you ship internationally?",
         answer:
-          "Currently we ship within the United States only. International shipping is planned for the future.",
+          "No. Purity Lab Research LLC ships exclusively within the United States. We do not accept or fulfill international orders.",
       },
       {
         question: "Is shipping discreet?",

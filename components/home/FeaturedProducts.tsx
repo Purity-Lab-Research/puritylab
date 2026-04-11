@@ -110,11 +110,8 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                   <h3 className="text-xs sm:text-sm font-bold text-[#111111] leading-snug group-hover:text-[#10B981] transition-colors line-clamp-2">
                     {product.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5">
-                    From {formatPrice(subPrice)}/mo
-                  </p>
-                  <p className="text-[10px] sm:text-xs text-[#10B981] font-medium mt-0.5 mb-3">
-                    Scheduled reorder discounts available
+                  <p className="text-xs sm:text-sm text-[#6B7280] mt-0.5 mb-3">
+                    {formatPrice(product.price)}
                   </p>
                 </Link>
                 <Link

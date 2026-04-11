@@ -14,7 +14,7 @@ const rows = [
   },
   {
     industry: "Standard ground shipping",
-    purityLab: "FedEx 2-Day Cold Chain on every order",
+    purityLab: "Careful packaging designed to preserve product integrity",
   },
   {
     industry: "Inconsistent pricing with no volume options",

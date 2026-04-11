@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS affiliates (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_affiliates_user_id ON affiliates(user_id);
-CREATE INDEX idx_affiliates_code ON affiliates(affiliate_code);
+CREATE INDEX IF NOT EXISTS idx_affiliates_user_id ON affiliates(user_id);
+CREATE INDEX IF NOT EXISTS idx_affiliates_code ON affiliates(affiliate_code);
 
 -- Affiliate clicks
 CREATE TABLE IF NOT EXISTS affiliate_clicks (
@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS affiliate_clicks (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_affiliate_clicks_affiliate ON affiliate_clicks(affiliate_id);
-CREATE INDEX idx_affiliate_clicks_created ON affiliate_clicks(created_at);
+CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_affiliate ON affiliate_clicks(affiliate_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_clicks_created ON affiliate_clicks(created_at);
 
 -- Affiliate conversions
 CREATE TABLE IF NOT EXISTS affiliate_conversions (
@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS affiliate_conversions (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_affiliate_conversions_affiliate ON affiliate_conversions(affiliate_id);
-CREATE INDEX idx_affiliate_conversions_order ON affiliate_conversions(order_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_conversions_affiliate ON affiliate_conversions(affiliate_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_conversions_order ON affiliate_conversions(order_id);
 
 -- Affiliate payouts
 CREATE TABLE IF NOT EXISTS affiliate_payouts (
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS affiliate_payouts (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_affiliate_payouts_affiliate ON affiliate_payouts(affiliate_id);
+CREATE INDEX IF NOT EXISTS idx_affiliate_payouts_affiliate ON affiliate_payouts(affiliate_id);
 
 -- Add affiliate columns to orders table
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS affiliate_id uuid REFERENCES affiliates(id) ON DELETE SET NULL;
@@ -110,14 +110,17 @@ ALTER TABLE affiliate_conversions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE affiliate_payouts ENABLE ROW LEVEL SECURITY;
 
 -- affiliate_applications: anyone can insert, users can see own, admins full
+DROP POLICY IF EXISTS "Anyone can submit affiliate application" ON affiliate_applications;
 CREATE POLICY "Anyone can submit affiliate application"
   ON affiliate_applications FOR INSERT
   WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Users can view own applications" ON affiliate_applications;
 CREATE POLICY "Users can view own applications"
   ON affiliate_applications FOR SELECT
   USING (email = (SELECT email FROM auth.users WHERE id = auth.uid()));
 
+DROP POLICY IF EXISTS "Admins full access to applications" ON affiliate_applications;
 CREATE POLICY "Admins full access to applications"
   ON affiliate_applications FOR ALL
   USING (
@@ -125,10 +128,12 @@ CREATE POLICY "Admins full access to applications"
   );
 
 -- affiliates: users can view own, admins full
+DROP POLICY IF EXISTS "Affiliates can view own record" ON affiliates;
 CREATE POLICY "Affiliates can view own record"
   ON affiliates FOR SELECT
   USING (user_id = auth.uid());
 
+DROP POLICY IF EXISTS "Admins full access to affiliates" ON affiliates;
 CREATE POLICY "Admins full access to affiliates"
   ON affiliates FOR ALL
   USING (
@@ -136,12 +141,14 @@ CREATE POLICY "Admins full access to affiliates"
   );
 
 -- affiliate_clicks: service role inserts, affiliates see own, admins full
+DROP POLICY IF EXISTS "Affiliates can view own clicks" ON affiliate_clicks;
 CREATE POLICY "Affiliates can view own clicks"
   ON affiliate_clicks FOR SELECT
   USING (
     affiliate_id IN (SELECT id FROM affiliates WHERE user_id = auth.uid())
   );
 
+DROP POLICY IF EXISTS "Admins full access to clicks" ON affiliate_clicks;
 CREATE POLICY "Admins full access to clicks"
   ON affiliate_clicks FOR ALL
   USING (
@@ -149,12 +156,14 @@ CREATE POLICY "Admins full access to clicks"
   );
 
 -- affiliate_conversions: affiliates see own, admins full
+DROP POLICY IF EXISTS "Affiliates can view own conversions" ON affiliate_conversions;
 CREATE POLICY "Affiliates can view own conversions"
   ON affiliate_conversions FOR SELECT
   USING (
     affiliate_id IN (SELECT id FROM affiliates WHERE user_id = auth.uid())
   );
 
+DROP POLICY IF EXISTS "Admins full access to conversions" ON affiliate_conversions;
 CREATE POLICY "Admins full access to conversions"
   ON affiliate_conversions FOR ALL
   USING (
@@ -162,12 +171,14 @@ CREATE POLICY "Admins full access to conversions"
   );
 
 -- affiliate_payouts: affiliates see own, admins full
+DROP POLICY IF EXISTS "Affiliates can view own payouts" ON affiliate_payouts;
 CREATE POLICY "Affiliates can view own payouts"
   ON affiliate_payouts FOR SELECT
   USING (
     affiliate_id IN (SELECT id FROM affiliates WHERE user_id = auth.uid())
   );
 
+DROP POLICY IF EXISTS "Admins full access to payouts" ON affiliate_payouts;
 CREATE POLICY "Admins full access to payouts"
   ON affiliate_payouts FOR ALL
   USING (

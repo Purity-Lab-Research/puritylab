@@ -56,7 +56,7 @@ const DEFAULT_FAQ_DATA: FaqSection[] = [
       {
         question: "Do you ship internationally?",
         answer:
-          "Yes, we ship worldwide. Buyers are responsible for understanding and complying with their local regulations regarding the importation of research peptides. International shipping times and customs processing may vary by destination.",
+          "No. Purity Lab Research LLC ships exclusively within the United States. We do not accept or fulfill international orders.",
       },
     ],
   },

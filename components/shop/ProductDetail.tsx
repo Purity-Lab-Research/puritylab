@@ -474,7 +474,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
                     : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 )}
               >
-                Subscribe
+                Scheduled Reorder
               </button>
               <button
                 onClick={() => setPurchaseMode("one-time")}
@@ -499,13 +499,6 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
 
               {purchaseMode === "subscribe" ? (
                 <div className="mt-3 space-y-3">
-                  {savings > 0 && (
-                    <p className="text-sm text-[#10B981] font-semibold">
-                      {billingCycle === "annual"
-                        ? `Save ${formatPrice(savings)} vs monthly (2 months free)`
-                        : `Save ${formatPrice(savings)} (${getFrequencyDiscount(deliveryWeeks)}% off)`}
-                    </p>
-                  )}
 
                   {/* Billing cycle toggle */}
                   <div className="flex gap-2">
@@ -546,15 +539,15 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
                         onChange={(e) => setDeliveryWeeks(Number(e.target.value))}
                         className="rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none"
                       >
-                        <option value={4}>Every 4 weeks (Save 15%)</option>
-                        <option value={6}>Every 6 weeks (Save 10%)</option>
-                        <option value={8}>Every 8 weeks (Save 5%)</option>
+                        <option value={4}>Every 4 weeks</option>
+                        <option value={6}>Every 6 weeks</option>
+                        <option value={8}>Every 8 weeks</option>
                       </select>
                     </div>
                   )}
 
                   <div className="space-y-1.5">
-                    {["Free shipping on subscriptions", "Pause or cancel anytime", "Full CoA with every shipment"].map((b) => (
+                    {["Pause or cancel anytime", "Full CoA with every shipment", "Careful packaging included"].map((b) => (
                       <div key={b} className="flex items-center gap-2 text-sm text-[#6B7280]">
                         <CheckIcon className="text-[#10B981] flex-shrink-0" />
                         {b}
@@ -562,13 +555,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
                     ))}
                   </div>
                 </div>
-              ) : (
-                originalPrice && originalPrice > regularPrice && (
-                  <span className="ml-2 text-lg text-[#9CA3AF] line-through">
-                    {formatPrice(originalPrice)}
-                  </span>
-                )
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -605,9 +592,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
           >
             {isOutOfStock
               ? "Out of Stock"
-              : purchaseMode === "subscribe"
-                ? "Subscribe"
-                : "Add to Cart"}
+              : "Add to Cart"}
           </button>
 
           {isOutOfStock && <BackInStockForm productId={product.id} productName={product.name} />}
@@ -624,7 +609,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
             </div>
             <div className="flex items-center gap-1.5 text-xs text-[#6B7280]">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="text-[#10B981]"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
-              Cold Chain Shipping
+              Careful Packaging
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 -- Saved payment methods (processor-agnostic, stores card display info only)
-create table saved_payment_methods (
+create table if not exists saved_payment_methods (
   id uuid primary key default uuid_generate_v4(),
   user_id uuid not null references auth.users(id) on delete cascade,
   label text default 'Card',
@@ -13,5 +13,6 @@ create table saved_payment_methods (
 
 alter table saved_payment_methods enable row level security;
 
+drop policy if exists "Users can manage own payment methods" on saved_payment_methods;
 create policy "Users can manage own payment methods"
   on saved_payment_methods for all using (auth.uid() = user_id);

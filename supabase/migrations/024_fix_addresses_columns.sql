@@ -1,7 +1,15 @@
--- Rename addresses columns to match application code
-alter table addresses rename column name to full_name;
-alter table addresses rename column state to province_state;
-alter table addresses rename column zip to postal_code;
+-- Rename addresses columns to match application code (idempotent)
+DO $$ BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'addresses' AND column_name = 'name') THEN
+    ALTER TABLE addresses RENAME COLUMN name TO full_name;
+  END IF;
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'addresses' AND column_name = 'state') THEN
+    ALTER TABLE addresses RENAME COLUMN state TO province_state;
+  END IF;
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'addresses' AND column_name = 'zip') THEN
+    ALTER TABLE addresses RENAME COLUMN zip TO postal_code;
+  END IF;
+END $$;
 
 -- Set default country to 'CA' to match app default
-alter table addresses alter column country set default 'CA';
+ALTER TABLE addresses ALTER COLUMN country SET DEFAULT 'CA';

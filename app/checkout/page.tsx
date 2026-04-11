@@ -499,7 +499,7 @@ export default function CheckoutPage() {
                             <p className={`text-sm font-medium ${deliveryMethod === "ship" ? "text-[#111111]" : "text-gray-700"}`}>
                               Ship to Address
                             </p>
-                            <p className="text-xs text-gray-400">Worldwide delivery</p>
+                            <p className="text-xs text-gray-400">US delivery</p>
                           </div>
                         </button>
                         <button

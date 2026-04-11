@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Shipping Policy",
-  description: `${SITE_NAME} shipping policy - same-day fulfillment, 2-4 business day US domestic delivery, free shipping over $200.`,
+  description: `${SITE_NAME} shipping policy - orders processed within 1 business day, 2-4 business day US domestic delivery, free shipping over $200.`,
 };
 
 export default function ShippingPolicyPage() {
@@ -12,7 +12,7 @@ export default function ShippingPolicyPage() {
     <>
       <PageHeader
         title="SHIPPING POLICY"
-        description="Same-day fulfillment. Free shipping on orders over $200."
+        description="Orders processed within 1 business day. Free shipping on orders over $200."
         breadcrumbs={[{ label: "Shipping Policy" }]}
       />
 
@@ -48,8 +48,8 @@ export default function ShippingPolicyPage() {
               2. Processing Time
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              All orders are processed same-day when placed before 2:00 PM EST on business days (Monday
-              through Friday, excluding United States statutory holidays). Orders placed after this cutoff or
+              All orders are processed within 1 business day when placed on business days (Monday
+              through Friday, excluding United States statutory holidays). Orders placed
               on weekends and holidays will be processed on the next business day.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
@@ -71,10 +71,10 @@ export default function ShippingPolicyPage() {
               <li><strong>Priority Shipping:</strong> 1-2 business days</li>
             </ul>
             <p className="mt-2 text-sm leading-relaxed">
-              We currently ship within the United States only. International shipping is planned for the
-              future. These are estimated timeframes and are not guaranteed. Actual delivery times may
-              vary due to carrier capacity, weather, and other factors beyond our control. Free shipping
-              is available on all orders over $200 and on all active subscriptions.
+              Purity Lab Research LLC ships exclusively within the United States. We do not accept
+              or fulfill international orders. These are estimated timeframes and are not guaranteed.
+              Actual delivery times may vary due to carrier capacity, weather, and other factors
+              beyond our control.
             </p>
           </div>
 
@@ -104,9 +104,8 @@ export default function ShippingPolicyPage() {
               5. Shipping Destinations and Restrictions
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              We currently ship within the United States only. We do not ship to P.O. boxes for
-              orders requiring signature confirmation. International shipping may be available in
-              the future.
+              We ship exclusively within the United States. We do not accept international orders.
+              We do not ship to P.O. boxes for orders requiring signature confirmation.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               We reserve the right to refuse or cancel any order shipping to a destination where we
@@ -121,58 +120,19 @@ export default function ShippingPolicyPage() {
             </p>
           </div>
 
-          {/* 6. International Orders and Customs */}
+          {/* 6. Shipping Territory */}
           <div>
             <h2 className="text-lg font-bold text-[#111111]">
-              6. International Orders and Customs
+              6. Shipping Territory
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              International shipments may be subject to customs duties, import taxes, value-added tax
-              (VAT), goods and services tax (GST), brokerage fees, and other charges imposed by the
-              destination country&apos;s customs authorities. These charges are determined by the
-              destination country and are the sole responsibility of the buyer.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed">
-              {SITE_NAME} has no control over these charges and cannot predict or estimate their amount.
-              We recommend contacting your local customs office for information on applicable duties and
-              taxes before placing an order.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed">
-              All international shipments include accurate customs declarations as required by United States
-              export regulations and international shipping law. We are legally required to declare the
-              actual contents and value of each shipment.
+              Purity Lab Research LLC ships exclusively within the United States. We do not accept
+              or fulfill international orders. Orders with shipping addresses outside the United
+              States will be cancelled and refunded.
             </p>
           </div>
 
-          {/* 7. Customs Seizures and Import Issues */}
-          <div>
-            <h2 className="text-lg font-bold text-[#111111]">
-              7. Customs Seizures and Import Issues
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed">
-              If your package is seized, detained, held, or destroyed by customs or border authorities
-              in the destination country:
-            </p>
-            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
-              <li>
-                {SITE_NAME} is not liable and no refund will be issued. By placing an international
-                order, you accept this risk.
-              </li>
-              <li>
-                It is your sole responsibility to ensure that the products you order may be legally
-                imported into your jurisdiction.
-              </li>
-              <li>
-                We will provide reasonable assistance by supplying documentation (such as Certificates
-                of Analysis or product descriptions) that may help with customs clearance, but we
-                cannot guarantee the outcome.
-              </li>
-              <li>
-                If customs contacts us directly regarding your shipment, we will cooperate with
-                authorities as required by law.
-              </li>
-            </ul>
-          </div>
+          {/* 7. Reserved */}
 
           {/* 8. Packaging */}
           <div>
@@ -181,13 +141,12 @@ export default function ShippingPolicyPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               All orders are shipped in discreet, professional packaging. External labels do not
-              describe the specific contents beyond what is required by shipping carriers and customs
-              regulations for lawful transport.
+              describe the specific contents beyond what is required by shipping carriers for
+              lawful transport.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              International shipments will include customs declaration forms as legally required, which
-              may describe the general nature and declared value of the contents. This is a legal
-              requirement and cannot be omitted.
+              We ship only within the United States. All packages include standard carrier
+              documentation as required for domestic shipment.
             </p>
           </div>
 

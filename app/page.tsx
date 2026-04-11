@@ -11,8 +11,8 @@ import Protocols from "@/components/home/Protocols";
 import WhyPurityLab from "@/components/home/WhyPurityLab";
 
 const QualitySection = dynamic(() => import("@/components/home/QualitySection"));
-const EducationPreview = dynamic(() => import("@/components/home/EducationPreview"));
-const CommunitySection = dynamic(() => import("@/components/home/CommunitySection"));
+// EducationPreview hidden for compliance review
+// const EducationPreview = dynamic(() => import("@/components/home/EducationPreview"));
 
 export const metadata: Metadata = {
   title: "Purity Lab | Research-Grade Peptides with Published CoAs",
@@ -65,8 +65,7 @@ export default async function HomePage() {
       <Protocols protocols={protocols} />
       <WhyPurityLab />
       <QualitySection />
-      <EducationPreview />
-      <CommunitySection />
+      {/* EducationPreview hidden for compliance review */}
     </>
   );
 }

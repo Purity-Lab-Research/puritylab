@@ -147,17 +147,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Pricing */}
         <div className="mt-auto pt-3">
-          <div className="flex items-baseline gap-2">
-            <span className="text-base font-bold text-[#111111]">
-              From {formatPrice(activeSubPrice)}/mo
-            </span>
-            {savingsPercent > 0 && (
-              <span className="bg-[#10B981]/10 text-[#10B981] text-[10px] font-bold px-2 py-0.5 rounded-full">
-                Save {savingsPercent}%
-              </span>
-            )}
-          </div>
-          <span className="text-sm text-[#9CA3AF] line-through">
+          <span className="text-base font-bold text-[#111111]">
             {formatPrice(activePrice)}
           </span>
         </div>

@@ -18,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "About Purity Lab",
   description:
-    "We don't just sell peptides. We prove what's in them. Learn about our mission to bring radical transparency and research-grade quality to the peptide industry.",
+    "We don't just sell peptides. We prove what's in them. Our mission is to bring radical transparency and research-grade quality to the peptide industry.",
 };
 
 /* ─── Data ─── */
@@ -49,17 +49,17 @@ const VALUES = [
     iconColor: "text-purple-500",
   },
   {
-    title: "Cold Chain Integrity",
+    title: "Temperature-Safe Packaging",
     description:
-      "Peptides are temperature-sensitive. Our entire supply chain, from storage to shipping, is cold-chain controlled to protect product integrity.",
+      "Peptides are temperature-sensitive. All products are stored and shipped under conditions designed to preserve compound integrity.",
     icon: Thermometer,
     iconBg: "bg-sky-50",
     iconColor: "text-sky-500",
   },
   {
-    title: "Community First",
+    title: "Responsive Support",
     description:
-      "Every customer gets access to our private research community. We share protocols, answer questions, and learn from each other.",
+      "Have a question about a product, a CoA, or your order? Our support team is available by email and responds within one business day.",
     icon: Users,
     iconBg: "bg-amber-50",
     iconColor: "text-amber-500",
@@ -100,7 +100,7 @@ const PROCESS = [
     number: "04",
     title: "Ship",
     description:
-      "Approved products are stored in cold-chain facilities and shipped with temperature-controlled packaging to your door.",
+      "Approved products are stored under proper conditions and shipped with care to preserve compound integrity.",
     icon: Thermometer,
   },
 ];
@@ -108,7 +108,7 @@ const PROCESS = [
 const STATS = [
   { value: "98%+", label: "Purity Threshold" },
   { value: "100%", label: "Batches Tested" },
-  { value: "Same-Day", label: "Order Processing" },
+  { value: "1-Day", label: "Order Processing" },
   { value: "24/7", label: "CoA Access" },
 ];
 
@@ -266,8 +266,8 @@ export default function AboutPage() {
             <p>
               Every product in our catalog has a published Certificate of
               Analysis from an independent lab. Every product listing is built
-              around real research documentation, not upselling. Every order ships
-              same-day with cold-chain protection.
+              around real research documentation, not upselling. Orders are
+              processed within one business day.
             </p>
             <p className="font-semibold text-[#111111]">
               If you&apos;ve been burned by peptide companies that cut corners,

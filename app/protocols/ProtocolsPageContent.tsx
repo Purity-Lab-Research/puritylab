@@ -153,12 +153,7 @@ export default function ProtocolsPageContent({
                   <div className="p-5 flex-1 flex flex-col">
                     {/* Price */}
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-extrabold text-[#111111]">${displaySub}</span>
-                      <span className="text-sm text-[#6B7280]">/mo</span>
-                    </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs text-[#9CA3AF] line-through">${displayOneTime}</span>
-                      <span className="text-[10px] font-semibold text-[#10B981]">Save {roundPrice(displayOneTime - displaySub > 0 ? ((displayOneTime - displaySub) / displayOneTime) * 100 : 15)}%</span>
+                      <span className="text-3xl font-extrabold text-[#111111]">${displayOneTime}</span>
                     </div>
 
                     {/* Items as compact list */}
@@ -180,18 +175,12 @@ export default function ProtocolsPageContent({
                 </Link>
 
                 {/* Buttons */}
-                <div className="px-5 pb-5 space-y-2 mt-auto">
-                  <button
-                    onClick={() => addProtocolToCart(protocol, "subscription")}
-                    className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
-                  >
-                    Subscribe
-                  </button>
+                <div className="px-5 pb-5 mt-auto">
                   <button
                     onClick={() => addProtocolToCart(protocol, "one-time")}
-                    className="block w-full text-[#6B7280] text-center text-xs font-medium hover:text-[#111111] transition-colors py-1"
+                    className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
                   >
-                    or buy once for ${displayOneTime}
+                    Add to Cart
                   </button>
                 </div>
               </div>

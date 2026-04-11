@@ -7,19 +7,21 @@ CREATE TABLE IF NOT EXISTS site_events (
   created_at timestamptz DEFAULT now()
 );
 
-CREATE INDEX idx_site_events_name ON site_events(event_name);
-CREATE INDEX idx_site_events_created ON site_events(created_at DESC);
-CREATE INDEX idx_site_events_name_created ON site_events(event_name, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_site_events_name ON site_events(event_name);
+CREATE INDEX IF NOT EXISTS idx_site_events_created ON site_events(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_site_events_name_created ON site_events(event_name, created_at DESC);
 
 -- Enable RLS but allow inserts from anon (public tracking) and reads from service role
 ALTER TABLE site_events ENABLE ROW LEVEL SECURITY;
 
 -- Allow anyone to insert events (public tracking endpoint)
+DROP POLICY IF EXISTS "Allow public insert" ON site_events;
 CREATE POLICY "Allow public insert" ON site_events
   FOR INSERT TO anon, authenticated
   WITH CHECK (true);
 
 -- Only service role can read (admin dashboard)
+DROP POLICY IF EXISTS "Allow service role read" ON site_events;
 CREATE POLICY "Allow service role read" ON site_events
   FOR SELECT TO service_role
   USING (true);

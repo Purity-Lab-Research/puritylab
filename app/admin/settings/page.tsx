@@ -408,7 +408,7 @@ export default function AdminSettingsPage() {
             <textarea
               className={INPUT_CLS}
               rows={4}
-              placeholder={"We ship worldwide\nSame-day processing\n99%+ purity guaranteed"}
+              placeholder={"We ship worldwide\nProcessed within 1 business day\n99%+ purity guaranteed"}
               value={form.ticker_items}
               onChange={(e) => updateField("ticker_items", e.target.value)}
             />

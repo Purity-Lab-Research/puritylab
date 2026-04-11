@@ -6,7 +6,7 @@ const items = [
   { icon: Shield, text: "EVERY BATCH THIRD-PARTY TESTED" },
   { icon: FlaskConical, text: "98%+ VERIFIED PURITY" },
   { icon: FileCheck, text: "FULL CoA PUBLISHED ON EVERY PRODUCT" },
-  { icon: Truck, text: "SAME-DAY FULFILLMENT" },
+  { icon: Truck, text: "ORDERS PROCESSED WITHIN 1 BUSINESS DAY" },
   { icon: BadgePercent, text: "SCHEDULED REORDER DISCOUNTS AVAILABLE" },
 ];
 

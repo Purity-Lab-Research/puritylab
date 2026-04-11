@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const stats = [
-  { value: "4,200+", label: "Vials shipped" },
-  { value: "99.2%", label: "Average batch purity" },
-  { value: "48 hrs", label: "Average delivery time" },
-  { value: "0", label: "Failed purity tests" },
+  { value: "cGMP", label: "Certified Manufacturing", subtext: "All compounds sourced from facilities meeting current Good Manufacturing Practice standards" },
+  { value: "≥99%", label: "Purity Guaranteed", subtext: "Every batch verified by independent third-party laboratory analysis" },
+  { value: "24hr", label: "Order Processing", subtext: "Orders processed and shipped within one business day of placement" },
+  { value: "100%", label: "Batches Independently Tested", subtext: "No product ships without a published Certificate of Analysis" },
 ];
 
 export default function SocialProof() {
@@ -29,8 +29,11 @@ export default function SocialProof() {
               <p className="text-3xl sm:text-4xl font-extrabold text-[#10B981] leading-none">
                 {stat.value}
               </p>
-              <p className="text-xs sm:text-sm text-[#6B7280] mt-2 font-medium">
+              <p className="text-xs sm:text-sm text-[#111111] mt-2 font-medium">
                 {stat.label}
+              </p>
+              <p className="text-[11px] sm:text-xs text-[#6B7280] mt-1.5 leading-relaxed">
+                {stat.subtext}
               </p>
             </div>
           ))}

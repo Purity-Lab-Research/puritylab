@@ -8,7 +8,7 @@ export default function StructuredData() {
     name: "Purity Lab",
     url: BASE_URL,
     description:
-      "Research-grade peptides and reference compounds for in-vitro laboratory use. Every batch third-party tested with published Certificates of Analysis. Same-day processing, domestic shipping.",
+      "Research-grade peptides and reference compounds for in-vitro laboratory use. Every batch third-party tested with published Certificates of Analysis. Orders processed within 1 business day, domestic shipping.",
     contactPoint: {
       "@type": "ContactPoint",
       email: "support@puritylabresearch.com",

@@ -37,11 +37,13 @@ export default function PrivacyPolicyPage() {
               and applicable provincial legislation, including Quebec&apos;s Law 25.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              Because we ship products worldwide and serve customers in multiple jurisdictions, this
-              policy also addresses obligations under the European Union General Data Protection
-              Regulation (EU GDPR), the United Kingdom General Data Protection Regulation (UK GDPR),
-              the California Consumer Privacy Act as amended by the California Privacy Rights Act
-              (CCPA/CPRA), and other applicable international data protection laws.
+              Purity Lab Research LLC ships exclusively within the United States. We do not accept
+              or fulfill international orders. While we do not ship physical products outside the
+              United States, we respect the data privacy rights of all website visitors including
+              those in the European Economic Area. This policy also addresses obligations under the
+              European Union General Data Protection Regulation (EU GDPR), the United Kingdom General
+              Data Protection Regulation (UK GDPR), the California Consumer Privacy Act as amended by
+              the California Privacy Rights Act (CCPA/CPRA), and other applicable data protection laws.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               Our products are sold exclusively for legitimate scientific research, laboratory, and
@@ -122,7 +124,7 @@ export default function PrivacyPolicyPage() {
                 details on our servers
               </li>
               <li>Business or institutional name and affiliation, where applicable</li>
-              <li>Intended research use description, where requested at checkout</li>
+              <li>Research use acknowledgment checkbox confirmations at checkout</li>
               <li>
                 Communications you send to us, including customer support inquiries and feedback
               </li>
@@ -203,8 +205,7 @@ export default function PrivacyPolicyPage() {
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
                 <strong>Order Fulfillment:</strong> Processing, verifying, shipping, and delivering
-                your orders, including age and eligibility verification and customs documentation for
-                international shipments.
+                your orders, including age and eligibility verification.
               </li>
               <li>
                 <strong>Account Management:</strong> Creating and maintaining your customer account,
@@ -212,7 +213,7 @@ export default function PrivacyPolicyPage() {
               </li>
               <li>
                 <strong>Communication:</strong> Sending order confirmations, shipping notifications,
-                customs/duty information, and responding to your inquiries.
+                and responding to your inquiries.
               </li>
               <li>
                 <strong>Compliance and Safety:</strong> Verifying that orders comply with applicable
@@ -298,15 +299,7 @@ export default function PrivacyPolicyPage() {
               <li>
                 <strong>Shipping and Logistics Carriers:</strong> Your name, shipping address,
                 telephone number, and email (for delivery notifications) are shared with carriers
-                (e.g., USPS, FedEx, UPS) solely to deliver your
-                order. For international shipments, customs declaration information (order contents,
-                declared value) is provided as required by law.
-              </li>
-              <li>
-                <strong>Customs and Regulatory Authorities:</strong> For international orders, we
-                may be required to provide order details and limited customer information to customs
-                authorities in the origin and/or destination country as part of export/import
-                compliance.
+                (e.g., USPS, FedEx, UPS) solely to deliver your order within the United States.
               </li>
               <li>
                 <strong>Legal Requirements:</strong> We may disclose personal information if required
@@ -394,8 +387,8 @@ export default function PrivacyPolicyPage() {
                 resolution.
               </li>
               <li>
-                <strong>Customs and export compliance records:</strong> Retained for the period
-                required by applicable export control and customs regulations (typically 5 to 7
+                <strong>Regulatory compliance records:</strong> Retained for the period
+                required by applicable federal and state regulations (typically 5 to 7
                 years).
               </li>
               <li>
@@ -491,8 +484,9 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="mt-2 space-y-1.5 text-sm leading-relaxed list-disc pl-5">
               <li>
-                We will notify the Office of the Federal Trade Commission (FTC) and affected
-                individuals as required by CCPA&apos;s breach notification provisions.
+                We will notify the California Attorney General and the California Privacy
+                Protection Agency (CPPA), and affected individuals as required by CCPA&apos;s
+                breach notification provisions.
               </li>
               <li>
                 For breaches affecting EU/EEA residents, we will notify the relevant supervisory
@@ -565,8 +559,8 @@ export default function PrivacyPolicyPage() {
                 restrictions.
               </li>
               <li>
-                <strong>Complain:</strong> File a complaint with our Privacy Officer or the Office of
-                the Federal Trade Commission (FTC).
+                <strong>Complain:</strong> File a complaint with our Privacy Officer or the
+                California Attorney General.
               </li>
             </ul>
 
@@ -755,9 +749,8 @@ export default function PrivacyPolicyPage() {
               violate applicable export controls, sanctions, or trade regulations.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
-              International orders may be subject to customs duties, import taxes, and additional
-              fees imposed by the destination country. These charges are the sole responsibility of
-              the purchaser.
+              Purity Lab Research LLC ships exclusively within the United States. We do not
+              accept or fulfill international orders.
             </p>
           </div>
 
@@ -813,12 +806,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="mt-2 text-sm leading-relaxed space-y-3 pl-5">
               <div>
-                <p><strong>United States:</strong> Federal Trade Commission (FTC)</p>
-                <p>30 Victoria Street, Gatineau, Quebec K1A 1H3 | Toll-free: 1-800-282-1376 | www.priv.gc.ca</p>
-              </div>
-              <div>
-                <p><strong>Quebec:</strong> Commission d&apos;acc&egrave;s &agrave; l&apos;information du Qu&eacute;bec</p>
-                <p>www.cai.gouv.qc.ca</p>
+                <p><strong>California:</strong> California Attorney General / California Privacy Protection Agency (CPPA)</p>
+                <p>oag.ca.gov/privacy | cppa.ca.gov</p>
               </div>
               <div>
                 <p><strong>European Union:</strong> Your local data protection supervisory authority.</p>
