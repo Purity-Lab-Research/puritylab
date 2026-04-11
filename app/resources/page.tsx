@@ -14,10 +14,8 @@ import {
 import {
   Calculator,
   FlaskConical,
-  CalendarDays,
   BookOpen,
   Thermometer,
-  Syringe,
   ShieldCheck,
   HelpCircle,
   ChevronDown,
@@ -89,175 +87,59 @@ function ResourceNav({
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   CALCULATORS
+   DILUTION CALCULATOR
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-function DosingCalculator() {
-  const [peptideMg, setPeptideMg] = useState("");
-  const [waterMl, setWaterMl] = useState("");
-  const [doseMcg, setDoseMcg] = useState("");
+function DilutionCalculator() {
+  const [soluteMg, setSoluteMg] = useState("");
+  const [solventMl, setSolventMl] = useState("");
 
   const result = useMemo(() => {
-    const p = parseFloat(peptideMg);
-    const w = parseFloat(waterMl);
-    const d = parseFloat(doseMcg);
-    if (!p || !w || !d || p <= 0 || w <= 0 || d <= 0) return null;
+    const s = parseFloat(soluteMg);
+    const v = parseFloat(solventMl);
+    if (!s || !v || s <= 0 || v <= 0) return null;
 
-    const totalMcg = p * 1000;
-    const concPerMl = totalMcg / w;
-    const concPerUnit = concPerMl / 100;
-    const units = d / concPerUnit;
-    const totalDoses = totalMcg / d;
+    const totalMcg = s * 1000;
+    const concMcgPerMl = totalMcg / v;
+    const concMgPerMl = s / v;
 
     return {
-      units: Math.round(units * 10) / 10,
-      concPerUnit: Math.round(concPerUnit * 10) / 10,
-      totalDoses: Math.floor(totalDoses),
+      concMcgPerMl: Math.round(concMcgPerMl * 10) / 10,
+      concMgPerMl: Math.round(concMgPerMl * 100) / 100,
     };
-  }, [peptideMg, waterMl, doseMcg]);
-
-  return (
-    <div className={cardCls}>
-      <div className="flex items-center gap-2 mb-1">
-        <Calculator className="w-5 h-5 text-secondary" />
-        <h3 className="font-heading text-xl font-bold text-primary">
-          Dosing Calculator
-        </h3>
-      </div>
-      <p className="text-sm text-text-secondary mb-6">
-        Calculate how many units to draw on your insulin syringe for a desired
-        dose.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div>
-            <label className={labelCls}>Peptide amount in vial (mg)</label>
-            <input
-              type="number"
-              value={peptideMg}
-              onChange={(e) => setPeptideMg(e.target.value)}
-              placeholder="e.g. 10"
-              className={inputCls}
-              min="0"
-              step="any"
-            />
-          </div>
-          <div>
-            <label className={labelCls}>Bacteriostatic water added (ml)</label>
-            <input
-              type="number"
-              value={waterMl}
-              onChange={(e) => setWaterMl(e.target.value)}
-              placeholder="e.g. 2"
-              className={inputCls}
-              min="0"
-              step="any"
-            />
-          </div>
-          <div>
-            <label className={labelCls}>Desired dose (mcg)</label>
-            <input
-              type="number"
-              value={doseMcg}
-              onChange={(e) => setDoseMcg(e.target.value)}
-              placeholder="e.g. 250"
-              className={inputCls}
-              min="0"
-              step="any"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          {result ? (
-            <div className="space-y-4">
-              <div className="bg-primary/5 border border-primary/10 rounded-xl p-6 text-center">
-                <p className="text-xs text-text-secondary uppercase tracking-wider mb-1">
-                  Draw
-                </p>
-                <p className="font-heading text-4xl font-extrabold text-primary">
-                  {result.units}
-                </p>
-                <p className="text-sm text-text-secondary">
-                  units on your insulin syringe
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-background rounded-lg p-3 text-center">
-                  <p className="text-xs text-text-secondary">Per unit</p>
-                  <p className="font-heading text-lg font-bold text-primary">
-                    {result.concPerUnit} mcg
-                  </p>
-                </div>
-                <div className="bg-background rounded-lg p-3 text-center">
-                  <p className="text-xs text-text-secondary">Total doses</p>
-                  <p className="font-heading text-lg font-bold text-primary">
-                    {result.totalDoses}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="text-center text-sm text-text-secondary py-8">
-              Enter values to calculate your dose.
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ReconstitutionCalculator() {
-  const [peptideMg, setPeptideMg] = useState("");
-  const [waterMl, setWaterMl] = useState("");
-
-  const result = useMemo(() => {
-    const p = parseFloat(peptideMg);
-    const w = parseFloat(waterMl);
-    if (!p || !w || p <= 0 || w <= 0) return null;
-
-    const totalMcg = p * 1000;
-    const per10Units = totalMcg / w / 10;
-    const perUnit = totalMcg / w / 100;
-
-    return {
-      per10Units: Math.round(per10Units * 10) / 10,
-      perUnit: Math.round(perUnit * 10) / 10,
-    };
-  }, [peptideMg, waterMl]);
+  }, [soluteMg, solventMl]);
 
   const refTable = useMemo(() => {
-    const p = parseFloat(peptideMg);
-    if (!p || p <= 0) return [];
-    return [1, 2, 3].map((ml) => ({
+    const s = parseFloat(soluteMg);
+    if (!s || s <= 0) return [];
+    return [1, 2, 3, 5].map((ml) => ({
       ml,
-      per10Units: Math.round(((p * 1000) / ml / 10) * 10) / 10,
-      perUnit: Math.round(((p * 1000) / ml / 100) * 10) / 10,
+      concMcgPerMl: Math.round(((s * 1000) / ml) * 10) / 10,
+      concMgPerMl: Math.round((s / ml) * 100) / 100,
     }));
-  }, [peptideMg]);
+  }, [soluteMg]);
 
   return (
     <div className={cardCls}>
       <div className="flex items-center gap-2 mb-1">
         <FlaskConical className="w-5 h-5 text-secondary" />
         <h3 className="font-heading text-xl font-bold text-primary">
-          Reconstitution Calculator
+          Dilution Calculator for Laboratory Preparation
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-6">
-        Determine the concentration after reconstituting your peptide.
+        Determine the resulting concentration when dissolving a lyophilized
+        reference standard into a known volume of solvent.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div>
-            <label className={labelCls}>Peptide amount (mg)</label>
+            <label className={labelCls}>Solute amount (mg)</label>
             <input
               type="number"
-              value={peptideMg}
-              onChange={(e) => setPeptideMg(e.target.value)}
+              value={soluteMg}
+              onChange={(e) => setSoluteMg(e.target.value)}
               placeholder="e.g. 5"
               className={inputCls}
               min="0"
@@ -265,11 +147,11 @@ function ReconstitutionCalculator() {
             />
           </div>
           <div>
-            <label className={labelCls}>Water volume (ml)</label>
+            <label className={labelCls}>Solvent volume (mL)</label>
             <input
               type="number"
-              value={waterMl}
-              onChange={(e) => setWaterMl(e.target.value)}
+              value={solventMl}
+              onChange={(e) => setSolventMl(e.target.value)}
               placeholder="e.g. 2"
               className={inputCls}
               min="0"
@@ -284,18 +166,18 @@ function ReconstitutionCalculator() {
               <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-6">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-xs text-text-secondary">
-                    Per 0.1ml (10 units)
+                    Concentration (mcg/mL)
                   </span>
                   <span className="font-heading text-xl font-bold text-primary">
-                    {result.per10Units} mcg
+                    {result.concMcgPerMl} mcg/mL
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-text-secondary">
-                    Per unit (0.01ml)
+                    Concentration (mg/mL)
                   </span>
                   <span className="font-heading text-xl font-bold text-primary">
-                    {result.perUnit} mcg
+                    {result.concMgPerMl} mg/mL
                   </span>
                 </div>
               </div>
@@ -303,20 +185,20 @@ function ReconstitutionCalculator() {
               {refTable.length > 0 && (
                 <div>
                   <p className="text-xs text-text-secondary mb-2">
-                    Reference table:
+                    Reference table (various solvent volumes):
                   </p>
                   <div className="border border-border rounded-lg overflow-hidden">
                     <table className="w-full text-xs">
                       <thead>
                         <tr className="bg-background">
                           <th className="px-3 py-2 text-left text-text-secondary font-semibold">
-                            Water
+                            Solvent (mL)
                           </th>
                           <th className="px-3 py-2 text-right text-text-secondary font-semibold">
-                            Per 10 units
+                            mcg/mL
                           </th>
                           <th className="px-3 py-2 text-right text-text-secondary font-semibold">
-                            Per unit
+                            mg/mL
                           </th>
                         </tr>
                       </thead>
@@ -325,19 +207,19 @@ function ReconstitutionCalculator() {
                           <tr
                             key={row.ml}
                             className={
-                              row.ml === parseFloat(waterMl)
+                              row.ml === parseFloat(solventMl)
                                 ? "bg-secondary/5"
                                 : ""
                             }
                           >
                             <td className="px-3 py-2 text-text-primary">
-                              {row.ml}ml
+                              {row.ml} mL
                             </td>
                             <td className="px-3 py-2 text-right text-text-primary font-medium">
-                              {row.per10Units} mcg
+                              {row.concMcgPerMl} mcg/mL
                             </td>
                             <td className="px-3 py-2 text-right text-text-primary font-medium">
-                              {row.perUnit} mcg
+                              {row.concMgPerMl} mg/mL
                             </td>
                           </tr>
                         ))}
@@ -349,211 +231,9 @@ function ReconstitutionCalculator() {
             </div>
           ) : (
             <div className="text-center text-sm text-text-secondary py-8">
-              Enter values to see concentrations.
+              Enter values to calculate the resulting concentration.
             </div>
           )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Cycle Planner ─── */
-const PROTOCOL_PRESETS: Record<
-  string,
-  { label: string; daysPerWeek: number }
-> = {
-  recovery: { label: "Recovery (daily)", daysPerWeek: 7 },
-  fatloss: { label: "Fat Loss (5x/week)", daysPerWeek: 5 },
-  performance: { label: "Performance (3x/week)", daysPerWeek: 3 },
-  custom: { label: "Custom", daysPerWeek: 5 },
-};
-
-function CyclePlanner() {
-  const [protocol, setProtocol] = useState("recovery");
-  const [startDate, setStartDate] = useState(() =>
-    new Date().toISOString().split("T")[0]
-  );
-  const [cycleWeeks, setCycleWeeks] = useState(4);
-  const [customDays, setCustomDays] = useState(5);
-
-  const daysPerWeek =
-    protocol === "custom"
-      ? customDays
-      : PROTOCOL_PRESETS[protocol].daysPerWeek;
-
-  const schedule = useMemo(() => {
-    const start = new Date(startDate + "T00:00:00");
-    if (isNaN(start.getTime()))
-      return { weeks: [], totalInjections: 0, endDate: "" };
-
-    const totalDays = cycleWeeks * 7;
-    const endDate = new Date(start);
-    endDate.setDate(endDate.getDate() + totalDays - 1);
-
-    const weeks: {
-      weekNum: number;
-      days: { date: Date; isInjection: boolean; dayOfWeek: number }[];
-    }[] = [];
-    let totalInjections = 0;
-
-    for (let w = 0; w < cycleWeeks; w++) {
-      const days: {
-        date: Date;
-        isInjection: boolean;
-        dayOfWeek: number;
-      }[] = [];
-      for (let d = 0; d < 7; d++) {
-        const date = new Date(start);
-        date.setDate(date.getDate() + w * 7 + d);
-        const isInjection = d < daysPerWeek;
-        if (isInjection) totalInjections++;
-        days.push({ date, isInjection, dayOfWeek: date.getDay() });
-      }
-      weeks.push({ weekNum: w + 1, days });
-    }
-
-    return {
-      weeks,
-      totalInjections,
-      endDate: endDate.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      }),
-    };
-  }, [startDate, cycleWeeks, daysPerWeek]);
-
-  const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
-
-  return (
-    <div className={cardCls}>
-      <div className="flex items-center gap-2 mb-1">
-        <CalendarDays className="w-5 h-5 text-secondary" />
-        <h3 className="font-heading text-xl font-bold text-primary">
-          Cycle Planner
-        </h3>
-      </div>
-      <p className="text-sm text-text-secondary mb-6">
-        Generate an injection schedule for your protocol.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div>
-            <label className={labelCls}>Protocol</label>
-            <select
-              value={protocol}
-              onChange={(e) => setProtocol(e.target.value)}
-              className={inputCls}
-            >
-              {Object.entries(PROTOCOL_PRESETS).map(([key, val]) => (
-                <option key={key} value={key}>
-                  {val.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          {protocol === "custom" && (
-            <div>
-              <label className={labelCls}>Days per week</label>
-              <input
-                type="number"
-                value={customDays}
-                onChange={(e) =>
-                  setCustomDays(
-                    Math.max(1, Math.min(7, parseInt(e.target.value) || 1))
-                  )
-                }
-                min="1"
-                max="7"
-                className={inputCls}
-              />
-            </div>
-          )}
-          <div>
-            <label className={labelCls}>Start date</label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className={inputCls}
-            />
-          </div>
-          <div>
-            <label className={labelCls}>Cycle length</label>
-            <select
-              value={cycleWeeks}
-              onChange={(e) => setCycleWeeks(Number(e.target.value))}
-              className={inputCls}
-            >
-              <option value={4}>4 weeks</option>
-              <option value={6}>6 weeks</option>
-              <option value={8}>8 weeks</option>
-              <option value={12}>12 weeks</option>
-            </select>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <div className="bg-background rounded-lg p-3 text-center">
-              <p className="text-xs text-text-secondary">Total injections</p>
-              <p className="font-heading text-lg font-bold text-primary">
-                {schedule.totalInjections}
-              </p>
-            </div>
-            <div className="bg-background rounded-lg p-3 text-center">
-              <p className="text-xs text-text-secondary">Cycle ends</p>
-              <p className="text-sm font-semibold text-primary">
-                {schedule.endDate}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className="grid grid-cols-7 gap-0.5 text-center mb-1">
-            {dayLabels.map((d, i) => (
-              <span
-                key={i}
-                className="text-[10px] text-text-secondary font-semibold"
-              >
-                {d}
-              </span>
-            ))}
-          </div>
-          <div className="space-y-1 max-h-[400px] overflow-y-auto">
-            {schedule.weeks.map((week) => (
-              <div key={week.weekNum}>
-                <p className="text-[10px] text-text-secondary mb-0.5">
-                  Wk {week.weekNum}
-                </p>
-                <div className="grid grid-cols-7 gap-0.5">
-                  {week.days.map((day, i) => (
-                    <div
-                      key={i}
-                      className={`h-8 rounded flex items-center justify-center text-[10px] font-medium ${
-                        day.isInjection
-                          ? "bg-secondary text-white"
-                          : "bg-background text-text-secondary"
-                      }`}
-                    >
-                      {day.date.getDate()}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-4 mt-3 text-[10px] text-text-secondary">
-            <span className="flex items-center gap-1">
-              <span className="w-3 h-3 rounded bg-secondary inline-block" />{" "}
-              Injection day
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="w-3 h-3 rounded bg-background border border-border inline-block" />{" "}
-              Rest day
-            </span>
-          </div>
         </div>
       </div>
     </div>
@@ -668,8 +348,8 @@ function PeptideGuide() {
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-4">
-        At-a-glance comparison of popular research peptides. Tap any row for
-        details.
+        At-a-glance comparison of research peptides, including molecular
+        properties and published study references. Tap any row for details.
       </p>
 
       {/* Category filter */}
@@ -689,7 +369,7 @@ function PeptideGuide() {
         ))}
       </div>
 
-      {/* Table  -  desktop */}
+      {/* Table - desktop */}
       <div className="hidden md:block border border-border rounded-lg overflow-hidden">
         <table className="w-full text-sm">
           <thead>
@@ -701,13 +381,7 @@ function PeptideGuide() {
                 Category
               </th>
               <th className="px-4 py-3 font-semibold text-text-secondary">
-                Typical Dose
-              </th>
-              <th className="px-4 py-3 font-semibold text-text-secondary">
-                Frequency
-              </th>
-              <th className="px-4 py-3 font-semibold text-text-secondary">
-                Cycle
+                Mechanism
               </th>
               <th className="px-4 py-3 font-semibold text-text-secondary w-8" />
             </tr>
@@ -728,11 +402,7 @@ function PeptideGuide() {
                   <td className="px-4 py-3 text-text-secondary">
                     {p.category}
                   </td>
-                  <td className="px-4 py-3 text-text-primary">{p.typicalDose}</td>
-                  <td className="px-4 py-3 text-text-primary">{p.frequency}</td>
-                  <td className="px-4 py-3 text-text-primary">
-                    {p.cycleLength}
-                  </td>
+                  <td className="px-4 py-3 text-text-primary text-xs">{p.mechanism}</td>
                   <td className="px-4 py-3 text-text-secondary">
                     {expandedRow === p.name ? (
                       <ChevronUp className="w-4 h-4" />
@@ -744,27 +414,21 @@ function PeptideGuide() {
                 {expandedRow === p.name && (
                   <tr key={`${p.name}-detail`}>
                     <td
-                      colSpan={6}
+                      colSpan={4}
                       className="px-4 py-4 bg-primary/[0.02] text-sm"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
                           <p className="text-xs font-semibold text-text-secondary uppercase mb-1">
-                            Mechanism
+                            Mechanism of Action
                           </p>
                           <p className="text-text-primary">{p.mechanism}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-text-secondary uppercase mb-1">
-                            Best For
+                            Research Applications
                           </p>
-                          <p className="text-text-primary">{p.bestFor}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs font-semibold text-text-secondary uppercase mb-1">
-                            Stacks With
-                          </p>
-                          <p className="text-text-primary">{p.stacksWith}</p>
+                          <p className="text-text-primary">{p.researchApplications}</p>
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-border">
@@ -800,7 +464,7 @@ function PeptideGuide() {
         </table>
       </div>
 
-      {/* Cards  -  mobile */}
+      {/* Cards - mobile */}
       <div className="md:hidden space-y-3">
         {filtered.map((p) => (
           <div
@@ -825,41 +489,17 @@ function PeptideGuide() {
             </button>
             {expandedRow === p.name && (
               <div className="px-4 pb-4 space-y-2 text-xs border-t border-border pt-3">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Dose</span>
-                  <span className="text-text-primary font-medium">
-                    {p.typicalDose}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Frequency</span>
-                  <span className="text-text-primary font-medium">
-                    {p.frequency}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Cycle</span>
-                  <span className="text-text-primary font-medium">
-                    {p.cycleLength}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Stacks With</span>
-                  <span className="text-text-primary font-medium">
-                    {p.stacksWith}
-                  </span>
-                </div>
                 <div className="pt-1">
                   <p className="text-text-secondary font-semibold mb-0.5">
-                    Mechanism
+                    Mechanism of Action
                   </p>
                   <p className="text-text-primary">{p.mechanism}</p>
                 </div>
                 <div>
                   <p className="text-text-secondary font-semibold mb-0.5">
-                    Best For
+                    Research Applications
                   </p>
-                  <p className="text-text-primary">{p.bestFor}</p>
+                  <p className="text-text-primary">{p.researchApplications}</p>
                 </div>
                 {p.productSlugs.length > 0 && (
                   <div className="pt-2 flex flex-wrap gap-2">
@@ -888,15 +528,16 @@ function PeptideGuide() {
       </div>
 
       <p className="text-[10px] text-text-secondary mt-4 italic">
-        All dosing information is from published research literature and is
-        provided for educational purposes only. Not medical advice.
+        All information is from published research literature and is
+        provided for reference purposes only. These materials do not
+        constitute recommendations for human or animal use.
       </p>
     </div>
   );
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   STORAGE & HANDLING GUIDE
+   HANDLING AND STORAGE
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 const STORAGE_ITEMS = [
@@ -906,15 +547,15 @@ const STORAGE_ITEMS = [
     temp: "Room temp or refrigerated",
     duration: "12-24+ months",
     notes:
-      "Stable at room temperature during shipping. Refrigeration extends shelf life. Keep away from direct sunlight and heat sources. Sealed vials are very stable.",
+      "Stable at room temperature during shipping. Refrigeration extends shelf life. Keep away from direct sunlight and heat sources. Sealed vials are highly stable.",
   },
   {
-    state: "Reconstituted (liquid)",
+    state: "Reconstituted (in solution)",
     icon: "droplet",
     temp: "2-8\u00B0C (refrigerator)",
     duration: "28-30 days",
     notes:
-      "Must be refrigerated immediately after reconstitution. Never freeze reconstituted peptides  -  ice crystals damage peptide bonds. Keep upright to avoid contaminating the stopper.",
+      "Must be refrigerated immediately after reconstitution. Never freeze reconstituted peptides, as ice crystals damage peptide bonds. Keep vials upright to avoid contaminating the stopper.",
   },
   {
     state: "Bacteriostatic Water",
@@ -922,7 +563,7 @@ const STORAGE_ITEMS = [
     temp: "Room temp or refrigerated",
     duration: "28 days once opened",
     notes:
-      "Contains 0.9% benzyl alcohol as preservative. Stable at room temperature when sealed. Once the stopper is pierced, use within 28 days. Always swab before drawing.",
+      "Contains 0.9% benzyl alcohol as preservative. Stable at room temperature when sealed. Once the stopper is pierced, use within 28 days. Always swab before withdrawing solvent.",
   },
 ];
 
@@ -932,11 +573,12 @@ function StorageGuide() {
       <div className="flex items-center gap-2 mb-1">
         <Thermometer className="w-5 h-5 text-secondary" />
         <h3 className="font-heading text-xl font-bold text-primary">
-          Storage & Handling Guide
+          Handling and Storage
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-6">
-        Proper storage is critical for maintaining peptide potency and safety.
+        Proper storage is critical for maintaining the integrity and stability
+        of research peptides in a laboratory setting.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -974,20 +616,20 @@ function StorageGuide() {
         <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-5">
           <p className="font-heading font-bold text-green-700 text-sm mb-3 flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4" />
-            Do
+            Recommended Practices
           </p>
           <ul className="space-y-2 text-xs text-text-primary">
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
-              Swab vial stoppers with alcohol before every draw
+              Swab vial stoppers with 70% isopropyl alcohol before each withdrawal
             </li>
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
-              Use a fresh syringe for each injection
+              Use sterile, single-use transfer equipment for each procedure
             </li>
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
-              Store reconstituted vials upright in the fridge
+              Store reconstituted vials upright in a refrigerator at 2-8 degrees C
             </li>
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
@@ -995,43 +637,43 @@ function StorageGuide() {
             </li>
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
-              Let BAC water trickle down the vial wall, don&apos;t spray on powder
+              Allow solvent to trickle down the vial wall rather than spraying directly on powder
             </li>
             <li className="flex gap-2">
               <span className="text-green-600 mt-0.5 shrink-0">&#10003;</span>
-              Gently roll vials to mix  -  never shake
+              Gently roll or swirl vials to dissolve; never shake
             </li>
           </ul>
         </div>
         <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-5">
           <p className="font-heading font-bold text-red-700 text-sm mb-3 flex items-center gap-1.5">
             <AlertTriangle className="w-4 h-4" />
-            Don&apos;t
+            Avoid
           </p>
           <ul className="space-y-2 text-xs text-text-primary">
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Freeze reconstituted peptides  -  ice crystals destroy bonds
+              Freezing reconstituted peptides; ice crystal formation damages peptide bonds
             </li>
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Expose vials to direct sunlight or heat above 25°C
+              Exposing vials to direct sunlight or temperatures above 25 degrees C
             </li>
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Reuse syringes  -  dulled needles damage tissue and risk contamination
+              Reusing transfer equipment, which risks contamination
             </li>
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Use reconstituted peptides past 30 days
+              Using reconstituted peptides past 30 days
             </li>
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Shake vials vigorously  -  it denatures the peptide
+              Shaking vials vigorously, which can denature the peptide
             </li>
             <li className="flex gap-2">
               <span className="text-red-600 mt-0.5 shrink-0">&#10007;</span>
-              Use cloudy, discolored, or particulate solutions
+              Using cloudy, discolored, or particulate-containing solutions
             </li>
           </ul>
         </div>
@@ -1041,141 +683,38 @@ function StorageGuide() {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SUPPLIES GUIDE
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-const SUPPLY_ITEMS = [
-  {
-    name: "Insulin Syringes",
-    desc: "The standard tool for measuring and administering peptides. Available in different sizes based on dose volume.",
-    details: [
-      { label: "0.3ml (30 unit)", use: "Best for small doses under 30 units. More precise markings for accurate low-volume dosing." },
-      { label: "0.5ml (50 unit)", use: "Good all-around choice. Suitable for most peptide doses." },
-      { label: "1ml (100 unit)", use: "Best for larger doses or when reconstituting with less water for higher concentrations." },
-    ],
-    tip: "29-31 gauge needles are standard for SubQ injections. Thinner gauge = less discomfort.",
-  },
-  {
-    name: "Bacteriostatic Water (BAC Water)",
-    desc: "Sterile water with 0.9% benzyl alcohol preservative. The only recommended solvent for reconstituting peptides.",
-    details: [
-      { label: "Why not sterile water?", use: "Sterile water has no preservative and must be used immediately. BAC water stays safe for 28 days." },
-      { label: "How much do I need?", use: "1-2ml per vial is standard. Less water = higher concentration = fewer units to draw per dose." },
-    ],
-    tip: "Keep a spare vial on hand. Running out mid-cycle means you can't reconstitute new vials.",
-  },
-  {
-    name: "Alcohol Swabs",
-    desc: "70% isopropyl alcohol prep pads for sterilizing vial stoppers and injection sites before each use.",
-    details: [
-      { label: "When to swab", use: "Before every draw from a vial and before every injection. Every single time, no exceptions." },
-    ],
-    tip: "Buy in bulk  -  you'll use 2 per injection (one for vial, one for skin).",
-  },
-  {
-    name: "Sharps Container",
-    desc: "A puncture-resistant container for safe disposal of used syringes and needles.",
-    details: [
-      { label: "Disposal", use: "Never throw loose syringes in regular trash. Most pharmacies accept full sharps containers for free disposal." },
-    ],
-    tip: "A 1-quart container holds about 30-50 insulin syringes.",
-  },
-];
-
-function SuppliesGuide() {
-  return (
-    <div className={cardCls}>
-      <div className="flex items-center gap-2 mb-1">
-        <Syringe className="w-5 h-5 text-secondary" />
-        <h3 className="font-heading text-xl font-bold text-primary">
-          Supplies Guide
-        </h3>
-      </div>
-      <p className="text-sm text-text-secondary mb-6">
-        Everything you need beyond the peptide itself for a proper research
-        setup.
-      </p>
-
-      <div className="space-y-4">
-        {SUPPLY_ITEMS.map((item) => (
-          <div
-            key={item.name}
-            className="bg-background rounded-lg border border-border p-5"
-          >
-            <p className="font-heading font-bold text-primary text-sm mb-1">
-              {item.name}
-            </p>
-            <p className="text-xs text-text-secondary mb-3">{item.desc}</p>
-            <div className="space-y-2 mb-3">
-              {item.details.map((d) => (
-                <div
-                  key={d.label}
-                  className="flex flex-col sm:flex-row sm:gap-3 text-xs"
-                >
-                  <span className="font-semibold text-primary shrink-0 min-w-[160px]">
-                    {d.label}
-                  </span>
-                  <span className="text-text-primary">{d.use}</span>
-                </div>
-              ))}
-            </div>
-            <div className="flex items-start gap-1.5 text-xs text-secondary bg-secondary/5 rounded-md px-3 py-2">
-              <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-              <span>{item.tip}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SAFETY CHECKLIST
+   LABORATORY SAFETY CHECKLIST
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 const CHECKLIST_SECTIONS = [
   {
-    title: "Before You Start",
+    title: "Before You Begin",
     items: [
       "Verify your peptide has a valid, batch-specific Certificate of Analysis",
-      "Confirm the peptide identity via Mass Spectrometry and purity via HPLC (98%+)",
+      "Confirm peptide identity via Mass Spectrometry and purity via HPLC (98%+)",
       "Check the vial seal is intact and the lyophilized powder appears normal (white to off-white)",
-      "Ensure you have all required supplies: BAC water, syringes, alcohol swabs",
-      "Wash hands thoroughly with soap and water",
-      "Clean your workspace  -  a flat, well-lit surface is ideal",
+      "Ensure you have all required supplies: solvent, sterile transfer equipment, alcohol swabs",
+      "Wash hands thoroughly and use appropriate personal protective equipment",
+      "Prepare a clean, flat, well-lit laboratory workspace",
     ],
   },
   {
     title: "During Reconstitution",
     items: [
-      "Swab both the peptide vial and BAC water vial stoppers with alcohol",
-      "Draw the desired amount of BAC water with a fresh syringe",
-      "Insert needle and let water trickle down the inside wall of the peptide vial",
-      "Gently roll or swirl  -  never shake the vial",
+      "Swab both the peptide vial and solvent vial stoppers with alcohol",
+      "Withdraw the desired volume of solvent with sterile equipment",
+      "Insert needle and allow solvent to trickle down the inside wall of the peptide vial",
+      "Gently roll or swirl to dissolve; never shake the vial",
       "Wait until the solution is completely clear before proceeding",
       "Label the vial with: peptide name, concentration, and date of reconstitution",
     ],
   },
   {
-    title: "During Administration",
+    title: "After Preparation",
     items: [
-      "Swab the vial stopper with a fresh alcohol pad",
-      "Draw the calculated dose with a new, unused syringe",
-      "Remove any air bubbles by tapping the syringe and gently pushing the plunger",
-      "Clean the injection site with an alcohol swab and let it dry",
-      "Pinch the skin, insert needle at 45\u00B0 angle for SubQ injection",
-      "Inject slowly, then withdraw and apply gentle pressure with a clean swab",
-    ],
-  },
-  {
-    title: "After Use",
-    items: [
-      "Return the reconstituted vial to the refrigerator immediately",
-      "Dispose of the used syringe in a sharps container  -  never recap or reuse",
-      "Log your dose, time, and injection site for tracking purposes",
-      "Rotate injection sites to prevent tissue irritation (abdomen, thigh, upper arm)",
-      "Monitor for any unusual reactions at the injection site",
+      "Return the reconstituted vial to refrigerated storage (2-8 degrees C) immediately",
+      "Dispose of used transfer equipment in an appropriate sharps container",
+      "Log the preparation details: compound, concentration, date, and solvent used",
       "Discard reconstituted peptides after 28-30 days, regardless of remaining volume",
     ],
   },
@@ -1187,12 +726,12 @@ function SafetyChecklist() {
       <div className="flex items-center gap-2 mb-1">
         <ShieldCheck className="w-5 h-5 text-secondary" />
         <h3 className="font-heading text-xl font-bold text-primary">
-          Safety Checklist
+          Laboratory Safety Checklist
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-6">
-        Follow this step-by-step checklist every time for safe and sterile
-        handling.
+        Follow this step-by-step checklist for proper handling and
+        preparation of research peptides.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1230,30 +769,26 @@ function SafetyChecklist() {
 
 const GLOSSARY: { term: string; definition: string }[] = [
   { term: "Amino Acid", definition: "The building blocks of peptides and proteins. There are 20 standard amino acids that combine in different sequences to form peptides." },
-  { term: "AMPK", definition: "AMP-activated protein kinase  -  a master metabolic regulator that controls energy balance at the cellular level. Activated by MOTS-C." },
-  { term: "Angiogenesis", definition: "The formation of new blood vessels from existing ones. Critical for tissue repair as it delivers nutrients and oxygen to damaged areas." },
-  { term: "BAC Water", definition: "Bacteriostatic water  -  sterile water containing 0.9% benzyl alcohol as a preservative. The standard solvent for reconstituting peptides." },
-  { term: "BDNF", definition: "Brain-Derived Neurotrophic Factor  -  a protein that supports neuron growth, survival, and plasticity. Upregulated by nootropic peptides like Semax and Selank." },
-  { term: "Bioavailability", definition: "The proportion of a substance that enters circulation and is able to have an active effect. SubQ injection has high bioavailability for peptides." },
+  { term: "AMPK", definition: "AMP-activated protein kinase, a master metabolic regulator that controls energy balance at the cellular level." },
+  { term: "Angiogenesis", definition: "The formation of new blood vessels from existing ones. A key process studied in tissue biology and wound healing research." },
+  { term: "BAC Water", definition: "Bacteriostatic water: sterile water containing 0.9% benzyl alcohol as a preservative. A common solvent for reconstituting lyophilized peptides." },
+  { term: "BDNF", definition: "Brain-Derived Neurotrophic Factor, a protein that supports neuron growth, survival, and plasticity. Investigated in neuroscience research." },
+  { term: "Bioavailability", definition: "The proportion of a substance that enters systemic circulation and is available to exert biological activity. A key pharmacokinetic parameter." },
   { term: "CoA (Certificate of Analysis)", definition: "A document from an analytical laboratory confirming the identity (via MS) and purity (via HPLC) of a specific product batch." },
-  { term: "DAC (Drug Affinity Complex)", definition: "A modification added to CJC-1295 that extends its half-life from ~30 minutes to ~8 days. CJC-1295 without DAC is generally preferred." },
-  { term: "GH (Growth Hormone)", definition: "A peptide hormone produced by the pituitary gland that stimulates growth, cell reproduction, and regeneration." },
-  { term: "GHRH", definition: "Growth Hormone Releasing Hormone  -  a naturally occurring hormone that stimulates GH release. CJC-1295 is a synthetic GHRH analogue." },
-  { term: "GHS (Growth Hormone Secretagogue)", definition: "A class of compounds that stimulate the pituitary gland to release growth hormone naturally, as opposed to injecting exogenous GH." },
-  { term: "Half-life", definition: "The time it takes for the concentration of a peptide in the body to decrease by half. Determines dosing frequency." },
-  { term: "HPLC", definition: "High-Performance Liquid Chromatography  -  the industry standard analytical method for measuring peptide purity. Research-grade peptides test at 98%+." },
-  { term: "IM (Intramuscular)", definition: "Injection into muscle tissue. Less common for peptides than SubQ, but used for some compounds like TB500." },
-  { term: "IU (International Unit)", definition: "A measurement unit for biological substances based on their biological activity. Used primarily for HGH dosing, not most peptides." },
-  { term: "Lipolysis", definition: "The breakdown of stored fat (triglycerides) into free fatty acids for energy use. Stimulated by compounds like AOD 9604." },
-  { term: "Lyophilized", definition: "Freeze-dried. Peptides ship as lyophilized powder for maximum stability. Must be reconstituted with BAC water before use." },
+  { term: "DAC (Drug Affinity Complex)", definition: "A molecular modification that extends the biological half-life of certain peptide compounds in research settings." },
+  { term: "GH (Growth Hormone)", definition: "A peptide hormone produced by the pituitary gland that stimulates growth, cell reproduction, and regeneration. Widely studied in endocrinology." },
+  { term: "GHRH", definition: "Growth Hormone Releasing Hormone, a naturally occurring hormone that stimulates GH release from the anterior pituitary. A subject of endocrine research." },
+  { term: "GHS (Growth Hormone Secretagogue)", definition: "A class of compounds studied for their ability to stimulate pituitary release of growth hormone through receptor-mediated pathways." },
+  { term: "Half-life", definition: "The time required for the concentration of a compound to decrease by half. A fundamental pharmacokinetic property that informs experimental design." },
+  { term: "HPLC", definition: "High-Performance Liquid Chromatography, the industry-standard analytical method for measuring peptide purity. Research-grade peptides test at 98%+." },
+  { term: "IU (International Unit)", definition: "A standardized measurement unit for biological substances based on their biological activity, as defined by international agreement." },
+  { term: "Lyophilized", definition: "Freeze-dried. Peptides are supplied as lyophilized powder for maximum stability. Must be reconstituted with an appropriate solvent before use." },
   { term: "Mass Spectrometry (MS)", definition: "An analytical technique that measures molecular weight to confirm the identity of a compound. Used alongside HPLC on Certificates of Analysis." },
-  { term: "mcg (Microgram)", definition: "One millionth of a gram (1/1000 of a mg). The standard unit for most peptide doses. Example: 250 mcg = 0.25 mg." },
+  { term: "mcg (Microgram)", definition: "One millionth of a gram (1/1000 of a mg). A standard unit of measurement in peptide research. Example: 250 mcg = 0.25 mg." },
   { term: "Peptide Bond", definition: "The chemical bond that links amino acids together to form peptides and proteins. Formed by a condensation reaction between the carboxyl and amino groups." },
-  { term: "Reconstitution", definition: "The process of dissolving lyophilized peptide powder into a liquid solution using bacteriostatic water." },
-  { term: "SubQ (Subcutaneous)", definition: "Injection into the fatty tissue layer just beneath the skin. The most common route for peptide administration. Common sites: abdomen, thigh." },
-  { term: "Telomerase", definition: "An enzyme that maintains telomere length on chromosomes. Activated by Epithalon. Telomere shortening is associated with cellular aging." },
-  { term: "Unit (on syringe)", definition: "A marking on an insulin syringe. 100 units = 1ml, 10 units = 0.1ml, 1 unit = 0.01ml. Used to measure precise peptide doses." },
-  { term: "VEGF", definition: "Vascular Endothelial Growth Factor  -  a signaling protein that promotes blood vessel formation. Upregulated by BPC-157 to support tissue repair." },
+  { term: "Reconstitution", definition: "The process of dissolving lyophilized peptide powder into a liquid solution using an appropriate solvent such as bacteriostatic water." },
+  { term: "Telomerase", definition: "An enzyme that maintains telomere length on chromosomes. A subject of aging and cell biology research." },
+  { term: "VEGF", definition: "Vascular Endothelial Growth Factor, a signaling protein that promotes blood vessel formation. Studied in tissue biology and angiogenesis research." },
 ];
 
 function Glossary() {
@@ -1275,8 +810,8 @@ function Glossary() {
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-4">
-        {GLOSSARY.length} terms covering peptide science, dosing, and testing
-        terminology.
+        {GLOSSARY.length} terms covering peptide science, analytical testing,
+        and laboratory terminology.
       </p>
 
       <input
@@ -1312,52 +847,32 @@ function Glossary() {
 
 const FAQ_ITEMS = [
   {
-    q: "What's the difference between peptides and proteins?",
+    q: "What is the difference between peptides and proteins?",
     a: "Size. Peptides are short chains of amino acids (typically 2-50 amino acids), while proteins are longer chains (50+ amino acids) with complex three-dimensional structures. All peptides and proteins are made of amino acids linked by peptide bonds, but peptides are smaller and often act as signaling molecules rather than structural components.",
   },
   {
-    q: "Do I need to refrigerate peptides before reconstitution?",
-    a: "Not strictly necessary for short-term storage. Lyophilized (freeze-dried) peptides are very stable at room temperature for weeks to months. However, refrigeration (2-8\u00B0C) extends shelf life and is recommended for long-term storage. Once reconstituted with BAC water, refrigeration is mandatory  -  use within 28-30 days.",
+    q: "Do peptides need to be refrigerated before reconstitution?",
+    a: "Not strictly necessary for short-term storage. Lyophilized (freeze-dried) peptides are highly stable at room temperature for weeks to months. However, refrigeration (2-8 degrees C) extends shelf life and is recommended for long-term storage. Once reconstituted with bacteriostatic water, refrigeration is mandatory. Use within 28-30 days.",
   },
   {
-    q: "Can I use sterile water instead of bacteriostatic water?",
-    a: "Technically yes, but it's not recommended. Sterile water has no preservative, so the reconstituted solution must be used within 24 hours and a fresh syringe used each time to avoid bacterial contamination. Bacteriostatic water contains 0.9% benzyl alcohol, which prevents bacterial growth and allows the solution to remain safe for up to 28 days. Always use BAC water unless you plan to use the entire vial in a single session.",
+    q: "Can sterile water be used instead of bacteriostatic water?",
+    a: "Technically yes, but it is not recommended for multi-use applications. Sterile water has no preservative, so the reconstituted solution must be used within 24 hours and fresh sterile equipment used each time to avoid bacterial contamination. Bacteriostatic water contains 0.9% benzyl alcohol, which inhibits bacterial growth and allows the solution to remain viable for up to 28 days.",
   },
   {
-    q: "What does 'units' mean on an insulin syringe?",
-    a: "Insulin syringes are marked in 'units'  -  100 units equals 1ml. So 10 units = 0.1ml, and 1 unit = 0.01ml. When someone says 'draw 5 units,' they mean draw to the 5-unit mark on the syringe. The actual amount of peptide those 5 units contain depends on your reconstitution concentration  -  use the dosing calculator above to figure it out.",
-  },
-  {
-    q: "How do I know if my peptide has gone bad?",
-    a: "After reconstitution, the solution should be clear and colorless. Red flags include: cloudiness, discoloration (yellow, brown), visible particles or floaters, or an unusual smell. If you see any of these, discard the vial. Also discard if it's been more than 30 days since reconstitution, or if it was left unrefrigerated for an extended period. Lyophilized powder should be white to off-white  -  discoloration in the powder itself may indicate degradation.",
+    q: "How can I tell if a peptide has degraded?",
+    a: "After reconstitution, the solution should be clear and colorless. Warning signs include: cloudiness, discoloration (yellow, brown), visible particles or floaters, or an unusual odor. If any of these are observed, discard the vial. Also discard if it has been more than 30 days since reconstitution, or if the vial was left unrefrigerated for an extended period. Lyophilized powder should be white to off-white; discoloration may indicate degradation.",
   },
   {
     q: "What does 98%+ purity mean? Is 99% significantly better than 98%?",
-    a: "Purity is measured by HPLC and represents the percentage of the sample that is the actual target peptide vs. impurities (truncated sequences, degraded fragments, etc.). 98%+ is considered research-grade. The difference between 98% and 99% is marginal in practice  -  both are high quality. Be more concerned about the testing being legitimate (third-party lab, batch-specific CoA) than chasing the highest number, because some vendors fabricate purity claims.",
+    a: "Purity is measured by HPLC and represents the percentage of the sample that is the actual target peptide versus impurities (truncated sequences, degraded fragments, etc.). 98%+ is considered research-grade. The difference between 98% and 99% is marginal in practice. It is more important that the testing is legitimate (third-party lab, batch-specific CoA) than to chase the highest number, as some vendors fabricate purity claims.",
   },
   {
-    q: "Why do some peptides come in different sizes (5mg, 10mg, 20mg)?",
-    a: "Different vial sizes accommodate different dosing needs. A 5mg vial is great for trying a peptide or running a short cycle. 10mg vials are the standard for most protocols. 20mg vials offer better value per milligram for longer cycles or higher-dose protocols. The peptide itself is identical  -  only the amount per vial changes.",
+    q: "Why do some peptides come in different vial sizes (5mg, 10mg, 20mg)?",
+    a: "Different vial sizes accommodate different experimental requirements. Smaller vials (5mg) are suitable for preliminary studies or short-duration experiments. Standard 10mg vials are common for most research applications. Larger vials (20mg) offer better value per milligram for extended studies. The peptide compound is identical regardless of vial size.",
   },
   {
-    q: "What's the best injection site for SubQ peptides?",
-    a: "The most common SubQ injection sites are: the abdominal area (1-2 inches from the navel), the front of the thigh, and the back of the upper arm. Rotate sites with each injection to prevent tissue irritation or lipodystrophy. For recovery peptides like BPC-157, some researchers prefer injecting near the area of interest, though the peptide has systemic effects regardless of site.",
-  },
-  {
-    q: "Can I mix two different peptides in the same syringe?",
-    a: "Some peptides are commonly combined in a single injection (like CJC-1295 + Ipamorelin), and pre-made blends exist for this reason. However, mixing arbitrary peptides yourself carries risks of interaction or degradation. Stick to well-established combinations or pre-formulated blends. Never mix peptides from different vials into a single vial for long-term storage  -  only combine in the syringe immediately before use if needed.",
-  },
-  {
-    q: "How long does it take for peptides to show effects?",
-    a: "It varies significantly by peptide and the effect you're measuring. Recovery peptides (BPC-157, TB500)  -  noticeable improvements in 1-2 weeks. GH secretagogues (CJC/Ipamorelin)  -  improved sleep within days, body composition changes over 8-12 weeks. Metabolic peptides (MOTS-C)  -  energy/endurance improvements in 2-4 weeks. Cognitive peptides (Semax, Selank)  -  often within days to a week. Patience and consistency are key.",
-  },
-  {
-    q: "What's the difference between SubQ and IM injection?",
-    a: "SubQ (subcutaneous) is injection into the fat layer just beneath the skin  -  pinch the skin, insert at a 45\u00B0 angle, use a short needle (29-31 gauge). It's slower absorption but easier and less painful. IM (intramuscular) is injection directly into muscle tissue  -  longer needle, 90\u00B0 angle, faster absorption. Most peptides are administered SubQ. Some larger-volume peptides like TB500 can be given IM. When in doubt, SubQ is the standard.",
-  },
-  {
-    q: "Are research peptides legal?",
-    a: "In most jurisdictions, research peptides are legal to purchase and possess when intended for legitimate research purposes. They are sold as 'not for human consumption' and are not FDA-approved drugs. However, regulations vary by country and are subject to change. It is the buyer's responsibility to understand and comply with local laws. Some peptides (like certain SARMs) may be more heavily regulated in some regions.",
+    q: "Are research peptides legal to purchase?",
+    a: "In most jurisdictions, research peptides are legal to purchase and possess when intended for legitimate research purposes. They are sold as research chemicals not intended for human or animal consumption and are not FDA-approved drugs. However, regulations vary by country and are subject to change. It is the buyer's responsibility to understand and comply with all applicable local, state, and federal laws.",
   },
 ];
 
@@ -1373,7 +888,8 @@ function FAQ() {
         </h3>
       </div>
       <p className="text-sm text-text-secondary mb-6">
-        Answers to the most common questions we hear from researchers.
+        Common questions about research peptides, quality testing, and
+        laboratory handling.
       </p>
 
       <div className="divide-y divide-border border border-border rounded-lg">
@@ -1411,31 +927,27 @@ function FAQ() {
 const SECTION_META: Record<string, { title: string; desc: string }> = {
   "getting-started": {
     title: "Getting Started",
-    desc: "Articles, guides, and checklists to help you get started with confidence.",
+    desc: "Articles, guides, and checklists for laboratory research with peptides.",
   },
   tools: {
-    title: "Calculators & Tools",
-    desc: "Interactive calculators for reconstitution, dosing, and cycle planning.",
+    title: "Laboratory Tools",
+    desc: "Interactive calculator for preparing reference standard dilutions.",
   },
   reference: {
     title: "Reference Library",
-    desc: "Peptide data, published research, and terminology  -  all in one place.",
+    desc: "Peptide data, published research, and scientific terminology in one place.",
   },
   faq: {
     title: "FAQ & Help",
-    desc: "Common questions, storage tips, and everything else you need to know.",
+    desc: "Common questions, storage guidelines, and handling best practices.",
   },
 };
 
-/* Map subsection hash → parent tab */
+/* Map subsection hash to parent tab */
 const SUBSECTION_TO_TAB: Record<string, string> = {
   articles: "getting-started",
-  supplies: "getting-started",
   safety: "getting-started",
-  calculators: "tools",
-  "dosing-calculator": "tools",
-  "reconstitution-calculator": "tools",
-  "cycle-planner": "tools",
+  "dilution-calculator": "tools",
   "peptide-guide": "reference",
   research: "reference",
   glossary: "reference",
@@ -1443,35 +955,31 @@ const SUBSECTION_TO_TAB: Record<string, string> = {
   storage: "faq",
 };
 
-/* ─── Subsection definitions per tab ─── */
+/* Subsection definitions per tab */
 const TAB_SUBSECTIONS: Record<string, { id: string; label: string; desc: string; icon: typeof Calculator }[]> = {
   "getting-started": [
-    { id: "articles", label: "Articles & Guides", desc: "Research-backed guides from beginner basics to advanced protocols", icon: BookOpen },
-    { id: "supplies", label: "Supplies Guide", desc: "Everything you need beyond the peptide itself", icon: Syringe },
-    { id: "safety", label: "Safety Checklist", desc: "Step-by-step protocol for safe, sterile handling", icon: ShieldCheck },
+    { id: "articles", label: "Articles & Guides", desc: "Research-backed guides covering peptide science and laboratory techniques", icon: BookOpen },
+    { id: "safety", label: "Laboratory Safety Checklist", desc: "Step-by-step protocol for proper handling and preparation", icon: ShieldCheck },
   ],
   tools: [
-    { id: "dosing-calculator", label: "Dosing Calculator", desc: "Calculate how many units to draw for your desired dose", icon: Calculator },
-    { id: "reconstitution-calculator", label: "Reconstitution Calculator", desc: "Find your concentration after adding BAC water", icon: FlaskConical },
-    { id: "cycle-planner", label: "Cycle Planner", desc: "Generate an injection schedule for your protocol", icon: CalendarDays },
+    { id: "dilution-calculator", label: "Dilution Calculator", desc: "Calculate concentration when dissolving a reference standard into solvent", icon: FlaskConical },
   ],
   reference: [
-    { id: "peptide-guide", label: "Peptide Quick-Reference", desc: "Compare dosing, mechanisms, and stacking options at a glance", icon: FlaskConical },
-    { id: "research", label: "Published Research", desc: "Peer-reviewed studies organized by peptide with PubMed links", icon: FileText },
-    { id: "glossary", label: "Glossary", desc: "Peptide terminology explained in plain language", icon: BookOpen },
+    { id: "peptide-guide", label: "Peptide Quick-Reference", desc: "Compare mechanisms, research applications, and published study references", icon: FlaskConical },
+    { id: "research", label: "Published Research Library", desc: "Peer-reviewed studies organized by peptide with PubMed links", icon: FileText },
+    { id: "glossary", label: "Glossary", desc: "Peptide and analytical terminology explained clearly", icon: BookOpen },
   ],
   faq: [
-    { id: "faq-questions", label: "Frequently Asked Questions", desc: "Quick answers to the most common questions", icon: HelpCircle },
-    { id: "storage", label: "Storage & Handling", desc: "How to store and care for your peptides properly", icon: Thermometer },
+    { id: "faq-questions", label: "Frequently Asked Questions", desc: "Quick answers to the most common research questions", icon: HelpCircle },
+    { id: "storage", label: "Handling and Storage", desc: "How to properly store and care for research peptides in the laboratory", icon: Thermometer },
   ],
 };
 
 function SubsectionContent({ id }: { id: string }) {
   switch (id) {
     case "articles": return <ArticlesSection />;
-    case "supplies": return <SuppliesGuide />;
     case "safety": return <SafetyChecklist />;
-    case "dosing-calculator":
+    case "dilution-calculator":
       return (
         <div className="space-y-6">
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 flex items-start gap-3">
@@ -1481,14 +989,12 @@ function SubsectionContent({ id }: { id: string }) {
               <line x1="12" x2="12.01" y1="17" y2="17" />
             </svg>
             <p className="text-[11px] text-amber-800 leading-relaxed">
-              <strong>IMPORTANT:</strong> These calculators are provided exclusively for educational and research reference purposes. They do not constitute dosing recommendations, medical advice, or instructions for human use.
+              <strong>NOTE:</strong> This calculator is provided exclusively for laboratory reference purposes. It does not constitute recommendations for human or animal use.
             </p>
           </div>
-          <DosingCalculator />
+          <DilutionCalculator />
         </div>
       );
-    case "reconstitution-calculator": return <ReconstitutionCalculator />;
-    case "cycle-planner": return <CyclePlanner />;
     case "peptide-guide": return <PeptideGuide />;
     case "research": return <ResearchLibrary />;
     case "glossary": return <Glossary />;
@@ -1556,7 +1062,7 @@ export default function ResourcesPage() {
         return;
       }
 
-      // Hash matches a subsection — open the right tab + subsection
+      // Hash matches a subsection: open the right tab + subsection
       const parentTab = SUBSECTION_TO_TAB[hash];
       if (parentTab) {
         setActiveTab(parentTab);
@@ -1617,9 +1123,9 @@ export default function ResourcesPage() {
   return (
     <>
       <PageHeader
-        title="Learn & Resources"
-        description="Everything you need in one place  -  articles, calculators, reference guides, and safety checklists."
-        breadcrumbs={[{ label: "Learn & Resources" }]}
+        title="Research Resources"
+        description="Laboratory guides, reference tools, published research, and technical documentation for peptide research."
+        breadcrumbs={[{ label: "Research Resources" }]}
       />
 
       <ResourceNav active={activeTab} onChange={handleTabChange} />
@@ -1639,7 +1145,7 @@ export default function ResourcesPage() {
               <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
               <div>
                 <h3 className="font-heading font-bold text-primary text-sm mb-2">
-                  Research Use Only
+                  For Research Use Only
                 </h3>
                 <p className="text-xs text-text-secondary leading-relaxed">
                   All products sold by Purity Lab are intended strictly for
@@ -1660,15 +1166,13 @@ export default function ResourcesPage() {
                   Not Medical Advice
                 </h3>
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  Nothing on this website  -  including articles, calculators,
-                  dosing information, glossary entries, FAQs, and any other
-                  content  -  constitutes medical, pharmaceutical, or healthcare
+                  Nothing on this website, including articles, calculators,
+                  reference data, glossary entries, FAQs, and any other
+                  content, constitutes medical, pharmaceutical, or healthcare
                   advice. The information provided is compiled from published
                   research literature for educational purposes only. It should
                   not be used as a substitute for professional medical advice,
-                  diagnosis, or treatment. Always consult a qualified healthcare
-                  professional before beginning any research protocol or making
-                  health-related decisions.
+                  diagnosis, or treatment.
                 </p>
               </div>
             </div>
@@ -1685,9 +1189,9 @@ export default function ResourcesPage() {
                   damage arising from the use or misuse of any products or
                   information provided on this website. All information is
                   provided &ldquo;as is&rdquo; without warranty of any kind.
-                  Dosing references, protocol suggestions, and research data are
-                  drawn from third-party published studies and are not guaranteed
-                  to be accurate, complete, or current. Use of any product or
+                  Reference data and research citations are drawn from
+                  third-party published studies and are not guaranteed to be
+                  accurate, complete, or current. Use of any product or
                   information is entirely at your own risk.
                 </p>
               </div>
@@ -1706,7 +1210,7 @@ export default function ResourcesPage() {
                   efficacy. Regulatory status varies by jurisdiction. It is the
                   buyer&apos;s sole responsibility to understand and comply with
                   all applicable local, state, and federal laws regarding the
-                  purchase, possession, and use of research peptides in their
+                  purchase, possession, and use of research chemicals in their
                   region.
                 </p>
               </div>

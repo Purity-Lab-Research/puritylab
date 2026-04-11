@@ -129,11 +129,11 @@ export default function ResearchLibrary() {
       <div className="mt-6 bg-amber-500/5 border border-amber-500/10 rounded-lg p-4 flex items-start gap-2">
         <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
         <p className="text-xs text-text-secondary leading-relaxed">
-          These references are provided for educational purposes only. Inclusion
-          of a study does not imply endorsement of its conclusions. Many studies
-          were conducted in animal models and may not translate directly to human
-          outcomes. Always review the full text and consult qualified
-          professionals before drawing conclusions.
+          These references are provided for informational purposes only and are
+          intended for qualified laboratory researchers. Inclusion of a study
+          does not imply endorsement of its conclusions. Many referenced studies
+          were conducted in animal or in-vitro models. All products are sold
+          exclusively for in-vitro laboratory research use.
         </p>
       </div>
     </div>

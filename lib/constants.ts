@@ -1,7 +1,8 @@
 export const SITE_NAME = "Purity Lab";
 export const SITE_TAGLINE = "Research-Grade Peptides";
+export const LEGAL_ENTITY_NAME = "Purity Lab Research LLC";
 export const SITE_DESCRIPTION =
-  "Research-grade peptides with 99%+ purity. Third-party tested with full COA library. Subscription pricing, protocol-based stacks, and same-day processing.";
+  "Purity Lab Research LLC. Research-grade compounds with six-panel independent testing and published Certificates of Analysis.";
 
 export const CONTACT_EMAIL = "support@puritylabresearch.com";
 export const ADMIN_NOTIFICATION_EMAIL = "puritylabresearch@gmail.com";
@@ -37,8 +38,8 @@ export const CATEGORIES = [
 ];
 
 export const PROTOCOL_STACKS = [
-  { name: "Recovery", slug: "recovery", description: "Tissue repair, joint health, and accelerated healing" },
-  { name: "Fat Loss", slug: "fat-loss", description: "Metabolic support and body recomposition" },
-  { name: "Performance", slug: "performance", description: "Strength, endurance, and recovery optimization" },
-  { name: "Full Recomp", slug: "full-recomp", description: "Complete body recomposition protocol" },
+  { name: "Tissue Research Configuration", slug: "recovery", description: "Compounds commonly studied together in tissue biology research" },
+  { name: "Metabolic Research Configuration", slug: "fat-loss", description: "Compounds commonly studied together in metabolic signaling research" },
+  { name: "Growth Hormone Research Configuration", slug: "performance", description: "Compounds commonly studied together in growth hormone pathway research" },
+  { name: "Comprehensive Research Configuration", slug: "full-recomp", description: "A broad set of compounds referenced across multiple research domains" },
 ];

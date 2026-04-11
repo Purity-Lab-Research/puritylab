@@ -104,7 +104,7 @@ export default async function ArticlePage({ params }: PageProps) {
         {article.relatedProductSlugs.length > 0 && (
           <div className="bg-background border border-border rounded-xl p-6 my-10">
             <h3 className="font-heading text-base font-bold text-primary mb-3">
-              Products mentioned in this article
+              Related reference compounds
             </h3>
             <div className="flex flex-wrap gap-x-4 gap-y-1">
               {article.relatedProductSlugs.map((productSlug) => (
@@ -127,23 +127,23 @@ export default async function ArticlePage({ params }: PageProps) {
         <ScrollReveal>
           <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-8 text-center mt-12">
             <h3 className="font-heading text-xl font-bold text-primary mb-2">
-              Ready to start?
+              Browse Research Compounds
             </h3>
             <p className="text-sm text-text-secondary mb-4">
-              Take our 60-second quiz to find the right protocol for your goals.
+              View our catalog of high-purity reference standards for laboratory research.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
-                href="/quiz"
+                href="/shop"
                 className="inline-block bg-primary text-white rounded-lg px-6 py-2.5 font-semibold text-sm hover:bg-primary-hover transition-colors"
               >
-                Find My Protocol
+                View All Products
               </Link>
               <Link
-                href="/protocols"
+                href="/resources"
                 className="inline-block text-sm text-secondary font-semibold hover:underline"
               >
-                Or explore all protocols
+                Continue reading research articles
               </Link>
             </div>
           </div>

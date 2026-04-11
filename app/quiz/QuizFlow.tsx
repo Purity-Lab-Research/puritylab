@@ -4,8 +4,14 @@ import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import type { Protocol } from "@/lib/types";
 
-/* ─── Types ─── */
-type Goal = "recovery" | "fat_loss" | "performance" | "multiple" | null;
+/* ---- Types ---- */
+type ResearchArea =
+  | "tissue_biology"
+  | "metabolic_signaling"
+  | "growth_hormone"
+  | "neuropeptide"
+  | "cellular_longevity"
+  | null;
 type Experience = "first_time" | "some" | "advanced" | null;
 type Budget = "under_150" | "150_300" | "300_plus" | null;
 
@@ -13,45 +19,50 @@ interface QuizFlowProps {
   protocols: Protocol[];
 }
 
-/* ─── Step data ─── */
-const GOALS = [
+/* ---- Step data ---- */
+const RESEARCH_AREAS = [
   {
-    value: "recovery" as const,
-    title: "Recover from injury",
-    subtitle: "Healing, joint repair, post-surgery recovery",
+    value: "tissue_biology" as const,
+    title: "Tissue biology",
+    subtitle: "Connective tissue remodeling, wound closure models, extracellular matrix studies",
   },
   {
-    value: "fat_loss" as const,
-    title: "Manage weight",
-    subtitle: "Body composition, metabolic support, GLP-1 research",
+    value: "metabolic_signaling" as const,
+    title: "Metabolic signaling",
+    subtitle: "Mitochondrial bioenergetics, lipid metabolism pathways, AMPK activation",
   },
   {
-    value: "performance" as const,
-    title: "Build muscle & performance",
-    subtitle: "Growth hormone, lean mass, endurance",
+    value: "growth_hormone" as const,
+    title: "Growth hormone pathways",
+    subtitle: "GH secretagogue receptor signaling, IGF-1 axis, GHRH analogs",
   },
   {
-    value: "multiple" as const,
-    title: "Multiple goals",
-    subtitle: "I want a comprehensive protocol",
+    value: "neuropeptide" as const,
+    title: "Neuropeptide research",
+    subtitle: "CNS peptide signaling, neurotrophic factors, receptor binding assays",
+  },
+  {
+    value: "cellular_longevity" as const,
+    title: "Cellular longevity",
+    subtitle: "Telomere biology, senescence markers, oxidative stress resistance",
   },
 ];
 
 const EXPERIENCES = [
   {
     value: "first_time" as const,
-    title: "First time",
-    subtitle: "Never used research peptides before",
+    title: "New to peptide research",
+    subtitle: "Setting up initial studies with research peptides",
   },
   {
     value: "some" as const,
     title: "Some experience",
-    subtitle: "I've run a cycle or two",
+    subtitle: "Have completed one or two research projects with peptides",
   },
   {
     value: "advanced" as const,
-    title: "Advanced",
-    subtitle: "I'm familiar with protocols, dosing, and reconstitution",
+    title: "Experienced researcher",
+    subtitle: "Familiar with reconstitution, storage protocols, and assay design",
   },
 ];
 
@@ -59,45 +70,49 @@ const BUDGETS = [
   {
     value: "under_150" as const,
     title: "Under $150/month",
-    subtitle: "Looking for an effective entry point",
+    subtitle: "Starting with a focused reference compound set",
   },
   {
     value: "150_300" as const,
-    title: "$150 – $300/month",
-    subtitle: "Ready to invest in a full protocol",
+    title: "$150 to $300/month",
+    subtitle: "Building a broader compound library",
   },
   {
     value: "300_plus" as const,
     title: "$300+/month",
-    subtitle: "I want the most comprehensive stack available",
+    subtitle: "Comprehensive compound panel for multi-pathway studies",
   },
 ];
 
 const FOCUS_AREAS = [
-  "Joint & tendon recovery",
-  "Post-surgery healing",
-  "Stubborn belly fat",
-  "Overall body composition",
-  "Sleep & recovery",
-  "Energy & endurance",
+  "In vitro cell culture",
+  "Receptor binding assays",
+  "Signal transduction mapping",
+  "Protein folding studies",
+  "Bioavailability profiling",
+  "Comparative analog research",
 ];
 
-/* ─── Recommendation map ─── */
-function getRecommendedSlug(goal: Goal, budget: Budget): string {
-  if (goal === "recovery") return "recovery";
-  if (goal === "fat_loss") {
+/* ---- Recommendation map ---- */
+function getRecommendedSlug(area: ResearchArea, budget: Budget): string {
+  if (area === "tissue_biology") return "recovery";
+  if (area === "metabolic_signaling") {
     if (budget === "under_150") return "performance";
     return "fat-loss";
   }
-  if (goal === "performance") return "performance";
-  // multiple goals
+  if (area === "growth_hormone") return "performance";
+  if (area === "neuropeptide") {
+    if (budget === "under_150") return "performance";
+    return "fat-loss";
+  }
+  // cellular_longevity or fallback
   if (budget === "under_150") return "performance";
   if (budget === "150_300") return "fat-loss";
   return "full-recomp";
 }
 
 function getReasonText(
-  goal: Goal,
+  area: ResearchArea,
   budget: Budget,
   focuses: Set<string>,
   protocol: Protocol
@@ -112,32 +127,35 @@ function getReasonText(
     budget === "under_150"
       ? "under $150/month"
       : budget === "150_300"
-        ? "$150–$300/month"
+        ? "$150 to $300/month"
         : "$300+/month";
 
-  if (goal === "recovery") {
-    return `Based on your focus on injury recovery${focusStr ? ` - specifically ${focusStr}` : ""} - the ${protocol.name} gives you the essential BPC-157 and TB500 combination that athletes rely on for soft tissue healing. At $${protocol.subscription_price ?? "TBD"}/month with a subscription, it fits well within your ${budgetLabel} budget.`;
+  if (area === "tissue_biology") {
+    return `Based on your interest in tissue biology${focusStr ? `, particularly ${focusStr}` : ""}, the ${protocol.name} contains compounds frequently cited in published literature on connective tissue remodeling and extracellular matrix studies. At $${protocol.subscription_price ?? "TBD"}/month with a subscription, it aligns with your ${budgetLabel} budget.`;
   }
-  if (goal === "fat_loss") {
+  if (area === "metabolic_signaling") {
     if (protocol.slug === "performance") {
-      return `For fat loss on a budget ${budgetLabel}, the ${protocol.name} is the smartest entry point. CJC-1295/Ipamorelin supports growth hormone release which aids both body composition and metabolic function${focusStr ? `, making it a strong match for your interest in ${focusStr}` : ""}.`;
+      return `For metabolic signaling research at a ${budgetLabel} budget, the ${protocol.name} provides a focused starting point. These compounds appear regularly in peer-reviewed studies on GH secretagogue receptor activity and downstream metabolic pathways${focusStr ? `, making them relevant to ${focusStr}` : ""}.`;
     }
-    return `Based on your fat loss goals${focusStr ? ` and focus on ${focusStr}` : ""}, the ${protocol.name} combines MOTS-C and AOD 9604 - two peptides specifically studied for metabolic optimization and targeted fat reduction. At $${protocol.subscription_price ?? "TBD"}/month, it fits your ${budgetLabel} budget.`;
+    return `Based on your focus on metabolic signaling${focusStr ? ` and interest in ${focusStr}` : ""}, the ${protocol.name} includes compounds commonly referenced in published literature on mitochondrial bioenergetics and lipid metabolism pathways. At $${protocol.subscription_price ?? "TBD"}/month, it fits your ${budgetLabel} budget.`;
   }
-  if (goal === "performance") {
-    return `For muscle and performance goals${focusStr ? ` with a focus on ${focusStr}` : ""}, the ${protocol.name} delivers clean growth hormone support through CJC-1295/Ipamorelin without cortisol or prolactin spikes. At $${protocol.subscription_price ?? "TBD"}/month, it's an efficient stack for your ${budgetLabel} budget.`;
+  if (area === "growth_hormone") {
+    return `For growth hormone pathway research${focusStr ? ` with a focus on ${focusStr}` : ""}, the ${protocol.name} includes GH secretagogue analogs widely referenced in published studies on the GH/IGF-1 axis. At $${protocol.subscription_price ?? "TBD"}/month, it provides an efficient compound set for your ${budgetLabel} budget.`;
   }
-  // multiple
+  if (area === "neuropeptide") {
+    return `Based on your interest in neuropeptide research${focusStr ? `, particularly ${focusStr}` : ""}, the ${protocol.name} includes compounds frequently cited in CNS peptide signaling literature. At $${protocol.subscription_price ?? "TBD"}/month, it fits within your ${budgetLabel} budget.`;
+  }
+  // cellular_longevity
   if (protocol.slug === "full-recomp") {
-    return `With multiple goals and a ${budgetLabel} budget, the ${protocol.name} is the all-in-one answer. It covers recovery (BPC-157 + TB500), metabolic support (MOTS-C), and growth hormone optimization (CJC/Ipa)${focusStr ? ` - addressing your interest in ${focusStr}` : ""}. Everything you need in one monthly shipment.`;
+    return `For cellular longevity research at a ${budgetLabel} budget, the ${protocol.name} provides the broadest compound panel. These peptides appear across published studies on senescence markers, oxidative stress resistance, and mitochondrial function${focusStr ? `, directly relevant to ${focusStr}` : ""}. A comprehensive set for multi-pathway investigation.`;
   }
   if (protocol.slug === "fat-loss") {
-    return `For multiple goals at a ${budgetLabel} budget, the ${protocol.name} offers the widest coverage. MOTS-C handles metabolic function, AOD 9604 targets fat, and CJC/Ipa supports growth hormone${focusStr ? ` - a strong match for ${focusStr}` : ""}.`;
+    return `For cellular longevity studies at a ${budgetLabel} budget, the ${protocol.name} offers broad pathway coverage. The included compounds are commonly referenced in literature on mitochondrial bioenergetics and cellular stress response${focusStr ? `, relevant to ${focusStr}` : ""}.`;
   }
-  return `The ${protocol.name} is the best multi-goal value at your ${budgetLabel} budget. Growth hormone support through CJC/Ipa aids recovery, body composition, and performance simultaneously${focusStr ? ` - directly relevant to your interest in ${focusStr}` : ""}.`;
+  return `The ${protocol.name} is a well-rounded compound set for your ${budgetLabel} budget. These peptides are referenced across multiple research domains including cellular signaling and metabolic pathways${focusStr ? `, directly relevant to ${focusStr}` : ""}.`;
 }
 
-/* ─── Icons ─── */
+/* ---- Icons ---- */
 function CheckIcon() {
   return (
     <svg
@@ -192,10 +210,10 @@ function CheckmarkSmall() {
   );
 }
 
-/* ─── Main Component ─── */
+/* ---- Main Component ---- */
 export default function QuizFlow({ protocols }: QuizFlowProps) {
   const [step, setStep] = useState(1);
-  const [goal, setGoal] = useState<Goal>(null);
+  const [area, setArea] = useState<ResearchArea>(null);
   const [experience, setExperience] = useState<Experience>(null);
   const [budget, setBudget] = useState<Budget>(null);
   const [focuses, setFocuses] = useState<Set<string>>(new Set());
@@ -205,15 +223,15 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
   const progress = step <= totalSteps ? ((step - 1) / totalSteps) * 100 : 100;
 
   const recommended = useMemo(() => {
-    if (!goal || !budget) return null;
-    const slug = getRecommendedSlug(goal, budget);
+    if (!area || !budget) return null;
+    const slug = getRecommendedSlug(area, budget);
     return protocols.find((p) => p.slug === slug) ?? protocols[0] ?? null;
-  }, [goal, budget, protocols]);
+  }, [area, budget, protocols]);
 
   const reasonText = useMemo(() => {
-    if (!recommended || !goal || !budget) return "";
-    return getReasonText(goal, budget, focuses, recommended);
-  }, [recommended, goal, budget, focuses]);
+    if (!recommended || !area || !budget) return "";
+    return getReasonText(area, budget, focuses, recommended);
+  }, [recommended, area, budget, focuses]);
 
   const advanceStep = useCallback(
     (nextStep: number) => {
@@ -230,17 +248,17 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
     if (step > 1) advanceStep(step - 1);
   }, [step, advanceStep]);
 
-  function toggleFocus(area: string) {
+  function toggleFocus(focusArea: string) {
     setFocuses((prev) => {
       const next = new Set(prev);
-      if (next.has(area)) next.delete(area);
-      else next.add(area);
+      if (next.has(focusArea)) next.delete(focusArea);
+      else next.add(focusArea);
       return next;
     });
   }
 
-  function handleGoal(g: Goal) {
-    setGoal(g);
+  function handleArea(a: ResearchArea) {
+    setArea(a);
     setTimeout(() => advanceStep(2), 300);
   }
 
@@ -295,22 +313,23 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
               : "opacity-100 translate-y-0"
           }`}
         >
-          {/* ─── Step 1: Goal ─── */}
+          {/* ---- Step 1: Research Area ---- */}
           {step === 1 && (
             <div>
               <h1 className="font-heading text-3xl font-bold text-primary mb-2">
-                What&apos;s your primary goal?
+                What area of research are you focused on?
               </h1>
               <p className="text-text-secondary mb-8">
-                We&apos;ll recommend a protocol based on your answers.
+                We will suggest reference compounds commonly cited in published
+                literature for your field of study.
               </p>
               <div className="space-y-3">
-                {GOALS.map((g) => (
+                {RESEARCH_AREAS.map((r) => (
                   <button
-                    key={g.value}
-                    onClick={() => handleGoal(g.value)}
+                    key={r.value}
+                    onClick={() => handleArea(r.value)}
                     className={`w-full text-left border rounded-xl p-5 transition-all ${
-                      goal === g.value
+                      area === r.value
                         ? "border-secondary bg-secondary/5"
                         : "border-border hover:border-secondary hover:bg-secondary/5"
                     }`}
@@ -318,13 +337,13 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-semibold text-text-primary">
-                          {g.title}
+                          {r.title}
                         </p>
                         <p className="text-xs text-text-secondary mt-0.5">
-                          {g.subtitle}
+                          {r.subtitle}
                         </p>
                       </div>
-                      {goal === g.value && <CheckIcon />}
+                      {area === r.value && <CheckIcon />}
                     </div>
                   </button>
                 ))}
@@ -332,7 +351,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
             </div>
           )}
 
-          {/* ─── Step 2: Experience ─── */}
+          {/* ---- Step 2: Experience ---- */}
           {step === 2 && (
             <div>
               <button
@@ -343,10 +362,10 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 Back
               </button>
               <h1 className="font-heading text-3xl font-bold text-primary mb-2">
-                What&apos;s your experience with peptides?
+                What is your experience with research peptides?
               </h1>
               <p className="text-text-secondary mb-8">
-                This helps us calibrate the right starting point.
+                This helps us suggest an appropriate compound set for your lab.
               </p>
               <div className="space-y-3">
                 {EXPERIENCES.map((e) => (
@@ -376,7 +395,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
             </div>
           )}
 
-          {/* ─── Step 3: Budget ─── */}
+          {/* ---- Step 3: Budget ---- */}
           {step === 3 && (
             <div>
               <button
@@ -387,10 +406,10 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 Back
               </button>
               <h1 className="font-heading text-3xl font-bold text-primary mb-2">
-                What&apos;s your monthly budget?
+                What is your monthly research budget?
               </h1>
               <p className="text-text-secondary mb-8">
-                We&apos;ll match you with a protocol that fits.
+                We will match you with a compound set that fits your lab budget.
               </p>
               <div className="space-y-3">
                 {BUDGETS.map((b) => (
@@ -420,7 +439,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
             </div>
           )}
 
-          {/* ─── Step 4: Focus Areas ─── */}
+          {/* ---- Step 4: Focus Areas ---- */}
           {step === 4 && (
             <div>
               <button
@@ -431,24 +450,24 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 Back
               </button>
               <h1 className="font-heading text-3xl font-bold text-primary mb-2">
-                Any specific focus areas?
+                Any specific methodologies of interest?
               </h1>
               <p className="text-text-secondary mb-8">
-                Select all that apply. This helps us fine-tune your
-                recommendation.
+                Select all that apply. This helps us refine the compound
+                suggestion for your research.
               </p>
               <div className="flex flex-wrap gap-2.5 mb-10">
-                {FOCUS_AREAS.map((area) => (
+                {FOCUS_AREAS.map((focusArea) => (
                   <button
-                    key={area}
-                    onClick={() => toggleFocus(area)}
+                    key={focusArea}
+                    onClick={() => toggleFocus(focusArea)}
                     className={`border rounded-full px-5 py-2.5 text-sm transition-all ${
-                      focuses.has(area)
+                      focuses.has(focusArea)
                         ? "bg-secondary text-white border-secondary"
                         : "border-border text-text-primary hover:border-secondary"
                     }`}
                   >
-                    {area}
+                    {focusArea}
                   </button>
                 ))}
               </div>
@@ -457,19 +476,20 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 disabled={focuses.size === 0}
                 className="bg-primary text-white rounded-lg px-8 py-3 font-semibold hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                See My Protocol
+                View Suggested Compounds
               </button>
             </div>
           )}
 
-          {/* ─── Results ─── */}
+          {/* ---- Results ---- */}
           {step === 5 && recommended && (
             <div className="text-center">
               <h1 className="font-heading text-3xl font-bold text-primary mb-2">
-                Your Recommended Protocol
+                Suggested Compound Set
               </h1>
               <p className="text-text-secondary mb-10">
-                Based on your goals and experience level
+                Based on your research interest, these compounds are commonly
+                referenced in published literature on this topic.
               </p>
 
               {/* Protocol card */}
@@ -518,7 +538,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                         ))}
                     </ul>
                     <p className="text-xs text-text-secondary mt-3">
-                      Recommended cycle: {recommended.cycle_length}
+                      For laboratory research use only. Not for human consumption.
                     </p>
                   </div>
                 </div>
@@ -539,10 +559,10 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 </div>
               </div>
 
-              {/* Why we recommend this */}
+              {/* Why this compound set */}
               <div className="max-w-md mx-auto mt-8 bg-surface border border-border rounded-xl p-6 text-left">
                 <h4 className="font-heading text-sm font-bold text-primary mb-2">
-                  Why we recommend this
+                  Why this compound set
                 </h4>
                 <p className="text-sm text-text-secondary leading-relaxed">
                   {reasonText}
@@ -555,13 +575,13 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                   href="#"
                   className="flex-1 bg-primary text-white text-center rounded-lg py-3 font-semibold hover:bg-primary-hover transition-colors"
                 >
-                  Subscribe to This Protocol
+                  Order This Compound Set
                 </Link>
                 <Link
                   href="/protocols/build"
                   className="flex-1 border border-border text-primary text-center rounded-lg py-3 font-medium hover:border-primary transition-colors"
                 >
-                  Customize This Stack
+                  Customize Compounds
                 </Link>
               </div>
 
@@ -569,7 +589,7 @@ export default function QuizFlow({ protocols }: QuizFlowProps) {
                 href="/protocols"
                 className="inline-block mt-6 text-sm text-text-secondary hover:text-secondary transition-colors"
               >
-                Or explore all protocols
+                Or browse all compound sets
               </Link>
             </div>
           )}

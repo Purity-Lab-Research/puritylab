@@ -5,25 +5,25 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const steps = [
   {
     number: "1",
-    title: "Pick Your Goal",
+    title: "Browse Our Catalog",
     description:
-      "Recovery, fat loss, performance, or longevity. Choose a pre-built protocol or build your own custom stack.",
-    cta: { label: "Take the quiz", href: "/quiz" },
+      "Select from 40+ research-grade compounds organized by category.",
+    cta: { label: "View catalog", href: "/shop" },
     tint: "bg-[#F0FDF4]",
   },
   {
     number: "2",
-    title: "Subscribe or Buy Once",
+    title: "Order with Confidence",
     description:
-      "Subscribe every 4 weeks and save 15%. Or buy once with no commitment. Pause or cancel anytime.",
-    cta: { label: "See pricing", href: "/protocols" },
+      "Every product ships with batch-specific documentation and verified purity data.",
+    cta: { label: "See products", href: "/shop" },
     tint: "bg-[#EFF6FF]",
   },
   {
     number: "3",
-    title: "Track Your Purity",
+    title: "Verify Your Product",
     description:
-      "Every vial ships with a batch number. Look it up in our CoA Library and see the exact purity of what you received.",
+      "Look up your batch number in our CoA library to review full test results.",
     cta: { label: "Browse CoA Library", href: "/coa" },
     tint: "bg-[#F5F3FF]",
   },
@@ -37,7 +37,7 @@ export default function HowItWorks() {
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
-            From Goal to Doorstep in 3 Steps
+            How It Works
           </h2>
         </div>
 

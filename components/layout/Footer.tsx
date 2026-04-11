@@ -11,16 +11,16 @@ import {
 import EditableText from "@/components/admin/EditableText";
 
 const protocolLinks = [
-  { label: "Recovery", href: "/protocols/recovery" },
-  { label: "Fat Loss", href: "/protocols/fat-loss" },
-  { label: "Performance", href: "/protocols/performance" },
-  { label: "Full Recomp", href: "/protocols/full-recomp" },
+  { label: "Tissue Research", href: "/protocols/recovery" },
+  { label: "Metabolic Research", href: "/protocols/fat-loss" },
+  { label: "GH Research", href: "/protocols/performance" },
+  { label: "Comprehensive", href: "/protocols/full-recomp" },
   { label: "Build Your Own", href: "/protocols/build" },
 ];
 
 const learnLinks = [
-  { label: "Beginner's Guide", href: "/learn/getting-started" },
-  { label: "Dosing & Reconstitution", href: "/learn/how-to-reconstitute" },
+  { label: "Peptide Chemistry", href: "/learn/getting-started" },
+  { label: "Laboratory Preparation", href: "/learn/how-to-reconstitute" },
   { label: "CoA Library", href: "/coa" },
   { label: "How We Test", href: "/how-we-test" },
   { label: "FAQ", href: "/faq" },
@@ -30,7 +30,7 @@ const learnLinks = [
 const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Affiliate Program", href: "/affiliate" },
+  { label: "Referral Program", href: "/affiliate" },
   { label: "Terms", href: "/policies/terms" },
   { label: "Privacy", href: "/policies/privacy" },
   { label: "Shipping", href: "/policies/shipping" },
@@ -127,7 +127,7 @@ export default function Footer() {
             {/* Protocols */}
             <div>
               <h3 className="mb-4 text-sm font-semibold tracking-wider text-[#111111] uppercase">
-                Protocols
+                Research Configurations
               </h3>
               <ul className="space-y-2.5">
                 {protocolLinks.map((link) => (
@@ -189,11 +189,11 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 sm:flex-row sm:py-5 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-4 text-center">
             <p className="text-[10px] sm:text-xs text-[#6B7280]">
-              &copy; 2026 Purity Lab. All rights reserved.
+              &copy; 2026 Purity Lab Research LLC. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#F0F0F0]">|</span>
             <p className="text-[10px] sm:text-xs text-[#6B7280] font-medium">
-              For Research Use Only. Not for human consumption. You must be 21 or older to purchase. Purity Lab assumes no liability for product use or misuse.
+              For in-vitro laboratory research use only. Not for human consumption. You must be 21 or older to purchase. Purity Lab Research LLC assumes no liability for product use or misuse.
             </p>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">

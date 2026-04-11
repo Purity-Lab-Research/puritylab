@@ -18,17 +18,18 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 
 const GOAL_FILTERS = [
   { value: "all", label: "All" },
-  { value: "recovery", label: "Recovery" },
-  { value: "fat_loss", label: "Weight Management" },
-  { value: "performance", label: "Performance" },
-  { value: "supplies", label: "Supplies" },
+  { value: "tissue_research", label: "Tissue Research" },
+  { value: "metabolic_research", label: "Metabolic Research" },
+  { value: "gh_research", label: "Growth Hormone Research" },
+  { value: "general_research", label: "General Research" },
+  { value: "laboratory_supplies", label: "Laboratory Supplies" },
 ];
 
 const TYPE_FILTERS = [
   { value: "all", label: "All" },
   { value: "single", label: "Single Peptides" },
   { value: "blend", label: "Blends" },
-  { value: "supplies", label: "Supplies" },
+  { value: "laboratory_supplies", label: "Laboratory Supplies" },
   { value: "exclusive", label: "Subscriber Exclusives" },
 ];
 
@@ -102,7 +103,7 @@ export default function ShopContent({ products }: ShopContentProps) {
         (p) =>
           !p.name.toLowerCase().includes("blend") &&
           !p.name.toLowerCase().includes("wolverine") &&
-          p.goal_category !== "supplies"
+          p.goal_category !== "laboratory_supplies"
       );
     } else if (typeFilter === "blend") {
       filtered = filtered.filter(
@@ -110,8 +111,8 @@ export default function ShopContent({ products }: ShopContentProps) {
           p.name.toLowerCase().includes("blend") ||
           p.name.toLowerCase().includes("wolverine")
       );
-    } else if (typeFilter === "supplies") {
-      filtered = filtered.filter((p) => p.goal_category === "supplies");
+    } else if (typeFilter === "laboratory_supplies") {
+      filtered = filtered.filter((p) => p.goal_category === "laboratory_supplies");
     } else if (typeFilter === "exclusive") {
       filtered = filtered.filter((p) => p.subscription_only);
     }
@@ -153,7 +154,7 @@ export default function ShopContent({ products }: ShopContentProps) {
         {/* Goal */}
         <div className="mb-6">
           <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider mb-3">
-            Goal
+            Category
           </h3>
           <div className="flex flex-wrap gap-2">
             {GOAL_FILTERS.map((f) => (

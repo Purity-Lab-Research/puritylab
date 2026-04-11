@@ -4,9 +4,9 @@ import type { Protocol } from "@/lib/types";
 import ProtocolsPageContent from "./ProtocolsPageContent";
 
 export const metadata: Metadata = {
-  title: "Protocols",
+  title: "Research Configurations",
   description:
-    "Complete peptide stacks designed for specific goals. Recovery, fat loss, performance, and full recomp protocols with 10% subscription savings.",
+    "Pre-configured compound sets commonly studied together in published peer-reviewed research. Every product third-party tested with full CoA.",
 };
 
 export const revalidate = 60;

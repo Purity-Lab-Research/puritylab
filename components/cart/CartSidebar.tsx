@@ -24,9 +24,9 @@ function itemDisplayPrice(item: { purchaseType: string; subscriptionPrice: numbe
 }
 
 const ADD_ON_SUGGESTIONS: Record<string, string[]> = {
-  recovery: ["ghk-cu-5mg", "nad-plus-500mg"],
-  fat_loss: ["5-amino-1mq-50mg", "cjc-ipa-blend-5-5mg"],
-  performance: ["mots-c-10mg", "sermorelin-5mg"],
+  tissue_research: ["ghk-cu-5mg", "nad-plus-500mg"],
+  metabolic_research: ["5-amino-1mq-50mg", "cjc-ipa-blend-5-5mg"],
+  gh_research: ["mots-c-10mg", "sermorelin-5mg"],
 };
 
 const SUPPLY_SLUGS = ["bac-water-10ml", "syringes"];
@@ -514,7 +514,7 @@ function CartAddOns() {
 
   return (
     <div className="border-t border-border pt-3 pb-1">
-      <p className="text-xs font-semibold text-primary mb-2">Complete your protocol</p>
+      <p className="text-xs font-semibold text-primary mb-2">Related compounds</p>
       <div className="space-y-2">
         {suggestions.slice(0, 3).map((product) => {
           const subPrice = getSubscriptionPrice(product.price, subFreq);

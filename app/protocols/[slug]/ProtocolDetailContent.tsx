@@ -95,77 +95,77 @@ interface ProtocolMeta {
 const PROTOCOL_META: Record<string, ProtocolMeta> = {
   recovery: {
     bestFor: [
-      "Soft tissue repair and joint recovery",
-      "Post-training recovery support",
-      "Tendon and ligament health",
-      "Reducing inflammation and downtime",
+      "Soft tissue repair research",
+      "Tendon and ligament studies",
+      "Inflammation pathway investigation",
+      "Angiogenesis and cell migration research",
     ],
     howItWorks: [
-      "BPC-157 is a body protection compound studied for its ability to accelerate healing in tendons, ligaments, muscles, and the gut lining. Research shows it promotes angiogenesis (new blood vessel formation) at injury sites.",
-      "TB-500 (Thymosin Beta-4) supports tissue repair by promoting cell migration and reducing inflammation. It has been studied for improving flexibility and range of motion.",
-      "The Wolverine Blend combines both peptides in a single vial for convenience. Together, they provide comprehensive recovery support from two complementary mechanisms.",
+      "BPC-157 is a body protection compound studied for its role in tissue repair mechanisms, including angiogenesis (new blood vessel formation) at targeted sites. Published research documents its effects on tendons, ligaments, and mucosal tissue.",
+      "TB-500 (Thymosin Beta-4) has been studied for its role in promoting cell migration and modulating inflammatory pathways. Research literature documents its effects on tissue flexibility and structural repair.",
+      "The Wolverine Blend combines both compounds in a single vial for streamlined research protocols. Together, they are commonly studied for complementary tissue repair mechanisms.",
     ],
     highlights: [
-      { label: "Cycle Length", value: "4 to 6 weeks" },
-      { label: "Goal", value: "Tissue repair and recovery" },
-      { label: "Experience Level", value: "Beginner friendly" },
+      { label: "Research Focus", value: "Tissue repair mechanisms" },
+      { label: "Compounds", value: "3 included" },
+      { label: "Purity", value: "98%+ HPLC verified" },
       { label: "Shipping", value: "Free with subscription" },
     ],
   },
   "fat-loss": {
     bestFor: [
-      "Metabolic support and fat reduction",
-      "Body recomposition research",
-      "Preserving lean tissue during a cut",
-      "Improving energy utilization and endurance",
+      "Metabolic pathway research",
+      "Body composition studies",
+      "Energy utilization mechanisms",
+      "AMPK activation and lipid metabolism research",
     ],
     howItWorks: [
-      "MOTS-C is a mitochondrial-derived peptide that activates AMPK, a key enzyme in cellular energy regulation. Research has shown it improves metabolic flexibility, enhances exercise performance, and supports healthy body composition.",
-      "AOD 9604 is a modified fragment (amino acids 177-191) of human growth hormone. It specifically targets fat metabolism without affecting blood sugar levels, insulin sensitivity, or IGF-1. This makes it a focused tool for fat reduction research.",
-      "The CJC-1295/Ipamorelin Blend provides sustained growth hormone release through two complementary pathways. Elevated GH supports lean tissue preservation, which is critical during periods of caloric restriction.",
+      "MOTS-C is a mitochondrial-derived peptide that activates AMPK, a key enzyme in cellular energy regulation. Published studies document its effects on metabolic flexibility and energy utilization pathways.",
+      "AOD 9604 is a modified fragment (amino acids 177-191) of human growth hormone. It has been studied for its targeted effects on lipid metabolism without impacting blood sugar levels, insulin sensitivity, or IGF-1.",
+      "The CJC-1295/Ipamorelin Blend is commonly studied alongside metabolic compounds in published literature. Research documents its role in sustained growth hormone release through two complementary pathways.",
     ],
     highlights: [
-      { label: "Cycle Length", value: "8 to 12 weeks" },
-      { label: "Goal", value: "Fat loss and recomposition" },
-      { label: "Experience Level", value: "Intermediate" },
+      { label: "Research Focus", value: "Metabolic pathways" },
+      { label: "Compounds", value: "3 included" },
+      { label: "Purity", value: "98%+ HPLC verified" },
       { label: "Shipping", value: "Free with subscription" },
     ],
   },
   performance: {
     bestFor: [
-      "Optimizing natural growth hormone output",
-      "Improving recovery between training sessions",
-      "Supporting lean muscle development",
-      "Enhancing sleep quality and deep rest",
+      "Growth hormone releasing pathway research",
+      "GH secretagogue mechanism studies",
+      "GHRH analog characterization",
+      "Ghrelin receptor agonist research",
     ],
     howItWorks: [
       "CJC-1295 is a GHRH (growth hormone releasing hormone) analog that extends the half-life of endogenous GH pulses. Combined with Ipamorelin, a selective ghrelin receptor agonist, it produces sustained GH elevation without the cortisol or prolactin spikes seen with other secretagogues.",
-      "The standalone Ipamorelin vial provides additional dosing flexibility. Ipamorelin is one of the cleanest GH-releasing peptides available, with a strong safety profile in research settings.",
-      "Optimized growth hormone levels have been linked in published research to faster recovery, improved sleep architecture, better body composition, and support for connective tissue health.",
+      "The standalone Ipamorelin vial provides additional concentration flexibility. Ipamorelin is one of the most selective GH-releasing peptides available, with a well-documented profile in research literature.",
+      "Growth hormone pathway modulation has been linked in published research to connective tissue mechanisms, sleep architecture, and body composition changes in preclinical models.",
     ],
     highlights: [
-      { label: "Cycle Length", value: "8 to 12 weeks" },
-      { label: "Goal", value: "Strength and recovery" },
-      { label: "Experience Level", value: "Beginner friendly" },
+      { label: "Research Focus", value: "GH pathway modulation" },
+      { label: "Compounds", value: "2 included" },
+      { label: "Purity", value: "98%+ HPLC verified" },
       { label: "Shipping", value: "Free with subscription" },
     ],
   },
   "full-recomp": {
     bestFor: [
-      "Comprehensive body recomposition",
-      "Simultaneous recovery and performance goals",
-      "Researchers wanting a complete all-in-one stack",
-      "Maximizing results across every category",
+      "Multi-pathway research configurations",
+      "Tissue repair and metabolic studies combined",
+      "Comprehensive peptide interaction research",
+      "Researchers investigating multiple compound classes",
     ],
     howItWorks: [
-      "BPC-157 and TB-500 form the recovery foundation. BPC-157 accelerates soft tissue healing while TB-500 promotes flexibility and reduces systemic inflammation. Together they address joint health and tissue repair.",
-      "CJC-1295/Ipamorelin provides sustained growth hormone optimization. This supports lean mass preservation, improved recovery between sessions, and better sleep quality throughout the cycle.",
-      "MOTS-C adds a metabolic layer by activating AMPK pathways. Research has demonstrated improvements in energy utilization, endurance capacity, and body composition when MOTS-C is combined with consistent training.",
+      "BPC-157 and TB-500 are commonly studied together in published literature for their complementary tissue repair mechanisms. BPC-157 research focuses on angiogenesis while TB-500 research centers on cell migration and inflammatory modulation.",
+      "CJC-1295/Ipamorelin is studied for sustained growth hormone pathway modulation. Published research documents its effects on GH release through two complementary receptor pathways.",
+      "MOTS-C adds a metabolic research dimension by activating AMPK pathways. Published studies document its effects on cellular energy regulation and mitochondrial function.",
     ],
     highlights: [
-      { label: "Cycle Length", value: "8 to 12 weeks" },
-      { label: "Goal", value: "Total body optimization" },
-      { label: "Experience Level", value: "Intermediate to advanced" },
+      { label: "Research Focus", value: "Multi-pathway study" },
+      { label: "Compounds", value: "5+ included" },
+      { label: "Purity", value: "98%+ HPLC verified" },
       { label: "Shipping", value: "Free with subscription" },
     ],
   },
@@ -228,10 +228,10 @@ export default function ProtocolDetailContent({
   }, [originalItems, swaps]);
 
   const peptideItems = effectiveItems.filter(
-    (i) => i.product?.goal_category !== "supplies"
+    (i) => i.product?.goal_category !== "laboratory_supplies"
   );
   const supplyItems = effectiveItems.filter(
-    (i) => i.product?.goal_category === "supplies"
+    (i) => i.product?.goal_category === "laboratory_supplies"
   );
 
   // Dynamic pricing
@@ -324,14 +324,14 @@ export default function ProtocolDetailContent({
               href="/protocols"
               className="hover:text-[#111111] transition-colors"
             >
-              Protocols
+              Research Configurations
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-[#6B7280]/40" />
             <span className="text-[#111111]">{protocol.name}</span>
           </nav>
           <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
-              {protocol.name} Protocol
+              {protocol.name} Research Configuration
             </h1>
             {protocol.badge && (
               <span
@@ -372,7 +372,7 @@ export default function ProtocolDetailContent({
       {/* ─── Main Content ─── */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
-          {/* Left: Protocol Details */}
+          {/* Left: Configuration Details */}
           <div className="lg:col-span-2 space-y-12">
             {/* Overview */}
             {protocol.description && (
@@ -395,7 +395,7 @@ export default function ProtocolDetailContent({
                   <div className="flex items-center gap-2 mb-4">
                     <Target className="w-5 h-5 text-[#111111]" />
                     <h2 className="text-xl font-bold text-[#111111]">
-                      Best For
+                      Research Applications
                     </h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -420,7 +420,7 @@ export default function ProtocolDetailContent({
                   <div className="flex items-center gap-2 mb-5">
                     <Zap className="w-5 h-5 text-[#111111]" />
                     <h2 className="text-xl font-bold text-[#111111]">
-                      How It Works
+                      Published Research
                     </h2>
                   </div>
                   <div className="space-y-4">
@@ -653,7 +653,7 @@ export default function ProtocolDetailContent({
                                 0 && (
                                 <p className="text-sm text-[#6B7280] text-center py-4">
                                   All available products are already in this
-                                  protocol.
+                                  configuration.
                                 </p>
                               )}
                             </div>
@@ -664,42 +664,10 @@ export default function ProtocolDetailContent({
                   })}
                 </div>
 
-                {/* Supplies */}
-                {supplyItems.length > 0 && (
-                  <div className="mt-4">
-                    <p className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider mb-3">
-                      Included Supplies
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {supplyItems.map((item) => (
-                        <span
-                          key={item.id}
-                          className="inline-flex items-center gap-1.5 text-xs text-[#6B7280] bg-[#FAFAFA] rounded-full px-3 py-1.5 border border-[#F0F0F0]"
-                        >
-                          <svg
-                            width="10"
-                            height="10"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-[#10B981]"
-                          >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                          {item.product?.name ?? "Unknown"}
-                          {item.quantity > 1 && ` (x${item.quantity})`}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             </ScrollReveal>
 
-            {/* Cycle Info */}
+            {/* Reorder Info */}
             <ScrollReveal>
               <div className="flex items-start gap-4 bg-gradient-to-br from-[#F0FDF4] via-[#EFF6FF] to-[#F5F3FF] rounded-xl p-5">
                 <div className="w-9 h-9 rounded-lg bg-white flex items-center justify-center flex-shrink-0">
@@ -707,13 +675,13 @@ export default function ProtocolDetailContent({
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-[#111111] mb-1">
-                    Recommended Cycle: {protocol.cycle_length}
+                    Scheduled Reorder Available
                   </h3>
                   <p className="text-xs text-[#6B7280] leading-relaxed">
-                    Subscribe to receive your protocol automatically each month.
-                    You can pause, skip, or cancel anytime from your account.
-                    Every product in this protocol ships with a published
-                    Certificate of Analysis from an independent US lab.
+                    Subscribe to receive your research compounds on a recurring
+                    schedule. You can pause, skip, or cancel anytime from your
+                    account. Every product ships with a published Certificate of
+                    Analysis from an independent US lab.
                   </p>
                 </div>
               </div>
@@ -786,11 +754,11 @@ export default function ProtocolDetailContent({
                     className={`bg-gradient-to-br ${colors.gradient} px-6 py-5`}
                   >
                     <h3 className="text-lg font-bold text-[#111111]">
-                      {protocol.name} Protocol
+                      {protocol.name} Configuration
                     </h3>
                     <p className="text-xs text-[#111111]/60 mt-0.5">
-                      {protocol.cycle_length} cycle · {peptideItems.length}{" "}
-                      peptide{peptideItems.length !== 1 ? "s" : ""} included
+                      {peptideItems.length}{" "}
+                      compound{peptideItems.length !== 1 ? "s" : ""} included
                     </p>
                     {hasSwaps && (
                       <p className="text-[10px] font-semibold text-[#10B981] mt-1">
@@ -803,7 +771,7 @@ export default function ProtocolDetailContent({
                     {/* Subscription price */}
                     <div>
                       <p className="text-xs font-semibold text-[#10B981] uppercase tracking-wider mb-1">
-                        Subscribe & Save {savingsPercent}%
+                        Scheduled Reorder ({savingsPercent}% off)
                       </p>
                       <div className="flex items-baseline gap-1.5">
                         <span className="text-4xl font-extrabold text-[#111111]">
@@ -818,7 +786,7 @@ export default function ProtocolDetailContent({
 
                     {/* Items summary */}
                     <div className="space-y-1.5">
-                      {effectiveItems.map((item) => (
+                      {peptideItems.map((item) => (
                         <div
                           key={item.id}
                           className="flex items-center justify-between gap-2"
@@ -862,7 +830,7 @@ export default function ProtocolDetailContent({
                         onClick={() => addProtocolToCart("subscription")}
                         className="block w-full bg-[#111111] text-white text-center rounded-full py-3 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
                       >
-                        Subscribe & Save
+                        Scheduled Reorder
                       </button>
                       <button
                         onClick={() => addProtocolToCart("one-time")}
@@ -927,10 +895,10 @@ export default function ProtocolDetailContent({
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <ScrollReveal className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111]">
-                Other Protocols
+                Other Research Configurations
               </h2>
               <p className="mt-2 text-[#6B7280]">
-                Explore our other goal-based stacks.
+                Explore our other compound configurations commonly studied together in published literature.
               </p>
             </ScrollReveal>
 
@@ -970,7 +938,7 @@ export default function ProtocolDetailContent({
                       </div>
                       <div className="px-6 py-4 flex items-center justify-between">
                         <span className="text-sm font-semibold text-[#111111]">
-                          View Protocol
+                          View Configuration
                         </span>
                         <ArrowRight className="w-4 h-4 text-[#111111]" />
                       </div>
@@ -985,7 +953,7 @@ export default function ProtocolDetailContent({
                 href="/protocols/build"
                 className="inline-flex items-center gap-1.5 text-[#111111] font-semibold hover:underline"
               >
-                Or build your own stack
+                Or build a custom configuration
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

@@ -77,11 +77,11 @@ export default function Protocols({ protocols }: ProtocolsProps) {
       <div ref={animRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111]">
-            Protocols
+            Research Configurations
           </h2>
           <p className="mt-3 text-[#6B7280]">
-            Complete stacks designed for specific goals. Everything you need in
-            one monthly shipment.
+            Pre-configured compound sets commonly studied together in published
+            peer-reviewed research.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                     </div>
 
                     <p className="text-[10px] text-[#6B7280] mt-3">
-                      {protocol.cycle_length} cycle · Free shipping
+                      {(protocol.items ?? []).length} compounds included
                     </p>
                   </div>
                 </Link>
@@ -153,7 +153,7 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                     onClick={() => addProtocolToCart(protocol, "subscription")}
                     className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
                   >
-                    Subscribe &amp; Save
+                    Subscribe
                   </button>
                   <button
                     onClick={() => addProtocolToCart(protocol, "one-time")}
@@ -172,7 +172,7 @@ export default function Protocols({ protocols }: ProtocolsProps) {
             href="/protocols/build"
             className="inline-flex items-center gap-1.5 text-[#111111] font-semibold hover:underline"
           >
-            Build Your Own Stack
+            Build a Custom Configuration
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />

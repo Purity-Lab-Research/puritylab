@@ -4,9 +4,9 @@ import type { Protocol } from "@/lib/types";
 import QuizFlow from "./QuizFlow";
 
 export const metadata: Metadata = {
-  title: "Find My Protocol | Purity Lab",
+  title: "Research Compound Finder | Purity Lab",
   description:
-    "Take our 60-second quiz to find the right peptide protocol for your goals. Personalized recommendations based on your experience and budget.",
+    "Answer a few quick questions about your research focus to find relevant reference compounds. Recommendations based on published literature and your laboratory budget.",
 };
 
 export default async function QuizPage() {

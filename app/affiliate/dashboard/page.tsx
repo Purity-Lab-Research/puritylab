@@ -280,7 +280,7 @@ function LinksTab({ links }: { links: LinksData | null }) {
     <div className="space-y-6">
       {/* Affiliate link */}
       <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Affiliate Link</h3>
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Referral Link</h3>
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <input
             type="text"
@@ -294,7 +294,7 @@ function LinksTab({ links }: { links: LinksData | null }) {
 
       {/* Discount code */}
       <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Discount Code</h3>
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Your Procurement Code</h3>
         <div className="flex items-center gap-2">
           <span className="text-base sm:text-lg font-bold text-[#111111] bg-[#FAFAFA] px-3 sm:px-4 py-2 rounded-lg border border-[#F0F0F0]">
             {links.discountCode}
@@ -306,39 +306,14 @@ function LinksTab({ links }: { links: LinksData | null }) {
         </p>
       </div>
 
-      {/* Share links */}
+      {/* Professional email template */}
       <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Share</h3>
-        <div className="flex flex-wrap gap-2 sm:gap-3">
-          <a
-            href={links.shareLinks.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#FAFAFA] px-4 py-2.5 text-sm font-medium text-[#111111] hover:bg-[#F0F0F0] transition-colors"
-          >
-            Twitter/X
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-          <a
-            href={links.shareLinks.email}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#FAFAFA] px-4 py-2.5 text-sm font-medium text-[#111111] hover:bg-[#F0F0F0] transition-colors"
-          >
-            Email
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </div>
-
-      {/* Share text suggestions */}
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-4 sm:p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Suggested Share Text</h3>
-        <div className="space-y-3">
-          {links.shareTexts.map((text, i) => (
-            <div key={i} className="bg-[#FAFAFA] rounded-lg p-3 flex items-start justify-between gap-3">
-              <p className="text-sm text-[#6B7280] flex-1">{text}</p>
-              <CopyButton text={text} />
-            </div>
-          ))}
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Referral Email Template</h3>
+        <div className="bg-[#FAFAFA] rounded-lg p-4">
+          <p className="text-sm text-[#6B7280] leading-relaxed mb-3">
+            I wanted to recommend Purity Lab as a research compound supplier. They publish independent six-panel test results for every batch. You can verify any product at puritylabresearch.com/coa. Use my referral link for 10% off your first order: {links.referralLink}
+          </p>
+          <CopyButton text={`I wanted to recommend Purity Lab as a research compound supplier. They publish independent six-panel test results for every batch. You can verify any product at puritylabresearch.com/coa. Use my referral link for 10% off your first order: ${links.referralLink}`} label="Copy Email Template" />
         </div>
       </div>
     </div>
@@ -365,7 +340,7 @@ function ConversionsTab({ data }: { data: AffiliateData }) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "affiliate-conversions.csv";
+    a.download = "referral-conversions.csv";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -539,46 +514,43 @@ function PayoutsTab() {
 }
 
 function ResourcesTab() {
-  const contentIdeas = [
-    "\"Why I trust Purity Lab for my research peptides\" (personal story)",
-    "\"How to verify peptide purity with CoAs\" (educational)",
-    "\"My peptide research stack breakdown\" (protocol walkthrough)",
-    "\"Purity Lab unboxing and first impressions\" (review)",
-    "\"Comparing peptide suppliers: what to look for\" (guide)",
-    "\"CoA deep dive: reading third-party lab results\" (educational)",
-    "\"Top 5 peptides for research in 2026\" (listicle)",
-    "\"How cold chain shipping preserves peptide integrity\" (explainer)",
-  ];
-
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Brand Guidelines</h3>
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Referral Email Templates</h3>
+        <div className="space-y-3">
+          <div className="bg-[#FAFAFA] rounded-lg p-4">
+            <p className="text-xs font-semibold text-[#6B7280] uppercase mb-2">General Introduction</p>
+            <p className="text-sm text-[#6B7280] leading-relaxed">
+              I wanted to recommend Purity Lab as a research compound supplier. They publish independent six-panel test results for every batch (purity, identity, heavy metals, sterility, endotoxins, and appearance). You can verify any product at puritylabresearch.com/coa.
+            </p>
+          </div>
+          <div className="bg-[#FAFAFA] rounded-lg p-4">
+            <p className="text-xs font-semibold text-[#6B7280] uppercase mb-2">For Procurement Teams</p>
+            <p className="text-sm text-[#6B7280] leading-relaxed">
+              Our lab has been sourcing research peptides from Purity Lab. Every batch comes with a published Certificate of Analysis, and their 98%+ purity threshold means consistent results across orders. They offer scheduled reorder pricing for ongoing research projects.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Product Documentation You Can Share</h3>
         <ul className="text-sm text-[#6B7280] space-y-2">
-          <li>Use our official logo and product images only.</li>
+          <li>Link to the CoA Library: puritylabresearch.com/coa</li>
+          <li>Link to the product catalog: puritylabresearch.com/shop</li>
+          <li>Link to the testing methodology page: puritylabresearch.com/how-we-test</li>
+        </ul>
+      </div>
+
+      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
+        <h3 className="text-sm font-semibold text-[#111111] mb-3">Referral Guidelines</h3>
+        <ul className="text-sm text-[#6B7280] space-y-2">
           <li>Always reference products as &quot;for research use only.&quot;</li>
           <li>Do not make health claims or imply therapeutic benefits.</li>
-          <li>Maintain a professional, educational tone in all content.</li>
+          <li>Share through professional channels: email, academic networks, industry forums.</li>
+          <li>Maintain a professional tone in all communications.</li>
         </ul>
-      </div>
-
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Content Ideas</h3>
-        <ul className="space-y-2">
-          {contentIdeas.map((idea, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-[#6B7280]">
-              <span className="text-[#10B981] font-bold mt-0.5">{i + 1}.</span>
-              {idea}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-3">Product Images</h3>
-        <p className="text-sm text-[#6B7280]">
-          Product images for marketing use will be available soon. In the meantime, you can use screenshots from the product pages on our website.
-        </p>
       </div>
 
       <div className="bg-red-50 rounded-xl border border-red-100 p-5">
@@ -587,7 +559,7 @@ function ResourcesTab() {
           Prohibited Activities
         </h3>
         <ul className="text-sm text-red-700 space-y-1.5">
-          <li>No spam or unsolicited messages.</li>
+          <li>No mass unsolicited outreach or spam.</li>
           <li>No misleading health or medical claims.</li>
           <li>No bidding on &quot;Purity Lab&quot; branded keywords in paid search.</li>
           <li>No fake reviews or testimonials.</li>
@@ -727,9 +699,9 @@ function SettingsTab() {
       </div>
 
       <div className="bg-white rounded-xl border border-[#F0F0F0] p-5">
-        <h3 className="text-sm font-semibold text-[#111111] mb-2">Affiliate Terms</h3>
+        <h3 className="text-sm font-semibold text-[#111111] mb-2">Referral Terms</h3>
         <p className="text-sm text-[#6B7280] mb-3">
-          View the complete affiliate program terms and conditions.
+          View the complete referral program terms and conditions.
         </p>
         <Link
           href="/policies/affiliate-terms"
@@ -743,10 +715,10 @@ function SettingsTab() {
       <div className="bg-red-50 rounded-xl border border-red-100 p-5">
         <h3 className="text-sm font-semibold text-red-800 mb-2">Deactivate Account</h3>
         <p className="text-sm text-red-700 mb-3">
-          Deactivating your affiliate account will stop all tracking and future commissions. This cannot be undone.
+          Deactivating your referral account will stop all tracking and future commissions. This cannot be undone.
         </p>
         <button className="text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
-          Deactivate My Affiliate Account
+          Deactivate My Referral Account
         </button>
       </div>
     </div>
@@ -816,7 +788,7 @@ export default function AffiliateDashboardPage() {
           className="inline-flex items-center gap-2 text-sm font-medium text-[#10B981] hover:underline"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Affiliate Program
+          Back to Referral Program
         </Link>
       </div>
     );
@@ -835,10 +807,10 @@ export default function AffiliateDashboardPage() {
               className="inline-flex items-center gap-1 text-sm text-[#6B7280] hover:text-[#111111] mb-2 transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
-              Affiliate Program
+              Referral Program
             </Link>
             <h1 className="text-xl sm:text-2xl font-extrabold text-[#111111] truncate">
-              Affiliate Dashboard
+              Referral Dashboard
             </h1>
           </div>
           <span

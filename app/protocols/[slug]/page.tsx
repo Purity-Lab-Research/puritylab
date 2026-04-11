@@ -13,7 +13,7 @@ const RESERVED_SLUGS = ["build"];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  if (RESERVED_SLUGS.includes(slug)) return { title: "Build Your Own Stack" };
+  if (RESERVED_SLUGS.includes(slug)) return { title: "Build a Custom Configuration" };
 
   const supabase = await createClient();
   const { data: protocol } = await supabase
@@ -23,14 +23,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .eq("active", true)
     .single();
 
-  if (!protocol) return { title: "Protocol Not Found" };
+  if (!protocol) return { title: "Research Configuration Not Found" };
 
   return {
-    title: `${protocol.name} Protocol`,
+    title: `${protocol.name} Research Configuration`,
     description:
       protocol.tagline ||
       protocol.description?.slice(0, 160) ||
-      `${protocol.name} peptide protocol. Third-party tested with 98%+ purity.`,
+      `${protocol.name} research configuration. Third-party tested with 98%+ purity.`,
   };
 }
 
@@ -51,7 +51,7 @@ export default async function ProtocolDetailPage({ params }: PageProps) {
 
   if (!protocol) notFound();
 
-  /* Fetch other active protocols for the "Other Protocols" section */
+  /* Fetch other active configurations for the "Other Configurations" section */
   const { data: otherProtocols } = await supabase
     .from("protocols")
     .select("id, name, slug, tagline, badge, accent_color")
@@ -64,7 +64,7 @@ export default async function ProtocolDetailPage({ params }: PageProps) {
     .from("products")
     .select("id, name, slug, size, price, subscription_price, short_description, images, purity, goal_category, active")
     .eq("active", true)
-    .neq("goal_category", "supplies")
+    .neq("goal_category", "laboratory_supplies")
     .order("goal_category", { ascending: true })
     .order("sort_order", { ascending: true });
 

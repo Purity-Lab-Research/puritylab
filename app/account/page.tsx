@@ -215,8 +215,8 @@ export default async function AccountPage() {
           <div className="w-9 h-9 rounded-xl bg-[#8B5CF6]/8 flex items-center justify-center mb-3 group-hover:bg-[#8B5CF6]/12 transition-colors">
             <FlaskConical className="h-4 w-4 text-[#8B5CF6]" />
           </div>
-          <p className="text-sm font-semibold text-[#111111]">Protocols</p>
-          <p className="text-[11px] text-[#9CA3AF] mt-0.5 hidden sm:block">Browse stacks</p>
+          <p className="text-sm font-semibold text-[#111111]">Configurations</p>
+          <p className="text-[11px] text-[#9CA3AF] mt-0.5 hidden sm:block">Browse compounds</p>
         </Link>
         <Link
           href="/coa"
@@ -253,7 +253,7 @@ export default async function AccountPage() {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="text-sm font-bold text-[#111111]">
-                      {sub.protocol?.name ?? sub.plan_name ?? "Custom Stack"}
+                      {sub.protocol?.name ?? sub.plan_name ?? "Custom Configuration"}
                     </h3>
                     <p className="text-xs text-[#9CA3AF] mt-0.5">
                       Every {sub.delivery_frequency_weeks} weeks
@@ -316,13 +316,13 @@ export default async function AccountPage() {
               No active subscriptions
             </p>
             <p className="text-xs text-[#9CA3AF] mb-4">
-              Subscribe to a protocol and save 15% on every order.
+              Set up a scheduled reorder for discounted pricing on research compounds.
             </p>
             <Link
               href="/protocols"
               className="inline-flex items-center gap-2 bg-[#111111] text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:bg-black transition-colors"
             >
-              Browse Protocols <ArrowRight className="h-3.5 w-3.5" />
+              Browse Configurations <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         )}

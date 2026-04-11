@@ -25,7 +25,7 @@ export default function NotFound() {
             href="/protocols"
             className="inline-block border border-[#F0F0F0] text-[#111111] rounded-full px-7 py-3 font-medium hover:border-[#111111] transition-colors"
           >
-            Browse Protocols
+            Browse Catalog
           </Link>
         </div>
       </div>

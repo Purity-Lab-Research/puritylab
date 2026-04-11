@@ -8,6 +8,7 @@ import {
   CONTACT_EMAIL,
   BUSINESS_ADDRESS,
   BUSINESS_HOURS,
+  LEGAL_ENTITY_NAME,
 } from "@/lib/constants";
 
 export default function ContactPage() {
@@ -59,6 +60,9 @@ export default function ContactPage() {
                   <h3 className="text-sm font-semibold text-gray-800 font-[family-name:var(--font-body)]">
                     <EditableText settingKey="contact_location_label">Location</EditableText>
                   </h3>
+                  <p className="text-sm font-medium text-gray-800 font-[family-name:var(--font-body)]">
+                    {LEGAL_ENTITY_NAME}
+                  </p>
                   <p className="text-sm text-gray-600 font-[family-name:var(--font-body)]">
                     {BUSINESS_ADDRESS}
                   </p>

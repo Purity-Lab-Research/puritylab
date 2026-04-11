@@ -58,18 +58,24 @@ function CyclePhaseBadge({ phase }: { phase: string }) {
     taper: "bg-[#FEF3C7] text-[#F59E0B]",
     off: "bg-[#F0F0F0] text-[#6B7280]",
   };
+  const labels: Record<string, string> = {
+    loading: "ramping up",
+    active: "active",
+    taper: "reducing",
+    off: "paused",
+  };
   return (
     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${styles[phase] ?? styles.active}`}>
-      {phase}
+      {labels[phase] ?? phase}
     </span>
   );
 }
 
 // Upgrade path mapping
 const UPGRADE_MAP: Record<string, { target: string; label: string }> = {
-  recovery: { target: "full-recomp", label: "Level up to Full Recomp" },
-  performance: { target: "full-recomp", label: "Add fat loss support. Upgrade to Full Recomp" },
-  "fat-loss": { target: "full-recomp", label: "Add recovery support. Upgrade to Full Recomp" },
+  recovery: { target: "full-recomp", label: "Upgrade to Comprehensive Configuration" },
+  performance: { target: "full-recomp", label: "Add metabolic compounds. Upgrade to Comprehensive" },
+  "fat-loss": { target: "full-recomp", label: "Add tissue research compounds. Upgrade to Comprehensive" },
 };
 
 export default function SubscriptionCard({ subscription: sub }: Props) {
@@ -159,7 +165,7 @@ export default function SubscriptionCard({ subscription: sub }: Props) {
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="font-heading text-lg font-bold text-primary">
-            {sub.protocol?.name ?? sub.plan_name ?? "Custom Stack"}
+            {sub.protocol?.name ?? sub.plan_name ?? "Custom Configuration"}
           </h3>
           <p className="text-xs text-text-secondary mt-0.5">
             Started {new Date(sub.created_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
@@ -213,7 +219,7 @@ export default function SubscriptionCard({ subscription: sub }: Props) {
           {sub.cycle_management ? (
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-primary">Smart Cycle Management</span>
+                <span className="text-xs font-semibold text-primary">Smart Delivery Management</span>
                 {sub.cycle_phase && <CyclePhaseBadge phase={sub.cycle_phase} />}
               </div>
               {/* Progress bar */}
@@ -225,17 +231,17 @@ export default function SubscriptionCard({ subscription: sub }: Props) {
               </div>
               <p className="text-[10px] text-text-secondary mb-2">Week {sub.cycle_week ?? 1} of 8</p>
               <button onClick={handleCycleToggle} disabled={cycleLoading} className="text-[10px] text-text-secondary hover:text-error transition-colors">
-                {cycleLoading ? "Updating..." : "Disable Smart Cycling"}
+                {cycleLoading ? "Updating..." : "Disable Smart Delivery"}
               </button>
             </div>
           ) : (
             <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-4">
-              <p className="text-xs font-semibold text-primary mb-1">Smart Cycle Management: {formatPrice(sub.cycle_management_fee ?? 14.99)}/mo</p>
+              <p className="text-xs font-semibold text-primary mb-1">Smart Delivery Management: {formatPrice(sub.cycle_management_fee ?? 14.99)}/mo</p>
               <p className="text-[10px] text-text-secondary mb-3">
-                Automatic shipment adjustments based on your cycle phase. Full dose during active weeks, taper when needed, skip during off weeks.
+                Automatic shipment adjustments based on your research schedule. Receive full shipments during active research periods, reduce frequency when needed, or skip during breaks.
               </p>
               <button onClick={handleCycleToggle} disabled={cycleLoading} className="bg-secondary text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-secondary-hover transition-colors disabled:opacity-50">
-                {cycleLoading ? "Enabling..." : "Enable Smart Cycling"}
+                {cycleLoading ? "Enabling..." : "Enable Smart Delivery"}
               </button>
             </div>
           )}
@@ -270,14 +276,14 @@ export default function SubscriptionCard({ subscription: sub }: Props) {
 
       {sub.status === "active" && isFullRecomp && (
         <div className="border-t border-[#F0F0F0] pt-4 mb-4">
-          <p className="text-xs text-success font-semibold">You are on our most comprehensive protocol.</p>
+          <p className="text-xs text-success font-semibold">You are on our most comprehensive configuration.</p>
         </div>
       )}
 
       {sub.status === "active" && !sub.protocol_id && (
         <div className="border-t border-[#F0F0F0] pt-4 mb-4">
           <Link href="/protocols" className="text-xs text-secondary font-semibold hover:underline">
-            Explore our pre-built protocols
+            Explore our research configurations
           </Link>
         </div>
       )}

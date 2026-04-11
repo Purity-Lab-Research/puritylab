@@ -5,9 +5,9 @@ import StackBuilder from "./StackBuilder";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Build Your Own Stack",
+  title: "Build a Custom Configuration",
   description:
-    "Create a custom peptide stack tailored to your goals. Pick your peptides, set your delivery schedule, and save up to 15% with a subscription.",
+    "Create a custom research compound configuration. Select your compounds, set your delivery schedule, and save up to 15% with a subscription.",
 };
 
 export default async function BuildStackPage() {
@@ -43,18 +43,18 @@ export default async function BuildStackPage() {
               href="/protocols"
               className="hover:text-[#111111] transition-colors"
             >
-              Protocols
+              Research Configurations
             </Link>
             <span>/</span>
             <span className="text-[#111111] font-medium">
-              Build Your Own
+              Custom Build
             </span>
           </nav>
           <h1 className="text-4xl font-extrabold text-[#111111]">
-            Build Your Own Stack
+            Build a Custom Configuration
           </h1>
           <p className="mt-2 text-[#6B7280]">
-            Pick your peptides, set your schedule, save up to 15% with a subscription.
+            Select your research compounds, set your delivery schedule, and save up to 15% with a subscription.
           </p>
         </div>
       </div>

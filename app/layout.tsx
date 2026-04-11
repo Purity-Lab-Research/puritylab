@@ -26,8 +26,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://puritylabresearch.com";
 
-const SITE_TITLE = "Purity Lab | Research-Grade Peptide Protocols for Athletes";
-const SITE_DESC = "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.";
+const SITE_TITLE = "Purity Lab | Research-Grade Peptides with Published CoAs";
+const SITE_DESC = "Every batch third-party tested. 98%+ verified purity. Research-grade peptides and reference compounds with published Certificates of Analysis. For in-vitro laboratory research only.";
 
 export const metadata: Metadata = {
   title: {
@@ -37,12 +37,13 @@ export const metadata: Metadata = {
   description: SITE_DESC,
   keywords: [
     "research peptides",
-    "peptides online",
-    "BPC-157",
     "peptide supplier",
-    "lab research",
-    "peptide stacks",
-    "peptide protocols",
+    "BPC-157",
+    "laboratory research chemicals",
+    "reference compounds",
+    "certificate of analysis",
+    "in-vitro research",
+    "research-grade peptides",
   ],
   openGraph: {
     title: SITE_TITLE,

@@ -42,7 +42,7 @@ export default function AffiliateTermsPage() {
               to {SITE_NAME} (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
               These Terms and Conditions (the &quot;Agreement&quot;) govern your participation in
               the Program. This Agreement is between you (&quot;Affiliate,&quot; &quot;you,&quot;
-              or &quot;your&quot;) and {SITE_NAME}.
+              or &quot;your&quot;) and Purity Lab Research LLC.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               The Program is offered at the sole discretion of {SITE_NAME}. We reserve the right to
@@ -502,7 +502,8 @@ export default function AffiliateTermsPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
               This Agreement shall be governed by and construed in accordance with the laws of the
-              State of California, without regard to its conflict of law principles.
+              State of California, without regard to its conflict of law principles. Purity Lab Research LLC
+              is a California limited liability company.
             </p>
           </div>
 
@@ -524,10 +525,10 @@ export default function AffiliateTermsPage() {
               21. Entire Agreement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              This Agreement constitutes the entire agreement between you and {SITE_NAME} with respect
+              This Agreement constitutes the entire agreement between you and Purity Lab Research LLC with respect
               to the Affiliate Program and supersedes all prior agreements, representations, or
               understandings. No modification of this Agreement shall be binding unless made in writing
-              by {SITE_NAME}.
+              by Purity Lab Research LLC.
             </p>
           </div>
 

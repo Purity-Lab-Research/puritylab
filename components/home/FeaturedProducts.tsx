@@ -13,12 +13,12 @@ interface FeaturedProductsProps {
 }
 
 const CATEGORY_GRADIENT: Record<string, string> = {
-  recovery: "bg-gradient-to-br from-[#F0FDF4] to-[#DCFCE7]",
-  fat_loss: "bg-gradient-to-br from-[#FDF2F8] to-[#FCE7F3]",
-  performance: "bg-gradient-to-br from-[#EFF6FF] to-[#DBEAFE]",
-  skin_healing: "bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE]",
-  wellness: "bg-gradient-to-br from-[#FFFBEB] to-[#FEF3C7]",
-  supplies: "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]",
+  tissue_research: "bg-gradient-to-br from-[#F0FDF4] to-[#DCFCE7]",
+  metabolic_research: "bg-gradient-to-br from-[#FDF2F8] to-[#FCE7F3]",
+  gh_research: "bg-gradient-to-br from-[#EFF6FF] to-[#DBEAFE]",
+  dermal_research: "bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE]",
+  general_research: "bg-gradient-to-br from-[#FFFBEB] to-[#FEF3C7]",
+  laboratory_supplies: "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]",
 };
 
 const BADGE_MAP: Record<string, { text: string; className: string }> = {
@@ -114,7 +114,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                     From {formatPrice(subPrice)}/mo
                   </p>
                   <p className="text-[10px] sm:text-xs text-[#10B981] font-medium mt-0.5 mb-3">
-                    Free shipping on subscriptions
+                    Scheduled reorder discounts available
                   </p>
                 </Link>
                 <Link

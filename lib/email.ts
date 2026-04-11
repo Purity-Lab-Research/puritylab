@@ -28,7 +28,7 @@ export function brandedEmailWrapper(options: {
     ? `<tr>
           <td style="padding:16px 24px;background:#FAFAFA;border-top:1px solid #F0F0F0;">
             <p style="margin:0;font-size:11px;color:#6B7280;line-height:1.5;text-align:center;">
-              <strong>For Research Use Only.</strong> Not for human or animal consumption. You must be 21 or older to purchase. Purity Lab assumes no liability for product use or misuse.
+              <strong>For Research Use Only.</strong> Not for human or animal consumption. You must be 21 or older to purchase. Purity Lab Research LLC assumes no liability for product use or misuse.
             </p>
           </td>
         </tr>`
@@ -70,7 +70,7 @@ export function brandedEmailWrapper(options: {
               Questions? Email us at
               <a href="mailto:${contactEmail}" style="color:#111111;text-decoration:underline;">${contactEmail}</a>
             </p>
-            <p style="margin:10px 0 0;font-size:11px;color:#9CA3AF;">&copy; 2026 Purity Lab. All rights reserved.</p>
+            <p style="margin:10px 0 0;font-size:11px;color:#9CA3AF;">&copy; 2026 Purity Lab Research LLC. All rights reserved.</p>
             ${showUnsubscribe && recipientEmail ? unsubscribeFooter(recipientEmail) : ""}
           </td>
         </tr>
@@ -967,7 +967,7 @@ export async function sendWelcomeEmail(
             <li><strong>Saved addresses</strong> -faster checkout</li>
             <li><strong>Wishlist</strong> -save products for later</li>
             <li><strong>Back-in-stock alerts</strong> -get notified when items return</li>
-            <li><strong>Research library</strong> -access to protocols and guides</li>
+            <li><strong>Research library</strong> -access to research configurations and guides</li>
           </ul>
         </td>
       </tr>
@@ -984,7 +984,7 @@ export async function sendWelcomeEmail(
             <p style="margin:0 0 4px;font-size:13px;color:#666;font-weight:bold;">EARN WITH US</p>
             <p style="margin:0;font-size:14px;line-height:1.6;color:#555;">
               Interested in earning commissions? Join our
-              <a href="${siteUrl}/affiliate" style="color:#111111;font-weight:600;">Affiliate Program</a>
+              <a href="${siteUrl}/affiliate" style="color:#111111;font-weight:600;">Referral Program</a>
               and earn up to 15% on referrals.
             </p>
           </div>
@@ -1188,8 +1188,8 @@ export async function sendDeliveryConfirmation(
           <a href="${siteUrl}/account/orders" style="display:inline-block;background:#111111;color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;margin-right:8px;">
             View Order
           </a>
-          <a href="${siteUrl}/protocols" style="display:inline-block;background:#fff;color:#111111;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;border:2px solid #1A2B4A;">
-            Research Protocols
+          <a href="${siteUrl}/research" style="display:inline-block;background:#fff;color:#111111;padding:12px 24px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:600;border:2px solid #1A2B4A;">
+            Research Configurations
           </a>
         </td>
       </tr>`,

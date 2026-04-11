@@ -63,7 +63,7 @@ export default async function SubscriptionsPage() {
           href="/protocols"
           className="text-sm text-[#10B981] font-semibold hover:underline"
         >
-          Browse Protocols
+          Browse Configurations
         </Link>
       </div>
 
@@ -95,14 +95,14 @@ export default async function SubscriptionsPage() {
             No subscriptions yet
           </h2>
           <p className="text-sm text-text-secondary max-w-sm mx-auto mb-6">
-            Subscribe to a protocol and save up to 15% on every delivery. Pause or
-            cancel anytime.
+            Set up a scheduled reorder for research compounds with discounted pricing.
+            Pause or cancel anytime.
           </p>
           <Link
             href="/protocols"
             className="inline-block bg-primary text-white rounded-lg px-6 py-2.5 text-sm font-semibold hover:bg-primary-hover transition-colors"
           >
-            Browse Protocols
+            Browse Configurations
           </Link>
         </div>
       )}

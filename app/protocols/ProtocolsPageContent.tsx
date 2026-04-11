@@ -13,9 +13,9 @@ interface ProtocolsPageContentProps {
 
 const TABS = [
   { label: "All", slug: "all" },
-  { label: "Recovery", slug: "recovery" },
-  { label: "Fat Loss", slug: "fat-loss" },
-  { label: "Performance", slug: "performance" },
+  { label: "Tissue Research", slug: "recovery" },
+  { label: "Metabolic Research", slug: "fat-loss" },
+  { label: "GH Research", slug: "performance" },
 ];
 
 const BADGE_STYLES: Record<string, string> = {
@@ -77,13 +77,13 @@ export default function ProtocolsPageContent({
               Home
             </Link>
             <span className="text-[#6B7280]/40">&#8250;</span>
-            <span className="text-[#111111]">Protocols</span>
+            <span className="text-[#111111]">Research Configurations</span>
           </nav>
           <h1 className="text-4xl font-extrabold text-[#111111]">
-            Protocols
+            Research Configurations
           </h1>
           <p className="mt-2 max-w-2xl text-base text-[#6B7280]">
-            Goal-based peptide stacks with built-in savings. Every protocol is third-party tested.
+            Pre-configured compound sets commonly studied together in published peer-reviewed research. Every product is third-party tested.
           </p>
         </div>
       </div>
@@ -174,7 +174,7 @@ export default function ProtocolsPageContent({
                     </div>
 
                     <p className="text-[10px] text-[#6B7280] mt-3">
-                      {protocol.cycle_length} cycle · Free shipping
+                      {(protocol.items ?? []).length} compounds included
                     </p>
                   </div>
                 </Link>
@@ -185,7 +185,7 @@ export default function ProtocolsPageContent({
                     onClick={() => addProtocolToCart(protocol, "subscription")}
                     className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
                   >
-                    Subscribe &amp; Save
+                    Subscribe
                   </button>
                   <button
                     onClick={() => addProtocolToCart(protocol, "one-time")}
@@ -206,17 +206,17 @@ export default function ProtocolsPageContent({
         {/* Build Your Own Stack CTA */}
         <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F5F3FF] rounded-2xl p-10 sm:p-12 text-center mt-12">
           <h2 className="text-2xl font-extrabold text-[#111111] mb-3">
-            Don&apos;t see exactly what you need?
+            Need a different combination?
           </h2>
           <p className="text-[#6B7280] max-w-lg mx-auto mb-6">
-            Build a custom stack from our full catalog. Pick your peptides, set
-            your delivery schedule, and save up to 15% with a subscription.
+            Build a custom configuration from our full catalog. Select compounds
+            relevant to your research and set up a scheduled reorder.
           </p>
           <Link
             href="/protocols/build"
             className="inline-block bg-[#111111] text-white rounded-full px-8 py-3.5 font-semibold hover:bg-black hover:scale-[1.02] transition-all"
           >
-            Build Your Own Stack
+            Build a Custom Configuration
           </Link>
         </div>
       </div>

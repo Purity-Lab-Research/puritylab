@@ -8,21 +8,21 @@ const TAG_COLORS: Record<string, string> = {
   Guide: "bg-blue-500",
   Trust: "bg-amber-500",
   "Deep Dive": "bg-purple-500",
-  "Weight Management": "bg-pink-500",
-  Recovery: "bg-emerald-500",
+  "Metabolic Research": "bg-pink-500",
+  "Tissue Research": "bg-emerald-500",
 };
 
 const articles = [
   {
     tag: "Beginner",
     readTime: "8 min read",
-    title: "New to Peptides? Start Here",
+    title: "Introduction to Peptide Chemistry",
     href: "/learn/getting-started",
   },
   {
     tag: "Guide",
     readTime: "5 min read",
-    title: "How to Reconstitute & Dose",
+    title: "Laboratory Preparation of Lyophilized Compounds",
     href: "/learn/how-to-reconstitute",
   },
   {
@@ -46,7 +46,7 @@ export default function EducationPreview() {
               Learn
             </h2>
             <p className="mt-3 text-[#6B7280]">
-              Learn what you&apos;re putting in your research. No jargon, no fluff.
+              Educational resources on peptide science and published research.
             </p>
           </div>
           <Link

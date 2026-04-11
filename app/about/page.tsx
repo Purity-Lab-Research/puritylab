@@ -65,9 +65,9 @@ const VALUES = [
     iconColor: "text-amber-500",
   },
   {
-    title: "Built for Athletes",
+    title: "Built for Researchers",
     description:
-      "Our protocol stacks are designed around real goals: recovery, performance, fat loss, and recomposition. Not generic product pages.",
+      "Our product catalog is organized around real research applications and supported by detailed documentation. Not generic product pages.",
     icon: Heart,
     iconBg: "bg-rose-50",
     iconColor: "text-rose-500",
@@ -265,8 +265,8 @@ export default function AboutPage() {
             </p>
             <p>
               Every product in our catalog has a published Certificate of
-              Analysis from an independent lab. Every protocol stack is built
-              around real research goals, not upselling. Every order ships
+              Analysis from an independent lab. Every product listing is built
+              around real research documentation, not upselling. Every order ships
               same-day with cold-chain protection.
             </p>
             <p className="font-semibold text-[#111111]">

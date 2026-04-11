@@ -92,7 +92,7 @@ export async function PUT(request: NextRequest) {
           <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
             <h2 style="color:#111111;">Application Update</h2>
             <p style="color:#6B7280;">Hi ${application.name},</p>
-            <p style="color:#6B7280;">Thank you for your interest in the Purity Lab Affiliate Program. After reviewing your application, we have determined that it is not a fit at this time.</p>
+            <p style="color:#6B7280;">Thank you for your interest in the Purity Lab Referral Program. After reviewing your application, we have determined that it is not a fit at this time.</p>
             <p style="color:#6B7280;">You are welcome to reapply in the future if your circumstances change.</p>
             <p style="color:#6B7280;margin-top:24px;">Best,<br/>Purity Lab Team</p>
           </div>
@@ -178,7 +178,7 @@ export async function PUT(request: NextRequest) {
     // Send approval email
     await sendEmail({
       to: [application.email],
-      subject: "Welcome to the Purity Lab Affiliate Program!",
+      subject: "Welcome to the Purity Lab Referral Program!",
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
           <h2 style="color:#111111;">You're Approved!</h2>

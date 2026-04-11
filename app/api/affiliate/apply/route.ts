@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
           <h2 style="color:#111111;">Application Received</h2>
           <p style="color:#6B7280;">Hi ${data.name},</p>
-          <p style="color:#6B7280;">Thank you for applying to the Purity Lab Affiliate Program. We review most applications within 24 hours and will notify you by email once a decision has been made.</p>
+          <p style="color:#6B7280;">Thank you for applying to the Purity Lab Referral Program. We review most applications within 24 hours and will notify you by email once a decision has been made.</p>
           <p style="color:#6B7280;">In the meantime, feel free to explore our products at <a href="https://puritylabresearch.com/shop" style="color:#10B981;">puritylabresearch.com/shop</a>.</p>
           <p style="color:#6B7280;margin-top:24px;">Best,<br/>Purity Lab Team</p>
         </div>

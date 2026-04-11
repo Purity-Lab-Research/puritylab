@@ -7,11 +7,11 @@ import { X } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 const NAV_LINKS = [
-  { href: "/protocols", label: "Protocols" },
+  { href: "/protocols", label: "Research Configurations" },
   { href: "/shop", label: "Shop" },
   { href: "/coa", label: "CoA Library" },
   { href: "/resources", label: "Learn" },
-  { href: "/affiliate", label: "Affiliate Program" },
+  { href: "/affiliate", label: "Referral Program" },
 ];
 
 interface MobileNavProps {

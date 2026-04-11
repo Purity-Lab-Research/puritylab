@@ -111,7 +111,7 @@ export async function sendApplicationReceivedEmail(
         <tr>
           <td style="padding:16px 24px 0;">
             <p style="margin:0;font-size:15px;line-height:1.6;color:#555;">Hi ${name},</p>
-            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">Thank you for applying to the Purity Lab Affiliate Program. We review most applications within 24 hours and will notify you by email once a decision has been made.</p>
+            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">Thank you for applying to the Purity Lab Referral Program. We review most applications within 24 hours and will notify you by email once a decision has been made.</p>
             <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">In the meantime, feel free to explore our products.</p>
           </td>
         </tr>
@@ -136,7 +136,7 @@ export async function sendApplicationApprovedEmail(
     to: [email],
     from: AFFILIATE_FROM,
     replyTo: AFFILIATE_REPLY_TO,
-    subject: "Welcome to the Purity Lab Affiliate Program!",
+    subject: "Welcome to the Purity Lab Referral Program!",
     html: brandedEmailWrapper({
       recipientEmail: email,
       contactEmail: AFFILIATE_REPLY_TO,
@@ -213,7 +213,7 @@ export async function sendApplicationRejectedEmail(
         <tr>
           <td style="padding:16px 24px 24px;">
             <p style="margin:0;font-size:15px;line-height:1.6;color:#555;">Hi ${name},</p>
-            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">Thank you for your interest in the Purity Lab Affiliate Program. After reviewing your application, we have determined that it is not a fit at this time.</p>
+            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">Thank you for your interest in the Purity Lab Referral Program. After reviewing your application, we have determined that it is not a fit at this time.</p>
             <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#555;">You are welcome to reapply in the future if your circumstances change.</p>
             <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:#555;">Best,<br/>Purity Lab Team</p>
           </td>

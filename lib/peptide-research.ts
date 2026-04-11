@@ -9,11 +9,8 @@ export interface PeptideEntry {
   name: string;
   category: string;
   mechanism: string;
-  typicalDose: string;
-  frequency: string;
-  cycleLength: string;
-  stacksWith: string;
-  bestFor: string;
+  researchApplications: string;
+  relatedCompounds: string;
   productSlugs: { label: string; slug: string }[];
   studies: PeptideStudy[];
 }
@@ -25,13 +22,10 @@ export interface PeptideEntry {
 export const PEPTIDE_DATA: PeptideEntry[] = [
   {
     name: "BPC-157",
-    category: "Recovery",
+    category: "Tissue Research",
     mechanism: "Angiogenesis, VEGF/EGF upregulation, nitric oxide modulation",
-    typicalDose: "250-500 mcg/day",
-    frequency: "Daily (SubQ)",
-    cycleLength: "4-6 weeks",
-    stacksWith: "TB500",
-    bestFor: "Soft tissue repair, tendon/ligament healing, gut health",
+    researchApplications: "Connective tissue models, gastrointestinal signaling, angiogenic pathway studies",
+    relatedCompounds: "TB-500",
     productSlugs: [
       { label: "BPC-157", slug: "bpc-157" },
       { label: "Wolverine Blend", slug: "wolverine-blend" },
@@ -46,13 +40,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "TB500",
-    category: "Recovery",
-    mechanism: "Actin upregulation, cell migration, systemic healing",
-    typicalDose: "2-5 mg twice/week",
-    frequency: "2x/week (SubQ)",
-    cycleLength: "4-6 weeks",
-    stacksWith: "BPC-157",
-    bestFor: "Systemic recovery, flexibility, inflammation reduction",
+    category: "Tissue Research",
+    mechanism: "Actin upregulation, cell migration, systemic wound models",
+    researchApplications: "Cell migration studies, cardiac tissue models, dermal wound research",
+    relatedCompounds: "BPC-157",
     productSlugs: [
       { label: "TB-500", slug: "tb-500" },
       { label: "Wolverine Blend", slug: "wolverine-blend" },
@@ -66,13 +57,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "CJC-1295 (no DAC)",
-    category: "GH Secretagogue",
+    category: "Growth Hormone Research",
     mechanism: "GHRH receptor agonist, sustained GH elevation",
-    typicalDose: "100-300 mcg/day",
-    frequency: "Daily before bed (SubQ)",
-    cycleLength: "8-12 weeks",
-    stacksWith: "Ipamorelin",
-    bestFor: "GH optimization, body composition, sleep quality",
+    researchApplications: "GH secretion kinetics, GHRH receptor binding studies, IGF-1 pathway research",
+    relatedCompounds: "Ipamorelin",
     productSlugs: [
       { label: "CJC/Ipa Blend", slug: "cjc-ipa-blend-5-5mg" },
     ],
@@ -84,13 +72,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "Ipamorelin",
-    category: "GH Secretagogue",
-    mechanism: "Selective ghrelin receptor agonist, GH pulse release",
-    typicalDose: "100-300 mcg/day",
-    frequency: "Daily before bed (SubQ)",
-    cycleLength: "8-12 weeks",
-    stacksWith: "CJC-1295",
-    bestFor: "Clean GH release (no cortisol/prolactin spike), recovery",
+    category: "Growth Hormone Research",
+    mechanism: "Selective ghrelin receptor agonist, pulsatile GH release",
+    researchApplications: "Selective GH secretagogue studies, ghrelin receptor binding, GH pulse profiling",
+    relatedCompounds: "CJC-1295",
     productSlugs: [
       { label: "Ipamorelin 10mg", slug: "ipamorelin-10mg" },
       { label: "CJC/Ipa Blend", slug: "cjc-ipa-blend-5-5mg" },
@@ -103,13 +88,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "MOTS-C",
-    category: "Metabolic",
-    mechanism: "AMPK activation, mitochondrial function, insulin sensitivity",
-    typicalDose: "5-10 mg, 3-5x/week",
-    frequency: "3-5x/week (SubQ)",
-    cycleLength: "4-8 weeks",
-    stacksWith: "AOD 9604",
-    bestFor: "Metabolic optimization, endurance, insulin sensitivity",
+    category: "Metabolic Research",
+    mechanism: "AMPK activation, mitochondrial function, insulin signaling",
+    researchApplications: "Mitochondrial-derived peptide studies, AMPK pathway research, metabolic homeostasis models",
+    relatedCompounds: "AOD 9604",
     productSlugs: [
       { label: "MOTS-C", slug: "mots-c" },
     ],
@@ -122,13 +104,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "AOD 9604",
-    category: "Metabolic",
-    mechanism: "GH fragment (aa 177-191), lipolysis stimulation",
-    typicalDose: "250-500 mcg/day",
-    frequency: "Daily (SubQ)",
-    cycleLength: "8-12 weeks",
-    stacksWith: "MOTS-C, CJC/Ipa",
-    bestFor: "Fat reduction without GH side effects",
+    category: "Metabolic Research",
+    mechanism: "GH fragment (aa 177-191), lipid metabolism modulation",
+    researchApplications: "Lipid oxidation studies, GH fragment receptor interaction, adipose tissue models",
+    relatedCompounds: "MOTS-C, CJC-1295/Ipamorelin",
     productSlugs: [
       { label: "AOD 9604 5mg", slug: "aod-9604-5mg" },
     ],
@@ -140,13 +119,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "GHK-Cu",
-    category: "Skin / Anti-aging",
-    mechanism: "Copper peptide complex, collagen synthesis, antioxidant",
-    typicalDose: "1-2 mg/day",
-    frequency: "Daily (SubQ or topical)",
-    cycleLength: "4-8 weeks",
-    stacksWith: "BPC-157",
-    bestFor: "Skin rejuvenation, wound healing, hair growth",
+    category: "Dermal Research",
+    mechanism: "Copper peptide complex, collagen synthesis, antioxidant pathways",
+    researchApplications: "Extracellular matrix remodeling, collagen signaling studies, copper-peptide interactions",
+    relatedCompounds: "BPC-157",
     productSlugs: [],
     studies: [
       { title: "The human tri-peptide GHK and tissue remodeling", journal: "J Biomater Sci Polym Ed", year: 2008, pmid: "18644225" },
@@ -156,13 +132,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "PT-141",
-    category: "Sexual Health",
+    category: "General Research",
     mechanism: "Melanocortin receptor agonist (MC4R)",
-    typicalDose: "1-2 mg as needed",
-    frequency: "As needed, 45 min prior (SubQ)",
-    cycleLength: "As needed",
-    stacksWith: " - ",
-    bestFor: "Sexual dysfunction research in both males and females",
+    researchApplications: "MC4R binding studies, melanocortin pathway research, receptor selectivity profiling",
+    relatedCompounds: "-",
     productSlugs: [],
     studies: [
       { title: "Melanocortin receptor agonists in the treatment of male and female sexual dysfunctions", journal: "Expert Opin Investig Drugs", year: 2014, pmid: "25096243" },
@@ -172,13 +145,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "Selank",
-    category: "Cognitive",
+    category: "General Research",
     mechanism: "Tuftsin analogue, GABA modulation, BDNF upregulation",
-    typicalDose: "250-500 mcg/day",
-    frequency: "Daily (intranasal or SubQ)",
-    cycleLength: "2-4 weeks",
-    stacksWith: "Semax",
-    bestFor: "Anxiety, cognitive enhancement, focus",
+    researchApplications: "GABAergic signaling studies, BDNF expression research, tuftsin analog characterization",
+    relatedCompounds: "Semax",
     productSlugs: [],
     studies: [
       { title: "Peptide Selank enhances the effect of diazepam in reducing anxiety in unpredictable chronic mild stress conditions in rats", journal: "Behav Neurol", year: 2017, pmid: "28280289" },
@@ -188,13 +158,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "Semax",
-    category: "Cognitive",
+    category: "General Research",
     mechanism: "ACTH(4-10) analogue, BDNF/NGF upregulation",
-    typicalDose: "200-600 mcg/day",
-    frequency: "Daily (intranasal)",
-    cycleLength: "2-4 weeks",
-    stacksWith: "Selank",
-    bestFor: "Cognitive performance, neuroprotection, memory",
+    researchApplications: "Neurotrophic factor studies, ACTH fragment research, neuroprotection models",
+    relatedCompounds: "Selank",
     productSlugs: [],
     studies: [
       { title: "Semax, an analog of ACTH(4-10) with cognitive effects, regulates BDNF and trkB expression in the rat hippocampus", journal: "Brain Res", year: 2006, pmid: "16996037" },
@@ -204,13 +171,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "Epithalon",
-    category: "Anti-aging",
+    category: "General Research",
     mechanism: "Telomerase activation, pineal gland regulation",
-    typicalDose: "5-10 mg/day",
-    frequency: "Daily for 10-20 days (SubQ)",
-    cycleLength: "10-20 day cycles, 2-3x/year",
-    stacksWith: "GHK-Cu",
-    bestFor: "Telomere maintenance, circadian rhythm, longevity research",
+    researchApplications: "Telomerase activity assays, telomere length studies, circadian rhythm research",
+    relatedCompounds: "GHK-Cu",
     productSlugs: [],
     studies: [
       { title: "Epithalon peptide induces telomerase activity and telomere elongation in human somatic cells", journal: "Bull Exp Biol Med", year: 2003, pmid: "12937682" },
@@ -220,13 +184,10 @@ export const PEPTIDE_DATA: PeptideEntry[] = [
   },
   {
     name: "Thymosin Alpha-1",
-    category: "Immune",
+    category: "General Research",
     mechanism: "T-cell maturation, dendritic cell activation, immune modulation",
-    typicalDose: "1.6 mg, 2-3x/week",
-    frequency: "2-3x/week (SubQ)",
-    cycleLength: "4-8 weeks",
-    stacksWith: "BPC-157",
-    bestFor: "Immune enhancement, chronic infection support",
+    researchApplications: "Immune cell differentiation studies, T-cell activation assays, cytokine signaling research",
+    relatedCompounds: "BPC-157",
     productSlugs: [],
     studies: [
       { title: "Thymosin alpha 1: a comprehensive review of the literature", journal: "World J Virol", year: 2020, pmid: "33362999" },

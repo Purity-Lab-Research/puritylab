@@ -17,8 +17,8 @@ const rows = [
     purityLab: "FedEx 2-Day Cold Chain on every order",
   },
   {
-    industry: "Same price whether you buy once or monthly",
-    purityLab: "Subscribe and save up to 15% with free shipping",
+    industry: "Inconsistent pricing with no volume options",
+    purityLab: "Transparent pricing with scheduled reorder discounts",
   },
   {
     industry: "No traceability after purchase",

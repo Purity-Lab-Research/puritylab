@@ -28,7 +28,7 @@ export default function DisclaimerPage() {
               Research Use Only
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              All products sold by {SITE_NAME} are intended exclusively for in-vitro laboratory research, scientific investigation, and educational purposes. They are not intended, marketed, sold, or distributed for human consumption, self-administration, veterinary use, therapeutic application, diagnostic purposes, or any form of bodily introduction by any route including but not limited to injection, ingestion, inhalation, topical application, or any other method. Products sold by {SITE_NAME} are not FDA-approved drugs, dietary supplements, food additives, or cosmetics.
+              All products sold by Purity Lab Research LLC are intended exclusively for in-vitro laboratory research, scientific investigation, and educational purposes. They are not intended, marketed, sold, or distributed for human consumption, self-administration, veterinary use, therapeutic application, diagnostic purposes, or any form of bodily introduction by any route including but not limited to injection, ingestion, inhalation, topical application, or any other method. Products sold by Purity Lab Research LLC are not FDA-approved drugs, dietary supplements, food additives, or cosmetics.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export default function DisclaimerPage() {
               No Medical Advice
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              All product descriptions, dosing protocols, cycle recommendations, stacking suggestions, reconstitution instructions, storage guidelines, educational articles, research references, calculator outputs, and other informational content on this website are provided for educational and research reference purposes only. This information does not constitute and shall not be interpreted as medical advice, pharmaceutical guidance, therapeutic recommendations, dosing instructions for human use, diagnostic information, or any recommendation to use any product for human or animal consumption. {SITE_NAME} is not a medical provider, pharmacy, or healthcare facility.
+              All product descriptions, dosing protocols, cycle recommendations, stacking suggestions, reconstitution instructions, storage guidelines, educational articles, research references, calculator outputs, and other informational content on this website are provided for educational and research reference purposes only. This information does not constitute and shall not be interpreted as medical advice, pharmaceutical guidance, therapeutic recommendations, dosing instructions for human use, diagnostic information, or any recommendation to use any product for human or animal consumption. Purity Lab Research LLC is not a medical provider, pharmacy, or healthcare facility.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export default function DisclaimerPage() {
               Assumption of Risk
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              You expressly acknowledge and assume all risks associated with the purchase, possession, storage, handling, transport, use, and disposal of all products. You voluntarily and knowingly release, waive, and forever discharge {SITE_NAME}, its owners, officers, directors, employees, agents, affiliates, suppliers, manufacturers, fulfillment partners, and their respective successors and assigns from any and all claims, demands, causes of action, suits, damages, losses, liabilities, costs, and expenses of every kind and nature, whether known or unknown, that arise from or relate in any way to your purchase, possession, or use of any products.
+              You expressly acknowledge and assume all risks associated with the purchase, possession, storage, handling, transport, use, and disposal of all products. You voluntarily and knowingly release, waive, and forever discharge Purity Lab Research LLC, its owners, officers, directors, employees, agents, affiliates, suppliers, manufacturers, fulfillment partners, and their respective successors and assigns from any and all claims, demands, causes of action, suits, damages, losses, liabilities, costs, and expenses of every kind and nature, whether known or unknown, that arise from or relate in any way to your purchase, possession, or use of any products.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function DisclaimerPage() {
               Limitation of Liability
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
-              TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL {SITE_NAME} BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY KIND, INCLUDING BUT NOT LIMITED TO PERSONAL INJURY OR DEATH, PROPERTY DAMAGE, LOSS OF PROFITS, MEDICAL EXPENSES, REGULATORY FINES, OR LEGAL FEES, ARISING FROM OR RELATED TO YOUR USE OF THIS WEBSITE OR PURCHASE OF ANY PRODUCTS. IN NO EVENT SHALL {SITE_NAME}&apos;S AGGREGATE LIABILITY EXCEED THE LESSER OF THE AMOUNT YOU PAID FOR THE SPECIFIC PRODUCT GIVING RISE TO THE CLAIM OR ONE HUNDRED DOLLARS ($100.00 USD).
+              TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PURITY LAB RESEARCH LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY KIND, INCLUDING BUT NOT LIMITED TO PERSONAL INJURY OR DEATH, PROPERTY DAMAGE, LOSS OF PROFITS, MEDICAL EXPENSES, REGULATORY FINES, OR LEGAL FEES, ARISING FROM OR RELATED TO YOUR USE OF THIS WEBSITE OR PURCHASE OF ANY PRODUCTS. IN NO EVENT SHALL PURITY LAB RESEARCH LLC&apos;S AGGREGATE LIABILITY EXCEED THE LESSER OF THE AMOUNT YOU PAID FOR THE SPECIFIC PRODUCT GIVING RISE TO THE CLAIM OR ONE HUNDRED DOLLARS ($100.00 USD).
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function DisclaimerPage() {
               Disclaimer of Warranties
             </h2>
             <p className="mt-2 text-sm leading-relaxed uppercase font-semibold">
-              ALL PRODUCTS AND SERVICES ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. {SITE_NAME} EXPRESSLY DISCLAIMS ALL WARRANTIES INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+              ALL PRODUCTS AND SERVICES ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. PURITY LAB RESEARCH LLC EXPRESSLY DISCLAIMS ALL WARRANTIES INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export default function DisclaimerPage() {
               Certificate of Analysis Disclaimer
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              Certificates of Analysis (CoAs) represent the test results of a specific batch at the specific time of testing. CoAs do not guarantee the purity, identity, or quality of a product after the testing date. Product quality may be affected by shipping conditions, storage conditions, temperature exposure, handling, time elapsed since testing, reconstitution method, and other factors outside {SITE_NAME}&apos;s control. Third-party testing is performed by independent laboratories over which {SITE_NAME} has no control. {SITE_NAME} does not guarantee the accuracy of third-party test results and assumes no liability for errors or omissions in testing.
+              Certificates of Analysis (CoAs) represent the test results of a specific batch at the specific time of testing. CoAs do not guarantee the purity, identity, or quality of a product after the testing date. Product quality may be affected by shipping conditions, storage conditions, temperature exposure, handling, time elapsed since testing, reconstitution method, and other factors outside Purity Lab Research LLC&apos;s control. Third-party testing is performed by independent laboratories over which Purity Lab Research LLC has no control. Purity Lab Research LLC does not guarantee the accuracy of third-party test results and assumes no liability for errors or omissions in testing.
             </p>
           </div>
 
@@ -98,7 +98,7 @@ export default function DisclaimerPage() {
               Calculator and Tool Disclaimer
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              Calculators and tools provided on this website are mathematical reference tools for educational purposes. They do not constitute dosing recommendations, medical advice, or instructions for human use. {SITE_NAME} assumes no liability for the use of these tools, the accuracy of user inputs, or any decisions taken based on tool outputs.
+              Calculators and tools provided on this website are mathematical reference tools for educational purposes. They do not constitute dosing recommendations, medical advice, or instructions for human use. Purity Lab Research LLC assumes no liability for the use of these tools, the accuracy of user inputs, or any decisions taken based on tool outputs.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export default function DisclaimerPage() {
               Indemnification
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              You agree to indemnify, defend, and hold harmless {SITE_NAME} and its owners, officers, employees, agents, and affiliates from any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys&apos; fees) arising from your use of products, your violation of these terms, or any claim that products were used for human or animal consumption.
+              You agree to indemnify, defend, and hold harmless Purity Lab Research LLC and its owners, officers, employees, agents, and affiliates from any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys&apos; fees) arising from your use of products, your violation of these terms, or any claim that products were used for human or animal consumption.
             </p>
           </div>
 

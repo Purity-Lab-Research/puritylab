@@ -771,7 +771,7 @@ export default function CheckoutPage() {
                       <div>
                         <h3 className="text-sm font-semibold text-amber-800">Research Use Disclaimer</h3>
                         <p className="mt-1 text-xs text-amber-700 leading-relaxed">
-                          All products sold by Purity Lab are intended strictly for laboratory and
+                          All products sold by Purity Lab Research LLC are intended strictly for laboratory and
                           research purposes only. These products are not intended for human consumption,
                           veterinary use, or any therapeutic application.
                         </p>
@@ -790,7 +790,7 @@ export default function CheckoutPage() {
                         <a href="/policies/terms" target="_blank" className="text-[#10B981] underline">Terms of Service</a>,{" "}
                         <a href="/policies/privacy" target="_blank" className="text-[#10B981] underline">Privacy Policy</a>, and{" "}
                         <a href="/policies/refund" target="_blank" className="text-[#10B981] underline">Refund Policy</a>;
-                        (6) I acknowledge that Purity Lab makes no claims regarding therapeutic efficacy and assumes no liability for the use or misuse of products; (7) All sales are subject to the limitation of liability provisions in the Terms of Service; (8) I will comply with all applicable laws regarding research chemicals in my jurisdiction.
+                        (6) I acknowledge that Purity Lab Research LLC makes no claims regarding therapeutic efficacy and assumes no liability for the use or misuse of products; (7) All sales are subject to the limitation of liability provisions in the Terms of Service; (8) I will comply with all applicable laws regarding research chemicals in my jurisdiction.
                       </span>
                     </label>
 

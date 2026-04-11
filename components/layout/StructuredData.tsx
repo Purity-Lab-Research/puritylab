@@ -8,7 +8,7 @@ export default function StructuredData() {
     name: "Purity Lab",
     url: BASE_URL,
     description:
-      "Premium research peptides with 99%+ purity. Third-party tested with COAs. Same-day processing, worldwide shipping.",
+      "Research-grade peptides and reference compounds for in-vitro laboratory use. Every batch third-party tested with published Certificates of Analysis. Same-day processing, domestic shipping.",
     contactPoint: {
       "@type": "ContactPoint",
       email: "support@puritylabresearch.com",
@@ -16,9 +16,9 @@ export default function StructuredData() {
     },
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Windsor",
-      addressRegion: "Ontario",
-      addressCountry: "CA",
+      addressLocality: "Los Angeles",
+      addressRegion: "California",
+      addressCountry: "US",
     },
   };
 

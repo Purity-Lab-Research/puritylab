@@ -196,9 +196,9 @@ export default function CookiePolicyPage() {
               6. Governing Law
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              This Cookie Policy is governed by the laws of the Province of
-              California, United States, including the Personal Information Protection and
-              Electronic Documents Act (CCPA). For full details on how we
+              This Cookie Policy is governed by the laws of the State of
+              California, United States, including the California Consumer Privacy Act
+              (CCPA). Purity Lab Research LLC is the data controller. For full details on how we
               collect, use, and protect your personal information, please see
               our{" "}
               <a href="/policies/privacy" className="text-[#10B981] hover:underline">

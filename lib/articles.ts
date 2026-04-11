@@ -11,27 +11,27 @@ export interface Article {
 }
 
 const DISCLAIMER =
-  "IMPORTANT DISCLAIMER: This article is provided for educational and informational purposes only. All information is compiled from published peer-reviewed research and is intended to provide context for laboratory researchers. Nothing in this article constitutes medical, pharmaceutical, therapeutic, diagnostic, or healthcare advice of any kind. This article does not recommend, suggest, or endorse the use of any product for human or animal consumption. All products referenced are for in-vitro laboratory research only. Dosing information, protocols, cycle recommendations, and stacking suggestions referenced herein are drawn from published research studies and are provided solely as educational context for researchers. They do not constitute instructions or recommendations for human use. Purity Lab, its owners, employees, and affiliates assume no liability for any actions taken based on the information in this article. Always consult a qualified, licensed healthcare professional before making any health-related decisions. Use of any product in a manner inconsistent with its labeled research purpose is strictly prohibited and done entirely at the user's own risk.";
+  "DISCLAIMER: This article is provided for informational and educational purposes only. All information is compiled from published peer-reviewed research and is intended solely for qualified laboratory researchers. Nothing in this article constitutes medical, pharmaceutical, therapeutic, diagnostic, or healthcare advice. This article does not recommend, suggest, or endorse the use of any product for human or animal consumption. All products referenced are intended for in-vitro laboratory research use only and are not intended for any diagnostic, therapeutic, or human use. Purity Lab, its owners, employees, and affiliates assume no liability for any actions taken based on the information in this article. Use of any product in a manner inconsistent with its labeled research purpose is strictly prohibited.";
 
 export const articles: Article[] = [
   // ─── Getting Started ───
   {
     slug: "getting-started",
-    title: "New to Peptides? The Complete Beginner's Guide",
-    tag: "Beginner",
+    title: "Introduction to Peptide Chemistry",
+    tag: "Fundamentals",
     category: "getting-started",
     readTime: "8 min read",
     excerpt:
-      "Everything you need to know before your first peptide purchase. What they are, how they work, and the terminology you'll encounter.",
-    content: `Peptides are short chains of amino acids, typically between 2 and 50, linked together by peptide bonds. They occur naturally in every living organism. Your body produces hundreds of them to regulate everything from immune function to tissue repair to hormone release. Research peptides are synthetic versions of these naturally occurring compounds, manufactured to extremely high purity standards for use in scientific study.
+      "A foundational overview of peptide chemistry, including molecular structure, classification, and their role in contemporary research applications.",
+    content: `Peptides are short chains of amino acids, typically between 2 and 50, linked together by peptide bonds. They occur naturally in every living organism and play essential roles in biological signaling, enzyme regulation, and cellular communication. Research peptides are synthetic versions of these naturally occurring compounds, manufactured to high purity standards for use in laboratory investigation.
 
-Athletes and biohackers have become increasingly interested in peptides because of the growing body of research around their potential applications. BPC-157, for instance, has been studied extensively for its role in accelerating soft tissue healing. CJC-1295 and Ipamorelin are studied for their ability to stimulate natural growth hormone release. MOTS-C is being researched for its effects on metabolism and endurance. The range of studied applications is broad and growing.
+The breadth of peptide research continues to expand across multiple scientific disciplines. BPC-157, for instance, has been studied in preclinical models for its role in tissue repair signaling pathways. CJC-1295 and Ipamorelin are investigated for their interaction with growth hormone releasing mechanisms. MOTS-C is the subject of published research examining mitochondrial signaling and metabolic regulation. These represent only a small portion of the active research landscape.
 
-Before diving in, it's important to understand the legal and ethical framework. Research peptides are sold strictly for in-vitro laboratory research. They are not approved for human consumption, self-administration, or therapeutic use. By purchasing research peptides, you are confirming that you are 18 or older and that products will be handled by qualified researchers. This is a legal requirement, not a suggestion.
+All products sold by Purity Lab are intended strictly for in-vitro laboratory research. They are not approved for human consumption, therapeutic use, or diagnostic purposes. By purchasing research chemicals, the buyer confirms that all materials will be used exclusively in a qualified laboratory setting and handled by trained researchers.
 
-Here's some terminology you'll encounter. "Lyophilized" means freeze-dried, peptides ship as a dry powder in a vial. "Reconstitution" is the process of adding bacteriostatic water to that powder to create an injectable solution. "Subcutaneous" (SubQ) refers to injection into the fatty layer just beneath the skin, which is the most common administration route in research. "Intramuscular" (IM) means injection into muscle tissue. "mcg" stands for micrograms, most peptide doses are measured in micrograms, not milligrams.
+Key terminology used in peptide chemistry includes the following. "Lyophilized" refers to the freeze-drying process used to stabilize peptides as a dry powder for storage and transport. "Reconstitution" describes the process of dissolving lyophilized powder into a solvent such as bacteriostatic water to prepare a solution for laboratory assays. "HPLC" (High-Performance Liquid Chromatography) is the standard analytical method used to determine peptide purity. "Mass Spectrometry" (MS) is used to confirm molecular identity by measuring molecular weight. "mcg" denotes micrograms, the standard unit of measurement for peptide quantities in research.
 
-What should you expect when you receive your first order? You'll get sealed vials containing a white or off-white lyophilized powder. You'll need bacteriostatic water and insulin syringes to reconstitute and measure doses. The powder is stable at room temperature during shipping, but once reconstituted, the solution should be refrigerated at 2-8°C and used within 30 days. Always handle vials with clean hands and swab rubber stoppers with alcohol before each use.
+Proper storage and handling are essential for maintaining compound integrity. Lyophilized peptides are stable at room temperature during transit, but once reconstituted, solutions should be stored at 2-8 degrees Celsius and used within the timeframe specified on the product documentation. All vials should be handled using aseptic technique and stored according to label instructions.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: ["bpc-157-5mg", "bac-water-10ml", "syringes"],
@@ -39,21 +39,21 @@ ${DISCLAIMER}`,
   },
   {
     slug: "how-to-reconstitute",
-    title: "How to Reconstitute & Dose Peptides",
-    tag: "Guide",
+    title: "Laboratory Preparation of Lyophilized Compounds",
+    tag: "Lab Methods",
     category: "getting-started",
     readTime: "5 min read",
     excerpt:
-      "Step-by-step guide to reconstituting lyophilized peptides with bacteriostatic water and calculating accurate doses.",
-    content: `Reconstitution is the process of dissolving lyophilized (freeze-dried) peptide powder into a liquid solution so it can be accurately measured and used in research. The standard solvent is bacteriostatic water (BAC water), which is sterile water containing 0.9% benzyl alcohol as a preservative. This preservative is what allows the reconstituted solution to remain stable for up to 30 days in the refrigerator, compared to sterile water which has no preservative and must be used immediately.
+      "Standard laboratory procedures for reconstituting lyophilized peptide reference standards, including solvent selection, concentration calculations, and proper storage protocols.",
+    content: `Reconstitution is the process of dissolving lyophilized (freeze-dried) peptide powder into a liquid solution so it can be accurately measured and used in laboratory assays. The standard solvent is bacteriostatic water (BAC water), which is sterile water containing 0.9% benzyl alcohol as a preservative. This preservative allows the reconstituted solution to remain stable for up to 30 days under refrigeration, compared to sterile water which contains no preservative and must be used immediately.
 
-Here's the step-by-step process. First, gather your supplies: the peptide vial, a vial of bacteriostatic water, an insulin syringe (typically 1ml/29 gauge), and alcohol swabs. Swab the rubber stopper of both the peptide vial and the BAC water vial with alcohol and let them air dry for a few seconds. Draw your desired amount of BAC water into the syringe, a common amount is 1ml or 2ml depending on the concentration you want.
+Standard laboratory procedure is as follows. Gather the necessary materials: the peptide vial, a vial of bacteriostatic water, appropriate syringes, and alcohol swabs. Swab the rubber stopper of both the peptide vial and the BAC water vial with alcohol and allow them to air dry. Draw the desired volume of BAC water into the syringe. Common volumes are 1 mL or 2 mL, depending on the target concentration for the assay.
 
-Insert the needle into the peptide vial through the rubber stopper. Here's the critical part: do not spray the water directly onto the powder. Instead, aim the needle at the inside wall of the vial and let the water trickle down slowly. This prevents damaging the peptide's molecular structure. Once all the water is in the vial, do not shake it. Gently roll the vial between your palms or swirl it in small circles until the powder is fully dissolved. This usually takes 1-3 minutes. The solution should be clear with no visible particles.
+Insert the needle into the peptide vial through the rubber stopper. It is critical to avoid directing the solvent stream directly onto the lyophilized powder, as this can disrupt molecular structure. Instead, direct the needle toward the inside wall of the vial and allow the water to flow down gently. Once all solvent has been added, do not agitate the vial. Gently roll the vial between the palms or swirl in small circles until the powder is fully dissolved. This typically requires 1 to 3 minutes. The resulting solution should be clear with no visible particulates.
 
-Now for dosing math. If you have a 5mg vial and you add 1ml of BAC water, every 0.1ml (10 units on an insulin syringe) contains 500mcg (0.5mg) of peptide. If you add 2ml, every 0.1ml contains 250mcg. The formula is: dose per unit = (total peptide in mcg) / (total water in units). So for a 10mg vial reconstituted with 2ml: 10,000mcg / 200 units = 50mcg per unit. To get a 250mcg dose, you'd draw 5 units.
+Concentration calculations are straightforward. For a 5 mg vial reconstituted with 1 mL of solvent, each 0.1 mL contains 500 mcg (0.5 mg). If reconstituted with 2 mL, each 0.1 mL contains 250 mcg. The general formula is: concentration per unit volume = (total peptide mass in mcg) / (total solvent volume in units). For a 10 mg vial reconstituted with 2 mL: 10,000 mcg / 200 units = 50 mcg per unit.
 
-After reconstitution, store the vial upright in the refrigerator at 2-8°C. Never freeze a reconstituted peptide. Use within 28-30 days. Always swab the stopper before each draw, and use a fresh syringe every time. If the solution becomes cloudy, discolored, or shows floating particles, discard it.
+Following reconstitution, store the vial upright under refrigeration at 2-8 degrees Celsius. Do not freeze reconstituted peptide solutions. Use within 28-30 days. Swab the stopper with alcohol before each withdrawal and use a fresh sterile syringe for each aliquot. Discard any solution that becomes cloudy, discolored, or shows particulate matter.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -89,21 +89,21 @@ ${DISCLAIMER}`,
   // ─── By Goal ───
   {
     slug: "peptides-for-recovery",
-    title: "The Complete Guide to Peptides for Injury Recovery",
-    tag: "Recovery",
+    title: "Published Research on BPC-157 and Thymosin Beta-4 in Preclinical Models",
+    tag: "Tissue Research",
     category: "by-goal",
     readTime: "7 min read",
     excerpt:
-      "How BPC-157 and TB500 are studied for soft tissue repair, joint recovery, and accelerated healing from injuries and surgery.",
-    content: `Recovery peptides are the most widely studied and commonly used category in the research peptide space. Two compounds dominate the conversation: BPC-157 (Body Protection Compound-157) and TB500 (a synthetic fragment of Thymosin Beta-4). Both have been subjects of extensive research for their roles in tissue repair, and they work through different but complementary mechanisms.
+      "A review of published preclinical research on BPC-157 and Thymosin Beta-4, covering their molecular mechanisms, signaling pathways, and findings in tissue repair models.",
+    content: `BPC-157 and Thymosin Beta-4 (TB-4) are among the most extensively studied peptides in preclinical tissue research. Both have been the subject of numerous peer-reviewed publications investigating their molecular mechanisms in the context of tissue repair signaling, and they operate through distinct but complementary pathways.
 
-BPC-157 is a pentadecapeptide, a chain of 15 amino acids, originally isolated from human gastric juice. Research has focused on its ability to accelerate the healing of a wide range of tissues, including tendons, ligaments, muscles, and even the gastrointestinal tract. Studies have shown it promotes angiogenesis (the formation of new blood vessels), which is critical for delivering nutrients and oxygen to damaged tissue. It's been studied in the context of tendon-to-bone healing, muscle tears, and inflammatory conditions. Common research dosing ranges from 250-500mcg per day administered subcutaneously near the injury site.
+BPC-157 is a pentadecapeptide (a chain of 15 amino acids) originally isolated from human gastric juice. Published research has examined its effects across a range of tissue types, including tendon, ligament, muscle, bone, and gastrointestinal epithelium. Studies in animal models have demonstrated that BPC-157 promotes angiogenesis (the formation of new blood vessels), upregulates growth factor expression (including VEGF), and modulates nitric oxide signaling. Published preclinical studies have specifically examined BPC-157 in models of tendon-to-bone healing, muscle injury, and gastrointestinal lesions.
 
-TB500 is a synthetic version of a naturally occurring 43-amino acid peptide called Thymosin Beta-4. Its primary studied mechanism involves upregulating actin, a cell-building protein that plays a crucial role in cell migration, wound healing, and the formation of new blood vessels. Research suggests TB500 promotes systemic healing, meaning its effects aren't limited to the injection site. It's commonly studied for flexibility, reduced inflammation, and accelerated recovery from muscle and connective tissue injuries. Typical research dosing is in the range of 2-5mg administered twice weekly.
+Thymosin Beta-4 (TB-4) is a naturally occurring 43-amino acid peptide. The primary mechanism studied in published literature involves the upregulation of actin, a protein central to cell migration, wound closure, and neovascularization. Research published in peer-reviewed journals suggests that TB-4 promotes tissue repair through systemic signaling pathways rather than localized effects alone. Studies have examined its role in cell migration, inflammatory modulation, and connective tissue remodeling.
 
-The combination of BPC-157 and TB500 is one of the most popular stacks in peptide research, and for good reason. BPC-157 tends to work locally at the injury site while TB500 works systemically. Together, they address tissue repair from multiple angles, local healing, systemic inflammation reduction, blood vessel formation, and cell migration. Our Wolverine Blend combines both peptides in a single vial for convenience.
+Published literature has also examined the combined effects of BPC-157 and Thymosin Beta-4 in preclinical models. BPC-157 appears to operate through localized signaling pathways while TB-4 acts through broader systemic mechanisms. Together, published studies suggest they may address tissue repair signaling from complementary angles, including angiogenesis, inflammatory modulation, and extracellular matrix remodeling.
 
-Typical recovery protocols run 4-6 weeks. Many researchers run a loading phase of higher doses for the first 2 weeks, then reduce to a maintenance dose. After the cycle, a 2-4 week break is standard before beginning another cycle if needed. Results in research settings are typically observed within the first 2-3 weeks, with continued improvement throughout the cycle.
+It is important to note that the research summarized here is derived from preclinical (animal and in-vitro) models. These findings have not been confirmed in controlled human clinical trials, and no conclusions regarding therapeutic efficacy should be drawn from this summary.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -115,21 +115,21 @@ ${DISCLAIMER}`,
   },
   {
     slug: "peptides-for-fat-loss",
-    title: "Peptides for Fat Loss: What Works and What Doesn't",
-    tag: "Weight Management",
+    title: "GLP-1 Receptor Agonists: A Review of Published Research",
+    tag: "Metabolic Research",
     category: "by-goal",
     readTime: "6 min read",
     excerpt:
-      "An honest look at MOTS-C, AOD 9604, and growth hormone peptides for body composition, what the research actually shows.",
-    content: `The peptide fat loss space is full of marketing hype, so let's cut through it. There are peptides with legitimate research backing for metabolic optimization and body composition, and there are compounds that get wildly oversold. Understanding the difference will save you money and set realistic expectations.
+      "A literature review of published research on GLP-1 receptor agonists and related metabolic peptides, including MOTS-C, AOD 9604, and incretin-pathway compounds.",
+    content: `Several peptide compounds have been the subject of extensive published research in the field of metabolic signaling and energy regulation. This article summarizes key findings from the peer-reviewed literature on compounds relevant to metabolic pathway research.
 
-MOTS-C (Mitochondrial-Derived Peptide) is one of the most exciting peptides in metabolic research. It's a 16-amino acid peptide encoded in the mitochondrial genome that plays a role in metabolic homeostasis. Research has shown MOTS-C activates AMPK (a master metabolic regulator), improves insulin sensitivity, and promotes fatty acid oxidation. In animal studies, MOTS-C administration prevented age-dependent and high-fat-diet-induced insulin resistance. It's not a "fat burner" in the traditional sense, it's a metabolic optimizer that helps your body process fuel more efficiently. Research doses typically range from 5-10mg administered subcutaneously several times per week.
+MOTS-C (Mitochondrial Open Reading Frame of the 12S rRNA-c) is a 16-amino acid peptide encoded in the mitochondrial genome. Published research has demonstrated that MOTS-C activates AMPK (adenosine monophosphate-activated protein kinase), a central regulator of cellular energy homeostasis. Studies in animal models have shown that MOTS-C influences insulin sensitivity and fatty acid oxidation pathways. Published findings in preclinical models indicate that MOTS-C administration prevented age-dependent and high-fat-diet-induced insulin resistance. These results have made MOTS-C a compound of significant interest in metabolic and mitochondrial research.
 
-AOD 9604 is a modified fragment of human growth hormone (specifically amino acids 177-191). It was originally developed for its potential anti-obesity effects. Research suggests it stimulates lipolysis (fat breakdown) and inhibits lipogenesis (fat formation) without the negative effects on blood sugar or growth that full-length growth hormone can cause. This makes it an interesting research compound for targeted fat reduction. It's typically studied at doses of 250-500mcg per day.
+AOD 9604 is a modified fragment of human growth hormone comprising amino acids 177-191. Published research has examined its effects on lipolysis (fat breakdown) and lipogenesis (fat formation) pathways. Studies suggest it interacts with lipid metabolism signaling without affecting blood glucose regulation or growth pathways associated with full-length growth hormone. These properties have made AOD 9604 a subject of interest in lipid metabolism research.
 
-CJC-1295/Ipamorelin is a growth hormone secretagogue combination that stimulates your body's natural growth hormone release. While not directly a "fat loss peptide," elevated growth hormone levels are associated with improved body composition, including increased lean mass and decreased fat mass. The combination is popular because CJC-1295 provides sustained GH elevation while Ipamorelin provides sharp GH pulses, and neither significantly raises cortisol or prolactin. Research dosing is typically 100-300mcg of each, administered before bed when natural GH release peaks.
+CJC-1295 and Ipamorelin are growth hormone secretagogues that have been studied for their interaction with the GHRH receptor and ghrelin receptor, respectively. Published research has examined the pharmacology of these compounds in the context of growth hormone releasing mechanisms. CJC-1295 has been studied for its effects on sustained GH-axis signaling, while Ipamorelin has been characterized in the literature for its selectivity in stimulating GH release without significantly affecting cortisol or prolactin pathways.
 
-What doesn't work as well as marketing claims suggest? Any peptide marketed as a miracle fat burner that requires no dietary changes is overpromising. Peptides are tools that can optimize metabolic processes, but they work best in the context of proper nutrition and exercise. They're not shortcuts, they're studied as optimizers for people who already have the fundamentals in place.
+All findings referenced in this article are derived from published preclinical and clinical research. This summary is intended to provide context for laboratory researchers and does not constitute recommendations for any therapeutic application.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -146,23 +146,21 @@ ${DISCLAIMER}`,
   // ─── Deep Dives ───
   {
     slug: "bpc-157-guide",
-    title: "BPC-157: Everything You Need to Know",
+    title: "BPC-157: Molecular Biology and Published Research",
     tag: "Deep Dive",
     category: "deep-dives",
     readTime: "10 min read",
     excerpt:
-      "The definitive research guide to Body Protection Compound-157, mechanisms, protocols, dosing, storage, and stacking options.",
-    content: `BPC-157, or Body Protection Compound-157, is a synthetic pentadecapeptide consisting of 15 amino acids. It's derived from a protein found in human gastric juice and has become one of the most extensively studied peptides in the research community. Since the mid-1990s, over 100 published research studies have examined its effects on tissue repair, inflammation, and wound healing, an unusually robust body of evidence for a research peptide.
+      "A detailed review of the molecular biology of Body Protection Compound-157, including its amino acid sequence, studied mechanisms of action, and key findings from published preclinical research.",
+    content: `BPC-157 (Body Protection Compound-157) is a synthetic pentadecapeptide consisting of 15 amino acids. It is derived from a protein found in human gastric juice and has been the subject of over 100 published research studies since the mid-1990s. Published investigations have examined its molecular interactions in the context of tissue repair signaling, inflammatory modulation, and wound healing pathways.
 
-The primary mechanisms of action studied include angiogenesis (formation of new blood vessels to deliver nutrients to injured tissue), upregulation of growth factor expression (including VEGF and EGF), modulation of the nitric oxide system, and interaction with the dopamine system. Research has shown protective effects on tendons, ligaments, muscles, the gastrointestinal tract, and even bone. Notably, BPC-157 has demonstrated effects on tendon-to-bone healing in animal models, which is particularly relevant for research into sports injuries and post-surgical recovery.
+The primary mechanisms of action described in published literature include promotion of angiogenesis (formation of new blood vessels), upregulation of growth factor expression (including VEGF and EGF), modulation of the nitric oxide (NO) system, and interaction with dopaminergic signaling pathways. Preclinical studies have reported effects on tendon, ligament, muscle, gastrointestinal epithelium, and bone tissue models. Of particular interest in the literature are studies examining BPC-157 in tendon-to-bone healing models and gastrointestinal lesion models.
 
-Common research dosing falls in the range of 250-500mcg per day for a standard 5mg vial, or 500-1000mcg per day for researchers using 10mg or 20mg vials for more aggressive protocols. Administration is typically subcutaneous (SubQ), with many researchers injecting near the area of interest. The peptide appears to have systemic effects regardless of injection site, but proximity to the target tissue is a common research practice. Once-daily administration is standard, though some protocols split the daily dose into two injections (morning and evening).
+Published research has also examined BPC-157 in combination with Thymosin Beta-4 (TB-4) in preclinical settings. The literature suggests these two peptides may operate through complementary signaling mechanisms, with BPC-157 acting primarily through localized pathways and TB-4 through broader systemic signaling cascades.
 
-Typical cycle length is 4-6 weeks, followed by a 2-4 week break before beginning a new cycle. Results in research settings are generally observed within the first 1-2 weeks. BPC-157 is commonly stacked with TB500 for a synergistic approach to recovery, BPC-157 provides localized healing while TB500 works systemically. Our Wolverine Blend was designed specifically for this combination, offering both peptides in a single convenient vial.
+Regarding compound stability: lyophilized (unreconstituted) BPC-157 is stable at room temperature for extended periods, which supports safe transport and storage. Once reconstituted with bacteriostatic water, the solution should be stored under refrigeration at 2-8 degrees Celsius and used within 28-30 days. Reconstituted solutions should not be frozen. The compound should be protected from light and excessive heat. The reconstituted solution should appear clear and colorless; discard any solution that shows cloudiness or particulate matter.
 
-Regarding storage: lyophilized (unreconstituted) BPC-157 is stable at room temperature for extended periods, making it safe during shipping. Once reconstituted with bacteriostatic water, store the vial refrigerated at 2-8°C and use within 28-30 days. Do not freeze reconstituted peptides. Protect from light and heat. The reconstituted solution should be clear and colorless, discard if it becomes cloudy or shows particulate matter.
-
-Side effects reported in the research literature are minimal. BPC-157 has a very high safety profile in animal studies, with no toxic effects reported even at doses far exceeding typical research ranges. However, as with any research compound, individual responses can vary, and long-term safety data in humans is limited.
+Published safety data from preclinical studies indicate a favorable toxicity profile in animal models. However, it is essential to note that the majority of published BPC-157 research has been conducted in animal and in-vitro models. These findings have not been replicated in controlled human clinical trials, and no conclusions regarding therapeutic safety or efficacy should be drawn from this summary.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -175,21 +173,21 @@ ${DISCLAIMER}`,
   },
   {
     slug: "understanding-growth-hormone-secretagogues",
-    title: "Understanding Growth Hormone Secretagogues",
+    title: "Growth Hormone Secretagogues: Receptor Pharmacology and Research",
     tag: "Deep Dive",
     category: "deep-dives",
     readTime: "8 min read",
     excerpt:
-      "How CJC-1295, Ipamorelin, and other GH secretagogues work, and why they're studied as alternatives to synthetic HGH.",
-    content: `Growth hormone secretagogues (GHS) are a class of peptides that stimulate the pituitary gland to release growth hormone (GH) naturally. This is fundamentally different from synthetic human growth hormone (HGH), which introduces exogenous GH directly into the body. The distinction matters because GHS work with your body's natural feedback loops, while exogenous HGH bypasses them, which is why HGH carries risks of shutdown, insulin resistance, and other side effects that GHS largely avoid.
+      "A review of the receptor pharmacology of growth hormone secretagogues, including CJC-1295 and Ipamorelin, with a focus on GHRH receptor and ghrelin receptor signaling mechanisms.",
+    content: `Growth hormone secretagogues (GHS) are a class of peptides studied for their interaction with receptors involved in growth hormone (GH) release from the anterior pituitary. Published research has characterized their receptor pharmacology in detail, distinguishing them from exogenous growth hormone by their mechanism of action through endogenous signaling pathways rather than direct hormone supplementation.
 
-CJC-1295 (without DAC) is a modified version of Growth Hormone Releasing Hormone (GHRH). It acts on the GHRH receptor in the pituitary to stimulate GH release. The "without DAC" distinction is important, the original CJC-1295 with Drug Affinity Complex had a much longer half-life and caused sustained GH elevation that blunted the natural pulsatile pattern. The version without DAC has a shorter half-life (about 30 minutes), which preserves the natural pulse pattern and is generally preferred in research. It raises baseline GH levels without the blunting effect.
+CJC-1295 (without DAC) is a modified analog of Growth Hormone Releasing Hormone (GHRH). It acts as an agonist at the GHRH receptor in the anterior pituitary. Published pharmacokinetic studies have characterized the distinction between CJC-1295 with and without the Drug Affinity Complex (DAC). The variant with DAC exhibits a significantly longer half-life, resulting in sustained receptor activation that alters the endogenous pulsatile release pattern. The variant without DAC has a shorter half-life (approximately 30 minutes), which preserves the native pulsatile signaling pattern and is more commonly referenced in the research literature.
 
-Ipamorelin is a selective growth hormone secretagogue and ghrelin receptor agonist. What makes it unique is its selectivity, it stimulates GH release without significantly raising cortisol, prolactin, or aldosterone. Most other GH secretagogues (like GHRP-6 or GHRP-2) increase hunger hormones and cortisol to varying degrees. Ipamorelin keeps things clean, which is why it's become the preferred GH secretagogue in many research protocols. It produces sharp GH pulses that mimic the body's natural release pattern.
+Ipamorelin is a selective growth hormone secretagogue and ghrelin receptor (GHS-R1a) agonist. Published pharmacological studies have characterized its selectivity profile, demonstrating that it stimulates GH release without significantly affecting cortisol, prolactin, or aldosterone levels. This selectivity distinguishes it from earlier ghrelin receptor agonists such as GHRP-6 and GHRP-2, which exhibit broader receptor activity profiles. Published binding studies confirm that Ipamorelin produces GH release pulses consistent with endogenous signaling patterns.
 
-The CJC-1295/Ipamorelin combination is studied for synergistic effects. CJC-1295 amplifies the overall GH signal while Ipamorelin triggers sharp release pulses. Together, they produce a robust but physiologically natural GH elevation pattern. Research suggests benefits across body composition (increased lean mass, decreased body fat), recovery (faster healing, improved sleep quality), and overall well-being. Timing typically follows the body's natural GH rhythm, administration before bed or first thing in the morning on an empty stomach is standard in research protocols.
+Published research has examined the combination of CJC-1295 and Ipamorelin for potential synergistic receptor interactions. CJC-1295 provides sustained GHRH receptor activation while Ipamorelin produces acute ghrelin receptor stimulation. The combined pharmacological profile has been characterized in the literature as producing a GH elevation pattern that more closely resembles physiological release than either compound alone.
 
-Expected effects in research settings include improved sleep quality (often one of the first noticed effects), gradual improvements in body composition over 8-12 weeks, enhanced recovery from training and injuries, and improved skin quality. These are subtle, progressive effects, not dramatic overnight changes. GH secretagogues work best as part of a long-term optimization strategy, not as a quick fix. Research cycles typically run 8-12 weeks, with some protocols extending to 16 weeks before a break.
+All findings referenced in this article are derived from published preclinical and pharmacological studies. This summary is intended to provide context for laboratory researchers investigating GH-axis signaling and does not constitute recommendations for any therapeutic application.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -207,15 +205,15 @@ ${DISCLAIMER}`,
     readTime: "10 min read",
     excerpt:
       "A comprehensive look at the GLP-1 receptor agonist family, how they differ, what the clinical data shows, and why they dominate metabolic research in 2026.",
-    content: `GLP-1 (glucagon-like peptide-1) receptor agonists have become the most discussed class of peptides in both clinical and research settings. Originally developed for glycemic control, these compounds have demonstrated remarkable effects on body composition, appetite regulation, and metabolic flexibility. Three compounds lead the conversation in 2026: Semaglutide, Tirzepatide, and Retatrutide. Each represents a different generation of receptor targeting, and understanding the differences is essential for any metabolic researcher.
+    content: `GLP-1 (glucagon-like peptide-1) receptor agonists represent one of the most actively researched classes of peptides in pharmacological science. Originally investigated for glycemic regulation, these compounds have been the subject of extensive published research examining their receptor pharmacology and metabolic signaling mechanisms. Three compounds are prominent in the current literature: Semaglutide, Tirzepatide, and Retatrutide. Each represents a different approach to incretin receptor targeting.
 
-Semaglutide is the single-receptor standard. It targets the GLP-1 receptor exclusively, suppressing appetite through central nervous system signaling, slowing gastric emptying, and improving insulin sensitivity. In the landmark STEP trials, participants on Semaglutide achieved average weight reductions of 15-17% over 68 weeks. Its once-weekly dosing schedule and extensive clinical evidence base (spanning Phase 3 and Phase 4 programs with thousands of participants) make it the reference compound against which all newer metabolic peptides are measured. Semaglutide has full FDA approval for specific indications, giving it the most robust regulatory and clinical backing of any metabolic peptide.
+Semaglutide is a selective GLP-1 receptor agonist. Published research has characterized its mechanism of action through central nervous system signaling pathways, gastric motility modulation, and insulin sensitivity pathways. The STEP clinical trial program generated extensive published data on Semaglutide's pharmacological profile, with Phase 3 and Phase 4 studies enrolling thousands of subjects. Semaglutide has FDA approval for specific indications, giving it the most extensive regulatory and clinical evidence base of any compound in this class.
 
-Tirzepatide adds a second receptor to the equation. As a dual GLP-1/GIP (glucose-dependent insulinotropic polypeptide) agonist, it activates two incretin pathways simultaneously. The SURMOUNT trial program demonstrated that this dual mechanism produces greater metabolic effects than GLP-1 alone. Participants on Tirzepatide lost approximately 4-12 additional pounds compared to Semaglutide in head-to-head comparisons. The GIP component enhances insulin secretion in a glucose-dependent manner and appears to amplify the metabolic response beyond what GLP-1 activation achieves independently. Tirzepatide also has FDA approval for specific indications.
+Tirzepatide is a dual GLP-1/GIP (glucose-dependent insulinotropic polypeptide) receptor agonist that activates two incretin pathways simultaneously. The SURMOUNT clinical trial program produced published data demonstrating that dual-receptor activation produces distinct pharmacological effects compared to single-receptor targeting. The GIP receptor component enhances insulin secretion in a glucose-dependent manner and appears to amplify the metabolic signaling response beyond what GLP-1 receptor activation achieves independently. Tirzepatide also has FDA approval for specific indications.
 
-Retatrutide pushes the boundary further with triple-receptor activation. It targets GLP-1, GIP, and glucagon receptors simultaneously. Phase 2 trial data showed up to 24% body weight reduction, surpassing anything seen with single or dual-receptor compounds. The glucagon receptor activation is the key differentiator. While GLP-1 and GIP handle appetite suppression and insulin regulation, glucagon receptor activation increases energy expenditure and promotes fat oxidation directly. This three-pronged approach creates a synergistic metabolic effect that has generated extraordinary excitement in the research community. Retatrutide is still in clinical development and does not yet have regulatory approval.
+Retatrutide represents a triple-receptor agonist targeting GLP-1, GIP, and glucagon receptors simultaneously. Phase 2 clinical trial data have been published examining its pharmacological profile. The glucagon receptor activation is the key differentiator from dual-receptor compounds. While GLP-1 and GIP receptor activation address incretin signaling, glucagon receptor activation engages energy expenditure and lipid oxidation pathways directly. Retatrutide is currently in clinical development and does not yet have regulatory approval.
 
-For researchers, the progression from single to dual to triple-receptor targeting illustrates an important principle in peptide pharmacology: multi-receptor engagement can produce effects that exceed the sum of individual receptor contributions. The metabolic signaling network is interconnected, and compounds that address multiple nodes simultaneously tend to produce more robust outcomes. Understanding these mechanisms and their clinical evidence base is fundamental to designing meaningful metabolic research protocols.
+For researchers, the progression from single to dual to triple-receptor targeting illustrates an important principle in peptide pharmacology: multi-receptor engagement can produce pharmacological effects that differ qualitatively from single-target activation. The metabolic signaling network is interconnected, and compounds that engage multiple receptor nodes simultaneously are an active area of investigation. All findings referenced here are from published clinical and preclinical research.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -234,15 +232,15 @@ ${DISCLAIMER}`,
     readTime: "8 min read",
     excerpt:
       "How mitochondrial-targeted peptides work, what separates MOTS-C from SS-31, and why cellular energy research is one of the fastest-growing areas in peptide science.",
-    content: `Mitochondria are the primary energy producers in every cell. When mitochondrial function declines, the downstream effects touch virtually every system in the body: reduced ATP production, increased oxidative stress, impaired recovery, accelerated aging, and metabolic dysfunction. Mitochondrial-targeted peptides represent a new frontier in research because they address cellular energy at its source rather than targeting downstream symptoms.
+    content: `Mitochondria are the primary sites of ATP production in eukaryotic cells. Declining mitochondrial function has been associated in published research with reduced ATP output, increased oxidative stress, and disrupted metabolic signaling. Mitochondrial-targeted peptides represent an active area of research because they interact with cellular energy production pathways at the organelle level.
 
-MOTS-C (Mitochondrial Open Reading Frame of the 12S rRNA-c) is a 16-amino acid peptide encoded directly in the mitochondrial genome. This is significant because it means MOTS-C is produced by mitochondria themselves as a signaling molecule. Research has shown that MOTS-C activates AMPK (adenosine monophosphate-activated protein kinase), a master metabolic regulator that influences glucose uptake, fatty acid oxidation, and insulin sensitivity. In animal studies, MOTS-C administration prevented both age-dependent and high-fat-diet-induced insulin resistance. It also demonstrated effects on exercise capacity and metabolic homeostasis under stress conditions. MOTS-C levels naturally decline with age, which has made it a compound of major interest in both metabolic and longevity research. Research dosing typically ranges from 5-10mg administered subcutaneously several times per week.
+MOTS-C (Mitochondrial Open Reading Frame of the 12S rRNA-c) is a 16-amino acid peptide encoded directly in the mitochondrial genome. This is significant because MOTS-C is produced by mitochondria as an endogenous signaling molecule. Published research has demonstrated that MOTS-C activates AMPK (adenosine monophosphate-activated protein kinase), a central regulator of cellular energy homeostasis that influences glucose uptake, fatty acid oxidation, and insulin signaling pathways. In published animal studies, MOTS-C administration prevented both age-dependent and high-fat-diet-induced insulin resistance. Published findings also describe effects on exercise capacity models and metabolic homeostasis under stress conditions. MOTS-C levels have been shown to decline with age in published studies, making it a compound of significant interest in metabolic and aging research.
 
-SS-31 (Elamipretide) takes a fundamentally different approach. Rather than acting as a metabolic signaling molecule like MOTS-C, SS-31 is a synthetic tetrapeptide that physically targets the inner mitochondrial membrane. It concentrates within mitochondria at concentrations 1,000-5,000 times higher than the extracellular space, where it interacts with cardiolipin. Cardiolipin is a phospholipid that is essential for the structural integrity of the electron transport chain and efficient ATP production. When cardiolipin is damaged by oxidative stress (a hallmark of aging and disease), the electron transport chain becomes less efficient, producing less ATP and more reactive oxygen species in a destructive feedback loop. SS-31 stabilizes cardiolipin interactions, restoring electron transport chain efficiency and breaking this cycle. Clinical trials have investigated SS-31 for heart failure, Barth syndrome, age-related mitochondrial dysfunction, and skeletal muscle performance.
+SS-31 (Elamipretide) operates through a fundamentally different mechanism. Rather than functioning as a metabolic signaling molecule, SS-31 is a synthetic tetrapeptide that physically targets the inner mitochondrial membrane. Published research has shown it concentrates within mitochondria at levels 1,000 to 5,000 times higher than in the extracellular space, where it interacts with cardiolipin. Cardiolipin is a phospholipid essential for the structural integrity of the electron transport chain and efficient ATP synthesis. Published studies describe how oxidative damage to cardiolipin reduces electron transport chain efficiency, leading to decreased ATP production and increased reactive oxygen species generation. SS-31 has been studied for its ability to stabilize cardiolipin interactions and support electron transport chain function. Published clinical trials have investigated SS-31 in the context of heart failure, Barth syndrome, age-related mitochondrial dysfunction, and skeletal muscle bioenergetics.
 
-The two compounds are complementary rather than competitive. MOTS-C works as a broad metabolic regulator, improving how the body processes energy at a systemic level. SS-31 works as a precision tool at the mitochondrial membrane, restoring the fundamental machinery of ATP production. Researchers studying mitochondrial biology often find value in examining both compounds, as they illuminate different aspects of mitochondrial function and dysfunction.
+The two compounds address different aspects of mitochondrial biology. MOTS-C operates as a broad metabolic signaling molecule at the systemic level, while SS-31 functions at the mitochondrial membrane to support the core machinery of ATP production. Researchers investigating mitochondrial biology may find value in studying both compounds, as they illuminate distinct facets of mitochondrial function.
 
-Other compounds in the mitochondrial research space include NAD+ precursors (which support mitochondrial enzyme function) and Epitalon (which has been studied for its effects on cellular aging markers including telomere maintenance). The convergence of these research areas points to a growing understanding that cellular energy production is central to health, performance, and aging. For researchers, mitochondrial peptides provide tools to investigate these connections at the molecular level.
+Other compounds in the mitochondrial research space include NAD+ precursors (which support mitochondrial enzyme cofactor availability) and Epitalon (which has been studied in published research for effects on cellular aging markers including telomere maintenance). The convergence of these research areas reflects a growing body of literature connecting cellular energy production to metabolic regulation and aging. For laboratory researchers, mitochondrial peptides provide molecular tools for investigating these signaling pathways.
 
 ${DISCLAIMER}`,
     relatedProductSlugs: [
@@ -265,7 +263,7 @@ ${DISCLAIMER}`,
     category: "trust-safety",
     readTime: "5 min read",
     excerpt:
-      "Red flags that indicate low-quality, underdosed, or counterfeit peptides, and how to protect yourself as a researcher.",
+      "Key indicators of low-quality, underdosed, or counterfeit research chemicals, and quality verification methods for laboratory procurement.",
     content: `The research peptide market has a quality problem. Because peptides are sold for research use and aren't regulated like pharmaceuticals, the barrier to entry for suppliers is low. This means the market includes everything from pharmaceutical-grade manufacturers to operations rebottling underdosed or entirely different compounds. Knowing what to look for can save you from wasting money on products that don't contain what the label claims.
 
 Price is a data point, not a verdict. If a company is selling BPC-157 5mg for $15 when the market average is $40-60, that should raise questions. Peptide synthesis has real costs, raw materials, purification, quality control, and testing. Prices significantly below market average often mean corners were cut somewhere, and that somewhere is usually purity or accurate dosing. That said, the most expensive option isn't automatically the best either. Look at the whole picture: pricing, testing transparency, and company reputation.
@@ -284,7 +282,7 @@ ${DISCLAIMER}`,
 
 export const CATEGORY_LABELS: Record<string, string> = {
   "getting-started": "Getting Started",
-  "by-goal": "By Goal",
+  "by-goal": "Research Reviews",
   "deep-dives": "Deep Dives",
   "trust-safety": "Trust & Safety",
 };

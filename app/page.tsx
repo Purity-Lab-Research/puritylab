@@ -15,13 +15,13 @@ const EducationPreview = dynamic(() => import("@/components/home/EducationPrevie
 const CommunitySection = dynamic(() => import("@/components/home/CommunitySection"));
 
 export const metadata: Metadata = {
-  title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
+  title: "Purity Lab | Research-Grade Peptides with Published CoAs",
   description:
-    "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.",
+    "Every batch third-party tested. 98%+ verified purity. Research-grade peptides and reference compounds with published Certificates of Analysis. For in-vitro laboratory research only.",
   openGraph: {
-    title: "Purity Lab | Research-Grade Peptide Protocols for Athletes",
+    title: "Purity Lab | Research-Grade Peptides with Published CoAs",
     description:
-      "Every batch third-party tested. 98%+ verified purity. Athlete recovery, fat loss, and performance peptide protocols with published Certificates of Analysis.",
+      "Every batch third-party tested. 98%+ verified purity. Research-grade peptides and reference compounds with published Certificates of Analysis. For in-vitro laboratory research only.",
   },
 };
 

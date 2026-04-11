@@ -4,9 +4,9 @@ import ShopContent from "@/components/shop/ShopContent";
 import type { Product } from "@/lib/types";
 
 export const metadata = {
-  title: "Shop All Products",
+  title: "Research Peptide Catalog | Purity Lab",
   description:
-    "Browse research peptides by goal. Recovery, fat loss, performance protocols and supplies. Every batch third-party tested.",
+    "Browse research-grade peptides and reference compounds by category. Every batch third-party tested for purity and identity.",
 };
 
 export const revalidate = 60;
@@ -34,8 +34,8 @@ export default async function ShopPage() {
   return (
     <>
       <PageHeader
-        title="Shop All Products"
-        description="Research peptides organized by goal. Every batch third-party tested."
+        title="Research Peptide Catalog"
+        description="Research-grade peptides and reference compounds. Every batch third-party tested for purity and identity."
         breadcrumbs={[{ label: "Shop" }]}
       />
 

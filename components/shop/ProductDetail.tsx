@@ -57,7 +57,7 @@ function getStockStatus(qty: number, threshold: number) {
   return { label: "In Stock", color: "text-[#10B981]" };
 }
 
-type TabId = "overview" | "dosing" | "stacking" | "coa" | "reviews";
+type TabId = "overview" | "related" | "coa" | "research" | "reviews";
 
 export default function ProductDetail({ product, coaDocuments = [], relatedProducts = [] }: ProductDetailProps) {
   const { addItem, openCart } = useCart();
@@ -123,11 +123,8 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
   const goalCat = product.goal_category ?? product.category?.slug ?? "";
   const placeholderBg = CATEGORY_GRADIENT[goalCat] ?? "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]";
 
-  const dosageInfo = product.dosage_info || "";
-  const cycleLength = product.cycle_length || "";
   const storageInfo = product.storage_info || "";
   const reconstitutionInfo = product.reconstitution_info || "";
-  const hasDosing = dosageInfo || cycleLength || storageInfo || reconstitutionInfo;
 
   const handleAddToCart = () => {
     if (isOutOfStock) return;
@@ -187,23 +184,21 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
             />
           </div>
         )}
+        {renderLabInfo()}
       </div>
     );
   }
 
-  function renderDosing() {
-    if (!hasDosing) {
-      return <p className="text-sm text-[#6B7280]">Dosing information coming soon.</p>;
-    }
+  function renderLabInfo() {
     const sections = [
-      { title: "Recommended Dosage", content: dosageInfo },
-      { title: "Cycle Length", content: cycleLength },
-      { title: "Reconstitution", content: reconstitutionInfo },
-      { title: "Storage", content: storageInfo },
+      { title: "Laboratory Preparation Notes", content: reconstitutionInfo },
+      { title: "Storage Conditions", content: storageInfo },
     ].filter((s) => s.content);
 
+    if (sections.length === 0) return null;
+
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
         {sections.map((s) => (
           <div key={s.title} className="bg-[#FAFAFA] rounded-2xl p-5">
             <h4 className="text-sm font-bold text-[#111111] mb-1.5">{s.title}</h4>
@@ -214,14 +209,28 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
     );
   }
 
-  function renderStacking() {
+  function renderPublishedResearch() {
+    return (
+      <div className="space-y-4">
+        <p className="text-sm text-[#6B7280]">
+          Published research citations for this compound are being compiled. Check back soon for links to peer-reviewed studies indexed on PubMed.
+        </p>
+        <div className="bg-[#FAFAFA] rounded-2xl p-5 border border-[#F0F0F0]">
+          <h4 className="text-sm font-bold text-[#111111] mb-2">PubMed Citations</h4>
+          <p className="text-sm text-[#6B7280]">No citations have been added yet. Relevant studies will be listed here as they are reviewed and verified.</p>
+        </div>
+      </div>
+    );
+  }
+
+  function renderRelatedCompounds() {
     const stackProducts = relatedProducts.length > 0 ? relatedProducts.slice(0, 4) : [];
     if (stackProducts.length === 0) {
-      return <p className="text-sm text-[#6B7280]">Stacking suggestions coming soon.</p>;
+      return <p className="text-sm text-[#6B7280]">Related compounds will be listed here soon.</p>;
     }
     return (
       <div>
-        <h4 className="text-sm font-bold text-[#111111] mb-4">Pairs well with</h4>
+        <h4 className="text-sm font-bold text-[#111111] mb-4">Related Compounds</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {stackProducts.map((rp) => (
             <Link
@@ -314,17 +323,17 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
 
   const TABS: { id: TabId; label: string }[] = [
     { id: "overview", label: "Overview" },
-    { id: "dosing", label: "Dosing Protocol" },
-    { id: "stacking", label: "Stacking Suggestions" },
+    { id: "related", label: "Related Compounds" },
     { id: "coa", label: "Certificate of Analysis" },
+    { id: "research", label: "Published Research" },
     { id: "reviews", label: "Reviews" },
   ];
 
   const tabContent: Record<TabId, () => React.ReactNode> = {
     overview: renderOverview,
-    dosing: renderDosing,
-    stacking: renderStacking,
+    related: renderRelatedCompounds,
     coa: renderCoa,
+    research: renderPublishedResearch,
     reviews: () => null,
   };
 
@@ -465,7 +474,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
                     : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 )}
               >
-                Subscribe &amp; Save
+                Subscribe
               </button>
               <button
                 onClick={() => setPurchaseMode("one-time")}
@@ -597,7 +606,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
             {isOutOfStock
               ? "Out of Stock"
               : purchaseMode === "subscribe"
-                ? "Subscribe & Save"
+                ? "Subscribe"
                 : "Add to Cart"}
           </button>
 
@@ -640,7 +649,7 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
           <line x1="12" x2="12.01" y1="17" y2="17" />
         </svg>
         <p className="text-[11px] text-amber-800 leading-relaxed">
-          <strong>Research Use Only:</strong> This product is sold exclusively for in-vitro laboratory research and educational purposes. It is not intended for human or animal consumption by any route of administration. No information on this page constitutes medical advice or a recommendation for human use. Dosing, cycle, and protocol information is derived from published research literature and provided for educational context only. By purchasing this product, you confirm you are 21+ and will use it for lawful research purposes only.
+          <strong>Research Use Only:</strong> This product is sold exclusively for in-vitro laboratory research and educational purposes. It is not intended for human or animal consumption by any route of administration. No information on this page constitutes medical advice or a recommendation for human use. By purchasing this product, you confirm you are 21+ and will use it for lawful research purposes only.
         </p>
       </div>
 

@@ -42,7 +42,7 @@ const faqSections = [
       {
         question: "How do subscriptions work?",
         answer:
-          "When you subscribe to a protocol or build a custom stack with the subscribe option, your selected products are automatically shipped on your chosen schedule (every 4, 6, or 8 weeks). You save up to 15% on every subscription order compared to one-time pricing.",
+          "When you subscribe to a research configuration or build a custom selection with the subscribe option, your chosen compounds are automatically shipped on your selected schedule (every 4, 6, or 8 weeks). You save up to 15% on every subscription order compared to one-time pricing.",
       },
       {
         question: "Can I pause my subscription?",
@@ -67,7 +67,7 @@ const faqSections = [
       {
         question: "What's the subscription discount?",
         answer:
-          "All subscription orders receive 10% off the one-time purchase price on every item in your stack.",
+          "All subscription orders receive 10% off the one-time purchase price on every item in your order.",
       },
     ],
   },
@@ -82,12 +82,12 @@ const faqSections = [
       {
         question: "What purity do you guarantee?",
         answer:
-          "We guarantee 98% or higher purity on all peptide products. If a batch tests below 98%, we reject it and it never reaches our catalog. You can verify the exact purity of your specific batch using the Batch Tracker in our CoA Library.",
+          "We guarantee 98% or higher purity on all peptide products as verified by HPLC analysis. If a batch tests below 98%, we reject it and it never reaches our catalog. You can verify the exact purity of your specific batch using the Batch Tracker in our CoA Library.",
       },
       {
-        question: "How should I store my peptides?",
+        question: "How should I store peptides?",
         answer:
-          "Store lyophilized (powder) peptides at room temperature or refrigerated. After reconstitution with bacteriostatic water, always refrigerate at 2-8\u00B0C and use within 30 days.",
+          "Store lyophilized (powder form) peptides in a cool, dry environment or refrigerated at 2-8 degrees Celsius. Reconstituted peptides should be refrigerated at 2-8 degrees Celsius and used within the timeframe specified on the product documentation.",
       },
       {
         question: "Do you provide Certificates of Analysis?",
@@ -99,25 +99,10 @@ const faqSections = [
         answer:
           "All products sold by Purity Lab are intended exclusively for in-vitro laboratory research, scientific investigation, and educational purposes. They are not drugs, supplements, food products, or intended for human or animal consumption by any route of administration. This designation means that the products have not been evaluated by the FDA for safety or efficacy in humans. By purchasing from Purity Lab, you represent that you are at least 21 years of age and that all products will be used exclusively for lawful research purposes. Any use inconsistent with this designation is strictly prohibited and done entirely at the purchaser's own risk. Purity Lab assumes no liability for any misuse of products.",
       },
-    ],
-  },
-  {
-    title: "Peptide Usage",
-    items: [
       {
-        question: "How do I reconstitute peptides?",
+        question: "What testing methodologies are used?",
         answer:
-          "Draw the desired amount of bacteriostatic water into a syringe, inject it slowly down the side of the peptide vial (never directly onto the powder), and gently swirl until dissolved. Never shake a peptide vial. See our full guide at /learn/how-to-reconstitute for detailed instructions.",
-      },
-      {
-        question: "What supplies do I need?",
-        answer:
-          "At minimum, you need bacteriostatic water for reconstitution and insulin syringes for dosing. We offer both in our Supplies section. We also recommend alcohol swabs for injection site cleaning.",
-      },
-      {
-        question: "How do I calculate dosing?",
-        answer:
-          "Use our Dosing Calculator at /resources. Enter the total peptide amount in your vial, the amount of bacteriostatic water you added, and your desired dose, and it will calculate exactly how many units to draw on your syringe. Each product page also includes specific dosing information.",
+          "Our third-party laboratory partners use High-Performance Liquid Chromatography (HPLC) for purity analysis and Mass Spectrometry (MS) for molecular identity confirmation. These are industry-standard analytical methods for verifying peptide composition and purity.",
       },
     ],
   },
@@ -148,7 +133,7 @@ export default function FaqPage() {
     <>
       <PageHeader
         title="Frequently Asked Questions"
-        description="Everything you need to know about Purity Lab products, subscriptions, and shipping."
+        description="Common questions about ordering, shipping, purity standards, and research compounds from Purity Lab."
         breadcrumbs={[{ label: "FAQ" }]}
       />
 

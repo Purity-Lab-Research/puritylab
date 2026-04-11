@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
               1. Introduction and Scope
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              This Privacy Policy describes how Purity Lab (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or
+              This Privacy Policy describes how Purity Lab Research LLC (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or
               &ldquo;our&rdquo;) collects, uses, discloses, retains, and protects personal
               information. We are a United States company and our primary data protection obligations
               arise under the California Consumer Privacy Act (CCPA)
@@ -66,7 +66,8 @@ export default function PrivacyPolicyPage() {
               personal information is:
             </p>
             <div className="mt-2 text-sm leading-relaxed pl-5">
-              <p><strong>Purity Lab</strong></p>
+              <p><strong>Purity Lab Research LLC</strong></p>
+              <p>A California limited liability company</p>
               <p>Email:{" "}
                 <a href={`mailto:${PRIVACY_EMAIL}`} className="text-[#10B981] hover:underline">
                   {PRIVACY_EMAIL}

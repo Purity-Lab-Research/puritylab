@@ -17,21 +17,22 @@ interface StackBuilderProps {
 
 /* Constants */
 const CATEGORY_LABELS: Record<string, string> = {
-  recovery: "Recovery",
-  fat_loss: "Weight Management",
-  performance: "Performance",
-  supplies: "Supplies",
+  tissue_research: "Tissue Research",
+  metabolic_research: "Metabolic Research",
+  gh_research: "Growth Hormone Research",
+  general_research: "General Research",
+  laboratory_supplies: "Laboratory Supplies",
 };
 
-const CATEGORY_ORDER = ["recovery", "fat_loss", "performance", "supplies"];
+const CATEGORY_ORDER = ["tissue_research", "metabolic_research", "gh_research", "general_research", "laboratory_supplies"];
 
 const RECOMMENDATIONS: Record<string, { slug: string; message: string }[]> = {
-  "bpc-157-5mg": [{ slug: "tb500-5mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
-  "bpc-157-10mg": [{ slug: "tb500-10mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
-  "bpc-157-20mg": [{ slug: "tb500-10mg", message: "Most athletes stack BPC-157 with TB500 for enhanced recovery." }],
-  "tb500-5mg": [{ slug: "bpc-157-5mg", message: "BPC-157 and TB500 work synergistically for faster tissue repair." }],
-  "tb500-10mg": [{ slug: "bpc-157-10mg", message: "BPC-157 and TB500 work synergistically for faster tissue repair." }],
-  "cjc-ipa-blend-5-5mg": [{ slug: "ipamorelin-10mg", message: "Add standalone Ipamorelin for amplified growth hormone release." }],
+  "bpc-157-5mg": [{ slug: "tb500-5mg", message: "BPC-157 and TB500 are commonly studied together in published literature for complementary tissue repair mechanisms." }],
+  "bpc-157-10mg": [{ slug: "tb500-10mg", message: "BPC-157 and TB500 are commonly studied together in published literature for complementary tissue repair mechanisms." }],
+  "bpc-157-20mg": [{ slug: "tb500-10mg", message: "BPC-157 and TB500 are commonly studied together in published literature for complementary tissue repair mechanisms." }],
+  "tb500-5mg": [{ slug: "bpc-157-5mg", message: "Published research frequently pairs BPC-157 with TB500 for synergistic tissue repair studies." }],
+  "tb500-10mg": [{ slug: "bpc-157-10mg", message: "Published research frequently pairs BPC-157 with TB500 for synergistic tissue repair studies." }],
+  "cjc-ipa-blend-5-5mg": [{ slug: "ipamorelin-10mg", message: "Standalone Ipamorelin is commonly studied alongside CJC/Ipamorelin blends in GH pathway research." }],
 };
 
 const SUPPLY_SLUGS = ["bac-water-10ml", "syringes"];
@@ -95,14 +96,14 @@ export default function StackBuilder({ products }: StackBuilderProps) {
     const groups: Record<string, Product[]> = {};
     for (const cat of CATEGORY_ORDER) groups[cat] = [];
     products.forEach((p) => {
-      const cat = p.goal_category ?? "supplies";
+      const cat = p.goal_category ?? "laboratory_supplies";
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(p);
     });
     return groups;
   }, [products]);
 
-  const hasPeptide = stack.some((item) => item.product.goal_category !== "supplies");
+  const hasPeptide = stack.some((item) => item.product.goal_category !== "laboratory_supplies");
 
   const needsSupplyHint =
     hasPeptide &&
@@ -272,9 +273,9 @@ export default function StackBuilder({ products }: StackBuilderProps) {
       <>
         {stack.length === 0 ? (
           <p className="text-sm text-[#6B7280] py-8 text-center">
-            Add peptides from the{" "}
+            Add compounds from the{" "}
             <span className="hidden md:inline">left</span>
-            <span className="md:hidden">catalog</span> to build your custom stack.
+            <span className="md:hidden">catalog</span> to build your custom configuration.
           </p>
         ) : (
           <div className="divide-y divide-[#F0F0F0]">
@@ -316,7 +317,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
                   subscribe ? "bg-[#111111] text-white" : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
                 }`}
               >
-                Subscribe &amp; Save
+                Subscribe
               </button>
               <button
                 onClick={() => setSubscribe(false)}
@@ -445,7 +446,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
               <div className="flex-1">
                 <p className="text-xs text-[#6B7280]">
                   <span className="font-semibold text-[#111111]">Don&apos;t forget supplies.</span>{" "}
-                  You&apos;ll need bacteriostatic water and syringes to reconstitute and dose your peptides.
+                  Bacteriostatic water is commonly used to reconstitute lyophilized peptides for laboratory research.
                 </p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
@@ -474,11 +475,11 @@ export default function StackBuilder({ products }: StackBuilderProps) {
           )}
         </div>
 
-        {/* RIGHT: Desktop Stack Summary */}
+        {/* RIGHT: Desktop Configuration Summary */}
         <div className="hidden lg:block lg:w-[40%]">
           <div className="sticky top-24 bg-white border border-[#F0F0F0] rounded-2xl p-6">
             <h2 className="text-lg font-bold text-[#111111] mb-1">
-              Your Stack
+              Your Configuration
               {itemCount > 0 && (
                 <span className="text-sm font-normal text-[#6B7280] ml-2">
                   ({itemCount} {itemCount === 1 ? "item" : "items"})
@@ -505,7 +506,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
               onClick={() => setMobileSheetOpen(true)}
               className="bg-white text-[#111111] rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-gray-100 transition-colors"
             >
-              View Stack
+              View Configuration
             </button>
           </div>
         </div>
@@ -521,7 +522,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
           <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden bg-white rounded-t-2xl border-t border-[#F0F0F0] max-h-[85vh] overflow-y-auto safe-area-bottom animate-slide-up">
             <div className="px-5 pt-4 pb-2 flex items-center justify-between border-b border-[#F0F0F0] sticky top-0 bg-white z-10">
               <h2 className="text-lg font-bold text-[#111111]">
-                Your Stack
+                Your Configuration
                 <span className="text-sm font-normal text-[#6B7280] ml-2">
                   ({itemCount} {itemCount === 1 ? "item" : "items"})
                 </span>

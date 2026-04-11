@@ -34,11 +34,12 @@ export default function TermsPage() {
               1. Acceptance of Terms
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              By accessing, browsing, or using the {SITE_NAME} website (puritylabresearch.com) or placing an
-              order through our platform, you acknowledge that you have read, understood, and agree to
-              be bound by these Terms of Service, our Privacy Policy, Refund Policy, and Shipping Policy
-              (collectively, the &ldquo;Agreements&rdquo;). If you do not agree to these terms, you must not use
-              our website or purchase our products.
+              These Terms of Service govern your use of the website puritylabresearch.com, operated by
+              Purity Lab Research LLC, a California limited liability company. By accessing, browsing, or
+              using this website or placing an order through our platform, you acknowledge that you have
+              read, understood, and agree to be bound by these Terms of Service, our Privacy Policy,
+              Refund Policy, and Shipping Policy (collectively, the &ldquo;Agreements&rdquo;). If you do
+              not agree to these terms, you must not use our website or purchase our products.
             </p>
             <p className="mt-2 text-sm leading-relaxed">
               We reserve the right to modify these Terms of Service at any time. Material changes will
@@ -453,7 +454,7 @@ export default function TermsPage() {
               20. Governing Law
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              These Terms of Service shall be governed by and construed in accordance with the laws of the State of California and the federal laws of the United States applicable therein, without regard to conflict of law principles. Any legal action or proceeding not subject to arbitration shall be brought exclusively in the federal or state courts located in Los Angeles County, California. You consent to the personal jurisdiction of such courts.
+              These Terms of Service shall be governed by and construed in accordance with the laws of the State of California and the federal laws of the United States applicable therein, without regard to conflict of law principles. Any legal action or proceeding not subject to arbitration against Purity Lab Research LLC shall be brought exclusively in the federal or state courts located in Los Angeles County, California. You consent to the personal jurisdiction of such courts.
             </p>
           </div>
 
@@ -473,7 +474,7 @@ export default function TermsPage() {
               22. Entire Agreement
             </h2>
             <p className="mt-2 text-sm leading-relaxed">
-              These Terms of Service, together with the Privacy Policy, Refund Policy, Shipping Policy, Legal Disclaimer, and any other policies referenced herein, constitute the entire agreement between you and {SITE_NAME}. No oral or written statement by any representative of {SITE_NAME} shall modify these terms.
+              These Terms of Service, together with the Privacy Policy, Refund Policy, Shipping Policy, Legal Disclaimer, and any other policies referenced herein, constitute the entire agreement between you and Purity Lab Research LLC. No oral or written statement by any representative of Purity Lab Research LLC shall modify these terms.
             </p>
           </div>
 
@@ -486,7 +487,8 @@ export default function TermsPage() {
               For questions or concerns regarding these Terms of Service, please contact:
             </p>
             <div className="mt-2 text-sm leading-relaxed">
-              <p className="font-semibold">{SITE_NAME}</p>
+              <p className="font-semibold">Purity Lab Research LLC</p>
+              <p>A California limited liability company</p>
               <p>United States</p>
               <p>
                 Email:{" "}

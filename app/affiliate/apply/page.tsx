@@ -5,21 +5,20 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
 
 const platforms = [
-  "Instagram",
-  "TikTok",
-  "YouTube",
-  "Blog",
-  "Twitter/X",
-  "Podcast",
+  "Academic Institution",
+  "Independent Laboratory",
+  "Research Consultancy",
+  "Industry Publication",
+  "Supply Reseller",
   "Other",
 ];
 
-const audienceSizes = [
-  "Under 1K",
-  "1K-10K",
-  "10K-50K",
-  "50K-100K",
-  "100K+",
+const networkSizes = [
+  "Under 50",
+  "50-200",
+  "200-500",
+  "500-1,000",
+  "1,000+",
 ];
 
 export default function AffiliateApplyPage() {
@@ -44,7 +43,7 @@ export default function AffiliateApplyPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.agreedToTerms) {
-      setError("You must agree to the Affiliate Program Terms and Conditions.");
+      setError("You must agree to the Referral Program Terms and Conditions.");
       return;
     }
 
@@ -99,7 +98,7 @@ export default function AffiliateApplyPage() {
             className="inline-flex items-center gap-2 text-sm font-medium text-[#10B981] hover:underline"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Affiliate Program
+            Back to Referral Program
           </Link>
         </div>
       </section>
@@ -114,11 +113,11 @@ export default function AffiliateApplyPage() {
           className="inline-flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-[#111111] mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Affiliate Program
+          Back to Referral Program
         </Link>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111111] mb-2">
-          Apply to Our Affiliate Program
+          Apply to Our Referral Program
         </h1>
         <p className="text-[#6B7280] mb-8">
           Fill out the form below. Most applications are approved within 24
@@ -159,7 +158,7 @@ export default function AffiliateApplyPage() {
           {/* Website / Social URL */}
           <div>
             <label className="block text-sm font-semibold text-[#111111] mb-1.5">
-              Website or Social Media URL
+              Website or Institution URL
             </label>
             <input
               type="text"
@@ -173,14 +172,14 @@ export default function AffiliateApplyPage() {
           {/* Platform */}
           <div>
             <label className="block text-sm font-semibold text-[#111111] mb-1.5">
-              Primary Platform
+              Professional Affiliation
             </label>
             <select
               value={form.platform}
               onChange={(e) => update("platform", e.target.value)}
               className="w-full rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3 text-sm text-[#111111] focus:border-[#111111] focus:ring-2 focus:ring-[#111111]/10 focus:bg-white outline-none transition-all"
             >
-              <option value="">Select a platform</option>
+              <option value="">Select your affiliation</option>
               {platforms.map((p) => (
                 <option key={p} value={p}>
                   {p}
@@ -192,15 +191,15 @@ export default function AffiliateApplyPage() {
           {/* Audience Size */}
           <div>
             <label className="block text-sm font-semibold text-[#111111] mb-1.5">
-              Estimated Audience Size
+              Estimated Professional Network Size
             </label>
             <select
               value={form.audienceSize}
               onChange={(e) => update("audienceSize", e.target.value)}
               className="w-full rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3 text-sm text-[#111111] focus:border-[#111111] focus:ring-2 focus:ring-[#111111]/10 focus:bg-white outline-none transition-all"
             >
-              <option value="">Select audience size</option>
-              {audienceSizes.map((s) => (
+              <option value="">Select network size</option>
+              {networkSizes.map((s) => (
                 <option key={s} value={s}>
                   {s}
                 </option>
@@ -211,14 +210,14 @@ export default function AffiliateApplyPage() {
           {/* Promotion plan */}
           <div>
             <label className="block text-sm font-semibold text-[#111111] mb-1.5">
-              How do you plan to promote Purity Lab?
+              How would you share Purity Lab with your professional network?
             </label>
             <textarea
               value={form.promotionPlan}
               onChange={(e) => update("promotionPlan", e.target.value)}
               rows={3}
               className="w-full rounded-xl border border-[#F0F0F0] bg-[#FAFAFA] px-4 py-3 text-sm text-[#111111] focus:border-[#111111] focus:ring-2 focus:ring-[#111111]/10 focus:bg-white outline-none transition-all resize-none"
-              placeholder="Tell us about your promotion strategy..."
+              placeholder="Tell us how you would recommend Purity Lab to colleagues and peers..."
             />
           </div>
 
@@ -266,7 +265,7 @@ export default function AffiliateApplyPage() {
                 className="text-[#10B981] hover:underline"
                 target="_blank"
               >
-                Affiliate Program Terms and Conditions
+                Referral Program Terms and Conditions
               </Link>
             </span>
           </label>

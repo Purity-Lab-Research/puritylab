@@ -7,7 +7,7 @@ const items = [
   { icon: FlaskConical, text: "98%+ VERIFIED PURITY" },
   { icon: FileCheck, text: "FULL CoA PUBLISHED ON EVERY PRODUCT" },
   { icon: Truck, text: "SAME-DAY FULFILLMENT" },
-  { icon: BadgePercent, text: "SUBSCRIBE & SAVE UP TO 15%" },
+  { icon: BadgePercent, text: "SCHEDULED REORDER DISCOUNTS AVAILABLE" },
 ];
 
 export default function Ticker() {
