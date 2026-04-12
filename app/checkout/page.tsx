@@ -63,6 +63,12 @@ const inputCls =
 
 export default function CheckoutPage() {
   const router = useRouter();
+
+  // Pre-launch: redirect to homepage
+  useEffect(() => {
+    router.replace("/?prelaunch=1");
+  }, [router]);
+
   const { items, subtotal, savings, shippingCost: cartShipping, hasSubscriptionItems, clearCart } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -11,6 +11,7 @@ import Protocols from "@/components/home/Protocols";
 import WhyPurityLab from "@/components/home/WhyPurityLab";
 
 const QualitySection = dynamic(() => import("@/components/home/QualitySection"));
+const WaitlistCTA = dynamic(() => import("@/components/home/WaitlistCTA"));
 // EducationPreview hidden for compliance review
 // const EducationPreview = dynamic(() => import("@/components/home/EducationPreview"));
 
@@ -65,6 +66,7 @@ export default async function HomePage() {
       <Protocols protocols={protocols} />
       <WhyPurityLab />
       <QualitySection />
+      <WaitlistCTA />
       {/* EducationPreview hidden for compliance review */}
     </>
   );

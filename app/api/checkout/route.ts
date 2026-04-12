@@ -56,6 +56,12 @@ const CheckoutSchema = z.object({
 import { TAX_RATE } from "@/lib/constants";
 
 export async function POST(request: NextRequest) {
+  // Pre-launch: orders disabled
+  return NextResponse.json(
+    { error: "Orders are not yet open. Join our waitlist to be notified when we launch." },
+    { status: 503 }
+  );
+
   const csrfError = verifyCsrf(request);
   if (csrfError) return csrfError;
 

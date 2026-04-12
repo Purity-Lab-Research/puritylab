@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import type { Product } from "@/lib/types";
 import { getSubscriptionPrice, getFrequencyDiscount, getAnnualPrice, getAnnualMonthlyPrice } from "@/lib/utils";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 
 /* Types */
 interface StackItem {
@@ -309,7 +310,8 @@ export default function StackBuilder({ products }: StackBuilderProps) {
 
         {stack.length > 0 && (
           <div className="border-t border-[#F0F0F0] pt-5 mt-2 space-y-4">
-            {/* Subscribe toggle */}
+            {/* Pre-launch: hide subscribe toggle */}
+            <div className="hidden">
             <div className="flex gap-2">
               <button
                 onClick={() => setSubscribe(true)}
@@ -371,6 +373,7 @@ export default function StackBuilder({ products }: StackBuilderProps) {
                 )}
               </div>
             )}
+            </div>{/* end hidden pre-launch */}
 
             {/* Free shipping progress */}
             <div>
@@ -400,12 +403,10 @@ export default function StackBuilder({ products }: StackBuilderProps) {
             </div>
 
             {/* CTA */}
-            <button
-              disabled={stack.length === 0}
-              className="block w-full bg-[#111111] text-white text-center rounded-full py-4 font-bold text-base hover:bg-black hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Proceed to Checkout
-            </button>
+            <WaitlistForm
+              buttonLabel="Get Notified"
+              successMessage="You'll be notified when we launch."
+            />
             <p className="text-xs text-[#6B7280] text-center">
               Free shipping on orders over $200
             </p>

@@ -8,6 +8,9 @@ import LoadingBar from "./LoadingBar";
 import CartSidebar from "@/components/cart/CartSidebar";
 import { EditProvider } from "@/components/admin/EditContext";
 import InlineEditBar from "@/components/admin/InlineEditBar";
+import PreLaunchBanner from "@/components/prelaunch/PreLaunchBanner";
+import ComingSoonModal from "@/components/prelaunch/ComingSoonModal";
+import PreLaunchToast from "@/components/prelaunch/PreLaunchToast";
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -27,12 +30,15 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <LoadingBar />
+      <PreLaunchBanner />
       <Header />
       <Ticker />
+      <ComingSoonModal />
       <main id="main-content">{children}</main>
       <Footer />
       <CartSidebar />
       <InlineEditBar />
+      <PreLaunchToast />
     </EditProvider>
   );
 }

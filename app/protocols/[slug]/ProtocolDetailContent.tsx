@@ -4,8 +4,8 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Protocol } from "@/lib/types";
-import { useCart } from "@/hooks/useCart";
 import { getSubscriptionPrice } from "@/lib/utils";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import {
   ArrowRight,
@@ -182,8 +182,6 @@ export default function ProtocolDetailContent({
   otherProtocols,
   swapProducts,
 }: ProtocolDetailContentProps) {
-  const { addItem, openCart } = useCart();
-
   const colors = CARD_COLORS[protocol.slug] ?? {
     gradient: "from-[#F9FAFB] to-[#F3F4F6]",
     light: "bg-[#F9FAFB]",
@@ -287,27 +285,6 @@ export default function ProtocolDetailContent({
 
   function handleResetAll() {
     setSwaps({});
-  }
-
-  function addProtocolToCart(purchaseType: "one-time" | "subscription") {
-    for (const item of effectiveItems) {
-      if (!item.product) continue;
-      addItem({
-        productId: item.product.id,
-        variantId: null,
-        name: item.product.name,
-        slug: item.product.slug,
-        price: item.product.price,
-        subscriptionPrice: getSubscriptionPrice(item.product.price),
-        size: item.product.size,
-        image: item.product.images?.[0] ?? null,
-        quantity: item.quantity,
-        purchaseType,
-        deliveryFrequencyWeeks: purchaseType === "subscription" ? 4 : 0,
-        billingCycle: "monthly",
-      });
-    }
-    openCart();
   }
 
   return (
@@ -819,15 +796,10 @@ export default function ProtocolDetailContent({
 
                     {/* Buttons */}
                     <div className="space-y-2">
-                      <button
-                        onClick={() => addProtocolToCart("one-time")}
-                        className="block w-full bg-[#111111] text-white text-center rounded-full py-3 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
-                      >
-                        Add to Cart
-                      </button>
-                      <p className="text-[10px] text-[#6B7280] text-center">
-                        Scheduled reorders available at checkout
-                      </p>
+                      <WaitlistForm
+                        buttonLabel="Get Notified"
+                        successMessage="You'll be notified when this is available."
+                      />
                     </div>
                   </div>
                 </div>

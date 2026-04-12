@@ -10,6 +10,7 @@ import { createClient } from "@/lib/supabase/client";
 import { formatPrice, getSubscriptionPrice, getFrequencyDiscount, getAnnualPrice, freeShippingRemaining, freeShippingProgress } from "@/lib/utils";
 import { trackViewCart } from "@/lib/analytics";
 import type { Product } from "@/lib/types";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 
 type Tab = "cart" | "wishlist";
 
@@ -142,223 +143,22 @@ export default function CartSidebar() {
           </div>
         </div>
 
-        {/* Cart Tab */}
+        {/* Cart Tab - Pre-launch state */}
         {tab === "cart" && (
-          <>
-            {items.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6 text-center">
-                <ShoppingBag className="w-14 h-14 text-gray-300" />
-                <p className="text-gray-500">Your cart is empty</p>
-                <Link
-                  href="/shop"
-                  onClick={closeCart}
-                  className="inline-block rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-all"
-                >
-                  Browse Products
-                </Link>
-              </div>
-            ) : (
-              <ul className="flex-1 overflow-y-auto divide-y divide-gray-100 px-6">
-                {items.map((item) => {
-                  const key = `${item.productId}-${item.variantId ?? "base"}-${item.purchaseType}`;
-                  const price = itemDisplayPrice(item);
-                  return (
-                    <li key={key} className="flex gap-4 py-5">
-                      <div className="relative w-18 h-18 shrink-0 rounded-lg bg-gray-100 overflow-hidden">
-                        {item.image ? (
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-gray-300">
-                            <ShoppingBag className="w-6 h-6" />
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0 flex flex-col gap-1">
-                        <p className="text-sm font-semibold text-gray-900 truncate">
-                          {item.name}
-                        </p>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs text-gray-500">{item.size}</span>
-                          {item.purchaseType === "subscription" ? (
-                            <span className="text-[10px] font-semibold text-secondary">
-                              {item.billingCycle === "annual" ? "Annual" : "Subscribing"}
-                            </span>
-                          ) : (
-                            <span className="text-[10px] text-text-secondary">
-                              One-time
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="flex items-center justify-between mt-auto pt-1">
-                          <div className="flex items-center gap-1">
-                            <button
-                              onClick={() =>
-                                updateQuantity(
-                                  item.productId,
-                                  item.variantId,
-                                  item.purchaseType,
-                                  item.quantity - 1
-                                )
-                              }
-                              disabled={item.quantity <= 1}
-                              className="w-7 h-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                              aria-label="Decrease quantity"
-                            >
-                              <Minus className="w-3.5 h-3.5" />
-                            </button>
-                            <span className="w-7 text-center text-sm font-medium text-gray-900">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() =>
-                                updateQuantity(
-                                  item.productId,
-                                  item.variantId,
-                                  item.purchaseType,
-                                  item.quantity + 1
-                                )
-                              }
-                              className="w-7 h-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-600 hover:bg-gray-100 transition-colors"
-                              aria-label="Increase quantity"
-                            >
-                              <Plus className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-semibold text-gray-900">
-                              {formatPrice(price * item.quantity)}
-                            </span>
-                            <button
-                              onClick={() =>
-                                removeItem(item.productId, item.variantId, item.purchaseType)
-                              }
-                              className="p-1 text-gray-400 hover:text-red-500 transition-colors"
-                              aria-label="Remove item"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-
-            {items.length > 0 && (
-              <div className="border-t border-gray-200 px-6 py-5 space-y-3">
-                {/* Add-ons for subscription carts */}
-                {hasSubscriptionItems && <CartAddOns />}
-
-                {/* Affiliate discount notice */}
-                {typeof document !== "undefined" && document.cookie.includes("pl_aff_active=1") && (
-                  <div className="bg-[#10B981]/5 border border-[#10B981]/10 rounded-lg px-3 py-2">
-                    <p className="text-xs font-semibold text-[#10B981]">
-                      10% new customer discount applied at checkout
-                    </p>
-                  </div>
-                )}
-
-                {/* Subscription savings */}
-                {hasSubscriptionItems && savings > 0 && (
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-success font-semibold">
-                        Subscription savings
-                      </span>
-                      <span className="text-sm text-success font-semibold">
-                        -{formatPrice(savings)}
-                      </span>
-                    </div>
-                    {items.some((i) => i.purchaseType === "subscription" && i.billingCycle === "annual") ? (
-                      <p className="text-[10px] text-text-secondary">Annual plan, billed once</p>
-                    ) : (
-                      <p className="text-[10px] text-text-secondary">
-                        Every {subFrequency} weeks: {getFrequencyDiscount(subFrequency)}% off
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                {/* Free shipping progress */}
-                {!hasSubscriptionItems && subtotal < 200 && subtotal > 0 && (
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-[10px]">
-                      <span className="text-text-secondary">
-                        Add {formatPrice(freeShippingRemaining(subtotal))} more for free shipping
-                      </span>
-                      <span className="text-text-secondary font-medium">
-                        {Math.round(freeShippingProgress(subtotal))}%
-                      </span>
-                    </div>
-                    <div className="h-1.5 bg-border rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-secondary rounded-full transition-all duration-300"
-                        style={{ width: `${freeShippingProgress(subtotal)}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-                {hasSubscriptionItems && (
-                  <p className="text-[10px] text-success font-semibold">Free shipping on all subscriptions</p>
-                )}
-                {!hasSubscriptionItems && subtotal >= 200 && (
-                  <p className="text-[10px] text-success font-semibold">Free shipping on this order</p>
-                )}
-
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span className="font-semibold text-gray-900">{formatPrice(subtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className={`font-semibold ${shippingCost === 0 ? "text-success" : "text-gray-900"}`}>
-                      {shippingCost === 0 ? "Free" : formatPrice(shippingCost)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-base pt-1.5 border-t border-border">
-                    <span className="font-semibold text-gray-900">Estimated Total</span>
-                    <span className="font-bold text-gray-900">{formatPrice(subtotal + shippingCost)}</span>
-                  </div>
-                </div>
-
-                {subtotal < 50 ? (
-                  <div>
-                    <button
-                      disabled
-                      className="block w-full text-center rounded-lg bg-primary/50 px-7 py-3.5 text-sm font-semibold text-white cursor-not-allowed"
-                    >
-                      Minimum Order: $50
-                    </button>
-                    <p className="text-[10px] text-center text-warning mt-1.5 font-medium">
-                      Add {formatPrice(50 - subtotal)} more to checkout.
-                    </p>
-                  </div>
-                ) : (
-                  <Link
-                    href="/checkout"
-                    onClick={closeCart}
-                    className="block w-full text-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary-hover transition-all"
-                  >
-                    Proceed to Checkout
-                  </Link>
-                )}
-                <p className="text-[10px] text-center text-gray-400 leading-tight mt-1.5">
-                  All products are for laboratory and research purposes only. Not for human consumption.
-                </p>
-              </div>
-            )}
-          </>
+          <div className="flex-1 flex flex-col items-center justify-center gap-5 px-6 text-center">
+            <ShoppingBag className="w-14 h-14 text-gray-300" />
+            <div>
+              <p className="text-lg font-bold text-[#111111]">We&apos;re not accepting orders yet</p>
+              <p className="text-sm text-[#6B7280] mt-2 leading-relaxed">
+                Our first batch is completing independent testing. Join the waitlist to be first in line.
+              </p>
+            </div>
+            <WaitlistForm
+              buttonLabel="Notify Me"
+              successMessage="You're on the list. We'll be in touch soon."
+              className="w-full max-w-xs"
+            />
+          </div>
         )}
 
         {/* Wishlist Tab */}
@@ -418,27 +218,13 @@ export default function CartSidebar() {
                         </p>
 
                         <div className="flex items-center gap-2 mt-2">
-                          <button
-                            onClick={() => {
-                              addItem({
-                                productId: product.id,
-                                variantId: null,
-                                name: product.name,
-                                slug: product.slug,
-                                price: product.price,
-                                subscriptionPrice: getSubscriptionPrice(product.price),
-                                size: product.size,
-                                image,
-                                purchaseType: "one-time",
-                                deliveryFrequencyWeeks: 4,
-                                billingCycle: "monthly",
-                              });
-                              setTab("cart");
-                            }}
+                          <Link
+                            href={`/shop/${product.slug}`}
+                            onClick={closeCart}
                             className="text-xs font-semibold text-secondary hover:underline"
                           >
-                            Add to Cart
-                          </button>
+                            View Details
+                          </Link>
                           <span className="text-gray-300">|</span>
                           <button
                             onClick={() => toggleWishlist(product.id)}

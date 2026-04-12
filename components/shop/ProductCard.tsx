@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice, getSubscriptionPrice } from "@/lib/utils";
-import { useCart } from "@/hooks/useCart";
 import { ShoppingCart, ArrowRight } from "lucide-react";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 
 interface ProductCardProps {
   product: Product;
@@ -22,7 +22,7 @@ const CATEGORY_GRADIENT: Record<string, string> = {
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart();
+  const [showForm, setShowForm] = useState(false);
 
   const variants = (product.variants?.filter((v) => v.active) ?? []).sort(
     (a, b) => a.sort_order - b.sort_order
@@ -52,22 +52,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const goalCat = product.goal_category ?? product.category?.slug ?? "";
   const bgClass = CATEGORY_GRADIENT[goalCat] ?? "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]";
-
-  function handleAddToCart() {
-    addItem({
-      productId: product.id,
-      variantId: selectedVariant?.id ?? null,
-      name: product.name,
-      slug: product.slug,
-      price: activePrice,
-      subscriptionPrice: activeSubPrice ?? null,
-      size: activeSize,
-      image,
-      purchaseType: product.subscription_only ? "subscription" : "one-time",
-      deliveryFrequencyWeeks: 4,
-      billingCycle: "monthly",
-    });
-  }
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
@@ -152,14 +136,31 @@ export default function ProductCard({ product }: ProductCardProps) {
           </span>
         </div>
 
-        {/* View button */}
-        <Link
-          href={`/shop/${product.slug}`}
-          className="mt-5 w-full bg-[#111111] text-white rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all text-center inline-flex items-center justify-center gap-2"
-        >
-          View
-          <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
+        {/* Get Notified / View */}
+        {showForm ? (
+          <div className="mt-4">
+            <WaitlistForm
+              buttonLabel="Notify Me"
+              successMessage="You'll be notified when this product is available."
+            />
+          </div>
+        ) : (
+          <div className="mt-4 space-y-2">
+            <button
+              onClick={() => setShowForm(true)}
+              className="w-full bg-[#111111] text-white rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all text-center inline-flex items-center justify-center gap-2"
+            >
+              Get Notified
+            </button>
+            <Link
+              href={`/shop/${product.slug}`}
+              className="w-full text-[#6B7280] rounded-full py-2 text-xs font-medium hover:text-[#111111] transition-colors text-center inline-flex items-center justify-center gap-1"
+            >
+              View Details
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

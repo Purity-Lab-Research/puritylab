@@ -4,16 +4,14 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
-import { cn, formatPrice, getSubscriptionPrice, getFrequencyDiscount, getAnnualPrice, getAnnualMonthlyPrice } from "@/lib/utils";
-import { MAX_QUANTITY } from "@/lib/constants";
-import { useCart } from "@/hooks/useCart";
+import { cn, formatPrice } from "@/lib/utils";
 import { getCoaUrl } from "@/lib/coa-url";
 import ImageZoom from "@/components/shop/ImageZoom";
 import ShareButtons from "@/components/shop/ShareButtons";
-import BackInStockForm from "@/components/shop/BackInStockForm";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { trackViewItem } from "@/lib/analytics";
 import type { Product, CoaDocument } from "@/lib/types";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 
 interface ProductDetailProps {
   product: Product;
@@ -30,17 +28,6 @@ function CheckIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function MinusIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /></svg>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-  );
-}
 
 const CATEGORY_GRADIENT: Record<string, string> = {
   recovery: "bg-gradient-to-br from-[#F0FDF4] to-[#DCFCE7]",
@@ -60,13 +47,8 @@ function getStockStatus(qty: number, threshold: number) {
 type TabId = "overview" | "related" | "coa" | "research" | "reviews";
 
 export default function ProductDetail({ product, coaDocuments = [], relatedProducts = [] }: ProductDetailProps) {
-  const { addItem, openCart } = useCart();
   const { addViewed } = useRecentlyViewed();
-  const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(0);
-  const [purchaseMode, setPurchaseMode] = useState<"subscribe" | "one-time">("subscribe");
-  const [deliveryWeeks, setDeliveryWeeks] = useState(4);
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [activeTab, setActiveTab] = useState<TabId>("overview");
   const [mobileAccordion, setMobileAccordion] = useState<TabId | null>(null);
 
@@ -105,48 +87,14 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
 
   const regularPrice = selectedVariant?.price ?? product.price;
   const originalPrice = selectedVariant?.original_price ?? product.original_price;
-  const subPrice = getSubscriptionPrice(regularPrice, deliveryWeeks);
-  const annualTotal = getAnnualPrice(regularPrice);
-  const annualMonthly = getAnnualMonthlyPrice(regularPrice);
   const shortDesc = product.short_description;
   const displaySize = selectedVariant?.size ?? product.size;
-
-  const displayPrice = purchaseMode === "subscribe"
-    ? (billingCycle === "annual" ? annualTotal : subPrice)
-    : regularPrice;
-  const savings = purchaseMode === "subscribe"
-    ? (billingCycle === "annual"
-      ? (getSubscriptionPrice(regularPrice, 4) * 12 - annualTotal)
-      : regularPrice - subPrice)
-    : 0;
 
   const goalCat = product.goal_category ?? product.category?.slug ?? "";
   const placeholderBg = CATEGORY_GRADIENT[goalCat] ?? "bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]";
 
   const storageInfo = product.storage_info || "";
   const reconstitutionInfo = product.reconstitution_info || "";
-
-  const handleAddToCart = () => {
-    if (isOutOfStock) return;
-    addItem({
-      productId: product.id,
-      variantId: selectedVariant?.id ?? null,
-      name: product.name,
-      slug: product.slug,
-      price: regularPrice,
-      subscriptionPrice: purchaseMode === "subscribe" ? subPrice : null,
-      size: displaySize,
-      image: hasImages ? (mainImages[0] ?? variantImage) : null,
-      purchaseType: purchaseMode === "subscribe" ? "subscription" : "one-time",
-      deliveryFrequencyWeeks: billingCycle === "annual" ? 4 : deliveryWeeks,
-      billingCycle: purchaseMode === "subscribe" ? billingCycle : "monthly",
-      quantity,
-    });
-    openCart();
-  };
-
-  const incrementQty = () => setQuantity((q) => Math.min(q + 1, MAX_QUANTITY));
-  const decrementQty = () => setQuantity((q) => Math.max(q - 1, 1));
 
   // Swipe support
   const touchStartX = useRef(0);
@@ -422,16 +370,27 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
             )}
           </div>
 
-          {/* Subscription-only banner */}
-          {product.subscription_only && (
-            <div className="mt-4 bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded-xl p-3">
-              <p className="text-xs font-semibold text-[#F59E0B]">
-                This product is exclusive to subscribers. Subscribe to any frequency to access.
-              </p>
+          {/* Pre-launch: In Testing Card */}
+          <div className="mt-6 bg-[#F0FDF4] border border-[#D1FAE5] rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#10B981]">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <h3 className="text-base font-bold text-[#111111]">This compound is currently in testing</h3>
             </div>
-          )}
+            <p className="text-sm text-[#6B7280] leading-relaxed mb-4">
+              Our independent lab is completing six-panel verification: purity, identity, heavy metals, sterility, endotoxins, and appearance.
+            </p>
+            <p className="text-sm text-[#6B7280] mb-4">
+              Enter your email to be notified when this product is verified and available for order.
+            </p>
+            <WaitlistForm
+              buttonLabel="Notify Me"
+              successMessage="You'll be notified when this product is available."
+            />
+          </div>
 
-          {/* Variant Selector */}
+          {/* Variant Selector (view only) */}
           {hasVariants && (
             <div className="mt-5">
               <p className="text-xs font-semibold text-[#111111] uppercase tracking-wider mb-2">Size</p>
@@ -461,141 +420,12 @@ export default function ProductDetail({ product, coaDocuments = [], relatedProdu
             </div>
           )}
 
-          {/* Pricing Toggle */}
+          {/* Price display (informational only during pre-launch) */}
           <div className="mt-6">
-            {!product.subscription_only ? (
-            <div className="flex gap-2">
-              <button
-                onClick={() => setPurchaseMode("subscribe")}
-                className={cn(
-                  "flex-1 px-5 py-3 text-sm font-semibold rounded-full transition-all",
-                  purchaseMode === "subscribe"
-                    ? "bg-[#111111] text-white"
-                    : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
-                )}
-              >
-                Scheduled Reorder
-              </button>
-              <button
-                onClick={() => setPurchaseMode("one-time")}
-                className={cn(
-                  "flex-1 px-5 py-3 text-sm font-semibold rounded-full transition-all",
-                  purchaseMode === "one-time"
-                    ? "bg-[#111111] text-white"
-                    : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
-                )}
-              >
-                One-time Purchase
-              </button>
-            </div>
-            ) : (
-              <p className="text-xs font-semibold text-[#F59E0B] mb-1">Subscription exclusive</p>
-            )}
-
-            <div className="mt-4">
-              <span className="text-4xl font-extrabold text-[#111111]">
-                {formatPrice(displayPrice)}
-              </span>
-
-              {purchaseMode === "subscribe" ? (
-                <div className="mt-3 space-y-3">
-
-                  {/* Billing cycle toggle */}
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setBillingCycle("monthly")}
-                      className={cn(
-                        "flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all",
-                        billingCycle === "monthly"
-                          ? "bg-[#111111] text-white"
-                          : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
-                      )}
-                    >
-                      Monthly
-                    </button>
-                    <button
-                      onClick={() => setBillingCycle("annual")}
-                      className={cn(
-                        "flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all",
-                        billingCycle === "annual"
-                          ? "bg-[#111111] text-white"
-                          : "bg-white border border-[#F0F0F0] text-[#111111] hover:border-[#111111]"
-                      )}
-                    >
-                      Annual (2 months free)
-                    </button>
-                  </div>
-
-                  {billingCycle === "annual" ? (
-                    <p className="text-xs text-[#6B7280]">
-                      {formatPrice(annualTotal)}/year, ships every 4 weeks.
-                      Effective: {formatPrice(annualMonthly)}/mo
-                    </p>
-                  ) : (
-                    <div>
-                      <label className="text-xs text-[#6B7280] block mb-1">Delivery frequency</label>
-                      <select
-                        value={deliveryWeeks}
-                        onChange={(e) => setDeliveryWeeks(Number(e.target.value))}
-                        className="rounded-lg border border-[#F0F0F0] bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#111111] focus:ring-1 focus:ring-[#111111]/10 outline-none"
-                      >
-                        <option value={4}>Every 4 weeks</option>
-                        <option value={6}>Every 6 weeks</option>
-                        <option value={8}>Every 8 weeks</option>
-                      </select>
-                    </div>
-                  )}
-
-                  <div className="space-y-1.5">
-                    {["Pause or cancel anytime", "Full CoA with every shipment", "Careful packaging included"].map((b) => (
-                      <div key={b} className="flex items-center gap-2 text-sm text-[#6B7280]">
-                        <CheckIcon className="text-[#10B981] flex-shrink-0" />
-                        {b}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </div>
+            <span className="text-4xl font-extrabold text-[#111111]">
+              {formatPrice(regularPrice)}
+            </span>
           </div>
-
-          {/* Quantity */}
-          <div className="mt-5 flex items-center gap-3">
-            <span className="text-sm font-medium text-[#111111]">Qty</span>
-            <div className="flex items-center rounded-full border border-[#F0F0F0]">
-              <button onClick={decrementQty} disabled={quantity <= 1} className="flex h-10 w-10 items-center justify-center text-[#6B7280] hover:text-[#111111] disabled:opacity-40 transition-colors" aria-label="Decrease">
-                <MinusIcon />
-              </button>
-              <input
-                type="number"
-                min={1}
-                max={MAX_QUANTITY}
-                value={quantity}
-                onChange={(e) => {
-                  const val = parseInt(e.target.value, 10);
-                  if (!isNaN(val)) setQuantity(Math.max(1, Math.min(val, MAX_QUANTITY)));
-                }}
-                className="h-10 w-12 border-x border-[#F0F0F0] bg-transparent text-center text-sm font-medium text-[#111111] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                aria-label="Quantity"
-              />
-              <button onClick={incrementQty} disabled={quantity >= MAX_QUANTITY} className="flex h-10 w-10 items-center justify-center text-[#6B7280] hover:text-[#111111] disabled:opacity-40 transition-colors" aria-label="Increase">
-                <PlusIcon />
-              </button>
-            </div>
-          </div>
-
-          {/* Add to Cart */}
-          <button
-            onClick={handleAddToCart}
-            disabled={isOutOfStock}
-            className="mt-5 w-full bg-[#111111] text-white rounded-full py-4 text-lg font-bold hover:bg-black hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isOutOfStock
-              ? "Out of Stock"
-              : "Add to Cart"}
-          </button>
-
-          {isOutOfStock && <BackInStockForm productId={product.id} productName={product.name} />}
 
           {/* Trust Badges */}
           <div className="mt-5 flex items-center justify-center gap-5 py-3 border-t border-[#F0F0F0]">

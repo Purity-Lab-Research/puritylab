@@ -20,6 +20,7 @@ import {
   UserPlus,
   RefreshCw,
   ChevronDown,
+  Bell,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "./AdminSidebarContext";
@@ -66,6 +67,7 @@ const navGroups: NavGroup[] = [
   {
     label: "Marketing",
     items: [
+      { label: "Waitlist", href: "/admin/waitlist", icon: Bell },
       { label: "Discounts", href: "/admin/discounts", icon: Ticket },
       { label: "Email", href: "/admin/email", icon: Mail, badgeKey: "email" },
       { label: "Reviews", href: "/admin/reviews", icon: Star, badgeKey: "reviews" },

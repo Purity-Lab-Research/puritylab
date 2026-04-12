@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import type { Protocol } from "@/lib/types";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useCart } from "@/hooks/useCart";
 import { getSubscriptionPrice } from "@/lib/utils";
+import WaitlistForm from "@/components/prelaunch/WaitlistForm";
 
 interface ProtocolsProps {
   protocols: Protocol[];
@@ -40,28 +41,7 @@ function dailyCost(monthly: number): string {
 
 export default function Protocols({ protocols }: ProtocolsProps) {
   const animRef = useScrollAnimation();
-  const { addItem, openCart } = useCart();
-
-  function addProtocolToCart(protocol: Protocol, purchaseType: "one-time" | "subscription") {
-    for (const item of protocol.items ?? []) {
-      if (!item.product) continue;
-      addItem({
-        productId: item.product.id,
-        variantId: null,
-        name: item.product.name,
-        slug: item.product.slug,
-        price: item.product.price,
-        subscriptionPrice: getSubscriptionPrice(item.product.price),
-        size: item.product.size,
-        image: item.product.images?.[0] ?? null,
-        quantity: item.quantity,
-        purchaseType,
-        deliveryFrequencyWeeks: purchaseType === "subscription" ? 4 : 0,
-        billingCycle: "monthly",
-      });
-    }
-    openCart();
-  }
+  const [openFormSlug, setOpenFormSlug] = useState<string | null>(null);
 
   if (protocols.length === 0) return null;
 
@@ -141,12 +121,19 @@ export default function Protocols({ protocols }: ProtocolsProps) {
                 </Link>
 
                 <div className="px-5 pb-5 mt-auto">
-                  <button
-                    onClick={() => addProtocolToCart(protocol, "one-time")}
-                    className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
-                  >
-                    Add to Cart
-                  </button>
+                  {openFormSlug === protocol.slug ? (
+                    <WaitlistForm
+                      buttonLabel="Notify Me"
+                      successMessage="You'll be notified when this is available."
+                    />
+                  ) : (
+                    <button
+                      onClick={() => setOpenFormSlug(protocol.slug)}
+                      className="block w-full bg-[#111111] text-white text-center rounded-full py-2.5 text-sm font-semibold hover:bg-black hover:scale-[1.01] transition-all"
+                    >
+                      Get Notified
+                    </button>
+                  )}
                 </div>
               </div>
             );

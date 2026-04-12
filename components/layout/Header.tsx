@@ -210,11 +210,6 @@ export default function Header() {
                 className="relative p-2 rounded-full text-text-secondary hover:text-primary hover:bg-gray-50 transition-colors"
               >
                 <ShoppingCart className="h-5 w-5" />
-                {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-white">
-                    {itemCount > 99 ? "99+" : itemCount}
-                  </span>
-                )}
               </button>
 
               {/* Mobile Menu Toggle */}
