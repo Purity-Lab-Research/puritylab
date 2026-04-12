@@ -55,13 +55,17 @@ const CheckoutSchema = z.object({
 
 import { TAX_RATE } from "@/lib/constants";
 
-export async function POST(request: NextRequest) {
-  // Pre-launch: orders disabled
+export async function POST(_request: NextRequest) {
+  // Pre-launch: orders disabled until first batch clears testing
   return NextResponse.json(
     { error: "Orders are not yet open. Join our waitlist to be notified when we launch." },
     { status: 503 }
   );
+}
 
+// Original checkout handler - uncomment when launching
+/*
+async function _checkoutHandler(request: NextRequest) {
   const csrfError = verifyCsrf(request);
   if (csrfError) return csrfError;
 
@@ -606,3 +610,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+*/
